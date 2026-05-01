@@ -72,6 +72,8 @@ namespace Rivet
             // Types and memory
             if (IdentifierStr == "int")
                 return tok_int;
+            if (IdentifierStr == "str")
+                return tok_string;
             if (IdentifierStr == "void")
                 return tok_void;
             if (IdentifierStr == "ref")
@@ -80,6 +82,8 @@ namespace Rivet
                 return tok_address_of;
             if (IdentifierStr == "deref")
                 return tok_deref;
+            if (IdentifierStr == "optref")
+                return tok_optref;
 
             // Control flow
             if (IdentifierStr == "if")
@@ -88,6 +92,12 @@ namespace Rivet
                 return tok_else;
             if (IdentifierStr == "while")
                 return tok_while;
+            if (IdentifierStr == "for")
+                return tok_for;
+            if (IdentifierStr == "in")
+                return tok_in;
+            if (IdentifierStr == "step")
+                return tok_step;
             if (IdentifierStr == "fun")
                 return tok_fun;
             if (IdentifierStr == "return")

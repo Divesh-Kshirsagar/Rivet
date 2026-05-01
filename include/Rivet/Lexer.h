@@ -14,6 +14,7 @@ namespace Rivet
         // Dynamic Tokens
         tok_identifier = -2,
         tok_number = -3,
+        tok_string = -4,
 
         // Memory & Types
         tok_int = -10,
@@ -21,6 +22,7 @@ namespace Rivet
         tok_ref = -12,
         tok_address_of = -13,
         tok_deref = -14,
+        tok_optref = -15,
 
         // Logical & Bitwise
         tok_and = -20,
@@ -35,9 +37,12 @@ namespace Rivet
         tok_if = -30,
         tok_else = -31,
         tok_while = -32,
-        tok_fun = -33,
-        tok_return = -34,
-        tok_import = -35
+        tok_for = -33,
+        tok_fun = -34,
+        tok_return = -35,
+        tok_import = -36,
+        tok_in = -37,
+        tok_step = -38
     };
 
     class Lexer
