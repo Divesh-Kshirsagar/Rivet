@@ -46,27 +46,52 @@ namespace Rivet
 
     int Lexer::gettok()
     {
-        while (isspace(LastChar))
-            advanceChar();
-
-        if (LastChar == '/' && inputFile.peek() == '/')
+        while (true)
         {
-            advanceChar();
-            while (LastChar != '\n' && LastChar != '\r' && !inputFile.eof())
-            {
+            while (LastChar != EOF && std::isspace(static_cast<unsigned char>(LastChar)))
                 advanceChar();
-            }
-            if (!inputFile.eof())
+
+            if (LastChar == '/' && inputFile.peek() == '/')
             {
-                return gettok();
+                // Consume both '/' characters.
+                advanceChar();
+                advanceChar();
+
+                while (LastChar != '\n' && LastChar != '\r' && LastChar != EOF)
+                    advanceChar();
+
+                continue;
             }
+
+            if (LastChar == '/' && inputFile.peek() == '*')
+            {
+                // Consume '/*'.
+                advanceChar();
+                advanceChar();
+
+                while (LastChar != EOF)
+                {
+                    if (LastChar == '*' && inputFile.peek() == '/')
+                    {
+                        // Consume closing '*/' and continue scanning.
+                        advanceChar();
+                        advanceChar();
+                        break;
+                    }
+                    advanceChar();
+                }
+
+                continue;
+            }
+
+            break;
         }
 
         // Identifiers and keywords
-        if (isalpha(LastChar) || LastChar == '_')
+        if (LastChar != EOF && (std::isalpha(static_cast<unsigned char>(LastChar)) || LastChar == '_'))
         {
             IdentifierStr = LastChar;
-            while (isalnum(advanceChar()) || LastChar == '_')
+            while (LastChar != EOF && (std::isalnum(static_cast<unsigned char>(advanceChar())) || LastChar == '_'))
                 IdentifierStr += LastChar;
 
             // Types and memory
@@ -123,14 +148,14 @@ namespace Rivet
         }
 
         // Number: [0-9]+
-        if (isdigit(LastChar))
+        if (LastChar != EOF && std::isdigit(static_cast<unsigned char>(LastChar)))
         {
             std::string NumStr;
             do
             {
                 NumStr += LastChar;
                 advanceChar();
-            } while (isdigit(LastChar));
+            } while (LastChar != EOF && std::isdigit(static_cast<unsigned char>(LastChar)));
 
             NumVal = std::stoi(NumStr);
             return tok_number;
