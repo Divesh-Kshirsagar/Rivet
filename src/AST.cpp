@@ -157,6 +157,7 @@ namespace Rivet
         std::cout << "Unary Operation: " << Op << std::endl;
         Operand->dump(indent + 1);
     }
+    // TODO: Impplement unary for '-'
     llvm::Value *UnaryOpAST::codegen()
     {
         return nullptr; // TODO: Implement codegen
@@ -317,6 +318,28 @@ namespace Rivet
         if (!StartValue)
             return nullptr;
 
+        // Evaluate step once for loop direction and increment.
+        llvm::Value *StepVal = nullptr;
+        if (Step)
+        {
+            StepVal = Step->codegen();
+            if (!StepVal)
+                return nullptr;
+        }
+        else
+        {
+            StepVal = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 1, true));
+        }
+
+        if (auto *ConstStep = llvm::dyn_cast<llvm::ConstantInt>(StepVal))
+        {
+            if (ConstStep->isZero())
+            {
+                std::cerr << "For loop step cannot be 0." << std::endl;
+                return nullptr;
+            }
+        }
+
         // Basic Blocks
         llvm::Function *TheFunction = CompilerState.Builder->GetInsertBlock()->getParent();
         // llvm::BasicBlock *PreHeaderBB = CompilerState.Builder->GetInsertBlock();
@@ -328,41 +351,35 @@ namespace Rivet
         llvm::AllocaInst *Alloca = CompilerState.Builder->CreateAlloca(llvm::Type::getInt32Ty(*CompilerState.TheContext), nullptr, VarName);
         CompilerState.Builder->CreateStore(StartValue, Alloca);
 
-        // TODO: Handle shadowing current implementation is wrong
-        // Handle Shadowing: save the old value if it exists so we can restore it later. This hides the old value of variable such that lexical scoping correctly works.
-        llvm::AllocaInst *OldVal = CompilerState.NamedValues[VarName];
+        // Save current symbol binding (if any) and shadow it within the loop.
+        llvm::AllocaInst *OldVal = nullptr;
+        auto OldValIt = CompilerState.NamedValues.find(VarName);
+        if (OldValIt != CompilerState.NamedValues.end())
+            OldVal = OldValIt->second;
         CompilerState.NamedValues[VarName] = Alloca;
 
         // Jump to condition block
         CompilerState.Builder->CreateBr(CondBB);
         CompilerState.Builder->SetInsertPoint(CondBB);
 
-        // TODO: Add condition for negative step currently the program will crash if negative is used
-        // Evalualte condition var<=end
+        // Evaluate condition based on step sign.
         llvm::Value *EndVal = End->codegen();
         if (!EndVal)
             return nullptr;
         llvm::Value *CurVar = CompilerState.Builder->CreateLoad(Alloca->getAllocatedType(), Alloca, VarName.c_str());
-        llvm::Value *CondVal = CompilerState.Builder->CreateICmpSLE(CurVar, EndVal, "forcmptmp");
+        llvm::Value *IsNegStep = CompilerState.Builder->CreateICmpSLT(
+            StepVal,
+            llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true)),
+            "isnegstep");
+        llvm::Value *CondAsc = CompilerState.Builder->CreateICmpSLE(CurVar, EndVal, "forcmptmp_asc");
+        llvm::Value *CondDesc = CompilerState.Builder->CreateICmpSGE(CurVar, EndVal, "forcmptmp_desc");
+        llvm::Value *CondVal = CompilerState.Builder->CreateSelect(IsNegStep, CondDesc, CondAsc, "forcmptmp");
         CompilerState.Builder->CreateCondBr(CondVal, LoopBB, AfterBB);
 
         // Emit loop body
         CompilerState.Builder->SetInsertPoint(LoopBB);
         if(!Body->codegen())
             return nullptr;
-
-        // Evaluate step optional
-        llvm::Value *StepVal = nullptr;
-        if (Step){
-           StepVal = Step->codegen();
-           if (!StepVal)
-              return nullptr;
-        }
-        else{
-            // Default step value is 1
-            StepVal = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 1, true));
-        }
-           
 
         llvm::Value *CurVarForInc = CompilerState.Builder->CreateLoad(Alloca->getAllocatedType(), Alloca, VarName.c_str());
         llvm::Value *NewVarForInc = CompilerState.Builder->CreateAdd(CurVarForInc, StepVal, "nextvar");
@@ -374,11 +391,11 @@ namespace Rivet
         // Cleanup and exit
         CompilerState.Builder->SetInsertPoint(AfterBB);
 
-        // Restore the shadowed variable
-        if(OldVal)
-            CompilerState.Builder->CreateStore(OldVal, Alloca);
+        // Restore previous symbol binding after loop scope ends.
+        if (OldVal)
+            CompilerState.NamedValues[VarName] = OldVal;
         else
-            CompilerState.Builder->CreateStore(llvm::Constant::getNullValue(Alloca->getAllocatedType()), Alloca);
+            CompilerState.NamedValues.erase(VarName);
 
         return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
     }
