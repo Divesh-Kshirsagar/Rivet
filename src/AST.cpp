@@ -157,10 +157,22 @@ namespace Rivet
         std::cout << "Unary Operation: " << Op << std::endl;
         Operand->dump(indent + 1);
     }
-    // TODO: Impplement unary for '-'
     llvm::Value *UnaryOpAST::codegen()
     {
-        return nullptr; // TODO: Implement codegen
+        llvm::Value *OperandVal = Operand->codegen();
+        if (!OperandVal)
+            return nullptr;
+        llvm::Value *Result = nullptr;
+        switch (Op)
+        {
+            case '-':
+                Result = CompilerState.Builder->CreateNeg(OperandVal, "neg");
+                break;
+            default:
+                std::cerr << "Unknown unary operator: " << Op << std::endl;
+                return nullptr;
+        }
+        return Result;
     }
 
     void BlockAST::dump(int indent) const

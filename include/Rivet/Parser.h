@@ -30,6 +30,7 @@ namespace Rivet
         // Expression parsing (handling operator precedence)
         std::unique_ptr<ASTNode> ParseExpression();
         std::unique_ptr<ASTNode> ParseBinOpRHS(int ExprPrec, std::unique_ptr<ASTNode> LHS);
+        std::unique_ptr<ASTNode> ParseUnaryExpr();
         
         // Parsing functions each for a major ebnf rule
         std::unique_ptr<ASTNode> ParseNumberExpr();

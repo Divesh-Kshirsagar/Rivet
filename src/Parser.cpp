@@ -159,16 +159,7 @@ namespace Rivet
 
     std::unique_ptr<ASTNode> Parser::ParseExpression()
     {
-        std::unique_ptr<ASTNode> LHS;
-        if (CurTok == tok_number)
-            LHS = ParseNumberExpr();
-        else if (CurTok == tok_identifier)
-            LHS = ParseIdentifierExpr();
-        else if (CurTok == '(')
-            LHS = ParseParenExpr();
-        else
-            return LogError("Unknown token when expecting an expression");
-
+        auto LHS = ParseUnaryExpr();
         if (!LHS)
             return nullptr;
         return ParseBinOpRHS(0, std::move(LHS));
@@ -287,17 +278,7 @@ namespace Rivet
             int BinOp = CurTok;
             getNextToken();
 
-            std::unique_ptr<ASTNode> RHS;
-
-            if (CurTok == tok_number)
-                RHS = ParseNumberExpr();
-            else if (CurTok == tok_identifier)
-                RHS = ParseIdentifierExpr();
-            else if (CurTok == '(')
-                RHS = ParseParenExpr();
-            else
-                return LogError("Unexpected token when parsing binary operator RHS");
-
+            auto RHS = ParseUnaryExpr();
             if (!RHS)
                 return nullptr;
 
@@ -311,6 +292,26 @@ namespace Rivet
 
             LHS = std::make_unique<BinaryOpAST>(BinOp, std::move(LHS), std::move(RHS));
         }
+    }
+
+    std::unique_ptr<ASTNode> Parser::ParseUnaryExpr()
+    {
+        if (CurTok == tok_not || CurTok == '-')
+        {
+            int Op = CurTok;
+            getNextToken();
+            auto Operand = ParseUnaryExpr(); // Recursively handles --x, -(a+b)
+            if (!Operand)
+                return nullptr;
+            return std::make_unique<UnaryOpAST>(Op, std::move(Operand));
+        }
+        if (CurTok == tok_identifier)
+            return ParseIdentifierExpr();
+        if (CurTok == '(')
+            return ParseParenExpr();
+        if (CurTok == tok_number)
+            return ParseNumberExpr();
+        return LogError("Unknown token when expecting unary expression");
     }
 
     std::unique_ptr<ASTNode> Parser::ParseVariableDeclaration()
