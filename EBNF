@@ -55,7 +55,7 @@
 <selection_statement> ::= "if" "(" <expression> ")" <statement> [ "else" <statement> ]
 
 <iteration_statement> ::= "while" "(" <expression> ")" <statement>
-                      | "for" <identifier> "in" <expression>   <expression> [ "step" <expression> ] <statement>
+                      | "for" "(" <identifier> "in" <expression> "to" <expression> [ "step" <expression> ] ")" <compound_statement>
 
 <return_statement> ::= "return" [ <expression> ] ";"
 

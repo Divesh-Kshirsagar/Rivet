@@ -98,6 +98,8 @@ namespace Rivet
                 return tok_in;
             if (IdentifierStr == "step")
                 return tok_step;
+            if (IdentifierStr == "to")
+                return tok_to;
             if (IdentifierStr == "fun")
                 return tok_fun;
             if (IdentifierStr == "return")

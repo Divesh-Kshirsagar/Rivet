@@ -286,6 +286,104 @@ namespace Rivet
         return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
     }
 
+    // TODO: Implement the for loop for arrays
+    void ForAST::dump(int indent) const
+    {
+        printIndent(indent);
+        std::cout << "For Loop" << std::endl;
+        printIndent(indent + 1);
+        // std::cout << "Itr: " << Itr << std::endl;
+        // printIndent(indent + 1);
+        std::cout << "Start: " << std::endl;
+        Start->dump(indent + 2);
+        printIndent(indent + 1);
+        std::cout << "End: " << std::endl;
+        End->dump(indent + 2);
+        if (Step)
+        {
+            printIndent(indent + 1);
+            std::cout << "Step: " << std::endl;
+            Step->dump(indent + 2);
+        }
+        printIndent(indent + 1);
+        std::cout << "Body:" << std::endl;
+        Body->dump(indent + 2);
+    }
+    llvm::Value *ForAST::codegen()
+    {
+        
+        // StartValue
+        llvm::Value *StartValue = Start->codegen();
+        if (!StartValue)
+            return nullptr;
+
+        // Basic Blocks
+        llvm::Function *TheFunction = CompilerState.Builder->GetInsertBlock()->getParent();
+        // llvm::BasicBlock *PreHeaderBB = CompilerState.Builder->GetInsertBlock();
+        llvm::BasicBlock *CondBB = llvm::BasicBlock::Create(*CompilerState.TheContext, "forcond", TheFunction);
+        llvm::BasicBlock *LoopBB = llvm::BasicBlock::Create(*CompilerState.TheContext, "forloop", TheFunction);
+        llvm::BasicBlock *AfterBB = llvm::BasicBlock::Create(*CompilerState.TheContext, "afterfor", TheFunction);
+
+        // Allocate loop variable and store the start value e.g. itr
+        llvm::AllocaInst *Alloca = CompilerState.Builder->CreateAlloca(llvm::Type::getInt32Ty(*CompilerState.TheContext), nullptr, VarName);
+        CompilerState.Builder->CreateStore(StartValue, Alloca);
+
+        // TODO: Handle shadowing current implementation is wrong
+        // Handle Shadowing: save the old value if it exists so we can restore it later. This hides the old value of variable such that lexical scoping correctly works.
+        llvm::AllocaInst *OldVal = CompilerState.NamedValues[VarName];
+        CompilerState.NamedValues[VarName] = Alloca;
+
+        // Jump to condition block
+        CompilerState.Builder->CreateBr(CondBB);
+        CompilerState.Builder->SetInsertPoint(CondBB);
+
+        // TODO: Add condition for negative step currently the program will crash if negative is used
+        // Evalualte condition var<=end
+        llvm::Value *EndVal = End->codegen();
+        if (!EndVal)
+            return nullptr;
+        llvm::Value *CurVar = CompilerState.Builder->CreateLoad(Alloca->getAllocatedType(), Alloca, VarName.c_str());
+        llvm::Value *CondVal = CompilerState.Builder->CreateICmpSLE(CurVar, EndVal, "forcmptmp");
+        CompilerState.Builder->CreateCondBr(CondVal, LoopBB, AfterBB);
+
+        // Emit loop body
+        CompilerState.Builder->SetInsertPoint(LoopBB);
+        if(!Body->codegen())
+            return nullptr;
+
+        // Evaluate step optional
+        llvm::Value *StepVal = nullptr;
+        if (Step){
+           StepVal = Step->codegen();
+           if (!StepVal)
+              return nullptr;
+        }
+        else{
+            // Default step value is 1
+            StepVal = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 1, true));
+        }
+           
+
+        llvm::Value *CurVarForInc = CompilerState.Builder->CreateLoad(Alloca->getAllocatedType(), Alloca, VarName.c_str());
+        llvm::Value *NewVarForInc = CompilerState.Builder->CreateAdd(CurVarForInc, StepVal, "nextvar");
+        CompilerState.Builder->CreateStore(NewVarForInc, Alloca);
+
+        // loop back to condition
+        CompilerState.Builder->CreateBr(CondBB);
+
+        // Cleanup and exit
+        CompilerState.Builder->SetInsertPoint(AfterBB);
+
+        // Restore the shadowed variable
+        if(OldVal)
+            CompilerState.Builder->CreateStore(OldVal, Alloca);
+        else
+            CompilerState.Builder->CreateStore(llvm::Constant::getNullValue(Alloca->getAllocatedType()), Alloca);
+
+        return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
+    }
+    
+
     void CallAST::dump(int indent) const
     {
         printIndent(indent);

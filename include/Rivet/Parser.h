@@ -40,6 +40,7 @@ namespace Rivet
         std::unique_ptr<ASTNode> ParseStatement(); // A helper block parser for '{ statements }'
         std::unique_ptr<ASTNode> ParseIfStatement();
         std::unique_ptr<ASTNode> ParseWhileStatement();
+        std::unique_ptr<ASTNode> ParseForStatement();
         std::unique_ptr<ASTNode> ParseBlock();
         std::unique_ptr<ASTNode> ParseVariableDeclaration();
         std::unique_ptr<ASTNode> ParseImport();

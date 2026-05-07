@@ -120,6 +120,22 @@ namespace Rivet
         void dump(int indent = 0) const override;
     };
 
+    /*
+     * For loop in Rivet Language
+     * 
+     */
+    class ForAST : public ASTNode
+    {
+        std::string VarName;
+        std::unique_ptr<ASTNode> Start, End, Step, Body;
+
+        public:
+        ForAST(const std::string &VarName, std::unique_ptr<ASTNode> Start, std::unique_ptr<ASTNode> End, std::unique_ptr<ASTNode> Step, std::unique_ptr<ASTNode> Body)
+            : VarName(VarName), Start(std::move(Start)), End(std::move(End)), Step(std::move(Step)), Body(std::move(Body)) {}
+        llvm::Value *codegen() override;
+        void dump(int indent = 0) const override;
+    };
+
     class CallAST : public ASTNode
     {
         std::string Callee;
