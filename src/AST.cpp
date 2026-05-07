@@ -128,20 +128,33 @@ namespace Rivet
         // assignment
         case '=':
         {
-            auto *LHSE = dynamic_cast<VariableAST *>(LHS.get());
-            if (!LHSE)
+            llvm::Value *VariablePtr = nullptr;
+
+            // LHS is a standard variable
+            if (auto VarAST = dynamic_cast<VariableAST *>(LHS.get()))
+            {
+                VariablePtr = CompilerState.NamedValues[VarAST->getName()];
+                if (!VariablePtr)
+                {
+                    std::cerr << "Unknown variable name in assignment: " << VarAST->getName() << std::endl;
+                    return nullptr;
+                }
+            }
+            else if (auto *Deref = dynamic_cast<DerefAST *>(LHS.get()))
+            {
+                VariablePtr = Deref->getOperand()->codegen();
+                if (!VariablePtr)
+                {
+                    return nullptr;
+                }
+            }
+            else
             {
                 std::cerr << "Left-hand side of assignment must be a variable." << std::endl;
                 return nullptr;
             }
-            llvm::AllocaInst *Alloca = CompilerState.NamedValues[LHSE->getName()];
-            if (!Alloca)
-            {
-                std::cerr << "Unknown variable name in assignment: " << LHSE->getName() << std::endl;
-                return nullptr;
-            }
-
-            CompilerState.Builder->CreateStore(R, Alloca);
+            
+            CompilerState.Builder->CreateStore(R, VariablePtr);
             return R;
         }
 
@@ -467,4 +480,35 @@ namespace Rivet
 
         return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
     }
+
+    void AddressOfAST::dump(int indent) const
+    {
+        printIndent(indent);
+        std::cout << "AddressOf: " << VarName << std::endl;
+    }
+    llvm::Value *AddressOfAST::codegen()
+    {
+        llvm::AllocaInst *Alloca = CompilerState.NamedValues[VarName];
+        if (!Alloca)
+        {
+            std::cerr << "Unknown Variable: " << VarName << std::endl;
+            return nullptr;
+        }
+        return Alloca;
+    }
+
+    void DerefAST::dump(int indent) const
+    {
+        printIndent(indent);
+        std::cout << "Deref: " << std::endl;
+        Operand->dump(indent + 1);
+    }
+    llvm::Value *DerefAST::codegen()
+    {
+        llvm::Value *PtrValue = Operand->codegen();
+        if (!PtrValue)
+            return nullptr;
+        return CompilerState.Builder->CreateLoad(llvm::Type::getInt32Ty(*CompilerState.TheContext), PtrValue, "dereftmp");
+    }
+    
 }

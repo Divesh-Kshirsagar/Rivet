@@ -159,6 +159,30 @@ namespace Rivet
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
     };
+
+    class AddressOfAST : public ASTNode
+    {
+        std::string VarName;
+
+    public:
+        AddressOfAST(const std::string &VarName)
+            : VarName(VarName) {}
+        llvm::Value *codegen() override;
+        void dump(int indent = 0) const override;
+    };
+
+    class DerefAST : public ASTNode
+    {
+        std::unique_ptr<ASTNode> Operand;
+
+    public:
+        DerefAST(std::unique_ptr<ASTNode> Operand)
+            : Operand(std::move(Operand)) {}
+        llvm::Value *codegen() override;
+        void dump(int indent = 0) const override;
+        // Getter for the assignment of the pointer expression
+        ASTNode *getOperand() const { return Operand.get(); }
+    };
 }
 
 #endif
