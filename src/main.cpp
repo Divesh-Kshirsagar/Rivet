@@ -1,4 +1,4 @@
-# include <iostream>
+#include <iostream>
 #include <string>
 #include <llvm/IR/BasicBlock.h>
 #include <llvm/IR/Constants.h>
@@ -37,6 +37,23 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    // --- SEMANTIC ANALYSIS PASS ---
+    SymbolTable symTab;
+    int semanticErrors = 0;
+
+    std::cout << "Running Semantic Analysis...\n";
+    for (const auto& node : astNodes) {
+        if (!node->typeCheck(symTab)) {
+            semanticErrors++;
+        }
+    }
+
+    if (semanticErrors > 0) {
+        std::cerr << "\nCompilation aborted due to " << semanticErrors << " semantic error(s).\n";
+        return 1;
+    }
+
+
     if (dumpAST) {
         std::cout << "\n============================\n";
         std::cout << "       ABSTRACT SYNTAX TREE   \n";
@@ -51,7 +68,7 @@ int main(int argc, char** argv) {
 
     }
 
-    // These are just placeholders for now, as codegen is not implemented yet
+    // These are just placeholders for now, as codegen is not entirely implemented yet
     if(parser.ErrorCount > 0) {
         std::cerr << "Compilation failed with " << parser.ErrorCount << " error(s).\n";
         return 1;

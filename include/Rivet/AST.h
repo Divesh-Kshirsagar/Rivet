@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "Type.h"
+#include "SymbolTable.h"
 
 namespace llvm
 {
@@ -22,6 +24,10 @@ namespace Rivet
         virtual llvm::Value *codegen() = 0;
         virtual void dump(int indent = 0) const = 0;
 
+        TypeInfo ExprType;
+        virtual bool typeCheck(SymbolTable& symTab) = 0; // Returns true if the node is semantically valid, false if an error occurred.
+
+
     protected:
         void printIndent(int indent) const
         {
@@ -38,6 +44,7 @@ namespace Rivet
         NumberAST(int Val) : Val(Val) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
     };
 
     class VariableAST : public ASTNode
@@ -48,6 +55,7 @@ namespace Rivet
         VariableAST(const std::string &Name) : Name(Name) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
         const std::string &getName() const { return Name; }
     };
 
@@ -62,6 +70,7 @@ namespace Rivet
             : Type(Type), Name(Name), IsRef(IsRef), InitVal(std::move(InitVal)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
     };
 
     class BinaryOpAST : public ASTNode
@@ -74,6 +83,7 @@ namespace Rivet
             : Op(Op), LHS(std::move(LHS)), RHS(std::move(RHS)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
     };
 
     class UnaryOpAST : public ASTNode
@@ -86,6 +96,7 @@ namespace Rivet
             : Op(Op), Operand(std::move(Operand)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
     };
 
     class BlockAST : public ASTNode
@@ -97,6 +108,7 @@ namespace Rivet
             : Statements(std::move(Statements)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
     };
 
     class IfAST : public ASTNode
@@ -108,6 +120,7 @@ namespace Rivet
             : Cond(std::move(Cond)), Then(std::move(Then)), Else(std::move(Else)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
     };
 
     class WhileAST : public ASTNode
@@ -119,6 +132,7 @@ namespace Rivet
             : Cond(std::move(Cond)), Body(std::move(Body)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
     };
 
     /*
@@ -135,6 +149,7 @@ namespace Rivet
             : VarName(VarName), Start(std::move(Start)), End(std::move(End)), Step(std::move(Step)), Body(std::move(Body)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
     };
 
     class CallAST : public ASTNode
@@ -147,6 +162,7 @@ namespace Rivet
             : Callee(Callee), Args(std::move(Args)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
     };
 
     class ImportAST : public ASTNode
@@ -159,6 +175,7 @@ namespace Rivet
             : ModuleName(ModuleName), ImportedNodes(std::move(ImportedNodes)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
     };
 
     class AddressOfAST : public ASTNode
@@ -170,6 +187,7 @@ namespace Rivet
             : VarName(VarName) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
     };
 
     class DerefAST : public ASTNode
@@ -181,6 +199,7 @@ namespace Rivet
             : Operand(std::move(Operand)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
         // Getter for the assignment of the pointer expression
         ASTNode *getOperand() const { return Operand.get(); }
     };

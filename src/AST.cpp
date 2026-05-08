@@ -15,6 +15,12 @@ namespace Rivet
     {
         return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, Val, true));
     }
+    bool NumberAST::typeCheck(SymbolTable& symTab)
+    {
+        (void)symTab;
+        ExprType = TypeInfo(BaseType::Int, false);
+        return true;
+    }
 
     void VariableAST::dump(int indent) const
     {
@@ -30,6 +36,18 @@ namespace Rivet
             return nullptr;
         }
         return CompilerState.Builder->CreateLoad(Alloca->getAllocatedType(), Alloca, Name.c_str());
+    }
+    bool VariableAST::typeCheck(SymbolTable& symTab)
+    {
+        Symbol* sym = symTab.lookup(Name);
+        if (!sym)
+        {
+            std::cerr << "Semantic Error: Use of undeclared variable '" << Name << "'.\n";
+            return false;
+        }
+
+        ExprType = sym->Type;
+        return true;
     }
 
     void VariableDeclAST::dump(int indent) const
@@ -80,6 +98,33 @@ namespace Rivet
         CompilerState.Builder->CreateStore(InitValIR, Alloca);
         CompilerState.NamedValues[Name] = Alloca;
         return Alloca;
+    }
+    bool VariableDeclAST::typeCheck(SymbolTable& symTab)
+    {
+        TypeInfo declaredType(BaseType::Int, IsRef);
+
+        if (InitVal)
+        {
+            if (!InitVal->typeCheck(symTab))
+                return false;
+
+            if (InitVal->ExprType != declaredType)
+            {
+                std::cerr << "Semantic Error: Type mismatch in declaration of '" << Name
+                          << "'. Expected " << declaredType.toString()
+                          << ", found " << InitVal->ExprType.toString() << ".\n";
+                return false;
+            }
+        }
+
+        if (!symTab.insert(Name, declaredType, InitVal != nullptr))
+        {
+            std::cerr << "Semantic Error: Variable '" << Name << "' already declared in this scope.\n";
+            return false;
+        }
+
+        ExprType = declaredType;
+        return true;
     }
 
     void BinaryOpAST::dump(int indent) const
@@ -179,6 +224,32 @@ namespace Rivet
             return nullptr;
         }
     }
+    bool BinaryOpAST::typeCheck(SymbolTable& symTab)
+    {
+        if (!LHS->typeCheck(symTab) || !RHS->typeCheck(symTab))
+            return false;
+
+        if (Op == '=')
+        {
+            if (LHS->ExprType != RHS->ExprType)
+            {
+                std::cerr << "Semantic Error: Cannot assign type '" << RHS->ExprType.toString()
+                          << "' to '" << LHS->ExprType.toString() << "'.\n";
+                return false;
+            }
+            ExprType = LHS->ExprType;
+            return true;
+        }
+
+        if (LHS->ExprType.IsRef || RHS->ExprType.IsRef)
+        {
+            std::cerr << "Semantic Error: Arithmetic operations on pointers are not supported.\n";
+            return false;
+        }
+
+        ExprType = TypeInfo(BaseType::Int, false);
+        return true;
+    }
 
     void UnaryOpAST::dump(int indent) const
     {
@@ -202,6 +273,11 @@ namespace Rivet
                 return nullptr;
         }
         return Result;
+    }
+    bool UnaryOpAST::typeCheck(SymbolTable& symTab)
+    {
+        (void)symTab;
+        return true;
     }
 
     void BlockAST::dump(int indent) const
@@ -227,6 +303,23 @@ namespace Rivet
         if (LastVal)
             return LastVal;
         return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
+    }
+    bool BlockAST::typeCheck(SymbolTable& symTab)
+    {
+        symTab.enterScope();
+
+        for (auto& stmt : Statements)
+        {
+            if (!stmt->typeCheck(symTab))
+            {
+                symTab.exitScope();
+                return false;
+            }
+        }
+
+        symTab.exitScope();
+        ExprType = TypeInfo(BaseType::Int, false);
+        return true;
     }
 
     void IfAST::dump(int indent) const
@@ -287,6 +380,18 @@ namespace Rivet
 
         return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
     }
+    bool IfAST::typeCheck(SymbolTable& symTab)
+    {
+        if (!Cond->typeCheck(symTab))
+            return false;
+        if (!Then->typeCheck(symTab))
+            return false;
+        if (Else && !Else->typeCheck(symTab))
+            return false;
+
+        ExprType = TypeInfo(BaseType::Int, false);
+        return true;
+    }
 
     void WhileAST::dump(int indent) const
     {
@@ -326,6 +431,16 @@ namespace Rivet
         CompilerState.Builder->CreateBr(CondBB);
         CompilerState.Builder->SetInsertPoint(AfterBB);
         return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
+    }
+    bool WhileAST::typeCheck(SymbolTable& symTab)
+    {
+        if (!Cond->typeCheck(symTab))
+            return false;
+        if (!Body->typeCheck(symTab))
+            return false;
+
+        ExprType = TypeInfo(BaseType::Int, false);
+        return true;
     }
 
     // TODO: Implement the for loop for arrays
@@ -440,6 +555,22 @@ namespace Rivet
 
         return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
     }
+    bool ForAST::typeCheck(SymbolTable& symTab)
+    {
+        if (!Start->typeCheck(symTab) || !End->typeCheck(symTab))
+            return false;
+        if (Step && !Step->typeCheck(symTab))
+            return false;
+
+        symTab.enterScope();
+        symTab.insert(VarName, TypeInfo(BaseType::Int, false), true);
+
+        bool bodyValid = Body->typeCheck(symTab);
+
+        symTab.exitScope();
+        ExprType = TypeInfo(BaseType::Int, false);
+        return bodyValid;
+    }
     
 
     void CallAST::dump(int indent) const
@@ -477,6 +608,11 @@ namespace Rivet
 
         return CompilerState.Builder->CreateCall(CalleeF, ArgsV, "calltmp");
     }
+    bool CallAST::typeCheck(SymbolTable& symTab)
+    {
+        (void)symTab;
+        return true;
+    }
 
     void ImportAST::dump(int indent) const
     {
@@ -496,6 +632,11 @@ namespace Rivet
 
         return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
     }
+    bool ImportAST::typeCheck(SymbolTable& symTab)
+    {
+        (void)symTab;
+        return true;
+    }
 
     void AddressOfAST::dump(int indent) const
     {
@@ -512,6 +653,18 @@ namespace Rivet
         }
         return Alloca;
     }
+    bool AddressOfAST::typeCheck(SymbolTable& symTab)
+    {
+        Symbol* sym = symTab.lookup(VarName);
+        if (!sym)
+        {
+            std::cerr << "Semantic Error: Cannot take address of undeclared variable '" << VarName << "'.\n";
+            return false;
+        }
+
+        ExprType = TypeInfo(sym->Type.Base, true);
+        return true;
+    }
 
     void DerefAST::dump(int indent) const
     {
@@ -525,6 +678,21 @@ namespace Rivet
         if (!PtrValue)
             return nullptr;
         return CompilerState.Builder->CreateLoad(llvm::Type::getInt32Ty(*CompilerState.TheContext), PtrValue, "dereftmp");
+    }
+    bool DerefAST::typeCheck(SymbolTable& symTab)
+    {
+        if (!Operand->typeCheck(symTab))
+            return false;
+
+        if (!Operand->ExprType.IsRef)
+        {
+            std::cerr << "Semantic Error: Cannot dereference a non-reference type ("
+                      << Operand->ExprType.toString() << ").\n";
+            return false;
+        }
+
+        ExprType = TypeInfo(Operand->ExprType.Base, false);
+        return true;
     }
     
 }
