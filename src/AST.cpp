@@ -48,19 +48,35 @@ namespace Rivet
     }
     llvm::Value *VariableDeclAST::codegen()
     {
-        llvm::Value *InitValIR = nullptr;
-        if (InitVal)
+        llvm::Value *InitValIR = nullptr;       
+        llvm::Type *VarType = nullptr;
+        if (IsRef)
+        {    
+            // pointer
+            VarType = llvm::PointerType::getUnqual(*CompilerState.TheContext);
+        }
+        else
+        {
+            // i32
+            VarType = llvm::IntegerType::getInt32Ty(*CompilerState.TheContext);
+        }
+
+        llvm::AllocaInst *Alloca = CompilerState.Builder->CreateAlloca(VarType, nullptr, Name);
+        
+        if (!InitVal)
+        {
+            if (IsRef)
+                InitValIR = llvm::ConstantPointerNull::get(llvm::cast<llvm::PointerType>(VarType)); // default pointer initializes to null (0x0)
+            else
+                InitValIR = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true)); // default initialize integer to 0
+        }
+        else
         {
             InitValIR = InitVal->codegen();
             if (!InitValIR)
                 return nullptr;
         }
-        else
-        {
-            // if they just wrote 0 to x we will default that to 0 so we shouldn't have garbage memory
-            InitValIR = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
-        }
-        llvm::AllocaInst *Alloca = CompilerState.Builder->CreateAlloca(llvm::Type::getInt32Ty(*CompilerState.TheContext), nullptr, Name);
+        
         CompilerState.Builder->CreateStore(InitValIR, Alloca);
         CompilerState.NamedValues[Name] = Alloca;
         return Alloca;

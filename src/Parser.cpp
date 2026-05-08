@@ -294,7 +294,6 @@ namespace Rivet
         }
     }
 
-    // TODO: Current implementation of pointers only tracks deref operators individually. When int deref p = address of q, p is not tracked as a pointer to q cause ParseVariableDeclaration() only looks for tok_int
     std::unique_ptr<ASTNode> Parser::ParseUnaryExpr()
     {
         if (CurTok == tok_not || CurTok == '-') 
@@ -340,6 +339,13 @@ namespace Rivet
             return LogErrorExpected("int", "to start variable declaration");
         getNextToken();
 
+        bool isRef = false;
+        if (CurTok == tok_ref)
+        {
+            isRef = true;
+            getNextToken();
+        }
+
         if (CurTok != tok_identifier)
             return LogErrorExpected("identifier", "after type in variable declaration");
         std::string varName = lexer.IdentifierStr;
@@ -356,7 +362,7 @@ namespace Rivet
         if (CurTok != ';')
             return LogErrorExpected("';'", "after variable declaration");
         getNextToken();
-        return std::make_unique<VariableDeclAST>("int", varName, std::move(initVal));
+        return std::make_unique<VariableDeclAST>("int", varName, isRef, std::move(initVal));
     }
 
     std::unique_ptr<ASTNode> Parser::ParseImport()

@@ -55,10 +55,11 @@ namespace Rivet
     {
         std::string Type;
         std::string Name;
+        bool IsRef; // tracks if the variable is a pointer
         std::unique_ptr<ASTNode> InitVal; // Can be null if uninitialized
     public:
-        VariableDeclAST(const std::string &Type, const std::string &Name, std::unique_ptr<ASTNode> InitVal)
-            : Type(Type), Name(Name), InitVal(std::move(InitVal)) {}
+        VariableDeclAST(const std::string &Type, const std::string &Name, bool IsRef, std::unique_ptr<ASTNode> InitVal)
+            : Type(Type), Name(Name), IsRef(IsRef), InitVal(std::move(InitVal)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
     };
