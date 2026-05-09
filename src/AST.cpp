@@ -68,7 +68,13 @@ namespace Rivet
     {
         llvm::Value *InitValIR = nullptr;       
         llvm::Type *VarType = nullptr;
-        if (IsRef)
+
+        if (ExprType.isArray())
+        {
+            llvm::Type *ElemType = llvm::IntegerType::getInt32Ty(*CompilerState.TheContext);
+            VarType = llvm::ArrayType::get(ElemType, ExprType.ArrayCapacity);
+        }
+        else if (IsRef)
         {    
             // pointer
             VarType = llvm::PointerType::getUnqual(*CompilerState.TheContext);
@@ -83,7 +89,9 @@ namespace Rivet
         
         if (!InitVal)
         {
-            if (IsRef)
+            if (ExprType.isArray())
+                InitValIR = llvm::ConstantAggregateZero::get(VarType);
+            else if (IsRef)
                 InitValIR = llvm::ConstantPointerNull::get(llvm::cast<llvm::PointerType>(VarType)); // default pointer initializes to null (0x0)
             else
                 InitValIR = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true)); // default initialize integer to 0
@@ -101,7 +109,7 @@ namespace Rivet
     }
     bool VariableDeclAST::typeCheck(SymbolTable& symTab)
     {
-        TypeInfo declaredType(BaseType::Int, IsRef);
+        TypeInfo declaredType(BaseType::Int, IsRef, ArrayCapacity);
 
         if (InitVal)
         {
@@ -209,9 +217,30 @@ namespace Rivet
                     return nullptr;
                 }
             }
+            else if (auto *Index = dynamic_cast<IndexAST *>(LHS.get()))
+            {
+                llvm::AllocaInst *ArrayPtr = CompilerState.NamedValues[Index->getArrayName()];
+                if (!ArrayPtr)
+                {
+                    std::cerr << "Unknown array name in assignment: " << Index->getArrayName() << std::endl;
+                    return nullptr;
+                }
+
+                llvm::Value *IndexVal = Index->getIndexExpr()->codegen();
+                if (!IndexVal)
+                    return nullptr;
+
+                llvm::Value *Zero = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
+                std::vector<llvm::Value *> Indices = {Zero, IndexVal};
+                VariablePtr = CompilerState.Builder->CreateInBoundsGEP(
+                    ArrayPtr->getAllocatedType(),
+                    ArrayPtr,
+                    Indices,
+                    "arrayidx.ptr");
+            }
             else
             {
-                std::cerr << "Left-hand side of assignment must be a variable." << std::endl;
+                std::cerr << "Left-hand side of assignment must be a variable, dereference, or array index." << std::endl;
                 return nullptr;
             }
             
@@ -231,10 +260,18 @@ namespace Rivet
 
         if (Op == '=')
         {
+            bool isVariable = dynamic_cast<VariableAST*>(LHS.get()) != nullptr;
+            bool isDeref = dynamic_cast<DerefAST*>(LHS.get()) != nullptr;
+            bool isIndex = dynamic_cast<IndexAST*>(LHS.get()) != nullptr;
+            
+            if (!isVariable && !isDeref && !isIndex)
+            {
+                std::cerr << "Semantic Error: Left Hand Side of assignment must be a variable, dereference, or array index.\n";
+                return false;
+            }
             if (LHS->ExprType != RHS->ExprType)
             {
-                std::cerr << "Semantic Error: Cannot assign type '" << RHS->ExprType.toString()
-                          << "' to '" << LHS->ExprType.toString() << "'.\n";
+                std::cerr << "Semantic Error: Types of LHS and RHS must be the same.\n";
                 return false;
             }
             ExprType = LHS->ExprType;
@@ -694,5 +731,79 @@ namespace Rivet
         ExprType = TypeInfo(Operand->ExprType.Base, false);
         return true;
     }
-    
+ 
+    void IndexAST::dump(int indent) const
+    {
+        printIndent(indent);
+        std::cout << "Index: " << ArrayName << "[" << std::endl;
+        IndexExpr->dump(indent + 1);
+    }
+    llvm::Value *IndexAST::codegen()
+    {
+        // Get starting point of the array from symbol table
+        llvm::AllocaInst *ArrayPtr = CompilerState.NamedValues[ArrayName];
+        if (!ArrayPtr)
+            return nullptr;
+
+        // Evaluate the index expression
+        llvm::Value *IndexVal = IndexExpr->codegen();
+        if (!IndexVal)
+            return nullptr;
+
+        // Generate GEP instruction to get the element at the index
+        // first index steps into the array object, second index selects element
+        llvm::Value *Zero = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
+        std::vector<llvm::Value *> Indices = {Zero, IndexVal};
+
+        // Calculate exact memory address of arr[index]
+        llvm::Value *ElementPtr = CompilerState.Builder->CreateInBoundsGEP(
+            ArrayPtr->getAllocatedType(),
+            ArrayPtr,
+            Indices,
+            "arrayidx"
+        );
+        return CompilerState.Builder->CreateLoad(llvm::Type::getInt32Ty(*CompilerState.TheContext), ElementPtr, "idxload");
+    }
+    bool IndexAST::typeCheck(SymbolTable& symTab)
+    {
+        // Verify if the variable exists in symbl table
+        Symbol* sym = symTab.lookup(ArrayName);
+        if (!sym)
+        {
+            std::cerr << "Semantic Error: Array '" << ArrayName << "' is not declared.\n";
+            return false;
+        }
+
+        // Verify if its an array
+        if (!sym->Type.isArray())
+        {
+            std::cerr << "Semantic Error: Variable '" << ArrayName << "' is not an array.\n";
+            return false;
+        }
+
+        // Verify if the index expression is valid and resolves to an integer
+        if (!IndexExpr->typeCheck(symTab))
+            return false;
+        if (IndexExpr->ExprType.Base != BaseType::Int || IndexExpr->ExprType.IsRef || IndexExpr->ExprType.isArray())
+        {
+            std::cerr << "Semantic Error: Array '" << ArrayName << "' must be of type int.\n";
+            return false;
+        }
+
+        // Compile time bounds checking
+        // If the index is hardcooded number we can check it right now
+        if (auto* NumNode = dynamic_cast<NumberAST*>(IndexExpr.get()))
+        {
+            int indexValue = NumNode->getVal();
+            if (indexValue < 0 || indexValue >= sym->Type.ArrayCapacity)
+            {
+                std::cerr << "Semantic Error: Array index out of bounds. '" << ArrayName << "' has capacity " << sym->Type.ArrayCapacity << ", but accessed at index " << indexValue << ".\n";
+                return false; // Halts compilation immediately
+            }
+        }
+
+        // return type indexing int[10] -> int
+        ExprType = TypeInfo(sym->Type.Base, false);
+        return true;
+    }
 }

@@ -16,7 +16,6 @@ namespace llvm
 
 namespace Rivet
 {
-    // TODO: Implement codegen
     class ASTNode
     {
     public:
@@ -45,6 +44,7 @@ namespace Rivet
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
         bool typeCheck(SymbolTable& symTab) override;
+        int getVal() const { return Val; }
     };
 
     class VariableAST : public ASTNode
@@ -65,9 +65,10 @@ namespace Rivet
         std::string Name;
         bool IsRef; // tracks if the variable is a pointer
         std::unique_ptr<ASTNode> InitVal; // Can be null if uninitialized
+        int ArrayCapacity;
     public:
-        VariableDeclAST(const std::string &Type, const std::string &Name, bool IsRef, std::unique_ptr<ASTNode> InitVal)
-            : Type(Type), Name(Name), IsRef(IsRef), InitVal(std::move(InitVal)) {}
+        VariableDeclAST(const std::string &Type, const std::string &Name, bool IsRef, std::unique_ptr<ASTNode> InitVal, int ArrayCapacity)
+            : Type(Type), Name(Name), IsRef(IsRef), InitVal(std::move(InitVal)), ArrayCapacity(ArrayCapacity) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
         bool typeCheck(SymbolTable& symTab) override;
@@ -202,6 +203,21 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
         // Getter for the assignment of the pointer expression
         ASTNode *getOperand() const { return Operand.get(); }
+    };
+
+    class IndexAST : public ASTNode
+    {
+        std::string ArrayName;
+        std::unique_ptr<ASTNode> IndexExpr; // The i in x[i]
+
+    public:
+        IndexAST(const std::string &ArrayName, std::unique_ptr<ASTNode> IndexExpr)
+            : ArrayName(ArrayName), IndexExpr(std::move(IndexExpr)) {}
+        llvm::Value *codegen() override;
+        void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
+        std::string getArrayName() const { return ArrayName; }
+        ASTNode *getIndexExpr() const { return IndexExpr.get(); }
     };
 }
 

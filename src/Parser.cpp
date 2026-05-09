@@ -42,38 +42,56 @@ namespace Rivet
 
         getNextToken();
 
-        if (CurTok != '(')
-            return std::make_unique<VariableAST>(idName);
-
-        getNextToken();
-
-        std::vector<std::unique_ptr<ASTNode>> args;
-        if (CurTok != ')')
+        // function call f(a,b)
+        if (CurTok == '(')
         {
-            while (true)
+            getNextToken();
+            std::vector<std::unique_ptr<ASTNode>> args;
+            if (CurTok != ')')
             {
-                if (auto arg = ParseExpression())
+                while (true)
                 {
-                    args.push_back(std::move(arg));
+                    if (auto arg = ParseExpression())
+                    {
+                        args.push_back(std::move(arg));
+                    }
+                    else
+                    {
+                        return nullptr;
+                    }
+
+                    if (CurTok == ')')
+                        break;
+
+                    if (CurTok != ',')
+                        return LogErrorExpected("',' or ')'", "in argument list");
+
+                    getNextToken();
                 }
-                else
-                {
-                    return nullptr;
-                }
-
-                if (CurTok == ')')
-                    break;
-
-                if (CurTok != ',')
-                    return LogErrorExpected("',' or ')'", "in argument list");
-
-                getNextToken();
             }
+            if (CurTok != ')')
+                return LogErrorExpected("')'", "after argument list");
+            getNextToken();
+            return std::make_unique<CallAST>(idName, std::move(args));
+
+        }
+        // array indexing x[i]
+        if (CurTok == '[')
+        {
+            getNextToken();
+            auto indexExpr = ParseExpression();
+            if (!indexExpr)
+                return nullptr;
+
+            if (CurTok != ']')
+                return LogErrorExpected("']'", "after index expression");
+            getNextToken();
+
+            return std::make_unique<IndexAST>(idName, std::move(indexExpr));
         }
 
-        getNextToken();
-
-        return std::make_unique<CallAST>(idName, std::move(args));
+        // variable x
+        return std::make_unique<VariableAST>(idName);
     }
 
     std::unique_ptr<ASTNode> Parser::ParseIfStatement()
@@ -340,9 +358,25 @@ namespace Rivet
         getNextToken();
 
         bool isRef = false;
+        int arrayCapacity = 0; // default is  meaning it is not an array
+        
         if (CurTok == tok_ref)
         {
             isRef = true;
+            getNextToken();
+        }
+
+        if (CurTok == '[')
+        {
+            getNextToken();
+            if (CurTok != tok_number)
+                return LogErrorExpected("number", "after '[' in array declaration");
+            arrayCapacity = lexer.NumVal;
+            if (arrayCapacity < 0)
+                return LogErrorExpected("non-negative number", "after '[' in array declaration");
+            getNextToken();
+            if (CurTok != ']')
+                return LogErrorExpected("']'", "after array capacity");
             getNextToken();
         }
 
@@ -362,7 +396,7 @@ namespace Rivet
         if (CurTok != ';')
             return LogErrorExpected("';'", "after variable declaration");
         getNextToken();
-        return std::make_unique<VariableDeclAST>("int", varName, isRef, std::move(initVal));
+        return std::make_unique<VariableDeclAST>("int", varName, isRef, std::move(initVal), arrayCapacity);
     }
 
     std::unique_ptr<ASTNode> Parser::ParseImport()

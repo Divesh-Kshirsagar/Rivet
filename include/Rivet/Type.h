@@ -14,17 +14,22 @@ namespace Rivet {
 
     struct TypeInfo {
         BaseType Base;
-        bool IsRef; 
+        bool IsRef;
+        int ArrayCapacity;
 
-        TypeInfo() : Base(BaseType::Unknown), IsRef(false) {}
-        TypeInfo(BaseType base, bool isRef = false) : Base(base), IsRef(isRef) {}
+        TypeInfo() : Base(BaseType::Unknown), IsRef(false), ArrayCapacity(0) {}
+        TypeInfo(BaseType base, bool isRef = false, int arrayCapacity = 0) : Base(base), IsRef(isRef), ArrayCapacity(arrayCapacity) {}
 
         bool operator==(const TypeInfo& other) const {
-            return Base == other.Base && IsRef == other.IsRef;
+            return Base == other.Base && IsRef == other.IsRef && ArrayCapacity == other.ArrayCapacity;
         }
 
         bool operator!=(const TypeInfo& other) const {
             return !(*this == other);
+        }
+
+        bool isArray() const {
+            return ArrayCapacity > 0;
         }
 
         std::string toString() const {
