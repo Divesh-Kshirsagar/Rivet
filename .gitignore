@@ -43,9 +43,24 @@
 # Python
 __pycache__/
 *.py[cod]
-*$py.class  
+*$py.class
 .venv/
+.venv-docs/
 site/
 
 # CMake build artifacts
 build/
+
+# Sphinx build artifacts
+_build/
+
+# editor files
+.idea
+.vscode
+
+# Clangd
+.clangd
+.cache
+
+# Agent
+.codex
