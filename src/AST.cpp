@@ -74,6 +74,10 @@ namespace Rivet
             llvm::Type *ElemType = llvm::IntegerType::getInt32Ty(*CompilerState.TheContext);
             VarType = llvm::ArrayType::get(ElemType, ExprType.ArrayCapacity);
         }
+        else if (ExprType.Base == BaseType::String)
+        {
+            VarType = CompilerState.StringStructType;
+        }
         else if (IsRef)
         {    
             // pointer
@@ -91,6 +95,12 @@ namespace Rivet
         {
             if (ExprType.isArray())
                 InitValIR = llvm::ConstantAggregateZero::get(VarType);
+            else if (ExprType.Base == BaseType::String)
+            {
+                llvm::Constant *NullPtr = llvm::ConstantPointerNull::get(llvm::PointerType::getUnqual(*CompilerState.TheContext));
+                llvm::Constant *ZeroLen = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
+                InitValIR = llvm::ConstantStruct::get(CompilerState.StringStructType, {NullPtr, ZeroLen});
+            }
             else if (IsRef)
                 InitValIR = llvm::ConstantPointerNull::get(llvm::cast<llvm::PointerType>(VarType)); // default pointer initializes to null (0x0)
             else
@@ -100,7 +110,18 @@ namespace Rivet
         {
             InitValIR = InitVal->codegen();
             if (!InitValIR)
-                return nullptr;
+            {
+                if (ExprType.isArray())
+                    InitValIR = llvm::ConstantAggregateZero::get(VarType);
+                else if (ExprType.Base == BaseType::String)
+                {
+                    llvm::Constant *NullPtr = llvm::ConstantPointerNull::get(llvm::PointerType::getUnqual(*CompilerState.TheContext));
+                    llvm::Constant *ZeroLen = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
+                    InitValIR = llvm::ConstantStruct::get(CompilerState.StringStructType, {NullPtr, ZeroLen});
+                }
+                else
+                    InitValIR = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true)); // default initialize integer to 0
+            }
         }
         
         CompilerState.Builder->CreateStore(InitValIR, Alloca);
@@ -109,7 +130,19 @@ namespace Rivet
     }
     bool VariableDeclAST::typeCheck(SymbolTable& symTab)
     {
-        TypeInfo declaredType(BaseType::Int, IsRef, ArrayCapacity);
+        BaseType declaredBase = BaseType::Unknown;
+        if (Type == "int")
+            declaredBase = BaseType::Int;
+        else if (Type == "str")
+            declaredBase = BaseType::String;
+
+        if (declaredBase == BaseType::Unknown)
+        {
+            std::cerr << "Semantic Error: Unknown declared type '" << Type << "' for variable '" << Name << "'.\n";
+            return false;
+        }
+
+        TypeInfo declaredType(declaredBase, IsRef, ArrayCapacity);
 
         if (InitVal)
         {
@@ -804,6 +837,31 @@ namespace Rivet
 
         // return type indexing int[10] -> int
         ExprType = TypeInfo(sym->Type.Base, false);
+        return true;
+    }
+
+    void StringLiteralAST::dump(int indent) const
+    {
+        printIndent(indent);
+        std::cout << "StringLiteral: \"" << Val << "\"\n";
+    }
+    llvm::Value *StringLiteralAST::codegen()
+    {
+        // Create the raw charecter array constant in llvm without auto apppending
+        llvm::Constant *StrConstant = llvm::ConstantDataArray::getString(*CompilerState.TheContext, Val, false);
+        // Create a global variable to hold the string constant
+        llvm::GlobalVariable *StrVar = new llvm::GlobalVariable(*CompilerState.TheModule, StrConstant->getType(), true, llvm::GlobalValue::PrivateLinkage, StrConstant, ".str.literal");
+        // create the fat pointer struct : {ptr, len}
+        llvm::Constant *Ptr = StrVar;
+        llvm::Constant *Len = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, Val.length(), true));
+        
+        return llvm::ConstantStruct::get(CompilerState.StringStructType, {Ptr, Len});
+    }
+    bool StringLiteralAST::typeCheck(SymbolTable& symTab)
+    {
+        (void)symTab;
+        // mark this node as a string type natively
+        ExprType = TypeInfo(BaseType::String, false);
         return true;
     }
 }

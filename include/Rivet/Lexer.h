@@ -14,6 +14,7 @@ namespace Rivet
         // Dynamic Tokens
         tok_identifier = -2,
         tok_number = -3,
+        tok_string_literal = -4,
 
         // Memory & Types
         tok_int = -10,
@@ -55,6 +56,8 @@ namespace Rivet
         int getNextToken();
 
         std::string IdentifierStr;
+
+        std::string StringVal;
 
         int NumVal;
 

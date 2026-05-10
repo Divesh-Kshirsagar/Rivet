@@ -17,6 +17,8 @@ namespace Rivet
 
         std::map<std::string, llvm::AllocaInst *> NamedValues;
 
+        // globally available string struct type
+        llvm::StructType *StringStructType = nullptr;
         void Initialize();
     };
 

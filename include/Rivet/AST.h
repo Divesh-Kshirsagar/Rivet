@@ -47,6 +47,18 @@ namespace Rivet
         int getVal() const { return Val; }
     };
 
+    class StringLiteralAST : public ASTNode
+    {
+        std::string Val;
+
+    public:
+        StringLiteralAST(const std::string &Val) : Val(Val) {}
+        llvm::Value *codegen() override;
+        void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
+        const std::string &getVal() const { return Val; }
+    };
+    
     class VariableAST : public ASTNode
     {
         std::string Name;

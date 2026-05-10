@@ -36,6 +36,14 @@ namespace Rivet
         return result;
     }
 
+    std::unique_ptr<ASTNode> Parser::ParseStringLiteralExpr()
+    {
+        // grab string value stored by the lexer
+        auto result = std::make_unique<StringLiteralAST>(lexer.StringVal);
+        getNextToken();
+        return result;
+    }
+
     std::unique_ptr<ASTNode> Parser::ParseIdentifierExpr()
     {
         std::string idName = lexer.IdentifierStr;
@@ -204,7 +212,7 @@ namespace Rivet
     {
         if (CurTok == tok_import)
             return ParseImport();
-        if (CurTok == tok_int)
+        if (CurTok == tok_int || CurTok == tok_string)
             return ParseVariableDeclaration();
         if (CurTok == tok_if)
             return ParseIfStatement();
@@ -329,6 +337,8 @@ namespace Rivet
             return ParseParenExpr();
         if (CurTok == tok_number)
             return ParseNumberExpr();
+        if (CurTok == tok_string_literal)
+            return ParseStringLiteralExpr();
         // TODO: Implement optref 
         if (CurTok == tok_address_of)
         {
@@ -353,8 +363,11 @@ namespace Rivet
 
     std::unique_ptr<ASTNode> Parser::ParseVariableDeclaration()
     {
-        if (CurTok != tok_int)
-            return LogErrorExpected("int", "to start variable declaration");
+        if (CurTok != tok_int && CurTok != tok_string)
+            return LogErrorExpected("int or str", "to start variable declaration");
+
+        const bool isStringType = (CurTok == tok_string);
+        const std::string declaredType = isStringType ? "str" : "int";
         getNextToken();
 
         bool isRef = false;
@@ -362,12 +375,16 @@ namespace Rivet
         
         if (CurTok == tok_ref)
         {
+            if (isStringType)
+                return LogError("String references are not supported yet.");
             isRef = true;
             getNextToken();
         }
 
         if (CurTok == '[')
         {
+            if (isStringType)
+                return LogError("String arrays are not supported yet.");
             getNextToken();
             if (CurTok != tok_number)
                 return LogErrorExpected("number", "after '[' in array declaration");
@@ -396,7 +413,7 @@ namespace Rivet
         if (CurTok != ';')
             return LogErrorExpected("';'", "after variable declaration");
         getNextToken();
-        return std::make_unique<VariableDeclAST>("int", varName, isRef, std::move(initVal), arrayCapacity);
+        return std::make_unique<VariableDeclAST>(declaredType, varName, isRef, std::move(initVal), arrayCapacity);
     }
 
     std::unique_ptr<ASTNode> Parser::ParseImport()

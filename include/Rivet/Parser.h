@@ -34,6 +34,7 @@ namespace Rivet
         
         // Parsing functions each for a major ebnf rule
         std::unique_ptr<ASTNode> ParseNumberExpr();
+        std::unique_ptr<ASTNode> ParseStringLiteralExpr();        
         std::unique_ptr<ASTNode> ParseParenExpr();
         std::unique_ptr<ASTNode> ParseIdentifierExpr();
         

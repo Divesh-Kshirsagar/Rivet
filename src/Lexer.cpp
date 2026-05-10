@@ -161,6 +161,23 @@ namespace Rivet
             return tok_number;
         }
 
+        // String literal: 
+        if (LastChar == '"')
+        {
+            StringVal = "";
+            advanceChar();
+            while (LastChar != EOF && LastChar != '"')
+            {
+                StringVal += LastChar;
+                advanceChar();
+            }
+            if (LastChar == '"')
+                advanceChar();
+            else
+                std::cerr << "Lexical Error: Unterminated string literal" << std::endl; 
+            return tok_string_literal;
+        }
+
         // Operators and punctuation
         if (LastChar == '=')
         {
