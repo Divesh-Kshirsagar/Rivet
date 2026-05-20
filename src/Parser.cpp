@@ -1,3 +1,7 @@
+/**
+ * @file Parser.cpp
+ * @brief Implementation of the Parser logic.
+ */
 #include "Rivet/Parser.h"
 #include <iostream>
 #include <filesystem>

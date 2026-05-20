@@ -1,3 +1,7 @@
+/**
+ * @file CodeGen.cpp
+ * @brief Implementation of the LLVM Code Generation setup operations.
+ */
 #include "Rivet/CodeGen.h"
 
 namespace Rivet
@@ -17,7 +21,7 @@ namespace Rivet
             llvm::Type::getInt32Ty(*TheContext), // length
         });
 
-        // 
+        
     }
 
 }

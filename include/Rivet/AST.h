@@ -1,3 +1,11 @@
+/**
+ * @file AST.h
+ * @brief Defines the Abstract Syntax Tree classes for the Rivet compiler.
+ * 
+ * Provides node structures that represent structural elements of code 
+ * (Expressions, Statements, Variables, Control Flow). Every node supports 
+ * type checking (`typeCheck`) and LLVM IR generation (`codegen`).
+ */
 #ifndef RIVET_AST_H
 #define RIVET_AST_H
 
@@ -16,18 +24,43 @@ namespace llvm
 
 namespace Rivet
 {
+    /**
+     * @class ASTNode
+     * @brief The pure virtual base class for all Abstract Syntax Tree nodes.
+     * 
+     * Every discrete logical step in a Rivet program inherits from this class.
+     * It ensures all constructs implement code generation, type checking, and AST tree visualizations.
+     */
     class ASTNode
     {
     public:
         virtual ~ASTNode() = default;
+
+        /**
+         * @brief Transforms the node's logical definition into corresponding LLVM instructions.
+         * @return llvm::Value* A pointer to an emitted LLVM value, or nullptr on failure.
+         */
         virtual llvm::Value *codegen() = 0;
+
+        /**
+         * @brief Recursively prints out the structure of the AST via stdout.
+         * @param indent Defines how many spaces to apply to format tree depth accurately.
+         */
         virtual void dump(int indent = 0) const = 0;
 
-        TypeInfo ExprType;
-        virtual bool typeCheck(SymbolTable& symTab) = 0; // Returns true if the node is semantically valid, false if an error occurred.
-
+        TypeInfo ExprType; ///< Discovered or annotated resulting type of this specific node expression.
+        
+        /**
+         * @brief Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing.
+         * @param symTab Mutable reference to an ongoing scope tracker mapping variable names.
+         * @return true if semantically valid and verified. False if illegal structures (memory constraints, missing vars) exist.
+         */
+        virtual bool typeCheck(SymbolTable& symTab) = 0; 
 
     protected:
+        /**
+         * @brief A helper to simplify recursively nested string output in Dumps.
+         */
         void printIndent(int indent) const
         {
             for (int i = 0; i < indent; ++i)
@@ -35,9 +68,13 @@ namespace Rivet
         }
     };
 
+    /**
+     * @class NumberAST
+     * @brief Syntactic node covering integer literal definitions.
+     */
     class NumberAST : public ASTNode
     {
-        int Val;
+        int Val; ///< The parsed integer value.
 
     public:
         NumberAST(int Val) : Val(Val) {}
@@ -47,9 +84,13 @@ namespace Rivet
         int getVal() const { return Val; }
     };
 
+    /**
+     * @class StringLiteralAST
+     * @brief Node containing immutable string literals (`"sample"`).
+     */
     class StringLiteralAST : public ASTNode
     {
-        std::string Val;
+        std::string Val; ///< The complete string text.
 
     public:
         StringLiteralAST(const std::string &Val) : Val(Val) {}
@@ -59,9 +100,13 @@ namespace Rivet
         const std::string &getVal() const { return Val; }
     };
     
+    /**
+     * @class VariableAST
+     * @brief Refers to an already existing defined symbol/variable by its name string.
+     */
     class VariableAST : public ASTNode
     {
-        std::string Name;
+        std::string Name; ///< The exact name of the requested symbol.
 
     public:
         VariableAST(const std::string &Name) : Name(Name) {}
@@ -71,13 +116,17 @@ namespace Rivet
         const std::string &getName() const { return Name; }
     };
 
+    /**
+     * @class VariableDeclAST
+     * @brief Controls variable allocation syntax like `int x = 5;` or `int[5] array;`.
+     */
     class VariableDeclAST : public ASTNode
     {
-        std::string Type;
-        std::string Name;
-        bool IsRef; // tracks if the variable is a pointer
-        std::unique_ptr<ASTNode> InitVal; // Can be null if uninitialized
-        int ArrayCapacity;
+        std::string Type; ///< String identifier of the memory type (e.g. "int", "str").
+        std::string Name; ///< Variable name.
+        bool IsRef;       ///< True if constructed as a reference type.
+        std::unique_ptr<ASTNode> InitVal; ///< The assignment expression (can be null if uninitialized).
+        int ArrayCapacity; ///< Set to >0 if defining a fixed-length static array block.
     public:
         VariableDeclAST(const std::string &Type, const std::string &Name, bool IsRef, std::unique_ptr<ASTNode> InitVal, int ArrayCapacity)
             : Type(Type), Name(Name), IsRef(IsRef), InitVal(std::move(InitVal)), ArrayCapacity(ArrayCapacity) {}
@@ -86,10 +135,15 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
     };
 
+    /**
+     * @class BinaryOpAST
+     * @brief Node containing binary operators (e.g. +, -, *, /) and LHS/RHS operands.
+     */
     class BinaryOpAST : public ASTNode
     {
-        int Op;
-        std::unique_ptr<ASTNode> LHS, RHS;
+        int Op; ///< The matching Lexer token ID or char of the operator.
+        std::unique_ptr<ASTNode> LHS; ///< Left-hand side operand.
+        std::unique_ptr<ASTNode> RHS; ///< Right-hand side operand.
 
     public:
         BinaryOpAST(int Op, std::unique_ptr<ASTNode> LHS, std::unique_ptr<ASTNode> RHS)
@@ -99,10 +153,14 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
     };
 
+    /**
+     * @class UnaryOpAST
+     * @brief Node describing unary operators applied to a single operand (e.g. -x, !x).
+     */
     class UnaryOpAST : public ASTNode
     {
-        int Op;
-        std::unique_ptr<ASTNode> Operand;
+        int Op; ///< The operator token (e.g. '-', tok_not).
+        std::unique_ptr<ASTNode> Operand; ///< Target nested expression.
 
     public:
         UnaryOpAST(int Op, std::unique_ptr<ASTNode> Operand)
@@ -112,9 +170,13 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
     };
 
+    /**
+     * @class BlockAST
+     * @brief Serves as a container for sequential statements grouping variable scopes `{ ... }`.
+     */
     class BlockAST : public ASTNode
     {
-        std::vector<std::unique_ptr<ASTNode>> Statements;
+        std::vector<std::unique_ptr<ASTNode>> Statements; ///< Array of sub-nodes executing linearly.
 
     public:
         BlockAST(std::vector<std::unique_ptr<ASTNode>> Statements)
@@ -124,9 +186,15 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
     };
 
+    /**
+     * @class IfAST
+     * @brief Control flow conditional branching (if-else expressions).
+     */
     class IfAST : public ASTNode
     {
-        std::unique_ptr<ASTNode> Cond, Then, Else;
+        std::unique_ptr<ASTNode> Cond; ///< Verification expression.
+        std::unique_ptr<ASTNode> Then; ///< Block executed on truth.
+        std::unique_ptr<ASTNode> Else; ///< Optional block executed on falsity (can be null).
 
     public:
         IfAST(std::unique_ptr<ASTNode> Cond, std::unique_ptr<ASTNode> Then, std::unique_ptr<ASTNode> Else)
@@ -136,9 +204,14 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
     };
 
+    /**
+     * @class WhileAST
+     * @brief A while loop expression iterating execution while Cond evaluates to non-zero.
+     */
     class WhileAST : public ASTNode
     {
-        std::unique_ptr<ASTNode> Cond, Body;
+        std::unique_ptr<ASTNode> Cond; ///< Condition re-evaluated per loop.
+        std::unique_ptr<ASTNode> Body; ///< Interior logic Block.
 
     public:
         WhileAST(std::unique_ptr<ASTNode> Cond, std::unique_ptr<ASTNode> Body)
@@ -148,16 +221,19 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
     };
 
-    /*
-     * For loop in Rivet Language
-     * 
+    /**
+     * @class ForAST
+     * @brief A for-loop structure defining numeric iterator stepping.
      */
     class ForAST : public ASTNode
     {
-        std::string VarName;
-        std::unique_ptr<ASTNode> Start, End, Step, Body;
+        std::string VarName; ///< Scope-local iterator variable.
+        std::unique_ptr<ASTNode> Start; ///< The initial loop value assignment.
+        std::unique_ptr<ASTNode> End; ///< The boundary target.
+        std::unique_ptr<ASTNode> Step; ///< Re-increment interval after each loop.
+        std::unique_ptr<ASTNode> Body; ///< Logic execution block.
 
-        public:
+    public:
         ForAST(const std::string &VarName, std::unique_ptr<ASTNode> Start, std::unique_ptr<ASTNode> End, std::unique_ptr<ASTNode> Step, std::unique_ptr<ASTNode> Body)
             : VarName(VarName), Start(std::move(Start)), End(std::move(End)), Step(std::move(Step)), Body(std::move(Body)) {}
         llvm::Value *codegen() override;
@@ -165,10 +241,14 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
     };
 
+    /**
+     * @class CallAST
+     * @brief Encapsulates function or routine invocation mapping to its identifier and parameters.
+     */
     class CallAST : public ASTNode
     {
-        std::string Callee;
-        std::vector<std::unique_ptr<ASTNode>> Args;
+        std::string Callee; ///< Specified name of the function to invoke.
+        std::vector<std::unique_ptr<ASTNode>> Args; ///< Evaluated arguments bound to the Call instruction.
 
     public:
         CallAST(const std::string &Callee, std::vector<std::unique_ptr<ASTNode>> Args)
@@ -178,10 +258,14 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
     };
 
+    /**
+     * @class ImportAST
+     * @brief Pulls external files/modules into the current code compilation tree.
+     */
     class ImportAST : public ASTNode
     {
-        std::string ModuleName;
-        std::vector<std::unique_ptr<ASTNode>> ImportedNodes;
+        std::string ModuleName; ///< Resolvable path or internal name.
+        std::vector<std::unique_ptr<ASTNode>> ImportedNodes; ///< Collection of root AST nodes sourced externally.
 
     public:
         ImportAST(const std::string &ModuleName, std::vector<std::unique_ptr<ASTNode>> ImportedNodes)
@@ -191,9 +275,13 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
     };
 
+    /**
+     * @class AddressOfAST
+     * @brief Equivalent to the C `&` operator to retrieve pointer locations.
+     */
     class AddressOfAST : public ASTNode
     {
-        std::string VarName;
+        std::string VarName; ///< Name of the target variable to query its address in memory.
 
     public:
         AddressOfAST(const std::string &VarName)
@@ -203,9 +291,13 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
     };
 
+    /**
+     * @class DerefAST
+     * @brief Equivalent to the C `*` operator pointing into referenced memory.
+     */
     class DerefAST : public ASTNode
     {
-        std::unique_ptr<ASTNode> Operand;
+        std::unique_ptr<ASTNode> Operand; ///< AST resolving to the target pointer data.
 
     public:
         DerefAST(std::unique_ptr<ASTNode> Operand)
@@ -217,10 +309,14 @@ namespace Rivet
         ASTNode *getOperand() const { return Operand.get(); }
     };
 
+    /**
+     * @class IndexAST
+     * @brief Node containing array indexing statements (`x[i]`).
+     */
     class IndexAST : public ASTNode
     {
-        std::string ArrayName;
-        std::unique_ptr<ASTNode> IndexExpr; // The i in x[i]
+        std::string ArrayName; ///< Identifier mapped to the target array.
+        std::unique_ptr<ASTNode> IndexExpr; ///< Resolvable subscript index (`i` in `x[i]`).
 
     public:
         IndexAST(const std::string &ArrayName, std::unique_ptr<ASTNode> IndexExpr)

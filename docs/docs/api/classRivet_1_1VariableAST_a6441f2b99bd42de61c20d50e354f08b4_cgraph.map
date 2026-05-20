@@ -1,0 +1,5 @@
+<map id="Rivet::VariableAST::typeCheck" name="Rivet::VariableAST::typeCheck">
+<area shape="rect" id="Node000001" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="5,5,139,45"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1SymbolTable.html#aff47a5345d3544d3f2bedcf4c2274c2e" title="Searches for a variable traversing upward from the current scope to the global scope." alt="" coords="187,5,323,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,23,173,23,173,28,139,28"/>
+</map>

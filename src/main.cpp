@@ -1,3 +1,11 @@
+/**
+ * @file main.cpp
+ * @brief Entry point for the Rivet compiler.
+ * 
+ * This file contains the main execution flow of the compiler, tying together
+ * the Lexer, Parser, Semantic Analysis, and Code Generation phases.
+ */
+
 #include <iostream>
 #include <string>
 #include <llvm/IR/BasicBlock.h>
@@ -10,6 +18,16 @@
 
 using namespace Rivet;
 
+/**
+ * @brief The main entry point of the Rivet compiler.
+ * 
+ * Invokes the lexical analysis, parsing, semantic analysis, and LLVM-based
+ * code generation phases on the given Rivet source file.
+ * 
+ * @param argc Number of command-line arguments.
+ * @param argv Array of command-line arguments. Expected format: `rivet <source_file.rvt> [--dump-ast]`
+ * @return int Returns 0 on successful compilation, 1 on failure (e.g., syntax/semantic errors or missing input).
+ */
 // TODO: Try to use better error messages cause the current ones are pretty bad, especially for syntax errors. Maybe include line/column info in the error messages? --- IGNORE ---
 int main(int argc, char** argv) {
     
@@ -68,7 +86,6 @@ int main(int argc, char** argv) {
 
     }
 
-    // These are just placeholders for now, as codegen is not entirely implemented yet
     if(parser.ErrorCount > 0) {
         std::cerr << "Compilation failed with " << parser.ErrorCount << " error(s).\n";
         return 1;

@@ -51,6 +51,12 @@ site/
 # CMake build artifacts
 build/
 
+# Doxygen build artifacts
+docs/doxygen/_build/
+Doxyfile.bak
+doxygen_sqlite3.db
+*.tmp
+
 # Sphinx build artifacts
 _build/
 

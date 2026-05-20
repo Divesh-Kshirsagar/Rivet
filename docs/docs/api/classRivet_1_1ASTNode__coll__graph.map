@@ -1,0 +1,5 @@
+<map id="Rivet::ASTNode" name="Rivet::ASTNode">
+<area shape="rect" id="Node000001" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="5,273,116,419"/>
+<area shape="rect" id="Node000002" href="$structRivet_1_1TypeInfo.html" title="Encapsulates a data type, its reference semantics, and array capacity if applicable." alt="" coords="6,5,115,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,211,63,257,58,257,58,211"/>
+</map>

@@ -42,13 +42,19 @@ nav:
 
   - Internals:
       - Overview: internals/overview.md
+      - Project Structure: internals/project-structure.md
       - LLVM Backend: internals/llvm.md
+
+  - C++ API Reference: api/index.html
+
+hooks:
+  - doxygen_hook.py
+
+plugins:
+  - search
 
 markdown_extensions:
   - toc:
       permalink: true
   - codehilite
   - admonition
-
-plugins:
-  - search

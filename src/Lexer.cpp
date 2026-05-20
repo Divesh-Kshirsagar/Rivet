@@ -1,3 +1,7 @@
+/**
+ * @file Lexer.cpp
+ * @brief Implementation of the Lexer class.
+ */
 #include "Rivet/Lexer.h"
 #include <iostream>
 #include <cctype>

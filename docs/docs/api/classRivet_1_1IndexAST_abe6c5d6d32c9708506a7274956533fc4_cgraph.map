@@ -1,0 +1,7 @@
+<map id="Rivet::IndexAST::typeCheck" name="Rivet::IndexAST::typeCheck">
+<area shape="rect" id="Node000001" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="5,35,193,60"/>
+<area shape="rect" id="Node000002" href="$structRivet_1_1TypeInfo.html#a2cbd5bf84cdf868487e85e0f4a5e4551" title="Utility returning whether this structure resolves as a flat array." alt="" coords="241,5,401,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,32,227,28,228,33,194,38"/>
+<area shape="rect" id="Node000003" href="$classRivet_1_1SymbolTable.html#aff47a5345d3544d3f2bedcf4c2274c2e" title="Searches for a variable traversing upward from the current scope to the global scope." alt="" coords="253,55,389,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="194,57,240,62,239,68,193,62"/>
+</map>

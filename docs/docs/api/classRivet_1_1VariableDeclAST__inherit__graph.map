@@ -1,0 +1,5 @@
+<map id="Rivet::VariableDeclAST" name="Rivet::VariableDeclAST">
+<area shape="rect" id="Node000001" title="Controls variable allocation syntax like int x = 5; or int[5] array;." alt="" coords="5,199,157,324"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="26,5,137,151"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,164,84,198,79,198,79,164"/>
+</map>

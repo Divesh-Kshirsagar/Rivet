@@ -1,0 +1,7 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title="The main entry point of the Rivet compiler." alt="" coords="5,42,56,67"/>
+<area shape="rect" id="Node000002" href="$structRivet_1_1CodeGenContext.html#a668e95dcdbe27422a51ea29464752167" title="Fully instantiates LLVM internals and custom core types." alt="" coords="104,5,267,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="56,47,90,41,91,46,57,53"/>
+<area shape="rect" id="Node000003" href="$classRivet_1_1Parser.html#aeb80fa865aa016f4b58f0bcc7ae4742d" title="Parses the entire file bound to the Lexer." alt="" coords="104,70,267,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="57,56,102,65,101,70,56,62"/>
+</map>

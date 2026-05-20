@@ -1,3 +1,10 @@
+/**
+ * @file AST.cpp
+ * @brief Implementation for AST node type-checking and log dumps.
+ * 
+ * Defines how expressions behave dynamically when traversing code tree structures.
+ * Also configures exactly what information is displayed via `--dump-ast`.
+ */
 #include "Rivet/AST.h"
 #include "Rivet/Lexer.h"
 #include "Rivet/CodeGen.h"

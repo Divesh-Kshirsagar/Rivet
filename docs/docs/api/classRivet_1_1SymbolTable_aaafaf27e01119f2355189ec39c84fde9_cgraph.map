@@ -1,0 +1,5 @@
+<map id="Rivet::SymbolTable::SymbolTable" name="Rivet::SymbolTable::SymbolTable">
+<area shape="rect" id="Node000001" title="Constructs a new SymbolTable and initializes the global scope." alt="" coords="5,5,141,45"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e" title="Creates a new inner scope and pushes it onto the stack." alt="" coords="189,5,325,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,23,176,23,176,28,142,28"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="Rivet::BlockAST::typeCheck" name="Rivet::BlockAST::typeCheck">
+<area shape="rect" id="Node000001" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="5,45,195,70"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e" title="Creates a new inner scope and pushes it onto the stack." alt="" coords="243,5,379,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,42,228,35,229,40,185,47"/>
+<area shape="rect" id="Node000003" href="$classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22" title="Destroys the deepest active scope, popping it from the stack." alt="" coords="243,69,379,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,67,229,74,228,80,184,73"/>
+</map>

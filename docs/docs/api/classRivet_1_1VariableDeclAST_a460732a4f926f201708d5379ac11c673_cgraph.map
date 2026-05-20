@@ -1,0 +1,7 @@
+<map id="Rivet::VariableDeclAST::typeCheck" name="Rivet::VariableDeclAST::typeCheck">
+<area shape="rect" id="Node000001" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="5,35,165,75"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a" title="Declares a new variable in the latest/current block scope." alt="" coords="227,5,363,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,41,213,34,214,39,166,46"/>
+<area shape="rect" id="Node000003" href="$structRivet_1_1TypeInfo.html#ab47cac8af909576b180482f9ccf39778" title="Converts the embedded semantic instructions into a readable debug string format." alt="" coords="213,70,377,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="166,63,200,67,200,73,165,68"/>
+</map>
