@@ -1,5 +1,5 @@
 <map id="Rivet::TypeInfo::toString" name="Rivet::TypeInfo::toString">
-<area shape="rect" id="Node000001" title=" " alt="" coords="213,13,377,38"/>
-<area shape="rect" id="Node000002" href="$classRivet_1_1VariableDeclAST.html#a460732a4f926f201708d5379ac11c673" title=" " alt="" coords="5,5,165,45"/>
+<area shape="rect" id="Node000001" title="Converts the embedded semantic instructions into a readable debug string format." alt="" coords="213,13,377,38"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1VariableDeclAST.html#a460732a4f926f201708d5379ac11c673" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="5,5,165,45"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,28,165,28,165,23,200,23"/>
 </map>

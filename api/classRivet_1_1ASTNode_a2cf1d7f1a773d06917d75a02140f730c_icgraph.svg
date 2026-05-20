@@ -57,7 +57,7 @@ var sectionId = 'dynsection-3';
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="A helper to simplify recursively nested string output in Dumps.">
 <polygon fill="#999999" stroke="#666666" points="309,-290 169,-290 169,-271 309,-271 309,-290"/>
 <text text-anchor="middle" x="239" y="-278" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ASTNode::printIndent</text>
 </a>
@@ -66,7 +66,7 @@ var sectionId = 'dynsection-3';
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="classRivet_1_1NumberAST.html#a31a2cd0436cda41ea3454df6302fc7d5" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="classRivet_1_1NumberAST.html#a31a2cd0436cda41ea3454df6302fc7d5" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="130.5,-594 2.5,-594 2.5,-575 130.5,-575 130.5,-594"/>
 <text text-anchor="middle" x="66.5" y="-582" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::NumberAST::dump</text>
 </a>
@@ -84,7 +84,7 @@ var sectionId = 'dynsection-3';
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="classRivet_1_1StringLiteralAST.html#a0d93715ced5b9d5f4f486a5fe733340a" target="_top" xlink:title=" ">
+<g id="a_Node000003"><a xlink:href="classRivet_1_1StringLiteralAST.html#a0d93715ced5b9d5f4f486a5fe733340a" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="125,-556.5 8,-556.5 8,-526.5 125,-526.5 125,-556.5"/>
 <text text-anchor="start" x="16" y="-544.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::StringLiteralAST</text>
 <text text-anchor="middle" x="66.5" y="-533.5" font-family="Helvetica,sans-Serif" font-size="10.00">::dump</text>
@@ -103,7 +103,7 @@ var sectionId = 'dynsection-3';
 <!-- Node4 -->
 <g id="Node000004" class="node">
 <title>Node4</title>
-<g id="a_Node000004"><a xlink:href="classRivet_1_1VariableAST.html#a61456353c32dc6674a261a7bdbeabcc4" target="_top" xlink:title=" ">
+<g id="a_Node000004"><a xlink:href="classRivet_1_1VariableAST.html#a61456353c32dc6674a261a7bdbeabcc4" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="116.5,-508.5 16.5,-508.5 16.5,-478.5 116.5,-478.5 116.5,-508.5"/>
 <text text-anchor="start" x="24.5" y="-496.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::VariableAST</text>
 <text text-anchor="middle" x="66.5" y="-485.5" font-family="Helvetica,sans-Serif" font-size="10.00">::dump</text>
@@ -122,7 +122,7 @@ var sectionId = 'dynsection-3';
 <!-- Node5 -->
 <g id="Node000005" class="node">
 <title>Node5</title>
-<g id="a_Node000005"><a xlink:href="classRivet_1_1VariableDeclAST.html#a09cdd13fbd91df6e48bac14a5d4d3157" target="_top" xlink:title=" ">
+<g id="a_Node000005"><a xlink:href="classRivet_1_1VariableDeclAST.html#a09cdd13fbd91df6e48bac14a5d4d3157" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="126.5,-460.5 6.5,-460.5 6.5,-430.5 126.5,-430.5 126.5,-460.5"/>
 <text text-anchor="start" x="14.5" y="-448.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::VariableDeclAST</text>
 <text text-anchor="middle" x="66.5" y="-437.5" font-family="Helvetica,sans-Serif" font-size="10.00">::dump</text>
@@ -141,7 +141,7 @@ var sectionId = 'dynsection-3';
 <!-- Node6 -->
 <g id="Node000006" class="node">
 <title>Node6</title>
-<g id="a_Node000006"><a xlink:href="classRivet_1_1BinaryOpAST.html#ad3697347959c0161a117f24730612092" target="_top" xlink:title=" ">
+<g id="a_Node000006"><a xlink:href="classRivet_1_1BinaryOpAST.html#ad3697347959c0161a117f24730612092" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="119.5,-412.5 13.5,-412.5 13.5,-382.5 119.5,-382.5 119.5,-412.5"/>
 <text text-anchor="start" x="21.5" y="-400.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::BinaryOpAST</text>
 <text text-anchor="middle" x="66.5" y="-389.5" font-family="Helvetica,sans-Serif" font-size="10.00">::dump</text>
@@ -160,7 +160,7 @@ var sectionId = 'dynsection-3';
 <!-- Node7 -->
 <g id="Node000007" class="node">
 <title>Node7</title>
-<g id="a_Node000007"><a xlink:href="classRivet_1_1UnaryOpAST.html#ab1da96c508d1fd145da4dcc9730e3c70" target="_top" xlink:title=" ">
+<g id="a_Node000007"><a xlink:href="classRivet_1_1UnaryOpAST.html#ab1da96c508d1fd145da4dcc9730e3c70" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="133,-364 0,-364 0,-345 133,-345 133,-364"/>
 <text text-anchor="middle" x="66.5" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::UnaryOpAST::dump</text>
 </a>
@@ -178,7 +178,7 @@ var sectionId = 'dynsection-3';
 <!-- Node8 -->
 <g id="Node000008" class="node">
 <title>Node8</title>
-<g id="a_Node000008"><a xlink:href="classRivet_1_1BlockAST.html#a629a5877bb5ea5ad6e7f2fedb6933165" target="_top" xlink:title=" ">
+<g id="a_Node000008"><a xlink:href="classRivet_1_1BlockAST.html#a629a5877bb5ea5ad6e7f2fedb6933165" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="126,-327 7,-327 7,-308 126,-308 126,-327"/>
 <text text-anchor="middle" x="66.5" y="-315" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::BlockAST::dump</text>
 </a>
@@ -196,7 +196,7 @@ var sectionId = 'dynsection-3';
 <!-- Node9 -->
 <g id="Node000009" class="node">
 <title>Node9</title>
-<g id="a_Node000009"><a xlink:href="classRivet_1_1IfAST.html#a3e48062b2b603f648986f8d01db993fa" target="_top" xlink:title=" ">
+<g id="a_Node000009"><a xlink:href="classRivet_1_1IfAST.html#a3e48062b2b603f648986f8d01db993fa" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="116.5,-290 16.5,-290 16.5,-271 116.5,-271 116.5,-290"/>
 <text text-anchor="middle" x="66.5" y="-278" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::IfAST::dump</text>
 </a>
@@ -214,7 +214,7 @@ var sectionId = 'dynsection-3';
 <!-- Node10 -->
 <g id="Node000010" class="node">
 <title>Node10</title>
-<g id="a_Node000010"><a xlink:href="classRivet_1_1WhileAST.html#a7c89945355bb6cd061f03ab698a34f0a" target="_top" xlink:title=" ">
+<g id="a_Node000010"><a xlink:href="classRivet_1_1WhileAST.html#a7c89945355bb6cd061f03ab698a34f0a" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="126,-253 7,-253 7,-234 126,-234 126,-253"/>
 <text text-anchor="middle" x="66.5" y="-241" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::WhileAST::dump</text>
 </a>
@@ -232,7 +232,7 @@ var sectionId = 'dynsection-3';
 <!-- Node11 -->
 <g id="Node000011" class="node">
 <title>Node11</title>
-<g id="a_Node000011"><a xlink:href="classRivet_1_1ForAST.html#a084de51c534bfdef6ea562862c1d8fe6" target="_top" xlink:title=" ">
+<g id="a_Node000011"><a xlink:href="classRivet_1_1ForAST.html#a084de51c534bfdef6ea562862c1d8fe6" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="120.5,-216 12.5,-216 12.5,-197 120.5,-197 120.5,-216"/>
 <text text-anchor="middle" x="66.5" y="-204" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ForAST::dump</text>
 </a>
@@ -250,7 +250,7 @@ var sectionId = 'dynsection-3';
 <!-- Node12 -->
 <g id="Node000012" class="node">
 <title>Node12</title>
-<g id="a_Node000012"><a xlink:href="classRivet_1_1CallAST.html#a336d3ab5210162eb5700ca580220f85a" target="_top" xlink:title=" ">
+<g id="a_Node000012"><a xlink:href="classRivet_1_1CallAST.html#a336d3ab5210162eb5700ca580220f85a" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="122,-179 11,-179 11,-160 122,-160 122,-179"/>
 <text text-anchor="middle" x="66.5" y="-167" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::CallAST::dump</text>
 </a>
@@ -268,7 +268,7 @@ var sectionId = 'dynsection-3';
 <!-- Node13 -->
 <g id="Node000013" class="node">
 <title>Node13</title>
-<g id="a_Node000013"><a xlink:href="classRivet_1_1ImportAST.html#ab3819c88dcabe6bd9a88b7b8ac5bd0db" target="_top" xlink:title=" ">
+<g id="a_Node000013"><a xlink:href="classRivet_1_1ImportAST.html#ab3819c88dcabe6bd9a88b7b8ac5bd0db" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="127.5,-142 5.5,-142 5.5,-123 127.5,-123 127.5,-142"/>
 <text text-anchor="middle" x="66.5" y="-130" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ImportAST::dump</text>
 </a>
@@ -286,7 +286,7 @@ var sectionId = 'dynsection-3';
 <!-- Node14 -->
 <g id="Node000014" class="node">
 <title>Node14</title>
-<g id="a_Node000014"><a xlink:href="classRivet_1_1AddressOfAST.html#a39c179c7d35cf1571eb05d23470a5e2b" target="_top" xlink:title=" ">
+<g id="a_Node000014"><a xlink:href="classRivet_1_1AddressOfAST.html#a39c179c7d35cf1571eb05d23470a5e2b" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="122.5,-104.5 10.5,-104.5 10.5,-74.5 122.5,-74.5 122.5,-104.5"/>
 <text text-anchor="start" x="18.5" y="-92.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::AddressOfAST</text>
 <text text-anchor="middle" x="66.5" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00">::dump</text>
@@ -305,7 +305,7 @@ var sectionId = 'dynsection-3';
 <!-- Node15 -->
 <g id="Node000015" class="node">
 <title>Node15</title>
-<g id="a_Node000015"><a xlink:href="classRivet_1_1DerefAST.html#ae5d50c644bc3ca10ccacf74ef847db1e" target="_top" xlink:title=" ">
+<g id="a_Node000015"><a xlink:href="classRivet_1_1DerefAST.html#ae5d50c644bc3ca10ccacf74ef847db1e" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="125.5,-56 7.5,-56 7.5,-37 125.5,-37 125.5,-56"/>
 <text text-anchor="middle" x="66.5" y="-44" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::DerefAST::dump</text>
 </a>
@@ -323,7 +323,7 @@ var sectionId = 'dynsection-3';
 <!-- Node16 -->
 <g id="Node000016" class="node">
 <title>Node16</title>
-<g id="a_Node000016"><a xlink:href="classRivet_1_1IndexAST.html#a708145e30999440ad8cec47ed8ec07e7" target="_top" xlink:title=" ">
+<g id="a_Node000016"><a xlink:href="classRivet_1_1IndexAST.html#a708145e30999440ad8cec47ed8ec07e7" target="_top" xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="white" stroke="#666666" points="125.5,-19 7.5,-19 7.5,0 125.5,0 125.5,-19"/>
 <text text-anchor="middle" x="66.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::IndexAST::dump</text>
 </a>

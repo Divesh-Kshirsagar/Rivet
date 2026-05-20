@@ -82,6 +82,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Performs lexical analysis on <a class="el" href="namespaceRivet.html">Rivet</a> source code.  
+ <a href="classRivet_1_1Lexer.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Lexer_8h_source.html">Lexer.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Rivet::Lexer:</div>
@@ -92,28 +95,37 @@ Collaboration diagram for Rivet::Lexer:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a773df8418b5afbba0a1530727cb668e0" id="r_a773df8418b5afbba0a1530727cb668e0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Lexer.html#a773df8418b5afbba0a1530727cb668e0">getNextToken</a> ()</td></tr>
+<tr class="memdesc:a773df8418b5afbba0a1530727cb668e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requests the next token from the input stream.  <br /></td></tr>
 <tr class="separator:a773df8418b5afbba0a1530727cb668e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e9f7d8ee6b2c821294aee9a2b3ef37a" id="r_a3e9f7d8ee6b2c821294aee9a2b3ef37a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Lexer.html#a3e9f7d8ee6b2c821294aee9a2b3ef37a">Lexer</a> (const std::string &amp;filename)</td></tr>
+<tr class="memdesc:a3e9f7d8ee6b2c821294aee9a2b3ef37a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classRivet_1_1Lexer.html" title="Performs lexical analysis on Rivet source code.">Lexer</a> attached to a specific input file.  <br /></td></tr>
 <tr class="separator:a3e9f7d8ee6b2c821294aee9a2b3ef37a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa20cf077c465df68749a5dadbfee133" id="r_aaa20cf077c465df68749a5dadbfee133"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Lexer.html#aaa20cf077c465df68749a5dadbfee133">~Lexer</a> ()</td></tr>
+<tr class="memdesc:aaa20cf077c465df68749a5dadbfee133"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor that closes the held file stream.  <br /></td></tr>
 <tr class="separator:aaa20cf077c465df68749a5dadbfee133"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a98e8b6242d0ce4da222031c37fc213a1" id="r_a98e8b6242d0ce4da222031c37fc213a1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Lexer.html#a98e8b6242d0ce4da222031c37fc213a1">CurrentColumn</a></td></tr>
+<tr class="memdesc:a98e8b6242d0ce4da222031c37fc213a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current column number on the active line.  <br /></td></tr>
 <tr class="separator:a98e8b6242d0ce4da222031c37fc213a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14f8e25742447e1282736869727a4890" id="r_a14f8e25742447e1282736869727a4890"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Lexer.html#a14f8e25742447e1282736869727a4890">CurrentLine</a></td></tr>
+<tr class="memdesc:a14f8e25742447e1282736869727a4890"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current line number in the source file being lexed (1-based).  <br /></td></tr>
 <tr class="separator:a14f8e25742447e1282736869727a4890"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4f0a5bf6839da1fa680da7c09c1a1bf" id="r_ad4f0a5bf6839da1fa680da7c09c1a1bf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Lexer.html#ad4f0a5bf6839da1fa680da7c09c1a1bf">IdentifierStr</a></td></tr>
+<tr class="memdesc:ad4f0a5bf6839da1fa680da7c09c1a1bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the string value if the current token is <code>tok_identifier</code>.  <br /></td></tr>
 <tr class="separator:ad4f0a5bf6839da1fa680da7c09c1a1bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1965b8fabf21f6e9a60d2e6f2e5c8c82" id="r_a1965b8fabf21f6e9a60d2e6f2e5c8c82"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Lexer.html#a1965b8fabf21f6e9a60d2e6f2e5c8c82">NumVal</a></td></tr>
+<tr class="memdesc:a1965b8fabf21f6e9a60d2e6f2e5c8c82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the numeric value if the current token is <code>tok_number</code>.  <br /></td></tr>
 <tr class="separator:a1965b8fabf21f6e9a60d2e6f2e5c8c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24df740553364a224f8be39eec498697" id="r_a24df740553364a224f8be39eec498697"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Lexer.html#a24df740553364a224f8be39eec498697">StringVal</a></td></tr>
+<tr class="memdesc:a24df740553364a224f8be39eec498697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the string value if the current token is <code>tok_string_literal</code>.  <br /></td></tr>
 <tr class="separator:a24df740553364a224f8be39eec498697"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00050">50</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
+<div class="textblock"><p>The <code><a class="el" href="classRivet_1_1Lexer.html" title="Performs lexical analysis on Rivet source code.">Lexer</a></code> scans through the contents of an input file character by character, grouping them into meaningful definitions (<code>Token</code>). It also keeps track of line/column data to assist with error reporting. </p>
+
+<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00072">72</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3e9f7d8ee6b2c821294aee9a2b3ef37a" name="a3e9f7d8ee6b2c821294aee9a2b3ef37a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3e9f7d8ee6b2c821294aee9a2b3ef37a">&#9670;&#160;</a></span>Lexer()</h2>
@@ -130,8 +142,14 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Path to the source file to open and lex. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Lexer_8cpp_source.html#l00007">7</a> of file <a class="el" href="Lexer_8cpp_source.html">Lexer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Lexer_8cpp_source.html#l00011">11</a> of file <a class="el" href="Lexer_8cpp_source.html">Lexer.cpp</a>.</p>
 
 </div>
 </div>
@@ -150,7 +168,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Lexer_8cpp_source.html#l00017">17</a> of file <a class="el" href="Lexer_8cpp_source.html">Lexer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Lexer_8cpp_source.html#l00021">21</a> of file <a class="el" href="Lexer_8cpp_source.html">Lexer.cpp</a>.</p>
 
 </div>
 </div>
@@ -169,8 +187,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The next <code>Token</code> value, or the ASCII character code if it's a single-char token. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Lexer_8cpp_source.html#l00211">211</a> of file <a class="el" href="Lexer_8cpp_source.html">Lexer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Lexer_8cpp_source.html#l00215">215</a> of file <a class="el" href="Lexer_8cpp_source.html">Lexer.cpp</a>.</p>
 
 </div>
 </div>
@@ -187,7 +206,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00065">65</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00097">97</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
 
 </div>
 </div>
@@ -203,7 +222,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00064">64</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00096">96</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
 
 </div>
 </div>
@@ -219,7 +238,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00058">58</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00092">92</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
 
 </div>
 </div>
@@ -235,7 +254,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00062">62</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00094">94</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
 
 </div>
 </div>
@@ -251,7 +270,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00060">60</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Lexer_8h_source.html#l00093">93</a> of file <a class="el" href="Lexer_8h_source.html">Lexer.h</a>.</p>
 
 </div>
 </div>

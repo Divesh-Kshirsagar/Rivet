@@ -1,5 +1,5 @@
 <map id="Rivet::UnaryOpAST::dump" name="Rivet::UnaryOpAST::dump">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,183,31"/>
-<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html#a2cf1d7f1a773d06917d75a02140f730c" title=" " alt="" coords="231,5,417,31"/>
+<area shape="rect" id="Node000001" title="Recursively prints out the structure of the AST via stdout." alt="" coords="5,5,183,31"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html#a2cf1d7f1a773d06917d75a02140f730c" title="A helper to simplify recursively nested string output in Dumps." alt="" coords="231,5,417,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,15,217,15,217,21,183,21"/>
 </map>

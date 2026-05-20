@@ -1,7 +1,7 @@
 <map id="Rivet::BinaryOpAST" name="Rivet::BinaryOpAST">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,468,139,593"/>
-<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title=" " alt="" coords="17,273,127,419"/>
+<area shape="rect" id="Node000001" title="Node containing binary operators (e.g." alt="" coords="5,468,139,593"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="17,273,127,419"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,432,75,468,69,468,69,432"/>
-<area shape="rect" id="Node000003" href="$structRivet_1_1TypeInfo.html" title=" " alt="" coords="17,5,127,211"/>
+<area shape="rect" id="Node000003" href="$structRivet_1_1TypeInfo.html" title="Encapsulates a data type, its reference semantics, and array capacity if applicable." alt="" coords="17,5,127,211"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="75,211,75,257,69,257,69,211"/>
 </map>

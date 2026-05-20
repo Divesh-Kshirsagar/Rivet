@@ -83,6 +83,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Parses a stream of tokens into an Abstract Syntax Tree (AST).  
+ <a href="classRivet_1_1Parser.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Parser_8h_source.html">Parser.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Rivet::Parser:</div>
@@ -93,23 +96,28 @@ Collaboration diagram for Rivet::Parser:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aeb80fa865aa016f4b58f0bcc7ae4742d" id="r_aeb80fa865aa016f4b58f0bcc7ae4742d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::unique_ptr&lt; <a class="el" href="classRivet_1_1ASTNode.html">ASTNode</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Parser.html#aeb80fa865aa016f4b58f0bcc7ae4742d">ParseFile</a> ()</td></tr>
+<tr class="memdesc:aeb80fa865aa016f4b58f0bcc7ae4742d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the entire file bound to the <a class="el" href="classRivet_1_1Lexer.html" title="Performs lexical analysis on Rivet source code.">Lexer</a>.  <br /></td></tr>
 <tr class="separator:aeb80fa865aa016f4b58f0bcc7ae4742d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad190059e5dc3a250d55821a0905fd0c0" id="r_ad190059e5dc3a250d55821a0905fd0c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Parser.html#ad190059e5dc3a250d55821a0905fd0c0">Parser</a> (<a class="el" href="classRivet_1_1Lexer.html">Lexer</a> &amp;lexer)</td></tr>
+<tr class="memdesc:ad190059e5dc3a250d55821a0905fd0c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classRivet_1_1Parser.html" title="Parses a stream of tokens into an Abstract Syntax Tree (AST).">Parser</a> using a specific <a class="el" href="classRivet_1_1Lexer.html" title="Performs lexical analysis on Rivet source code.">Lexer</a> instance.  <br /></td></tr>
 <tr class="separator:ad190059e5dc3a250d55821a0905fd0c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a91f620a1f7e32e9334d6d4fda7fa7c26" id="r_a91f620a1f7e32e9334d6d4fda7fa7c26"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Parser.html#a91f620a1f7e32e9334d6d4fda7fa7c26">ErrorCount</a> = 0</td></tr>
+<tr class="memdesc:a91f620a1f7e32e9334d6d4fda7fa7c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter tracking how many syntax errors were encountered.  <br /></td></tr>
 <tr class="separator:a91f620a1f7e32e9334d6d4fda7fa7c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:ac45ad95fa6dea096244b882f7da6599f" id="r_ac45ad95fa6dea096244b882f7da6599f"><td class="memItemLeft" align="right" valign="top">static std::set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1Parser.html#ac45ad95fa6dea096244b882f7da6599f">AlreadyImported</a></td></tr>
+<tr class="memdesc:ac45ad95fa6dea096244b882f7da6599f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tracks imported modules to prevent cyclical/duplicate imports.  <br /></td></tr>
 <tr class="separator:ac45ad95fa6dea096244b882f7da6599f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="Parser_8h_source.html#l00012">12</a> of file <a class="el" href="Parser_8h_source.html">Parser.h</a>.</p>
+<div class="textblock"><p>Uses recursive descent parsing techniques to evaluate tokens sequence rules, ensuring grammatical correctness based on the EBNF definitions. </p>
+
+<p class="definition">Definition at line <a class="el" href="Parser_8h_source.html#l00026">26</a> of file <a class="el" href="Parser_8h_source.html">Parser.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad190059e5dc3a250d55821a0905fd0c0" name="ad190059e5dc3a250d55821a0905fd0c0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad190059e5dc3a250d55821a0905fd0c0">&#9670;&#160;</a></span>Parser()</h2>
@@ -126,8 +134,14 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lexer</td><td>The lexical analyzer configured with the input source stream. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Parser_8cpp_source.html#l00007">7</a> of file <a class="el" href="Parser_8cpp_source.html">Parser.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Parser_8cpp_source.html#l00011">11</a> of file <a class="el" href="Parser_8cpp_source.html">Parser.cpp</a>.</p>
 
 </div>
 </div>
@@ -146,12 +160,13 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>A vector of unique pointers to the parsed root AST nodes (usually statements/declarations). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Parser_8cpp_source.html#l00194">194</a> of file <a class="el" href="Parser_8cpp_source.html">Parser.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Parser_8cpp_source.html#l00198">198</a> of file <a class="el" href="Parser_8cpp_source.html">Parser.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Lexer_8h_source.html#l00012">Rivet::tok_eof</a>.</p>
+<p class="reference">References <a class="el" href="Lexer_8h_source.html#l00026">Rivet::tok_eof</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00014">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00032">main()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -181,7 +196,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Parser_8h_source.html#l00018">18</a> of file <a class="el" href="Parser_8h_source.html">Parser.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Parser_8h_source.html#l00042">42</a> of file <a class="el" href="Parser_8h_source.html">Parser.h</a>.</p>
 
 </div>
 </div>
@@ -197,9 +212,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Parser_8h_source.html#l00017">17</a> of file <a class="el" href="Parser_8h_source.html">Parser.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Parser_8h_source.html#l00041">41</a> of file <a class="el" href="Parser_8h_source.html">Parser.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00014">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00032">main()</a>.</p>
 
 </div>
 </div>

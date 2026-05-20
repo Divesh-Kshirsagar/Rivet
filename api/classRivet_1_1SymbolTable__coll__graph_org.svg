@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="A hierarchical structure for managing variable scopes.">
 <polygon fill="#999999" stroke="transparent" points="96,-109 0,-109 0,0 96,0 96,-109"/>
 <text text-anchor="start" x="5" y="-96.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::SymbolTable</text>
 <text text-anchor="start" x="46" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>

@@ -1,5 +1,5 @@
 <map id="Rivet::IfAST::dump" name="Rivet::IfAST::dump">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,139,31"/>
-<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html#a2cf1d7f1a773d06917d75a02140f730c" title=" " alt="" coords="187,5,373,31"/>
+<area shape="rect" id="Node000001" title="Recursively prints out the structure of the AST via stdout." alt="" coords="5,5,139,31"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html#a2cf1d7f1a773d06917d75a02140f730c" title="A helper to simplify recursively nested string output in Dumps." alt="" coords="187,5,373,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,15,173,15,173,21,139,21"/>
 </map>

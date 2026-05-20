@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing.">
 <polygon fill="#999999" stroke="#666666" points="131,-72.5 0,-72.5 0,-53.5 131,-53.5 131,-72.5"/>
 <text text-anchor="middle" x="65.5" y="-60.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ForAST::typeCheck</text>
 </a>
@@ -20,7 +20,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e" target="_top" xlink:title="Creates a new inner scope and pushes it onto the stack.">
 <polygon fill="white" stroke="#666666" points="269,-126 167,-126 167,-96 269,-96 269,-126"/>
 <text text-anchor="start" x="175" y="-114" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::SymbolTable</text>
 <text text-anchor="middle" x="218" y="-103" font-family="Helvetica,sans-Serif" font-size="10.00">::enterScope</text>
@@ -39,7 +39,7 @@
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22" target="_top" xlink:title=" ">
+<g id="a_Node000003"><a xlink:href="classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22" target="_top" xlink:title="Destroys the deepest active scope, popping it from the stack.">
 <polygon fill="white" stroke="#666666" points="269,-78 167,-78 167,-48 269,-48 269,-78"/>
 <text text-anchor="start" x="175" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::SymbolTable</text>
 <text text-anchor="middle" x="218" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">::exitScope</text>
@@ -58,7 +58,7 @@
 <!-- Node4 -->
 <g id="Node000004" class="node">
 <title>Node4</title>
-<g id="a_Node000004"><a xlink:href="classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a" target="_top" xlink:title=" ">
+<g id="a_Node000004"><a xlink:href="classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a" target="_top" xlink:title="Declares a new variable in the latest/current block scope.">
 <polygon fill="white" stroke="#666666" points="269,-30 167,-30 167,0 269,0 269,-30"/>
 <text text-anchor="start" x="175" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::SymbolTable</text>
 <text text-anchor="middle" x="218" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">::insert</text>

@@ -1,5 +1,5 @@
 <map id="Rivet::IndexAST" name="Rivet::IndexAST">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,199,124,364"/>
-<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title=" " alt="" coords="9,5,120,151"/>
+<area shape="rect" id="Node000001" title="Node containing array indexing statements (x[i])." alt="" coords="5,199,124,364"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="9,5,120,151"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,165,67,198,62,198,62,165"/>
 </map>

@@ -11,7 +11,7 @@
 <!-- Node0 -->
 <g id="Node000000" class="node">
 <title>Node0</title>
-<g id="a_Node000000"><a xlink:href="classRivet_1_1Parser.html" target="_top" xlink:title=" ">
+<g id="a_Node000000"><a xlink:href="classRivet_1_1Parser.html" target="_top" xlink:title="Parses a stream of tokens into an Abstract Syntax Tree (AST).">
 <polygon fill="white" stroke="#666666" points="74,-19 0,-19 0,0 74,0 74,-19"/>
 <text text-anchor="middle" x="37" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::Parser</text>
 </a>

@@ -1,5 +1,5 @@
 <map id="Rivet::BlockAST" name="Rivet::BlockAST">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,199,117,324"/>
-<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title=" " alt="" coords="6,5,117,151"/>
+<area shape="rect" id="Node000001" title="Serves as a container for sequential statements grouping variable scopes { ... }." alt="" coords="5,199,117,324"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="6,5,117,151"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,164,64,198,59,198,59,164"/>
 </map>

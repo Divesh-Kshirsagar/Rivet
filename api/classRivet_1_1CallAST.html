@@ -83,6 +83,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Encapsulates function or routine invocation mapping to its identifier and parameters.  
+ <a href="classRivet_1_1CallAST.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="AST_8h_source.html">AST.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Rivet::CallAST:</div>
@@ -100,25 +103,30 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7dfe8dc7aef771949cdbf85d6cc1ddb7" id="r_a7dfe8dc7aef771949cdbf85d6cc1ddb7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1CallAST.html#a7dfe8dc7aef771949cdbf85d6cc1ddb7">CallAST</a> (const std::string &amp;Callee, std::vector&lt; std::unique_ptr&lt; <a class="el" href="classRivet_1_1ASTNode.html">ASTNode</a> &gt; &gt; Args)</td></tr>
 <tr class="separator:a7dfe8dc7aef771949cdbf85d6cc1ddb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5c619cf046eb29eb889caa9099e527b" id="r_af5c619cf046eb29eb889caa9099e527b"><td class="memItemLeft" align="right" valign="top">llvm::Value *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1CallAST.html#af5c619cf046eb29eb889caa9099e527b">codegen</a> () override</td></tr>
+<tr class="memdesc:af5c619cf046eb29eb889caa9099e527b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforms the node's logical definition into corresponding LLVM instructions.  <br /></td></tr>
 <tr class="separator:af5c619cf046eb29eb889caa9099e527b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a336d3ab5210162eb5700ca580220f85a" id="r_a336d3ab5210162eb5700ca580220f85a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1CallAST.html#a336d3ab5210162eb5700ca580220f85a">dump</a> (int indent=0) const override</td></tr>
+<tr class="memdesc:a336d3ab5210162eb5700ca580220f85a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively prints out the structure of the AST via stdout.  <br /></td></tr>
 <tr class="separator:a336d3ab5210162eb5700ca580220f85a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade436fa8295c42f55149e259ba416cc6" id="r_ade436fa8295c42f55149e259ba416cc6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1CallAST.html#ade436fa8295c42f55149e259ba416cc6">typeCheck</a> (<a class="el" href="classRivet_1_1SymbolTable.html">SymbolTable</a> &amp;symTab) override</td></tr>
+<tr class="memdesc:ade436fa8295c42f55149e259ba416cc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing.  <br /></td></tr>
 <tr class="separator:ade436fa8295c42f55149e259ba416cc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a228356e0dd8aeb7fff755cda02f732e6" id="r_a228356e0dd8aeb7fff755cda02f732e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structRivet_1_1TypeInfo.html">TypeInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1ASTNode.html#a228356e0dd8aeb7fff755cda02f732e6">ExprType</a></td></tr>
+<tr class="memdesc:a228356e0dd8aeb7fff755cda02f732e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discovered or annotated resulting type of this specific node expression.  <br /></td></tr>
 <tr class="separator:a228356e0dd8aeb7fff755cda02f732e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a2cf1d7f1a773d06917d75a02140f730c" id="r_a2cf1d7f1a773d06917d75a02140f730c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1ASTNode.html#a2cf1d7f1a773d06917d75a02140f730c">printIndent</a> (int indent) const</td></tr>
+<tr class="memdesc:a2cf1d7f1a773d06917d75a02140f730c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper to simplify recursively nested string output in Dumps.  <br /></td></tr>
 <tr class="separator:a2cf1d7f1a773d06917d75a02140f730c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="AST_8h_source.html#l00168">168</a> of file <a class="el" href="AST_8h_source.html">AST.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AST_8h_source.html#l00248">248</a> of file <a class="el" href="AST_8h_source.html">AST.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7dfe8dc7aef771949cdbf85d6cc1ddb7" name="a7dfe8dc7aef771949cdbf85d6cc1ddb7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7dfe8dc7aef771949cdbf85d6cc1ddb7">&#9670;&#160;</a></span>CallAST()</h2>
@@ -154,7 +162,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AST_8h_source.html#l00174">174</a> of file <a class="el" href="AST_8h_source.html">AST.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AST_8h_source.html#l00254">254</a> of file <a class="el" href="AST_8h_source.html">AST.h</a>.</p>
 
 </div>
 </div>
@@ -181,12 +189,13 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>llvm::Value* A pointer to an emitted LLVM value, or nullptr on failure. </dd></dl>
 
 <p>Implements <a class="el" href="classRivet_1_1ASTNode.html#a4cf5601bf3592dbbf5a83e1dc483fe2d">Rivet::ASTNode</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="AST_8cpp_source.html#l00655">655</a> of file <a class="el" href="AST_8cpp_source.html">AST.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AST_8cpp_source.html#l00662">662</a> of file <a class="el" href="AST_8cpp_source.html">AST.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="CodeGen_8h_source.html#l00015">Rivet::CodeGenContext::Builder</a>, <a class="el" href="CodeGen_8cpp_source.html#l00005">Rivet::CompilerState</a>, and <a class="el" href="CodeGen_8h_source.html#l00016">Rivet::CodeGenContext::TheModule</a>.</p>
+<p class="reference">References <a class="el" href="CodeGen_8h_source.html#l00029">Rivet::CodeGenContext::Builder</a>, <a class="el" href="CodeGen_8cpp_source.html#l00009">Rivet::CompilerState</a>, and <a class="el" href="CodeGen_8h_source.html#l00030">Rivet::CodeGenContext::TheModule</a>.</p>
 
 </div>
 </div>
@@ -213,12 +222,18 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">indent</td><td>Defines how many spaces to apply to format tree depth accurately. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="classRivet_1_1ASTNode.html#a633d2bd9a7320b52b2e593a75f0349ef">Rivet::ASTNode</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="AST_8cpp_source.html#l00646">646</a> of file <a class="el" href="AST_8cpp_source.html">AST.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AST_8cpp_source.html#l00653">653</a> of file <a class="el" href="AST_8cpp_source.html">AST.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="AST_8h_source.html#l00031">Rivet::ASTNode::printIndent()</a>.</p>
+<p class="reference">References <a class="el" href="AST_8h_source.html#l00064">Rivet::ASTNode::printIndent()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -251,9 +266,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AST_8h_source.html#l00031">31</a> of file <a class="el" href="AST_8h_source.html">AST.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AST_8h_source.html#l00064">64</a> of file <a class="el" href="AST_8h_source.html">AST.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00009">Rivet::NumberAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00843">Rivet::StringLiteralAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00025">Rivet::VariableAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00053">Rivet::VariableDeclAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00171">Rivet::BinaryOpAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00324">Rivet::UnaryOpAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00353">Rivet::BlockAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00395">Rivet::IfAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00466">Rivet::WhileAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00517">Rivet::ForAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00646">dump()</a>, <a class="el" href="AST_8cpp_source.html#l00687">Rivet::ImportAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00711">Rivet::AddressOfAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00739">Rivet::DerefAST::dump()</a>, and <a class="el" href="AST_8cpp_source.html#l00768">Rivet::IndexAST::dump()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00016">Rivet::NumberAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00850">Rivet::StringLiteralAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00032">Rivet::VariableAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00060">Rivet::VariableDeclAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00178">Rivet::BinaryOpAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00331">Rivet::UnaryOpAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00360">Rivet::BlockAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00402">Rivet::IfAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00473">Rivet::WhileAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00524">Rivet::ForAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00653">dump()</a>, <a class="el" href="AST_8cpp_source.html#l00694">Rivet::ImportAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00718">Rivet::AddressOfAST::dump()</a>, <a class="el" href="AST_8cpp_source.html#l00746">Rivet::DerefAST::dump()</a>, and <a class="el" href="AST_8cpp_source.html#l00775">Rivet::IndexAST::dump()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -285,10 +300,17 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">symTab</td><td>Mutable reference to an ongoing scope tracker mapping variable names. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if semantically valid and verified. False if illegal structures (memory constraints, missing vars) exist. </dd></dl>
 
 <p>Implements <a class="el" href="classRivet_1_1ASTNode.html#a9264b811a99e7773e884be9e4dd0c1e0">Rivet::ASTNode</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="AST_8cpp_source.html#l00681">681</a> of file <a class="el" href="AST_8cpp_source.html">AST.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AST_8cpp_source.html#l00688">688</a> of file <a class="el" href="AST_8cpp_source.html">AST.cpp</a>.</p>
 
 </div>
 </div>
@@ -313,9 +335,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AST_8h_source.html#l00026">26</a> of file <a class="el" href="AST_8h_source.html">AST.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AST_8h_source.html#l00051">51</a> of file <a class="el" href="AST_8h_source.html">AST.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00067">Rivet::VariableDeclAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00018">Rivet::NumberAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00860">Rivet::StringLiteralAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00040">Rivet::VariableAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00131">Rivet::VariableDeclAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00289">Rivet::BinaryOpAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00377">Rivet::BlockAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00453">Rivet::IfAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00505">Rivet::WhileAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00628">Rivet::ForAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00726">Rivet::AddressOfAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00752">Rivet::DerefAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00800">Rivet::IndexAST::typeCheck()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00074">Rivet::VariableDeclAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00025">Rivet::NumberAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00867">Rivet::StringLiteralAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00047">Rivet::VariableAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00138">Rivet::VariableDeclAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00296">Rivet::BinaryOpAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00384">Rivet::BlockAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00460">Rivet::IfAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00512">Rivet::WhileAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00635">Rivet::ForAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00733">Rivet::AddressOfAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00759">Rivet::DerefAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00807">Rivet::IndexAST::typeCheck()</a>.</p>
 
 </div>
 </div>

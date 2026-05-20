@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing.">
 <polygon fill="#999999" stroke="#666666" points="120,-45.5 0,-45.5 0,-15.5 120,-15.5 120,-45.5"/>
 <text text-anchor="start" x="8" y="-33.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::VariableDeclAST</text>
 <text text-anchor="middle" x="60" y="-22.5" font-family="Helvetica,sans-Serif" font-size="10.00">::typeCheck</text>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a" target="_top" xlink:title="Declares a new variable in the latest/current block scope.">
 <polygon fill="white" stroke="#666666" points="268.5,-67.5 166.5,-67.5 166.5,-37.5 268.5,-37.5 268.5,-67.5"/>
 <text text-anchor="start" x="174.5" y="-55.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::SymbolTable</text>
 <text text-anchor="middle" x="217.5" y="-44.5" font-family="Helvetica,sans-Serif" font-size="10.00">::insert</text>
@@ -40,7 +40,7 @@
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="structRivet_1_1TypeInfo.html#ab47cac8af909576b180482f9ccf39778" target="_top" xlink:title=" ">
+<g id="a_Node000003"><a xlink:href="structRivet_1_1TypeInfo.html#ab47cac8af909576b180482f9ccf39778" target="_top" xlink:title="Converts the embedded semantic instructions into a readable debug string format.">
 <polygon fill="white" stroke="#666666" points="279,-19 156,-19 156,0 279,0 279,-19"/>
 <text text-anchor="middle" x="217.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::TypeInfo::toString</text>
 </a>

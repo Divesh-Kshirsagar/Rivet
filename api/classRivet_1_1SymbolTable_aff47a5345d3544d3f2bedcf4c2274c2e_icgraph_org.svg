@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Searches for a variable traversing upward from the current scope to the global scope.">
 <polygon fill="#999999" stroke="#666666" points="279,-67.5 177,-67.5 177,-37.5 279,-37.5 279,-67.5"/>
 <text text-anchor="start" x="185" y="-55.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::SymbolTable</text>
 <text text-anchor="middle" x="228" y="-44.5" font-family="Helvetica,sans-Serif" font-size="10.00">::lookup</text>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="classRivet_1_1VariableAST.html#a6441f2b99bd42de61c20d50e354f08b4" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="classRivet_1_1VariableAST.html#a6441f2b99bd42de61c20d50e354f08b4" target="_top" xlink:title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing.">
 <polygon fill="white" stroke="#666666" points="120.5,-115.5 20.5,-115.5 20.5,-85.5 120.5,-85.5 120.5,-115.5"/>
 <text text-anchor="start" x="28.5" y="-103.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::VariableAST</text>
 <text text-anchor="middle" x="70.5" y="-92.5" font-family="Helvetica,sans-Serif" font-size="10.00">::typeCheck</text>
@@ -40,7 +40,7 @@
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="classRivet_1_1AddressOfAST.html#a94fffef911094b721a1517979100aa1d" target="_top" xlink:title=" ">
+<g id="a_Node000003"><a xlink:href="classRivet_1_1AddressOfAST.html#a94fffef911094b721a1517979100aa1d" target="_top" xlink:title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing.">
 <polygon fill="white" stroke="#666666" points="126.5,-67.5 14.5,-67.5 14.5,-37.5 126.5,-37.5 126.5,-67.5"/>
 <text text-anchor="start" x="22.5" y="-55.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::AddressOfAST</text>
 <text text-anchor="middle" x="70.5" y="-44.5" font-family="Helvetica,sans-Serif" font-size="10.00">::typeCheck</text>
@@ -59,7 +59,7 @@
 <!-- Node4 -->
 <g id="Node000004" class="node">
 <title>Node4</title>
-<g id="a_Node000004"><a xlink:href="classRivet_1_1IndexAST.html#abe6c5d6d32c9708506a7274956533fc4" target="_top" xlink:title=" ">
+<g id="a_Node000004"><a xlink:href="classRivet_1_1IndexAST.html#abe6c5d6d32c9708506a7274956533fc4" target="_top" xlink:title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing.">
 <polygon fill="white" stroke="#666666" points="141,-19 0,-19 0,0 141,0 141,-19"/>
 <text text-anchor="middle" x="70.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::IndexAST::typeCheck</text>
 </a>

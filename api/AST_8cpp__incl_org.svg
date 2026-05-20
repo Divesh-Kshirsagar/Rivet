@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Implementation for AST node type&#45;checking and log dumps.">
 <polygon fill="#999999" stroke="#666666" points="744,-239 691,-239 691,-220 744,-220 744,-239"/>
 <text text-anchor="middle" x="717.5" y="-227" font-family="Helvetica,sans-Serif" font-size="10.00">AST.cpp</text>
 </a>
@@ -20,7 +20,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="AST_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="AST_8h.html" target="_top" xlink:title="Defines the Abstract Syntax Tree classes for the Rivet compiler.">
 <polygon fill="white" stroke="#666666" points="669,-184 600,-184 600,-165 669,-165 669,-184"/>
 <text text-anchor="middle" x="634.5" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet/AST.h</text>
 </a>
@@ -56,7 +56,7 @@
 <!-- Node10 -->
 <g id="Node000010" class="node">
 <title>Node10</title>
-<g id="a_Node000010"><a xlink:href="Lexer_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000010"><a xlink:href="Lexer_8h.html" target="_top" xlink:title="Defines the Lexer and Token types for the Rivet compiler.">
 <polygon fill="white" stroke="#666666" points="819.5,-184 745.5,-184 745.5,-165 819.5,-165 819.5,-184"/>
 <text text-anchor="middle" x="782.5" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet/Lexer.h</text>
 </a>
@@ -74,7 +74,7 @@
 <!-- Node12 -->
 <g id="Node000012" class="node">
 <title>Node12</title>
-<g id="a_Node000012"><a xlink:href="CodeGen_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000012"><a xlink:href="CodeGen_8h.html" target="_top" xlink:title="Defines the globals and context structures required for LLVM IR code generation.">
 <polygon fill="white" stroke="#666666" points="386.5,-184 294.5,-184 294.5,-165 386.5,-165 386.5,-184"/>
 <text text-anchor="middle" x="340.5" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet/CodeGen.h</text>
 </a>
@@ -173,7 +173,7 @@
 <!-- Node7 -->
 <g id="Node000007" class="node">
 <title>Node7</title>
-<g id="a_Node000007"><a xlink:href="Type_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000007"><a xlink:href="Type_8h.html" target="_top" xlink:title="Defines the basic types supported by the Rivet type system.">
 <polygon fill="white" stroke="#666666" points="657.5,-74 611.5,-74 611.5,-55 657.5,-55 657.5,-74"/>
 <text text-anchor="middle" x="634.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Type.h</text>
 </a>
@@ -191,7 +191,7 @@
 <!-- Node8 -->
 <g id="Node000008" class="node">
 <title>Node8</title>
-<g id="a_Node000008"><a xlink:href="SymbolTable_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000008"><a xlink:href="SymbolTable_8h.html" target="_top" xlink:title="Defines the scoped symbol table for semantic analysis.">
 <polygon fill="white" stroke="#666666" points="606,-129 525,-129 525,-110 606,-110 606,-129"/>
 <text text-anchor="middle" x="565.5" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00">SymbolTable.h</text>
 </a>

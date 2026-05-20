@@ -57,7 +57,7 @@ var sectionId = 'dynsection-0';
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="The pure virtual base class for all Abstract Syntax Tree nodes.">
 <polygon fill="#999999" stroke="transparent" points="809.5,-269 726.5,-269 726.5,-160 809.5,-160 809.5,-269"/>
 <text text-anchor="start" x="732" y="-256.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ASTNode</text>
 <text text-anchor="start" x="733" y="-241.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
@@ -82,7 +82,7 @@ var sectionId = 'dynsection-0';
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="classRivet_1_1AddressOfAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="classRivet_1_1AddressOfAST.html" target="_top" xlink:title="Equivalent to the C &amp; operator to retrieve pointer locations.">
 <polygon fill="white" stroke="transparent" points="106,-109 0,-109 0,-15 106,-15 106,-109"/>
 <text text-anchor="start" x="5" y="-97" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::AddressOfAST</text>
 <text text-anchor="start" x="51" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -112,7 +112,7 @@ var sectionId = 'dynsection-0';
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="classRivet_1_1BinaryOpAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000003"><a xlink:href="classRivet_1_1BinaryOpAST.html" target="_top" xlink:title="Node containing binary operators (e.g.">
 <polygon fill="white" stroke="transparent" points="224,-109 124,-109 124,-15 224,-15 224,-109"/>
 <text text-anchor="start" x="129" y="-97" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::BinaryOpAST</text>
 <text text-anchor="start" x="172" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -142,7 +142,7 @@ var sectionId = 'dynsection-0';
 <!-- Node4 -->
 <g id="Node000004" class="node">
 <title>Node4</title>
-<g id="a_Node000004"><a xlink:href="classRivet_1_1BlockAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000004"><a xlink:href="classRivet_1_1BlockAST.html" target="_top" xlink:title="Serves as a container for sequential statements grouping variable scopes { ... }.">
 <polygon fill="white" stroke="transparent" points="326,-109 242,-109 242,-15 326,-15 326,-109"/>
 <text text-anchor="start" x="247" y="-97" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::BlockAST</text>
 <text text-anchor="start" x="282" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -172,7 +172,7 @@ var sectionId = 'dynsection-0';
 <!-- Node5 -->
 <g id="Node000005" class="node">
 <title>Node5</title>
-<g id="a_Node000005"><a xlink:href="classRivet_1_1CallAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000005"><a xlink:href="classRivet_1_1CallAST.html" target="_top" xlink:title="Encapsulates function or routine invocation mapping to its identifier and parameters.">
 <polygon fill="white" stroke="transparent" points="421.5,-109 344.5,-109 344.5,-15 421.5,-15 421.5,-109"/>
 <text text-anchor="start" x="350" y="-97" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::CallAST</text>
 <text text-anchor="start" x="381.5" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -202,7 +202,7 @@ var sectionId = 'dynsection-0';
 <!-- Node6 -->
 <g id="Node000006" class="node">
 <title>Node6</title>
-<g id="a_Node000006"><a xlink:href="classRivet_1_1DerefAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000006"><a xlink:href="classRivet_1_1DerefAST.html" target="_top" xlink:title="Equivalent to the C * operator pointing into referenced memory.">
 <polygon fill="white" stroke="transparent" points="522.5,-116.5 439.5,-116.5 439.5,-7.5 522.5,-7.5 522.5,-116.5"/>
 <text text-anchor="start" x="445" y="-104" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::DerefAST</text>
 <text text-anchor="start" x="479.5" y="-89" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -234,7 +234,7 @@ var sectionId = 'dynsection-0';
 <!-- Node7 -->
 <g id="Node000007" class="node">
 <title>Node7</title>
-<g id="a_Node000007"><a xlink:href="classRivet_1_1ForAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000007"><a xlink:href="classRivet_1_1ForAST.html" target="_top" xlink:title="A for&#45;loop structure defining numeric iterator stepping.">
 <polygon fill="white" stroke="transparent" points="615,-109 541,-109 541,-15 615,-15 615,-109"/>
 <text text-anchor="start" x="546" y="-97" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ForAST</text>
 <text text-anchor="start" x="576" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -264,7 +264,7 @@ var sectionId = 'dynsection-0';
 <!-- Node8 -->
 <g id="Node000008" class="node">
 <title>Node8</title>
-<g id="a_Node000008"><a xlink:href="classRivet_1_1IfAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000008"><a xlink:href="classRivet_1_1IfAST.html" target="_top" xlink:title="Control flow conditional branching (if&#45;else expressions).">
 <polygon fill="white" stroke="transparent" points="706.5,-109 633.5,-109 633.5,-15 706.5,-15 706.5,-109"/>
 <text text-anchor="start" x="643" y="-97" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::IfAST</text>
 <text text-anchor="start" x="668.5" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -294,7 +294,7 @@ var sectionId = 'dynsection-0';
 <!-- Node9 -->
 <g id="Node000009" class="node">
 <title>Node9</title>
-<g id="a_Node000009"><a xlink:href="classRivet_1_1ImportAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000009"><a xlink:href="classRivet_1_1ImportAST.html" target="_top" xlink:title="Pulls external files/modules into the current code compilation tree.">
 <polygon fill="white" stroke="transparent" points="811.5,-109 724.5,-109 724.5,-15 811.5,-15 811.5,-109"/>
 <text text-anchor="start" x="730" y="-97" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ImportAST</text>
 <text text-anchor="start" x="766.5" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -324,7 +324,7 @@ var sectionId = 'dynsection-0';
 <!-- Node10 -->
 <g id="Node000010" class="node">
 <title>Node10</title>
-<g id="a_Node000010"><a xlink:href="classRivet_1_1IndexAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000010"><a xlink:href="classRivet_1_1IndexAST.html" target="_top" xlink:title="Node containing array indexing statements (x[i]).">
 <polygon fill="white" stroke="transparent" points="918.5,-124 829.5,-124 829.5,0 918.5,0 918.5,-124"/>
 <text text-anchor="start" x="838" y="-112" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::IndexAST</text>
 <text text-anchor="start" x="872.5" y="-97" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -358,7 +358,7 @@ var sectionId = 'dynsection-0';
 <!-- Node11 -->
 <g id="Node000011" class="node">
 <title>Node11</title>
-<g id="a_Node000011"><a xlink:href="classRivet_1_1NumberAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000011"><a xlink:href="classRivet_1_1NumberAST.html" target="_top" xlink:title="Syntactic node covering integer literal definitions.">
 <polygon fill="white" stroke="transparent" points="1031,-116.5 937,-116.5 937,-7.5 1031,-7.5 1031,-116.5"/>
 <text text-anchor="start" x="942" y="-104" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::NumberAST</text>
 <text text-anchor="start" x="982" y="-89" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -390,7 +390,7 @@ var sectionId = 'dynsection-0';
 <!-- Node12 -->
 <g id="Node000012" class="node">
 <title>Node12</title>
-<g id="a_Node000012"><a xlink:href="classRivet_1_1StringLiteralAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000012"><a xlink:href="classRivet_1_1StringLiteralAST.html" target="_top" xlink:title="Node containing immutable string literals (&quot;sample&quot;).">
 <polygon fill="white" stroke="transparent" points="1160.5,-116.5 1049.5,-116.5 1049.5,-7.5 1160.5,-7.5 1160.5,-116.5"/>
 <text text-anchor="start" x="1055" y="-104" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::StringLiteralAST</text>
 <text text-anchor="start" x="1103.5" y="-89" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -422,7 +422,7 @@ var sectionId = 'dynsection-0';
 <!-- Node13 -->
 <g id="Node000013" class="node">
 <title>Node13</title>
-<g id="a_Node000013"><a xlink:href="classRivet_1_1UnaryOpAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000013"><a xlink:href="classRivet_1_1UnaryOpAST.html" target="_top" xlink:title="Node describing unary operators applied to a single operand (e.g.">
 <polygon fill="white" stroke="transparent" points="1277,-109 1179,-109 1179,-15 1277,-15 1277,-109"/>
 <text text-anchor="start" x="1184" y="-97" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::UnaryOpAST</text>
 <text text-anchor="start" x="1226" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -452,7 +452,7 @@ var sectionId = 'dynsection-0';
 <!-- Node14 -->
 <g id="Node000014" class="node">
 <title>Node14</title>
-<g id="a_Node000014"><a xlink:href="classRivet_1_1VariableAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000014"><a xlink:href="classRivet_1_1VariableAST.html" target="_top" xlink:title="Refers to an already existing defined symbol/variable by its name string.">
 <polygon fill="white" stroke="transparent" points="1389,-116.5 1295,-116.5 1295,-7.5 1389,-7.5 1389,-116.5"/>
 <text text-anchor="start" x="1300" y="-104" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::VariableAST</text>
 <text text-anchor="start" x="1340" y="-89" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -484,7 +484,7 @@ var sectionId = 'dynsection-0';
 <!-- Node15 -->
 <g id="Node000015" class="node">
 <title>Node15</title>
-<g id="a_Node000015"><a xlink:href="classRivet_1_1VariableDeclAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000015"><a xlink:href="classRivet_1_1VariableDeclAST.html" target="_top" xlink:title="Controls variable allocation syntax like int x = 5; or int[5] array;.">
 <polygon fill="white" stroke="transparent" points="1521,-109 1407,-109 1407,-15 1521,-15 1521,-109"/>
 <text text-anchor="start" x="1412" y="-97" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::VariableDeclAST</text>
 <text text-anchor="start" x="1462" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -514,7 +514,7 @@ var sectionId = 'dynsection-0';
 <!-- Node16 -->
 <g id="Node000016" class="node">
 <title>Node16</title>
-<g id="a_Node000016"><a xlink:href="classRivet_1_1WhileAST.html" target="_top" xlink:title=" ">
+<g id="a_Node000016"><a xlink:href="classRivet_1_1WhileAST.html" target="_top" xlink:title="A while loop expression iterating execution while Cond evaluates to non&#45;zero.">
 <polygon fill="white" stroke="transparent" points="1623,-109 1539,-109 1539,-15 1623,-15 1623,-109"/>
 <text text-anchor="start" x="1544" y="-97" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::WhileAST</text>
 <text text-anchor="start" x="1579" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>

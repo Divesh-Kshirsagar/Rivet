@@ -1,9 +1,9 @@
 <map id="Rivet::ForAST::typeCheck" name="Rivet::ForAST::typeCheck">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,77,180,102"/>
-<area shape="rect" id="Node000002" href="$classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e" title=" " alt="" coords="228,5,364,45"/>
+<area shape="rect" id="Node000001" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="5,77,180,102"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e" title="Creates a new inner scope and pushes it onto the stack." alt="" coords="228,5,364,45"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,74,218,47,220,52,135,79"/>
-<area shape="rect" id="Node000003" href="$classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22" title=" " alt="" coords="228,69,364,109"/>
+<area shape="rect" id="Node000003" href="$classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22" title="Destroys the deepest active scope, popping it from the stack." alt="" coords="228,69,364,109"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,87,214,87,214,92,180,92"/>
-<area shape="rect" id="Node000004" href="$classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a" title=" " alt="" coords="228,133,364,173"/>
+<area shape="rect" id="Node000004" href="$classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a" title="Declares a new variable in the latest/current block scope." alt="" coords="228,133,364,173"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="135,100,220,127,218,132,133,105"/>
 </map>

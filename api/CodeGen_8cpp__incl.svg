@@ -21,7 +21,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Implementation of the LLVM Code Generation setup operations.">
 <polygon fill="#999999" stroke="#666666" points="338,-129 261,-129 261,-110 338,-110 338,-129"/>
 <text text-anchor="middle" x="299.5" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00">CodeGen.cpp</text>
 </a>
@@ -30,7 +30,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="CodeGen_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="CodeGen_8h.html" target="_top" xlink:title="Defines the globals and context structures required for LLVM IR code generation.">
 <polygon fill="white" stroke="#666666" points="345.5,-74 253.5,-74 253.5,-55 345.5,-55 345.5,-74"/>
 <text text-anchor="middle" x="299.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet/CodeGen.h</text>
 </a>

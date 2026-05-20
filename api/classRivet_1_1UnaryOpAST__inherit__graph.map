@@ -1,5 +1,5 @@
 <map id="Rivet::UnaryOpAST" name="Rivet::UnaryOpAST">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,199,136,324"/>
-<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title=" " alt="" coords="15,5,126,151"/>
+<area shape="rect" id="Node000001" title="Node describing unary operators applied to a single operand (e.g." alt="" coords="5,199,136,324"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="15,5,126,151"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,164,73,198,68,198,68,164"/>
 </map>

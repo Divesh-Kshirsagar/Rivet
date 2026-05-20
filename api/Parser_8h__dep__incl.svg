@@ -21,7 +21,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Defines the Parser class for analyzing the token stream.">
 <polygon fill="#999999" stroke="#666666" points="97,-74 44,-74 44,-55 97,-55 97,-74"/>
 <text text-anchor="middle" x="70.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Parser.h</text>
 </a>
@@ -30,7 +30,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="Parser_8cpp.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="Parser_8cpp.html" target="_top" xlink:title="Implementation of the Parser logic.">
 <polygon fill="white" stroke="#666666" points="63,-19 0,-19 0,0 63,0 63,-19"/>
 <text text-anchor="middle" x="31.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Parser.cpp</text>
 </a>
@@ -48,7 +48,7 @@
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="main_8cpp.html" target="_top" xlink:title=" ">
+<g id="a_Node000003"><a xlink:href="main_8cpp.html" target="_top" xlink:title="Entry point for the Rivet compiler.">
 <polygon fill="white" stroke="#666666" points="137.5,-19 81.5,-19 81.5,0 137.5,0 137.5,-19"/>
 <text text-anchor="middle" x="109.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">main.cpp</text>
 </a>

@@ -1,6 +1,6 @@
 <map id="SymbolTable.h" name="SymbolTable.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="97,5,205,31"/>
-<area shape="rect" id="Node000002" href="$Type_8h.html" title=" " alt="" coords="5,79,67,104"/>
+<area shape="rect" id="Node000001" title="Defines the scoped symbol table for semantic analysis." alt="" coords="97,5,205,31"/>
+<area shape="rect" id="Node000002" href="$Type_8h.html" title="Defines the basic types supported by the Rivet type system." alt="" coords="5,79,67,104"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,33,68,74,65,69,131,28"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="42,152,97,177"/>
 <area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="146,32,85,141,80,139,142,30"/>

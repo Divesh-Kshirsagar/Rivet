@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Implementation of the Lexer class.">
 <polygon fill="#999999" stroke="#666666" points="164,-129 105,-129 105,-110 164,-110 164,-129"/>
 <text text-anchor="middle" x="134.5" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00">Lexer.cpp</text>
 </a>
@@ -20,7 +20,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="Lexer_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="Lexer_8h.html" target="_top" xlink:title="Defines the Lexer and Token types for the Rivet compiler.">
 <polygon fill="white" stroke="#666666" points="89.5,-74 15.5,-74 15.5,-55 89.5,-55 89.5,-74"/>
 <text text-anchor="middle" x="52.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet/Lexer.h</text>
 </a>

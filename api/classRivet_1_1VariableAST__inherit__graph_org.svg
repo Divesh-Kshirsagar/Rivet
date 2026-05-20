@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Refers to an already existing defined symbol/variable by its name string.">
 <polygon fill="#999999" stroke="transparent" points="94,-109 0,-109 0,0 94,0 94,-109"/>
 <text text-anchor="start" x="5" y="-96.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::VariableAST</text>
 <text text-anchor="start" x="45" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -34,7 +34,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="classRivet_1_1ASTNode.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="classRivet_1_1ASTNode.html" target="_top" xlink:title="The pure virtual base class for all Abstract Syntax Tree nodes.">
 <polygon fill="white" stroke="transparent" points="88.5,-254 5.5,-254 5.5,-145 88.5,-145 88.5,-254"/>
 <text text-anchor="start" x="11" y="-241.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ASTNode</text>
 <text text-anchor="start" x="12" y="-226.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>

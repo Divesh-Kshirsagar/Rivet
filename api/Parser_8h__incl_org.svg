@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Defines the Parser class for analyzing the token stream.">
 <polygon fill="#999999" stroke="#666666" points="418.23,-239 365.23,-239 365.23,-220 418.23,-220 418.23,-239"/>
 <text text-anchor="middle" x="391.73" y="-227" font-family="Helvetica,sans-Serif" font-size="10.00">Parser.h</text>
 </a>
@@ -20,7 +20,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="Lexer_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="Lexer_8h.html" target="_top" xlink:title="Defines the Lexer and Token types for the Rivet compiler.">
 <polygon fill="white" stroke="#666666" points="60.73,-184 12.73,-184 12.73,-165 60.73,-165 60.73,-184"/>
 <text text-anchor="middle" x="36.73" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">Lexer.h</text>
 </a>
@@ -38,7 +38,7 @@
 <!-- Node5 -->
 <g id="Node000005" class="node">
 <title>Node5</title>
-<g id="a_Node000005"><a xlink:href="AST_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000005"><a xlink:href="AST_8h.html" target="_top" xlink:title="Defines the Abstract Syntax Tree classes for the Rivet compiler.">
 <polygon fill="white" stroke="#666666" points="287.23,-184 244.23,-184 244.23,-165 287.23,-165 287.23,-184"/>
 <text text-anchor="middle" x="265.73" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">AST.h</text>
 </a>
@@ -191,7 +191,7 @@
 <!-- Node9 -->
 <g id="Node000009" class="node">
 <title>Node9</title>
-<g id="a_Node000009"><a xlink:href="Type_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000009"><a xlink:href="Type_8h.html" target="_top" xlink:title="Defines the basic types supported by the Rivet type system.">
 <polygon fill="white" stroke="#666666" points="163.73,-74 117.73,-74 117.73,-55 163.73,-55 163.73,-74"/>
 <text text-anchor="middle" x="140.73" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Type.h</text>
 </a>
@@ -209,7 +209,7 @@
 <!-- Node10 -->
 <g id="Node000010" class="node">
 <title>Node10</title>
-<g id="a_Node000010"><a xlink:href="SymbolTable_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000010"><a xlink:href="SymbolTable_8h.html" target="_top" xlink:title="Defines the scoped symbol table for semantic analysis.">
 <polygon fill="white" stroke="#666666" points="237.23,-129 156.23,-129 156.23,-110 237.23,-110 237.23,-129"/>
 <text text-anchor="middle" x="196.73" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00">SymbolTable.h</text>
 </a>

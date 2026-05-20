@@ -57,7 +57,7 @@ var sectionId = 'dynsection-1';
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Syntactic node covering integer literal definitions.">
 <polygon fill="#999999" stroke="transparent" points="94,-109 0,-109 0,0 94,0 94,-109"/>
 <text text-anchor="start" x="5" y="-96.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::NumberAST</text>
 <text text-anchor="start" x="45" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -80,7 +80,7 @@ var sectionId = 'dynsection-1';
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="classRivet_1_1ASTNode.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="classRivet_1_1ASTNode.html" target="_top" xlink:title="The pure virtual base class for all Abstract Syntax Tree nodes.">
 <polygon fill="white" stroke="transparent" points="88.5,-255 5.5,-255 5.5,-146 88.5,-146 88.5,-255"/>
 <text text-anchor="start" x="11" y="-242.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ASTNode</text>
 <text text-anchor="start" x="45.5" y="-227.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -112,7 +112,7 @@ var sectionId = 'dynsection-1';
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="structRivet_1_1TypeInfo.html" target="_top" xlink:title=" ">
+<g id="a_Node000003"><a xlink:href="structRivet_1_1TypeInfo.html" target="_top" xlink:title="Encapsulates a data type, its reference semantics, and array capacity if applicable.">
 <polygon fill="white" stroke="transparent" points="88,-456 6,-456 6,-302 88,-302 88,-456"/>
 <text text-anchor="start" x="13.5" y="-444" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::TypeInfo</text>
 <text text-anchor="start" x="10" y="-429" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>

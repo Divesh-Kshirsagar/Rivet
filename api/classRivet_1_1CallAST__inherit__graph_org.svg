@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Encapsulates function or routine invocation mapping to its identifier and parameters.">
 <polygon fill="#999999" stroke="transparent" points="80,-94 3,-94 3,0 80,0 80,-94"/>
 <text text-anchor="start" x="8.5" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::CallAST</text>
 <text text-anchor="start" x="40" y="-67" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -32,7 +32,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="classRivet_1_1ASTNode.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="classRivet_1_1ASTNode.html" target="_top" xlink:title="The pure virtual base class for all Abstract Syntax Tree nodes.">
 <polygon fill="white" stroke="transparent" points="83,-239 0,-239 0,-130 83,-130 83,-239"/>
 <text text-anchor="start" x="5.5" y="-226.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ASTNode</text>
 <text text-anchor="start" x="6.5" y="-211.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>

@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="A while loop expression iterating execution while Cond evaluates to non&#45;zero.">
 <polygon fill="#999999" stroke="transparent" points="84,-94 0,-94 0,0 84,0 84,-94"/>
 <text text-anchor="start" x="5" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::WhileAST</text>
 <text text-anchor="start" x="40" y="-67" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -32,7 +32,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="classRivet_1_1ASTNode.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="classRivet_1_1ASTNode.html" target="_top" xlink:title="The pure virtual base class for all Abstract Syntax Tree nodes.">
 <polygon fill="white" stroke="transparent" points="83.5,-240 0.5,-240 0.5,-131 83.5,-131 83.5,-240"/>
 <text text-anchor="start" x="6" y="-227.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ASTNode</text>
 <text text-anchor="start" x="40.5" y="-212.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -64,7 +64,7 @@
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="structRivet_1_1TypeInfo.html" target="_top" xlink:title=" ">
+<g id="a_Node000003"><a xlink:href="structRivet_1_1TypeInfo.html" target="_top" xlink:title="Encapsulates a data type, its reference semantics, and array capacity if applicable.">
 <polygon fill="white" stroke="transparent" points="83,-441 1,-441 1,-287 83,-287 83,-441"/>
 <text text-anchor="start" x="8.5" y="-429" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::TypeInfo</text>
 <text text-anchor="start" x="5" y="-414" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>

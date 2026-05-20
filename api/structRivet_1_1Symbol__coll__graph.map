@@ -1,5 +1,5 @@
 <map id="Rivet::Symbol" name="Rivet::Symbol">
-<area shape="rect" id="Node000001" title=" " alt="" coords="11,273,109,359"/>
-<area shape="rect" id="Node000002" href="$structRivet_1_1TypeInfo.html" title=" " alt="" coords="5,5,115,211"/>
+<area shape="rect" id="Node000001" title="Contains data associated with a specific variable inside the symbol table." alt="" coords="11,273,109,359"/>
+<area shape="rect" id="Node000002" href="$structRivet_1_1TypeInfo.html" title="Encapsulates a data type, its reference semantics, and array capacity if applicable." alt="" coords="5,5,115,211"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,211,63,257,57,257,57,211"/>
 </map>

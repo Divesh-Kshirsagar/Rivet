@@ -82,6 +82,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>A bundled environment holding LLVM core objects required during IR construction.  
+ <a href="structRivet_1_1CodeGenContext.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Rivet::CodeGenContext:</div>
@@ -92,24 +95,31 @@ Collaboration diagram for Rivet::CodeGenContext:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a668e95dcdbe27422a51ea29464752167" id="r_a668e95dcdbe27422a51ea29464752167"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRivet_1_1CodeGenContext.html#a668e95dcdbe27422a51ea29464752167">Initialize</a> ()</td></tr>
+<tr class="memdesc:a668e95dcdbe27422a51ea29464752167"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fully instantiates LLVM internals and custom core types.  <br /></td></tr>
 <tr class="separator:a668e95dcdbe27422a51ea29464752167"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:acd83b2152c8cbbe4970f5a3cc4643784" id="r_acd83b2152c8cbbe4970f5a3cc4643784"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; llvm::IRBuilder&lt;&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRivet_1_1CodeGenContext.html#acd83b2152c8cbbe4970f5a3cc4643784">Builder</a></td></tr>
+<tr class="memdesc:acd83b2152c8cbbe4970f5a3cc4643784"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assistant for generating LLVM IR instructions gracefully.  <br /></td></tr>
 <tr class="separator:acd83b2152c8cbbe4970f5a3cc4643784"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1125911bc1c36d6c934dd5559865381" id="r_af1125911bc1c36d6c934dd5559865381"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, llvm::AllocaInst * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRivet_1_1CodeGenContext.html#af1125911bc1c36d6c934dd5559865381">NamedValues</a></td></tr>
+<tr class="memdesc:af1125911bc1c36d6c934dd5559865381"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tracks memory references resolving source identifiers to LLVM stack allocations.  <br /></td></tr>
 <tr class="separator:af1125911bc1c36d6c934dd5559865381"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d4b76b3bb4b390a902235ab5cd40e7a" id="r_a9d4b76b3bb4b390a902235ab5cd40e7a"><td class="memItemLeft" align="right" valign="top">llvm::StructType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRivet_1_1CodeGenContext.html#a9d4b76b3bb4b390a902235ab5cd40e7a">StringStructType</a> = nullptr</td></tr>
+<tr class="memdesc:a9d4b76b3bb4b390a902235ab5cd40e7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cached reference to the globally available fat pointer string structure.  <br /></td></tr>
 <tr class="separator:a9d4b76b3bb4b390a902235ab5cd40e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afed43532152218763a22fba38c8e60cb" id="r_afed43532152218763a22fba38c8e60cb"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; llvm::LLVMContext &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRivet_1_1CodeGenContext.html#afed43532152218763a22fba38c8e60cb">TheContext</a></td></tr>
+<tr class="memdesc:afed43532152218763a22fba38c8e60cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Core LLVM environment and type management container.  <br /></td></tr>
 <tr class="separator:afed43532152218763a22fba38c8e60cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac275c6a4d26bc6574f7a77a8abbe6ca8" id="r_ac275c6a4d26bc6574f7a77a8abbe6ca8"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; llvm::Module &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRivet_1_1CodeGenContext.html#ac275c6a4d26bc6574f7a77a8abbe6ca8">TheModule</a></td></tr>
+<tr class="memdesc:ac275c6a4d26bc6574f7a77a8abbe6ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the ultimate target code for functions and global variables.  <br /></td></tr>
 <tr class="separator:ac275c6a4d26bc6574f7a77a8abbe6ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00012">12</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
+<div class="textblock"><p>Keeps track of active modules, basic block instruction builders, and maps memory allocations (like stack pointers for variables) required while stepping through nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00026">26</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a668e95dcdbe27422a51ea29464752167" name="a668e95dcdbe27422a51ea29464752167"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a668e95dcdbe27422a51ea29464752167">&#9670;&#160;</a></span>Initialize()</h2>
@@ -126,11 +136,11 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CodeGen_8cpp_source.html#l00007">7</a> of file <a class="el" href="CodeGen_8cpp_source.html">CodeGen.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CodeGen_8cpp_source.html#l00011">11</a> of file <a class="el" href="CodeGen_8cpp_source.html">CodeGen.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="CodeGen_8h_source.html#l00015">Builder</a>, <a class="el" href="CodeGen_8h_source.html#l00021">StringStructType</a>, <a class="el" href="CodeGen_8h_source.html#l00014">TheContext</a>, and <a class="el" href="CodeGen_8h_source.html#l00016">TheModule</a>.</p>
+<p class="reference">References <a class="el" href="CodeGen_8h_source.html#l00029">Builder</a>, <a class="el" href="CodeGen_8h_source.html#l00034">StringStructType</a>, <a class="el" href="CodeGen_8h_source.html#l00028">TheContext</a>, and <a class="el" href="CodeGen_8h_source.html#l00030">TheModule</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00014">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00032">main()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -152,9 +162,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00015">15</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00029">29</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00030">Rivet::VariableAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00067">Rivet::VariableDeclAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00178">Rivet::BinaryOpAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00330">Rivet::UnaryOpAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00412">Rivet::IfAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00477">Rivet::WhileAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00539">Rivet::ForAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00655">Rivet::CallAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00745">Rivet::DerefAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00774">Rivet::IndexAST::codegen()</a>, <a class="el" href="CodeGen_8cpp_source.html#l00007">Initialize()</a>, and <a class="el" href="main_8cpp_source.html#l00014">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00037">Rivet::VariableAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00074">Rivet::VariableDeclAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00185">Rivet::BinaryOpAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00337">Rivet::UnaryOpAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00419">Rivet::IfAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00484">Rivet::WhileAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00546">Rivet::ForAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00662">Rivet::CallAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00752">Rivet::DerefAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00781">Rivet::IndexAST::codegen()</a>, <a class="el" href="CodeGen_8cpp_source.html#l00011">Initialize()</a>, and <a class="el" href="main_8cpp_source.html#l00032">main()</a>.</p>
 
 </div>
 </div>
@@ -170,9 +180,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00018">18</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00032">32</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00030">Rivet::VariableAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00067">Rivet::VariableDeclAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00178">Rivet::BinaryOpAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00539">Rivet::ForAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00716">Rivet::AddressOfAST::codegen()</a>, and <a class="el" href="AST_8cpp_source.html#l00774">Rivet::IndexAST::codegen()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00037">Rivet::VariableAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00074">Rivet::VariableDeclAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00185">Rivet::BinaryOpAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00546">Rivet::ForAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00723">Rivet::AddressOfAST::codegen()</a>, and <a class="el" href="AST_8cpp_source.html#l00781">Rivet::IndexAST::codegen()</a>.</p>
 
 </div>
 </div>
@@ -188,9 +198,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00021">21</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00034">34</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00848">Rivet::StringLiteralAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00067">Rivet::VariableDeclAST::codegen()</a>, and <a class="el" href="CodeGen_8cpp_source.html#l00007">Initialize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00855">Rivet::StringLiteralAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00074">Rivet::VariableDeclAST::codegen()</a>, and <a class="el" href="CodeGen_8cpp_source.html#l00011">Initialize()</a>.</p>
 
 </div>
 </div>
@@ -206,9 +216,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00014">14</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00028">28</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00014">Rivet::NumberAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00848">Rivet::StringLiteralAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00067">Rivet::VariableDeclAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00178">Rivet::BinaryOpAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00362">Rivet::BlockAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00412">Rivet::IfAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00477">Rivet::WhileAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00539">Rivet::ForAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00692">Rivet::ImportAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00745">Rivet::DerefAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00774">Rivet::IndexAST::codegen()</a>, <a class="el" href="CodeGen_8cpp_source.html#l00007">Initialize()</a>, and <a class="el" href="main_8cpp_source.html#l00014">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00021">Rivet::NumberAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00855">Rivet::StringLiteralAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00074">Rivet::VariableDeclAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00185">Rivet::BinaryOpAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00369">Rivet::BlockAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00419">Rivet::IfAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00484">Rivet::WhileAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00546">Rivet::ForAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00699">Rivet::ImportAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00752">Rivet::DerefAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00781">Rivet::IndexAST::codegen()</a>, <a class="el" href="CodeGen_8cpp_source.html#l00011">Initialize()</a>, and <a class="el" href="main_8cpp_source.html#l00032">main()</a>.</p>
 
 </div>
 </div>
@@ -224,9 +234,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00016">16</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CodeGen_8h_source.html#l00030">30</a> of file <a class="el" href="CodeGen_8h_source.html">CodeGen.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00848">Rivet::StringLiteralAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00655">Rivet::CallAST::codegen()</a>, <a class="el" href="CodeGen_8cpp_source.html#l00007">Initialize()</a>, and <a class="el" href="main_8cpp_source.html#l00014">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00855">Rivet::StringLiteralAST::codegen()</a>, <a class="el" href="AST_8cpp_source.html#l00662">Rivet::CallAST::codegen()</a>, <a class="el" href="CodeGen_8cpp_source.html#l00011">Initialize()</a>, and <a class="el" href="main_8cpp_source.html#l00032">main()</a>.</p>
 
 </div>
 </div>

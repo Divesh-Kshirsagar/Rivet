@@ -1,5 +1,5 @@
 <map id="Rivet::VariableDeclAST::codegen" name="Rivet::VariableDeclAST::codegen">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,165,45"/>
-<area shape="rect" id="Node000002" href="$structRivet_1_1TypeInfo.html#a2cbd5bf84cdf868487e85e0f4a5e4551" title=" " alt="" coords="213,13,373,38"/>
+<area shape="rect" id="Node000001" title="Transforms the node&#39;s logical definition into corresponding LLVM instructions." alt="" coords="5,5,165,45"/>
+<area shape="rect" id="Node000002" href="$structRivet_1_1TypeInfo.html#a2cbd5bf84cdf868487e85e0f4a5e4551" title="Utility returning whether this structure resolves as a flat array." alt="" coords="213,13,373,38"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,23,199,23,199,28,165,28"/>
 </map>

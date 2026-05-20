@@ -21,7 +21,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Defines the scoped symbol table for semantic analysis.">
 <polygon fill="#999999" stroke="#666666" points="102,-184 21,-184 21,-165 102,-165 102,-184"/>
 <text text-anchor="middle" x="61.5" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">SymbolTable.h</text>
 </a>
@@ -30,7 +30,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="AST_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="AST_8h.html" target="_top" xlink:title="Defines the Abstract Syntax Tree classes for the Rivet compiler.">
 <polygon fill="white" stroke="#666666" points="83,-129 40,-129 40,-110 83,-110 83,-129"/>
 <text text-anchor="middle" x="61.5" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00">AST.h</text>
 </a>
@@ -48,7 +48,7 @@
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="AST_8cpp.html" target="_top" xlink:title=" ">
+<g id="a_Node000003"><a xlink:href="AST_8cpp.html" target="_top" xlink:title="Implementation for AST node type&#45;checking and log dumps.">
 <polygon fill="white" stroke="#666666" points="53,-74 0,-74 0,-55 53,-55 53,-74"/>
 <text text-anchor="middle" x="26.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">AST.cpp</text>
 </a>
@@ -66,7 +66,7 @@
 <!-- Node4 -->
 <g id="Node000004" class="node">
 <title>Node4</title>
-<g id="a_Node000004"><a xlink:href="Parser_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000004"><a xlink:href="Parser_8h.html" target="_top" xlink:title="Defines the Parser class for analyzing the token stream.">
 <polygon fill="white" stroke="#666666" points="124,-74 71,-74 71,-55 124,-55 124,-74"/>
 <text text-anchor="middle" x="97.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Parser.h</text>
 </a>
@@ -84,7 +84,7 @@
 <!-- Node5 -->
 <g id="Node000005" class="node">
 <title>Node5</title>
-<g id="a_Node000005"><a xlink:href="Parser_8cpp.html" target="_top" xlink:title=" ">
+<g id="a_Node000005"><a xlink:href="Parser_8cpp.html" target="_top" xlink:title="Implementation of the Parser logic.">
 <polygon fill="white" stroke="#666666" points="90,-19 27,-19 27,0 90,0 90,-19"/>
 <text text-anchor="middle" x="58.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Parser.cpp</text>
 </a>
@@ -102,7 +102,7 @@
 <!-- Node6 -->
 <g id="Node000006" class="node">
 <title>Node6</title>
-<g id="a_Node000006"><a xlink:href="main_8cpp.html" target="_top" xlink:title=" ">
+<g id="a_Node000006"><a xlink:href="main_8cpp.html" target="_top" xlink:title="Entry point for the Rivet compiler.">
 <polygon fill="white" stroke="#666666" points="164.5,-19 108.5,-19 108.5,0 164.5,0 164.5,-19"/>
 <text text-anchor="middle" x="136.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">main.cpp</text>
 </a>

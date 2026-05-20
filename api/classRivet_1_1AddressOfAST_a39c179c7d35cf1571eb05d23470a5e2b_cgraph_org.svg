@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Recursively prints out the structure of the AST via stdout.">
 <polygon fill="#999999" stroke="#666666" points="112,-30 0,-30 0,0 112,0 112,-30"/>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::AddressOfAST</text>
 <text text-anchor="middle" x="56" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">::dump</text>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="classRivet_1_1ASTNode.html#a2cf1d7f1a773d06917d75a02140f730c" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="classRivet_1_1ASTNode.html#a2cf1d7f1a773d06917d75a02140f730c" target="_top" xlink:title="A helper to simplify recursively nested string output in Dumps.">
 <polygon fill="white" stroke="#666666" points="288,-24.5 148,-24.5 148,-5.5 288,-5.5 288,-24.5"/>
 <text text-anchor="middle" x="218" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ASTNode::printIndent</text>
 </a>

@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Defines the Abstract Syntax Tree classes for the Rivet compiler.">
 <polygon fill="#999999" stroke="#666666" points="213.5,-184 170.5,-184 170.5,-165 213.5,-165 213.5,-184"/>
 <text text-anchor="middle" x="192" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">AST.h</text>
 </a>
@@ -92,7 +92,7 @@
 <!-- Node6 -->
 <g id="Node000006" class="node">
 <title>Node6</title>
-<g id="a_Node000006"><a xlink:href="Type_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000006"><a xlink:href="Type_8h.html" target="_top" xlink:title="Defines the basic types supported by the Rivet type system.">
 <polygon fill="white" stroke="#666666" points="306,-74 260,-74 260,-55 306,-55 306,-74"/>
 <text text-anchor="middle" x="283" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Type.h</text>
 </a>
@@ -110,7 +110,7 @@
 <!-- Node7 -->
 <g id="Node000007" class="node">
 <title>Node7</title>
-<g id="a_Node000007"><a xlink:href="SymbolTable_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000007"><a xlink:href="SymbolTable_8h.html" target="_top" xlink:title="Defines the scoped symbol table for semantic analysis.">
 <polygon fill="white" stroke="#666666" points="189.5,-129 108.5,-129 108.5,-110 189.5,-110 189.5,-129"/>
 <text text-anchor="middle" x="149" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00">SymbolTable.h</text>
 </a>

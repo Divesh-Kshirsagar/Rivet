@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="The pure virtual base class for all Abstract Syntax Tree nodes.">
 <polygon fill="#999999" stroke="transparent" points="83,-109 0,-109 0,0 83,0 83,-109"/>
 <text text-anchor="start" x="5.5" y="-96.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::ASTNode</text>
 <text text-anchor="start" x="40" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
@@ -34,7 +34,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="structRivet_1_1TypeInfo.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="structRivet_1_1TypeInfo.html" target="_top" xlink:title="Encapsulates a data type, its reference semantics, and array capacity if applicable.">
 <polygon fill="white" stroke="transparent" points="82.5,-310 0.5,-310 0.5,-156 82.5,-156 82.5,-310"/>
 <text text-anchor="start" x="8" y="-298" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::TypeInfo</text>
 <text text-anchor="start" x="4.5" y="-283" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>

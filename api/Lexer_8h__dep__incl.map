@@ -1,14 +1,14 @@
 <map id="Lexer.h" name="Lexer.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="157,5,221,31"/>
-<area shape="rect" id="Node000002" href="$AST_8cpp.html" title=" " alt="" coords="5,79,76,104"/>
+<area shape="rect" id="Node000001" title="Defines the Lexer and Token types for the Rivet compiler." alt="" coords="157,5,221,31"/>
+<area shape="rect" id="Node000002" href="$AST_8cpp.html" title="Implementation for AST node type&#45;checking and log dumps." alt="" coords="5,79,76,104"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,39,66,81,64,76,152,34"/>
-<area shape="rect" id="Node000003" href="$Lexer_8cpp.html" title=" " alt="" coords="100,79,179,104"/>
+<area shape="rect" id="Node000003" href="$Lexer_8cpp.html" title="Implementation of the Lexer class." alt="" coords="100,79,179,104"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="175,44,150,80,145,77,171,41"/>
-<area shape="rect" id="Node000004" href="$Parser_8h.html" title=" " alt="" coords="203,79,273,104"/>
+<area shape="rect" id="Node000004" href="$Parser_8h.html" title="Defines the Parser class for analyzing the token stream." alt="" coords="203,79,273,104"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="207,41,232,77,228,80,202,44"/>
-<area shape="rect" id="Node000006" href="$main_8cpp.html" title=" " alt="" coords="274,152,349,177"/>
+<area shape="rect" id="Node000006" href="$main_8cpp.html" title="Entry point for the Rivet compiler." alt="" coords="274,152,349,177"/>
 <area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="232,34,262,52,288,77,299,96,307,116,313,151,308,152,301,118,294,98,284,80,259,56,230,39"/>
-<area shape="rect" id="Node000005" href="$Parser_8cpp.html" title=" " alt="" coords="165,152,249,177"/>
+<area shape="rect" id="Node000005" href="$Parser_8cpp.html" title="Implementation of the Parser logic." alt="" coords="165,152,249,177"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="230,118,215,153,210,151,225,116"/>
 <area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="262,112,301,150,298,154,258,116"/>
 </map>

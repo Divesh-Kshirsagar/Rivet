@@ -81,6 +81,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>A hierarchical structure for managing variable scopes.  
+ <a href="classRivet_1_1SymbolTable.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Rivet::SymbolTable:</div>
@@ -91,19 +94,25 @@ Collaboration diagram for Rivet::SymbolTable:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:acb51f1288693460fea1e197e6d27d20e" id="r_acb51f1288693460fea1e197e6d27d20e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e">enterScope</a> ()</td></tr>
+<tr class="memdesc:acb51f1288693460fea1e197e6d27d20e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new inner scope and pushes it onto the stack.  <br /></td></tr>
 <tr class="separator:acb51f1288693460fea1e197e6d27d20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a976f81141cddc387bce3fe95145ebb22" id="r_a976f81141cddc387bce3fe95145ebb22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22">exitScope</a> ()</td></tr>
+<tr class="memdesc:a976f81141cddc387bce3fe95145ebb22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the deepest active scope, popping it from the stack.  <br /></td></tr>
 <tr class="separator:a976f81141cddc387bce3fe95145ebb22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0936db332f9cef233ed7be73cdaed58a" id="r_a0936db332f9cef233ed7be73cdaed58a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a">insert</a> (const std::string &amp;name, <a class="el" href="structRivet_1_1TypeInfo.html">TypeInfo</a> type, bool isInitialized=false)</td></tr>
+<tr class="memdesc:a0936db332f9cef233ed7be73cdaed58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares a new variable in the latest/current block scope.  <br /></td></tr>
 <tr class="separator:a0936db332f9cef233ed7be73cdaed58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff47a5345d3544d3f2bedcf4c2274c2e" id="r_aff47a5345d3544d3f2bedcf4c2274c2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structRivet_1_1Symbol.html">Symbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1SymbolTable.html#aff47a5345d3544d3f2bedcf4c2274c2e">lookup</a> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:aff47a5345d3544d3f2bedcf4c2274c2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for a variable traversing upward from the current scope to the global scope.  <br /></td></tr>
 <tr class="separator:aff47a5345d3544d3f2bedcf4c2274c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaafaf27e01119f2355189ec39c84fde9" id="r_aaafaf27e01119f2355189ec39c84fde9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1SymbolTable.html#aaafaf27e01119f2355189ec39c84fde9">SymbolTable</a> ()</td></tr>
+<tr class="memdesc:aaafaf27e01119f2355189ec39c84fde9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classRivet_1_1SymbolTable.html" title="A hierarchical structure for managing variable scopes.">SymbolTable</a> and initializes the global scope.  <br /></td></tr>
 <tr class="separator:aaafaf27e01119f2355189ec39c84fde9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00017">17</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<div class="textblock"><p>Supports nested scopes (functions, code blocks). When variables are declared, they are pushed into the current topmost scope. Lookups start at the current scope and search outwards until the global scope is reached. </p>
+
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00037">37</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aaafaf27e01119f2355189ec39c84fde9" name="aaafaf27e01119f2355189ec39c84fde9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaafaf27e01119f2355189ec39c84fde9">&#9670;&#160;</a></span>SymbolTable()</h2>
@@ -128,9 +137,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00022">22</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00045">45</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 
-<p class="reference">References <a class="el" href="SymbolTable_8h_source.html#l00027">enterScope()</a>.</p>
+<p class="reference">References <a class="el" href="SymbolTable_8h_source.html#l00052">enterScope()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -163,9 +172,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00027">27</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00052">52</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SymbolTable_8h_source.html#l00022">SymbolTable()</a>, <a class="el" href="AST_8cpp_source.html#l00377">Rivet::BlockAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00628">Rivet::ForAST::typeCheck()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SymbolTable_8h_source.html#l00045">SymbolTable()</a>, <a class="el" href="AST_8cpp_source.html#l00384">Rivet::BlockAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00635">Rivet::ForAST::typeCheck()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -197,9 +206,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00031">31</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00059">59</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00377">Rivet::BlockAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00628">Rivet::ForAST::typeCheck()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00384">Rivet::BlockAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00635">Rivet::ForAST::typeCheck()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -247,10 +256,21 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The identifier of the variable. </td></tr>
+    <tr><td class="paramname">type</td><td>The type metadata corresponding to this variable. </td></tr>
+    <tr><td class="paramname">isInitialized</td><td>Indicates if the variable was defined with an explicit value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the variable was inserted successfully. </dd>
+<dd>
+false if the variable already exists within the <em>current</em> restricted scope. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00038">38</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00074">74</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00131">Rivet::VariableDeclAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00628">Rivet::ForAST::typeCheck()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00138">Rivet::VariableDeclAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00635">Rivet::ForAST::typeCheck()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -282,10 +302,17 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The identifier to search for. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Symbol* Pointer to the resolved variable struct, or nullptr if completely undefined. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00048">48</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00089">89</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00040">Rivet::VariableAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00726">Rivet::AddressOfAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00800">Rivet::IndexAST::typeCheck()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00047">Rivet::VariableAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00733">Rivet::AddressOfAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00807">Rivet::IndexAST::typeCheck()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
