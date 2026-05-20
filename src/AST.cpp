@@ -259,6 +259,8 @@ namespace Rivet
             }
             else if (auto *Index = dynamic_cast<IndexAST *>(LHS.get()))
             {
+                // TODO: Avoid the redundant element load produced by IndexAST::codegen when indexing appears on assignment LHS.
+                // Introduce a dedicated "address-only" path for IndexAST so assignments can emit only the element pointer (GEP).
                 llvm::AllocaInst *ArrayPtr = CompilerState.NamedValues[Index->getArrayName()];
                 if (!ArrayPtr)
                 {
@@ -520,24 +522,29 @@ namespace Rivet
         return true;
     }
 
-    // TODO: Implement the for loop for arrays
     void ForAST::dump(int indent) const
     {
         printIndent(indent);
         std::cout << "For Loop" << std::endl;
-        printIndent(indent + 1);
-        // std::cout << "Itr: " << Itr << std::endl;
-        // printIndent(indent + 1);
-        std::cout << "Start: " << std::endl;
-        Start->dump(indent + 2);
-        printIndent(indent + 1);
-        std::cout << "End: " << std::endl;
-        End->dump(indent + 2);
-        if (Step)
+        if (Kind == LoopKind::Array)
         {
             printIndent(indent + 1);
-            std::cout << "Step: " << std::endl;
-            Step->dump(indent + 2);
+            std::cout << "Array: " << ArrayName << std::endl;
+        }
+        else
+        {
+            printIndent(indent + 1);
+            std::cout << "Start: " << std::endl;
+            Start->dump(indent + 2);
+            printIndent(indent + 1);
+            std::cout << "End: " << std::endl;
+            End->dump(indent + 2);
+            if (Step)
+            {
+                printIndent(indent + 1);
+                std::cout << "Step: " << std::endl;
+                Step->dump(indent + 2);
+            }
         }
         printIndent(indent + 1);
         std::cout << "Body:" << std::endl;
@@ -545,7 +552,82 @@ namespace Rivet
     }
     llvm::Value *ForAST::codegen()
     {
-        
+        if (Kind == LoopKind::Array)
+        {
+            llvm::AllocaInst *ArrayAlloca = CompilerState.NamedValues[ArrayName];
+            if (!ArrayAlloca)
+            {
+                std::cerr << "Unknown array name in for loop: " << ArrayName << std::endl;
+                return nullptr;
+            }
+
+            auto *ArrayType = llvm::dyn_cast<llvm::ArrayType>(ArrayAlloca->getAllocatedType());
+            if (!ArrayType)
+            {
+                std::cerr << "For loop source '" << ArrayName << "' is not a fixed-size array." << std::endl;
+                return nullptr;
+            }
+
+            uint64_t ArrayLen = ArrayType->getNumElements();
+
+            llvm::Function *TheFunction = CompilerState.Builder->GetInsertBlock()->getParent();
+            llvm::BasicBlock *CondBB = llvm::BasicBlock::Create(*CompilerState.TheContext, "forarr.cond", TheFunction);
+            llvm::BasicBlock *LoopBB = llvm::BasicBlock::Create(*CompilerState.TheContext, "forarr.body", TheFunction);
+            llvm::BasicBlock *AfterBB = llvm::BasicBlock::Create(*CompilerState.TheContext, "forarr.after", TheFunction);
+
+            llvm::AllocaInst *IndexAlloca = CompilerState.Builder->CreateAlloca(
+                llvm::Type::getInt32Ty(*CompilerState.TheContext), nullptr, VarName + ".idx");
+            llvm::AllocaInst *IterAlloca = CompilerState.Builder->CreateAlloca(
+                llvm::Type::getInt32Ty(*CompilerState.TheContext), nullptr, VarName);
+
+            llvm::Value *Zero = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
+            llvm::Value *LenVal = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, ArrayLen, false));
+            CompilerState.Builder->CreateStore(Zero, IndexAlloca);
+
+            llvm::AllocaInst *OldVal = nullptr;
+            auto OldValIt = CompilerState.NamedValues.find(VarName);
+            if (OldValIt != CompilerState.NamedValues.end())
+                OldVal = OldValIt->second;
+            CompilerState.NamedValues[VarName] = IterAlloca;
+
+            CompilerState.Builder->CreateBr(CondBB);
+            CompilerState.Builder->SetInsertPoint(CondBB);
+
+            llvm::Value *CurIdx = CompilerState.Builder->CreateLoad(
+                IndexAlloca->getAllocatedType(), IndexAlloca, (VarName + ".idx.cur").c_str());
+            llvm::Value *CondVal = CompilerState.Builder->CreateICmpSLT(CurIdx, LenVal, "forarr.cond");
+            CompilerState.Builder->CreateCondBr(CondVal, LoopBB, AfterBB);
+
+            CompilerState.Builder->SetInsertPoint(LoopBB);
+
+            llvm::Value *ElemPtr = CompilerState.Builder->CreateInBoundsGEP(
+                ArrayAlloca->getAllocatedType(),
+                ArrayAlloca,
+                {Zero, CurIdx},
+                "forarr.elem.ptr");
+            llvm::Value *ElemVal = CompilerState.Builder->CreateLoad(
+                llvm::Type::getInt32Ty(*CompilerState.TheContext), ElemPtr, "forarr.elem");
+            CompilerState.Builder->CreateStore(ElemVal, IterAlloca);
+
+            if (!Body->codegen())
+                return nullptr;
+
+            llvm::Value *NextIdx = CompilerState.Builder->CreateAdd(
+                CurIdx,
+                llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 1, true)),
+                "forarr.nextidx");
+            CompilerState.Builder->CreateStore(NextIdx, IndexAlloca);
+            CompilerState.Builder->CreateBr(CondBB);
+
+            CompilerState.Builder->SetInsertPoint(AfterBB);
+            if (OldVal)
+                CompilerState.NamedValues[VarName] = OldVal;
+            else
+                CompilerState.NamedValues.erase(VarName);
+
+            return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
+        }
+
         // StartValue
         llvm::Value *StartValue = Start->codegen();
         if (!StartValue)
@@ -634,6 +716,29 @@ namespace Rivet
     }
     bool ForAST::typeCheck(SymbolTable& symTab)
     {
+        if (Kind == LoopKind::Array)
+        {
+            Symbol *ArraySym = symTab.lookup(ArrayName);
+            if (!ArraySym)
+            {
+                std::cerr << "Semantic Error: Array '" << ArrayName << "' is not declared.\n";
+                return false;
+            }
+            if (!ArraySym->Type.isArray())
+            {
+                std::cerr << "Semantic Error: Variable '" << ArrayName << "' is not an array.\n";
+                return false;
+            }
+
+            symTab.enterScope();
+            symTab.insert(VarName, TypeInfo(ArraySym->Type.Base, false), true);
+            bool bodyValid = Body->typeCheck(symTab);
+            symTab.exitScope();
+
+            ExprType = TypeInfo(BaseType::Int, false);
+            return bodyValid;
+        }
+
         if (!Start->typeCheck(symTab) || !End->typeCheck(symTab))
             return false;
         if (Step && !Step->typeCheck(symTab))

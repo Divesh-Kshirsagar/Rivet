@@ -487,43 +487,63 @@ namespace Rivet
         if (CurTok != tok_in)
             return LogErrorExpected("'in'", "after iterator variable");
         getNextToken();
-    
-        // Start expression
-        auto start = ParseExpression();
-        if (!start) 
-            return nullptr;
-    
-        // Consume 'to'
+
+        std::unique_ptr<ASTNode> start = nullptr;
+        if (CurTok == tok_identifier)
+        {
+            std::string firstIdent = lexer.IdentifierStr;
+            getNextToken();
+
+            // Array iteration form: for (item in arrayName) { ... }
+            if (CurTok == ')')
+            {
+                getNextToken();
+
+                auto body = ParseBlock();
+                if (!body)
+                    return nullptr;
+
+                return std::make_unique<ForAST>(varName, firstIdent, std::move(body));
+            }
+
+            start = std::make_unique<VariableAST>(firstIdent);
+            start = ParseBinOpRHS(0, std::move(start));
+            if (!start)
+                return nullptr;
+        }
+        else
+        {
+            start = ParseExpression();
+            if (!start)
+                return nullptr;
+        }
+
         if (CurTok != tok_to)
             return LogErrorExpected("'to'", "after start expression");
         getNextToken();
-    
-        // End expression
+
         auto end = ParseExpression();
-        if (!end) 
+        if (!end)
             return nullptr;
-    
-        // Optional Step
+
         std::unique_ptr<ASTNode> step = nullptr;
         if (CurTok == tok_step)
         {
             getNextToken();
             step = ParseExpression();
-            if (!step) 
+            if (!step)
                 return nullptr;
         }
 
-        // Consume ')'
         if (CurTok != ')')
             return LogErrorExpected(")", "at end of 'for'");
-        
+
         getNextToken();
-    
-        // Loop Body
+
         auto body = ParseBlock();
-        if (!body) 
+        if (!body)
             return nullptr;
-    
+
         return std::make_unique<ForAST>(varName, std::move(start), std::move(end), std::move(step), std::move(body));
     }
 }

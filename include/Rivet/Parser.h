@@ -135,7 +135,7 @@ namespace Rivet
         std::unique_ptr<ASTNode> ParseWhileStatement();
 
         /**
-         * @brief Parses `for(x in y to z step w)` iteration structures.
+         * @brief Parses `for` iteration structures for ranges and arrays.
          * @return A ForAST node for the loop sequence.
          */
         std::unique_ptr<ASTNode> ParseForStatement();

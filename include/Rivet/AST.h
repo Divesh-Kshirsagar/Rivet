@@ -227,15 +227,27 @@ namespace Rivet
      */
     class ForAST : public ASTNode
     {
+    public:
+        enum class LoopKind
+        {
+            Range,
+            Array
+        };
+
+    private:
         std::string VarName; ///< Scope-local iterator variable.
+        LoopKind Kind; ///< Distinguishes range loops from array iteration loops.
         std::unique_ptr<ASTNode> Start; ///< The initial loop value assignment.
         std::unique_ptr<ASTNode> End; ///< The boundary target.
         std::unique_ptr<ASTNode> Step; ///< Re-increment interval after each loop.
+        std::string ArrayName; ///< Source array for array iteration loops.
         std::unique_ptr<ASTNode> Body; ///< Logic execution block.
 
     public:
         ForAST(const std::string &VarName, std::unique_ptr<ASTNode> Start, std::unique_ptr<ASTNode> End, std::unique_ptr<ASTNode> Step, std::unique_ptr<ASTNode> Body)
-            : VarName(VarName), Start(std::move(Start)), End(std::move(End)), Step(std::move(Step)), Body(std::move(Body)) {}
+            : VarName(VarName), Kind(LoopKind::Range), Start(std::move(Start)), End(std::move(End)), Step(std::move(Step)), Body(std::move(Body)) {}
+        ForAST(const std::string &VarName, const std::string &ArrayName, std::unique_ptr<ASTNode> Body)
+            : VarName(VarName), Kind(LoopKind::Array), ArrayName(ArrayName), Body(std::move(Body)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
         bool typeCheck(SymbolTable& symTab) override;
