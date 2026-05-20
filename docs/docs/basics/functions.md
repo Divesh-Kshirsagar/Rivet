@@ -1,43 +1,27 @@
 # Functions
 
-This page separates what is supported today from what is planned.
+Rivet currently supports function call expressions. Function declarations exist as tokens, but the full declaration pipeline is still in progress.
 
-## What Works Today
+## Calling Functions
 
-### Function call expressions
-
-Parser supports calls in expression position:
+A function call is parsed when an identifier is followed by `(`:
 
 ```rivet
 do_work();
-mix(a, b, 3);
+add(2, 3);
 ```
 
-A call is parsed when an identifier is followed by `(`.
-Arguments are parsed as comma-separated expressions.
-
-### Call codegen behavior
-
-During codegen, Rivet:
+Arguments are comma-separated expressions. During codegen, Rivet:
 
 1. Looks up the callee by name in the LLVM module.
-2. Verifies argument count.
-3. Emits `call` instruction.
+2. Verifies the argument count.
+3. Emits an LLVM `call` instruction.
 
-If function is missing or arity mismatches, codegen reports an error.
+If the callee is missing or the arity does not match, codegen reports an error.
 
-## Not Fully Enabled Yet
+## Function Declarations (Planned)
 
-### Function declarations
-
-Tokens for `fun` and `return` exist, and docs grammar mentions function declarations.
-However, parser flow in the current implementation is focused on statements/imports/variables/control-flow.
-Treat function declaration syntax as in-progress unless you add parser + AST + codegen paths for it.
-
-## Practical Guidance
-
-- Use calls only when callee functions are present in the LLVM module.
-- For quick experiments, most current tests focus on top-level statements and generated `__rivet_entry`.
+Tokens for `fun` and `return` exist, but parsing and codegen for function declarations are not fully integrated yet. Consider function definitions a planned feature while the current focus is on top-level statements and the synthetic `__rivet_entry` function.
 
 ## Example Call Form
 
@@ -48,4 +32,3 @@ int x = 7;
 int y = 3;
 add(x, y);
 ```
-

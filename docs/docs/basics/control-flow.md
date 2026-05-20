@@ -1,76 +1,66 @@
 # Control Flow
 
-Rivet currently supports block-based `if`/`else` and `while`.
+Rivet supports block-based `if/else`, `while`, and `for` loops. All control-flow bodies are parsed as blocks (`{ ... }`).
 
 ## `if` / `else`
 
-Syntax:
-
 ```rivet
-if (<expression>) {
-	<statements>
+if (condition) {
+  // statements
 } else {
-	<statements>
+  // statements
 }
 ```
 
-### Current parser behavior
+Notes:
 
-- `if` condition must be wrapped in parentheses.
-- `then` and `else` are parsed as blocks (`{ ... }`) in the current implementation.
+- Conditions must be wrapped in parentheses.
 - `else` is optional.
-
-### Truthiness in codegen
-
-Conditions are lowered to integer comparison against zero:
-
-- non-zero -> true
-- zero -> false
+- In codegen, conditions are treated as integers: zero is false, non-zero is true.
 
 ## `while`
 
-Syntax:
-
 ```rivet
-while (<expression>) {
-	<statements>
+while (condition) {
+  // statements
 }
 ```
 
-### Current parser behavior
+The loop re-evaluates the condition before each iteration.
 
-- Condition must be in `(...)`.
-- Body is parsed as a block.
+## `for`
 
-### LLVM structure generated
+Rivet uses a range-style `for` loop:
 
-Codegen creates three blocks:
+```rivet
+for (i in 0 to 10 step 1) {
+  // statements
+}
+```
 
-1. condition block
-2. loop body block
-3. after-loop block
+Notes:
 
-The body branches back to the condition block.
+- `step` is optional; if omitted, a step of `1` is assumed.
+- `i` is the loop iterator name.
+- `to` is inclusive of the upper bound in current tests.
 
 ## Example
 
 ```rivet
 int i = 0;
+int sum = 0;
 
-while (i < 10) {
-	if (i == 5) {
-		i = i + 2;
-	} else {
-		i = i + 1;
-	}
+while (i < 5) {
+  if (i == 2) {
+    sum = sum + 10;
+  } else {
+    sum = sum + i;
+  }
+  i = i + 1;
 }
-
-i;
 ```
 
 ## Current Limitations
 
-- No `break` / `continue` yet.
-- No single-line non-block `if` body form in parser path right now.
-- No `for` loop support yet.
-
+- `break` and `continue` are not implemented yet.
+- Single-line bodies without `{}` are not supported in the parser.

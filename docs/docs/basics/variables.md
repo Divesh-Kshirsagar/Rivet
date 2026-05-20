@@ -1,67 +1,67 @@
 # Variables
 
-This page describes variable behavior in the current Rivet implementation.
+This page introduces variables as implemented in Rivet today. You will see how to declare values, assign them, and work with arrays and references.
 
-## Declaration Forms
-
-Rivet currently supports `int` variables with two forms:
+## Integer Variables
 
 ```rivet
 int x;
 int y = 42;
 ```
 
-### Notes
-
-- `int x;` is valid and defaults to `0` during codegen.
+- `int x;` is valid and defaults to `0` in codegen.
 - `int y = <expression>;` evaluates the expression and stores the result.
-- Declarations must end with `;`.
+- Declarations end with `;`.
 
-## Assignment
+## String Variables
 
-Assignment works as a binary expression with `=`:
+```rivet
+str message = "Hello Bare Metal";
+str label;
+
+label = "RIVET";
+message = label;
+```
+
+Strings are first-class values in the current prototype. Assignments between `str` values are allowed.
+
+## Fixed-Size Arrays
+
+Rivet supports fixed-size arrays of integers using bracket syntax:
+
+```rivet
+int[5] nums;
+nums[0] = 10;
+nums[1] = nums[0] + 5;
+```
+
+Array indexing works in expressions and assignments. Index expressions must resolve to integers.
+
+## References (Address and Dereference)
+
+Rivet models references using `address_of` and `deref`:
+
+```rivet
+int base = 42;
+int ref ptr = address_of base;
+
+int roundtrip = deref ptr;
+```
+
+Use `int ref` to declare a reference. The `deref` operator reads the value at the referenced location.
+
+## Assignment Rules
+
+Assignments are binary expressions with `=`:
 
 ```rivet
 int i = 0;
 i = i + 1;
 ```
 
-Current rule: the left-hand side must be a declared variable.
-If the left side is not a variable node, codegen reports an error.
+Current rule: the left-hand side must be a declared variable or an array element.
 
-## Reading Variables
+## Scope Notes (Current Implementation)
 
-Using a variable in an expression generates a load from its stack slot:
-
-```rivet
-int a = 7;
-int b = 3;
-a + b;
-```
-
-## Scope Model (Current)
-
-Variables are stored in a shared name map for codegen.
-Practical implication in the current prototype:
-
-- Redeclaration and shadowing rules are not fully formalized yet.
-- Keep names unique in small programs to avoid confusion.
-
-## Supported Expression Operators with Variables
-
-- Arithmetic: `+`, `-`, `*`, `/`
-- Equality: `==`, `!=`
-- Relational: `<`, `>`
-- Keyword logical/bitwise: `and`, `or`, `lsft`, `rsft`
-
-## Example
-
-```rivet
-int x = 10;
-int y = 2;
-
-x = x + y;
-x = x lsft 1;
-x;
-```
-
+Variables are tracked in a shared name map for codegen and semantic checks.
+For now, keep names unique within the same block to avoid accidental shadowing.

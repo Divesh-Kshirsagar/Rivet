@@ -1,6 +1,6 @@
 # LLVM Backend Details
 
-This page explains how Rivet lowers language constructs into LLVM IR today.
+This page explains how Rivet lowers language constructs into LLVM IR in the current implementation.
 
 ## Module and Entry Function
 
@@ -15,13 +15,11 @@ Top-level code is emitted into:
 ```llvm
 define i32 @__rivet_entry() {
 entry:
-	...
+  ...
 }
 ```
 
-## Variable Lowering
-
-Declaration:
+## Variables
 
 ```rivet
 int x = 7;
@@ -34,7 +32,7 @@ Becomes roughly:
 store i32 7, ptr %x
 ```
 
-Variable read uses `load`.
+Variable reads use `load`.
 
 ## Binary Operators
 
@@ -56,7 +54,7 @@ Current mapping:
 
 ## Control Flow Lowering
 
-### If/Else
+### If / Else
 
 If creates blocks:
 
@@ -64,7 +62,7 @@ If creates blocks:
 - `else`
 - `ifcont`
 
-Condition is tested against zero for branch selection.
+The condition is tested against zero for branch selection.
 
 ### While
 
@@ -81,14 +79,20 @@ Flow:
 3. branch to `loop` or `afterloop`
 4. loop body branches back to `cond`
 
+### For
+
+`for` lowers to a loop with a dedicated induction variable and a step value. It uses the same structure as `while`, but emits initialization and increment logic around the loop body.
+
+## Strings
+
+Strings are represented as a simple struct containing a pointer and length. The backend builds a `String` struct type in the LLVM context and reuses it for string values.
+
 ## Imports and IR
 
-`ImportAST::codegen()` codegens all imported AST nodes in sequence before continuing with the importing file.
-This effectively injects imported declarations/statements into the same module.
+`ImportAST::codegen()` emits all imported nodes before continuing with the importing file. This effectively injects imported declarations and statements into the same module.
 
 ## Current Backend Limitations
 
-- Unary operations are not lowered yet.
-- More advanced type system and arrays are not implemented.
-- Function declaration pipeline is incomplete in parser/codegen integration.
-
+- Unary lowering is not fully implemented yet.
+- Function declarations are not yet integrated into parser and codegen.
+- Some edge cases in array and reference semantics are still being refined.

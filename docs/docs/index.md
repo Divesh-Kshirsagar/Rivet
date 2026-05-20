@@ -1,39 +1,25 @@
 # Rivet Language Docs
 
-Rivet is a small, LLVM-backed systems language prototype focused on readable syntax and explicit control.
-These docs describe the current implementation in this repository so you can quickly understand what works today.
+Rivet is a small, LLVM-backed systems language prototype designed for readable syntax and explicit control. This site documents the language as it exists in this repository today, so you can learn what works now and what is still in progress.
 
-## What Rivet Currently Supports
+## What You Can Do Today
 
-- Integer literals and integer variables (`int`)
-- Variable declarations with optional initialization
-- Expression statements (for example, `a + b;`)
-- Arithmetic operators: `+`, `-`, `*`, `/`
-- Comparisons: `==`, `!=`, `<`, `>`
-- Bitwise/logical keyword operators: `and`, `or`, `lsft`, `rsft`
-- Assignment with `=` to declared variables
-- `if` / `else` blocks
-- `while` loops
-- Function-call expressions (`name(arg1, arg2)`)
-- Module imports with `import module_name;`
-- LLVM IR generation to a synthetic entry function `__rivet_entry`
+- Declare integers, strings, references, and fixed-size arrays
+- Write expressions and assignments (`=`, `+`, `-`, `*`, `/`)
+- Use comparisons (`==`, `!=`, `<`, `>`) and keyword operators (`and`, `or`, `lsft`, `rsft`)
+- Create blocks, `if/else`, `while`, and `for` loops
+- Call functions defined in the LLVM module
+- Import other Rivet files with `import name;`
+- Generate LLVM IR through a synthetic entry function `__rivet_entry`
 
-## What Is Partially Implemented or Planned
+## What Is Still Evolving
 
-- `fun` and `return` tokens exist in the lexer, but function declaration parsing is not part of the current parser flow.
-- Unary expression codegen is not implemented.
-- Arrays are not implemented yet.
-- Import resolution currently tries:
-	- `lib/<module>.rvt`
-	- `../lib/<module>.rvt` (fallback for build-directory execution)
-
-## Typical Compile Flow
-
-1. **Lexing**: source file is tokenized with line/column tracking.
-2. **Parsing**: recursive-descent parser builds AST nodes.
-3. **AST dump (optional)**: run with `--dump-ast` to inspect parse output.
-4. **Codegen**: AST emits LLVM IR into module `Rivet Bare Metal Module`.
-5. **IR print**: module is printed to stdout.
+- Function declarations (`fun`/`return`) are tokenized but not fully integrated in parsing and codegen.
+- Unary operators are parsed, but not all forms are lowered yet.
+- Some features (arrays, strings, refs) are implemented but still receiving semantic checks and edge-case coverage.
+- Import resolution searches:
+  - `lib/<module>.rvt`
+  - `../lib/<module>.rvt` (fallback when running from build directories)
 
 ## Quick Example
 
@@ -42,7 +28,7 @@ import dummy;
 
 int i = 0;
 while (i < 3) {
-		i = i + 1;
+  i = i + 1;
 }
 
 i + imported_x;
@@ -54,9 +40,18 @@ Run from `build/`:
 ./rivet ../tests/import_dummy_test.rvt --dump-ast
 ```
 
+## Typical Compile Flow
+
+1. **Lexing**: source is tokenized with line/column tracking.
+2. **Parsing**: recursive descent builds AST nodes.
+3. **AST dump (optional)**: use `--dump-ast` to inspect the tree.
+4. **Codegen**: AST emits LLVM IR into `Rivet Bare Metal Module`.
+5. **IR print**: the module is printed to stdout.
+
 ## Reading Guide
 
-- Start with **Language Basics** for day-to-day syntax.
+- Start with **Language Basics** to learn core syntax.
+- Use **Features** to see strings, arrays, modules, and memory behavior.
 - Use **Reference** for compact grammar and keyword tables.
-- Use **Internals** to understand parser and LLVM backend behavior.
+- Visit **Internals** to understand the parser and LLVM backend flow.
 

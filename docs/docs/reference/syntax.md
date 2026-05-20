@@ -1,6 +1,6 @@
 # Syntax Reference
 
-This page is a practical syntax reference for the current Rivet implementation.
+This page summarizes the current Rivet syntax in a compact, practical form.
 
 ## Program Shape
 
@@ -24,15 +24,18 @@ import dummy;
 ```rivet
 int x;
 int y = 10;
+str message = "Hello";
+int ref ptr = address_of x;
+int[4] nums;
 ```
 
 ### If / Else
 
 ```rivet
 if (x == 0) {
-	x = x + 1;
+  x = x + 1;
 } else {
-	x = x + 2;
+  x = x + 2;
 }
 ```
 
@@ -40,7 +43,15 @@ if (x == 0) {
 
 ```rivet
 while (x < 10) {
-	x = x + 1;
+  x = x + 1;
+}
+```
+
+### For
+
+```rivet
+for (i in 0 to 10 step 1) {
+  x = x + i;
 }
 ```
 
@@ -62,9 +73,12 @@ call_me(x);
 Primary forms:
 
 - number literal
+- string literal
 - identifier
 - function call
 - parenthesized expression
+- `address_of` / `deref`
+- array indexing (`nums[i]`)
 
 Supported binary operators:
 
@@ -85,6 +99,5 @@ Arguments are comma-separated expressions.
 ## Notes on Current Parsing Rules
 
 - Conditions for `if`/`while` require parentheses.
-- Bodies are currently handled as block forms.
-- Every declaration/statement above ends with `;` except block/control structures.
-
+- Bodies are currently handled as block forms only.
+- Every declaration/statement ends with `;` except block/control structures.
