@@ -33,7 +33,8 @@ Current statements include:
 - variable declarations (`int`, `str`, `int ref`, arrays)
 - `if (...) { ... } [else { ... }]`
 - `while (...) { ... }`
-- `for (i in start to end step step)`
+- `for (i in start to end [step step])`
+- `for (item in arrayName)`
 - blocks `{ ... }`
 - expression statements
 - empty statement `;`

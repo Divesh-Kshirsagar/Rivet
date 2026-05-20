@@ -30,7 +30,9 @@ The loop re-evaluates the condition before each iteration.
 
 ## `for`
 
-Rivet uses a range-style `for` loop:
+Rivet supports two `for` loop forms.
+
+Range-style loop:
 
 ```rivet
 for (i in 0 to 10 step 1) {
@@ -38,11 +40,20 @@ for (i in 0 to 10 step 1) {
 }
 ```
 
+Array-iteration loop:
+
+```rivet
+for (pin in pins) {
+  // statements
+}
+```
+
 Notes:
 
 - `step` is optional; if omitted, a step of `1` is assumed.
-- `i` is the loop iterator name.
+- The identifier before `in` is always the loop iterator name.
 - `to` is inclusive of the upper bound in current tests.
+- In array iteration, the iterator receives each element value in order.
 
 ## Example
 

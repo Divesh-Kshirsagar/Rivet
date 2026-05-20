@@ -55,6 +55,12 @@ for (i in 0 to 10 step 1) {
 }
 ```
 
+```rivet
+for (pin in pins) {
+  set_pin_mode(pin, 1);
+}
+```
+
 ### Expression statement
 
 ```rivet
