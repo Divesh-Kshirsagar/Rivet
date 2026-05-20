@@ -184,6 +184,50 @@ namespace Rivet
     }
     llvm::Value *BinaryOpAST::codegen()
     {
+        // Assignment needs special handling because the LHS should resolve to an address,
+        // not a loaded value.
+        if (Op == '=')
+        {
+            llvm::Value *R = RHS->codegen();
+            if (!R)
+                return nullptr;
+
+            llvm::Value *VariablePtr = nullptr;
+
+            // LHS is a standard variable
+            if (auto VarAST = dynamic_cast<VariableAST *>(LHS.get()))
+            {
+                VariablePtr = CompilerState.NamedValues[VarAST->getName()];
+                if (!VariablePtr)
+                {
+                    std::cerr << "Unknown variable name in assignment: " << VarAST->getName() << std::endl;
+                    return nullptr;
+                }
+            }
+            else if (auto *Deref = dynamic_cast<DerefAST *>(LHS.get()))
+            {
+                VariablePtr = Deref->getOperand()->codegen();
+                if (!VariablePtr)
+                {
+                    return nullptr;
+                }
+            }
+            else if (auto *Index = dynamic_cast<IndexAST *>(LHS.get()))
+            {
+                VariablePtr = Index->codegenAddress();
+                if (!VariablePtr)
+                    return nullptr;
+            }
+            else
+            {
+                std::cerr << "Left-hand side of assignment must be a variable, dereference, or array index." << std::endl;
+                return nullptr;
+            }
+
+            CompilerState.Builder->CreateStore(R, VariablePtr);
+            return R;
+        }
+
         llvm::Value *L = LHS->codegen();
         llvm::Value *R = RHS->codegen();
         if (!L || !R)
@@ -232,62 +276,6 @@ namespace Rivet
         {
             llvm::Value *CmpGT = CompilerState.Builder->CreateICmpSGT(L, R, "gttmp");
             return CompilerState.Builder->CreateZExt(CmpGT, llvm::Type::getInt32Ty(*CompilerState.TheContext), "booltmp");
-        }
-
-        // assignment
-        case '=':
-        {
-            llvm::Value *VariablePtr = nullptr;
-
-            // LHS is a standard variable
-            if (auto VarAST = dynamic_cast<VariableAST *>(LHS.get()))
-            {
-                VariablePtr = CompilerState.NamedValues[VarAST->getName()];
-                if (!VariablePtr)
-                {
-                    std::cerr << "Unknown variable name in assignment: " << VarAST->getName() << std::endl;
-                    return nullptr;
-                }
-            }
-            else if (auto *Deref = dynamic_cast<DerefAST *>(LHS.get()))
-            {
-                VariablePtr = Deref->getOperand()->codegen();
-                if (!VariablePtr)
-                {
-                    return nullptr;
-                }
-            }
-            else if (auto *Index = dynamic_cast<IndexAST *>(LHS.get()))
-            {
-                // TODO: Avoid the redundant element load produced by IndexAST::codegen when indexing appears on assignment LHS.
-                // Introduce a dedicated "address-only" path for IndexAST so assignments can emit only the element pointer (GEP).
-                llvm::AllocaInst *ArrayPtr = CompilerState.NamedValues[Index->getArrayName()];
-                if (!ArrayPtr)
-                {
-                    std::cerr << "Unknown array name in assignment: " << Index->getArrayName() << std::endl;
-                    return nullptr;
-                }
-
-                llvm::Value *IndexVal = Index->getIndexExpr()->codegen();
-                if (!IndexVal)
-                    return nullptr;
-
-                llvm::Value *Zero = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
-                std::vector<llvm::Value *> Indices = {Zero, IndexVal};
-                VariablePtr = CompilerState.Builder->CreateInBoundsGEP(
-                    ArrayPtr->getAllocatedType(),
-                    ArrayPtr,
-                    Indices,
-                    "arrayidx.ptr");
-            }
-            else
-            {
-                std::cerr << "Left-hand side of assignment must be a variable, dereference, or array index." << std::endl;
-                return nullptr;
-            }
-            
-            CompilerState.Builder->CreateStore(R, VariablePtr);
-            return R;
         }
 
         default:
@@ -883,7 +871,7 @@ namespace Rivet
         std::cout << "Index: " << ArrayName << "[" << std::endl;
         IndexExpr->dump(indent + 1);
     }
-    llvm::Value *IndexAST::codegen()
+    llvm::Value *IndexAST::codegenAddress()
     {
         // Get starting point of the array from symbol table
         llvm::AllocaInst *ArrayPtr = CompilerState.NamedValues[ArrayName];
@@ -895,18 +883,20 @@ namespace Rivet
         if (!IndexVal)
             return nullptr;
 
-        // Generate GEP instruction to get the element at the index
         // first index steps into the array object, second index selects element
         llvm::Value *Zero = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
         std::vector<llvm::Value *> Indices = {Zero, IndexVal};
-
-        // Calculate exact memory address of arr[index]
-        llvm::Value *ElementPtr = CompilerState.Builder->CreateInBoundsGEP(
+        return CompilerState.Builder->CreateInBoundsGEP(
             ArrayPtr->getAllocatedType(),
             ArrayPtr,
             Indices,
-            "arrayidx"
-        );
+            "arrayidx.ptr");
+    }
+    llvm::Value *IndexAST::codegen()
+    {
+        llvm::Value *ElementPtr = codegenAddress();
+        if (!ElementPtr)
+            return nullptr;
         return CompilerState.Builder->CreateLoad(llvm::Type::getInt32Ty(*CompilerState.TheContext), ElementPtr, "idxload");
     }
     bool IndexAST::typeCheck(SymbolTable& symTab)

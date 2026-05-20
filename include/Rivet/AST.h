@@ -333,6 +333,7 @@ namespace Rivet
     public:
         IndexAST(const std::string &ArrayName, std::unique_ptr<ASTNode> IndexExpr)
             : ArrayName(ArrayName), IndexExpr(std::move(IndexExpr)) {}
+        llvm::Value *codegenAddress();
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
         bool typeCheck(SymbolTable& symTab) override;
