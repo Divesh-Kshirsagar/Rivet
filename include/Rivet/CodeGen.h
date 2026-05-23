@@ -28,6 +28,9 @@ namespace Rivet
         std::unique_ptr<llvm::LLVMContext> TheContext; ///< Core LLVM environment and type management container.
         std::unique_ptr<llvm::IRBuilder<>> Builder;    ///< Assistant for generating LLVM IR instructions gracefully.
         std::unique_ptr<llvm::Module> TheModule;       ///< Contains the ultimate target code for functions and global variables.
+        
+        // TODO: Add `std::unique_ptr<llvm::DIBuilder> DBuilder;` to enable DWARF debug 
+        //       metadata generation (for gdb/lldb support) in the future.
 
         std::map<std::string, llvm::AllocaInst *> NamedValues; ///< Tracks memory references resolving source identifiers to LLVM stack allocations.
 
