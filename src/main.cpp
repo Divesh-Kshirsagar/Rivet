@@ -50,6 +50,11 @@ int main(int argc, char** argv) {
 
     auto astNodes = parser.ParseFile();
 
+    if(parser.ErrorCount > 0) {
+        std::cerr << "Compilation failed with " << parser.ErrorCount << " error(s).\n";
+        return 1;
+    }
+
     if(astNodes.empty()) {
         std::cerr << "Error: No AST nodes generated. Compilation failed.\n";
         return 1;
@@ -88,11 +93,6 @@ int main(int argc, char** argv) {
 
         std::cout << "\n============================\n";
 
-    }
-
-    if(parser.ErrorCount > 0) {
-        std::cerr << "Compilation failed with " << parser.ErrorCount << " error(s).\n";
-        return 1;
     }
 
     std::cout << "Rivet Compiler initialized.\n";
