@@ -1154,8 +1154,15 @@ namespace Rivet
     }
     bool ImportAST::typeCheck(SymbolTable& symTab)
     {
-        (void)symTab;
-        return true;
+        bool success = true;
+        for (const auto &Node : ImportedNodes)
+        {
+            if (!Node->typeCheck(symTab))
+            {
+                success = false;
+            }
+        }
+        return success;
     }
 
     void AddressOfAST::dump(int indent) const
