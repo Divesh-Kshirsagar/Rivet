@@ -346,8 +346,26 @@ namespace Rivet
     }
     bool UnaryOpAST::typeCheck(SymbolTable& symTab)
     {
-        (void)symTab;
-        return true;
+        if (!Operand->typeCheck(symTab))
+            return false;
+
+        // Current unary operators are defined only for plain integer values.
+        if (Operand->ExprType.Base != BaseType::Int || Operand->ExprType.IsRef || Operand->ExprType.isArray())
+        {
+            std::cerr << "Semantic Error: Unary operator requires a non-reference int operand.\n";
+            return false;
+        }
+
+        switch (Op)
+        {
+            case '-':
+            case tok_not:
+                ExprType = TypeInfo(BaseType::Int, false);
+                return true;
+            default:
+                std::cerr << "Semantic Error: Unknown unary operator in type check: " << Op << ".\n";
+                return false;
+        }
     }
 
     void BlockAST::dump(int indent) const
