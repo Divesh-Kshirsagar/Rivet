@@ -139,6 +139,8 @@ namespace Rivet
          * @return A ForAST node for the loop sequence.
          */
         std::unique_ptr<ASTNode> ParseForStatement();
+        std::unique_ptr<ASTNode> ParseFunctionStatement();
+        std::unique_ptr<ASTNode> ParseReturnStatement();
 
         /**
          * @brief Parses a block of statements enclosed in `{}`.

@@ -224,6 +224,10 @@ namespace Rivet
             return ParseWhileStatement();
         if (CurTok == tok_for)
             return ParseForStatement();
+        if (CurTok == tok_fun)
+            return ParseFunctionStatement();
+        if (CurTok == tok_return)
+            return ParseReturnStatement();
         if (CurTok == '{')
             return ParseBlock();
         if (CurTok == ';')
@@ -418,6 +422,96 @@ namespace Rivet
             return LogErrorExpected("';'", "after variable declaration");
         getNextToken();
         return std::make_unique<VariableDeclAST>(declaredType, varName, isRef, std::move(initVal), arrayCapacity);
+    }
+
+    std::unique_ptr<ASTNode> Parser::ParseReturnStatement()
+    {
+        getNextToken(); // consume 'return'
+
+        std::unique_ptr<ASTNode> RetVal = nullptr;
+        if (CurTok != ';')
+        {
+            RetVal = ParseExpression();
+            if (!RetVal)
+                return nullptr;
+        }
+
+        if (CurTok != ';')
+            return LogErrorExpected("';'", "after return statement");
+        getNextToken();
+
+        return std::make_unique<ReturnAST>(std::move(RetVal));
+    }
+
+    std::unique_ptr<ASTNode> Parser::ParseFunctionStatement()
+    {
+        getNextToken(); // consume 'fun'
+
+        std::string returnType = "int";
+        if (CurTok == tok_int || CurTok == tok_string || CurTok == tok_void)
+        {
+            if (CurTok == tok_int)
+                returnType = "int";
+            else if (CurTok == tok_string)
+                returnType = "str";
+            else
+                returnType = "void";
+            getNextToken();
+        }
+
+        if (CurTok != tok_identifier)
+            return LogErrorExpected("function name", "after 'fun'");
+        std::string fnName = lexer.IdentifierStr;
+        getNextToken();
+
+        if (CurTok != '(')
+            return LogErrorExpected("'('", "after function name");
+        getNextToken();
+
+        std::vector<FunctionParam> params;
+        if (CurTok != ')')
+        {
+            while (true)
+            {
+                if (CurTok != tok_int && CurTok != tok_string)
+                    return LogErrorExpected("parameter type", "in function parameter list");
+
+                std::string paramType = (CurTok == tok_int) ? "int" : "str";
+                getNextToken();
+
+                bool isRef = false;
+                if (CurTok == tok_ref)
+                {
+                    if (paramType == "str")
+                        return LogError("String references are not supported yet.");
+                    isRef = true;
+                    getNextToken();
+                }
+
+                if (CurTok != tok_identifier)
+                    return LogErrorExpected("parameter name", "in function parameter list");
+                std::string paramName = lexer.IdentifierStr;
+                getNextToken();
+
+                params.push_back(FunctionParam{paramType, paramName, isRef});
+
+                if (CurTok == ')')
+                    break;
+                if (CurTok != ',')
+                    return LogErrorExpected("',' or ')'", "in function parameter list");
+                getNextToken();
+            }
+        }
+
+        if (CurTok != ')')
+            return LogErrorExpected("')'", "after function parameter list");
+        getNextToken();
+
+        auto body = ParseBlock();
+        if (!body)
+            return nullptr;
+
+        return std::make_unique<FunctionAST>(fnName, returnType, std::move(params), std::move(body));
     }
 
     std::unique_ptr<ASTNode> Parser::ParseImport()

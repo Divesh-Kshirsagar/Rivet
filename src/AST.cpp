@@ -9,10 +9,13 @@
 #include "Rivet/Lexer.h"
 #include "Rivet/CodeGen.h"
 #include <iostream>
+#include <vector>
 #include <llvm/IR/Constant.h>
 
 namespace Rivet
 {
+    static std::vector<TypeInfo> FunctionReturnTypeStack;
+
     void NumberAST::dump(int indent) const
     {
         printIndent(indent);
@@ -361,6 +364,8 @@ namespace Rivet
         llvm::Value *LastVal = nullptr;
         for (const auto &stmt : Statements)
         {
+            if (CompilerState.Builder->GetInsertBlock()->getTerminator())
+                break;
             LastVal = stmt->codegen();
             if (!LastVal)
             {
@@ -837,8 +842,21 @@ namespace Rivet
             llvm::Type *ActualTy = toLLVMType(Arg->ExprType);
             if (!ActualTy || ActualTy != ExpectedTy)
             {
+                std::string ExpectedTypeStr;
+                if (ExpectedTy->isIntegerTy(32))
+                    ExpectedTypeStr = "int";
+                else if (ExpectedTy->isVoidTy())
+                    ExpectedTypeStr = "void";
+                else if (CompilerState.StringStructType && ExpectedTy == CompilerState.StringStructType)
+                    ExpectedTypeStr = "str";
+                else if (ExpectedTy->isPointerTy())
+                    ExpectedTypeStr = "ref";
+                else
+                    ExpectedTypeStr = "unknown";
+
                 std::cerr << "Semantic Error: Type mismatch for argument " << i
-                          << " in call to '" << Callee << "'.\n";
+                          << " in call to '" << Callee << "'. Expected "
+                          << ExpectedTypeStr << ", found " << Arg->ExprType.toString() << ".\n";
                 return false;
             }
             ++i;
@@ -855,6 +873,245 @@ namespace Rivet
             ExprType = TypeInfo(BaseType::Unknown, false);
 
         return true;
+    }
+
+    void ReturnAST::dump(int indent) const
+    {
+        printIndent(indent);
+        std::cout << "Return" << std::endl;
+        if (RetVal)
+            RetVal->dump(indent + 1);
+    }
+    llvm::Value *ReturnAST::codegen()
+    {
+        if (!RetVal)
+            return CompilerState.Builder->CreateRetVoid();
+
+        llvm::Value *RetIR = RetVal->codegen();
+        if (!RetIR)
+            return nullptr;
+        return CompilerState.Builder->CreateRet(RetIR);
+    }
+    bool ReturnAST::typeCheck(SymbolTable& symTab)
+    {
+        if (FunctionReturnTypeStack.empty())
+        {
+            std::cerr << "Semantic Error: 'return' used outside of a function.\n";
+            return false;
+        }
+
+        TypeInfo expected = FunctionReturnTypeStack.back();
+        if (!RetVal)
+        {
+            if (expected.Base != BaseType::Void)
+            {
+                std::cerr << "Semantic Error: Non-void function must return a value.\n";
+                return false;
+            }
+            ExprType = TypeInfo(BaseType::Void, false);
+            return true;
+        }
+
+        if (!RetVal->typeCheck(symTab))
+            return false;
+
+        if (expected.Base == BaseType::Void)
+        {
+            std::cerr << "Semantic Error: Void function cannot return a value.\n";
+            return false;
+        }
+        if (RetVal->ExprType != expected)
+        {
+            std::cerr << "Semantic Error: Return type mismatch. Expected "
+                      << expected.toString() << ", found " << RetVal->ExprType.toString() << ".\n";
+            return false;
+        }
+        ExprType = expected;
+        return true;
+    }
+
+    void FunctionAST::dump(int indent) const
+    {
+        printIndent(indent);
+        std::cout << "Function: " << Name << " -> " << ReturnType << std::endl;
+        printIndent(indent + 1);
+        std::cout << "Params:" << std::endl;
+        for (const auto &P : Params)
+        {
+            printIndent(indent + 2);
+            std::cout << P.TypeName << (P.IsRef ? " ref " : " ") << P.Name << std::endl;
+        }
+        printIndent(indent + 1);
+        std::cout << "Body:" << std::endl;
+        Body->dump(indent + 2);
+    }
+    llvm::Value *FunctionAST::codegen()
+    {
+        auto toLLVMType = [&](const std::string &typeName, bool isRef) -> llvm::Type *
+        {
+            if (typeName == "int")
+            {
+                if (isRef)
+                    return llvm::PointerType::getUnqual(*CompilerState.TheContext);
+                return llvm::Type::getInt32Ty(*CompilerState.TheContext);
+            }
+            if (typeName == "str")
+                return CompilerState.StringStructType;
+            if (typeName == "void")
+                return llvm::Type::getVoidTy(*CompilerState.TheContext);
+            return nullptr;
+        };
+
+        std::vector<llvm::Type *> ArgTypes;
+        ArgTypes.reserve(Params.size());
+        for (const auto &P : Params)
+        {
+            llvm::Type *ParamTy = toLLVMType(P.TypeName, P.IsRef);
+            if (!ParamTy)
+                return nullptr;
+            ArgTypes.push_back(ParamTy);
+        }
+
+        llvm::Type *RetTy = toLLVMType(ReturnType, false);
+        if (!RetTy)
+            return nullptr;
+
+        llvm::Function *Fn = CompilerState.TheModule->getFunction(Name);
+        if (!Fn)
+        {
+            llvm::FunctionType *FnTy = llvm::FunctionType::get(RetTy, ArgTypes, false);
+            Fn = llvm::Function::Create(FnTy, llvm::Function::ExternalLinkage, Name, CompilerState.TheModule.get());
+        }
+
+        if (!Fn->empty())
+        {
+            std::cerr << "Function redefinition is not allowed: " << Name << std::endl;
+            return nullptr;
+        }
+
+        llvm::BasicBlock *FnEntry = llvm::BasicBlock::Create(*CompilerState.TheContext, "entry", Fn);
+        llvm::BasicBlock *OldInsertBlock = CompilerState.Builder->GetInsertBlock();
+        auto OldNamedValues = CompilerState.NamedValues;
+        CompilerState.NamedValues.clear();
+        CompilerState.Builder->SetInsertPoint(FnEntry);
+
+        unsigned idx = 0;
+        for (auto &Arg : Fn->args())
+        {
+            Arg.setName(Params[idx].Name);
+            llvm::AllocaInst *Alloca = CompilerState.Builder->CreateAlloca(Arg.getType(), nullptr, Params[idx].Name);
+            CompilerState.Builder->CreateStore(&Arg, Alloca);
+            CompilerState.NamedValues[Params[idx].Name] = Alloca;
+            ++idx;
+        }
+
+        if (!Body->codegen())
+            return nullptr;
+
+        if (!CompilerState.Builder->GetInsertBlock()->getTerminator())
+        {
+            if (RetTy->isVoidTy())
+                CompilerState.Builder->CreateRetVoid();
+            else if (RetTy->isIntegerTy(32))
+                CompilerState.Builder->CreateRet(llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true)));
+            else if (CompilerState.StringStructType && RetTy == CompilerState.StringStructType)
+            {
+                llvm::Constant *NullPtr = llvm::ConstantPointerNull::get(llvm::PointerType::getUnqual(*CompilerState.TheContext));
+                llvm::Constant *ZeroLen = llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
+                CompilerState.Builder->CreateRet(llvm::ConstantStruct::get(CompilerState.StringStructType, {NullPtr, ZeroLen}));
+            }
+        }
+
+        CompilerState.NamedValues = OldNamedValues;
+        if (OldInsertBlock)
+            CompilerState.Builder->SetInsertPoint(OldInsertBlock);
+
+        return Fn;
+    }
+    bool FunctionAST::typeCheck(SymbolTable& symTab)
+    {
+        auto toTypeInfo = [&](const std::string &typeName, bool isRef = false) -> TypeInfo
+        {
+            if (typeName == "int")
+                return TypeInfo(BaseType::Int, isRef);
+            if (typeName == "str")
+                return TypeInfo(BaseType::String, isRef);
+            if (typeName == "void")
+                return TypeInfo(BaseType::Void, false);
+            return TypeInfo(BaseType::Unknown, false);
+        };
+
+        if (!CompilerState.TheModule)
+        {
+            std::cerr << "Semantic Error: Compiler module is not initialized for function checks.\n";
+            return false;
+        }
+
+        std::vector<llvm::Type *> ArgTypes;
+        ArgTypes.reserve(Params.size());
+        for (const auto &P : Params)
+        {
+            TypeInfo TI = toTypeInfo(P.TypeName, P.IsRef);
+            if (TI.Base == BaseType::Unknown)
+            {
+                std::cerr << "Semantic Error: Unknown parameter type '" << P.TypeName << "' in function '" << Name << "'.\n";
+                return false;
+            }
+            if (TI.Base == BaseType::Void)
+            {
+                std::cerr << "Semantic Error: Function parameters cannot be void in function '" << Name << "'.\n";
+                return false;
+            }
+
+            if (TI.Base == BaseType::Int && TI.IsRef)
+                ArgTypes.push_back(llvm::PointerType::getUnqual(*CompilerState.TheContext));
+            else if (TI.Base == BaseType::Int)
+                ArgTypes.push_back(llvm::Type::getInt32Ty(*CompilerState.TheContext));
+            else if (TI.Base == BaseType::String)
+                ArgTypes.push_back(CompilerState.StringStructType);
+        }
+
+        TypeInfo RetInfo = toTypeInfo(ReturnType, false);
+        if (RetInfo.Base == BaseType::Unknown)
+        {
+            std::cerr << "Semantic Error: Unknown return type '" << ReturnType << "' in function '" << Name << "'.\n";
+            return false;
+        }
+
+        llvm::Type *RetTy = nullptr;
+        if (RetInfo.Base == BaseType::Int)
+            RetTy = llvm::Type::getInt32Ty(*CompilerState.TheContext);
+        else if (RetInfo.Base == BaseType::String)
+            RetTy = CompilerState.StringStructType;
+        else
+            RetTy = llvm::Type::getVoidTy(*CompilerState.TheContext);
+
+        llvm::Function *Existing = CompilerState.TheModule->getFunction(Name);
+        if (!Existing)
+        {
+            llvm::FunctionType *FnTy = llvm::FunctionType::get(RetTy, ArgTypes, false);
+            llvm::Function::Create(FnTy, llvm::Function::ExternalLinkage, Name, CompilerState.TheModule.get());
+        }
+
+        symTab.enterScope();
+        for (const auto &P : Params)
+        {
+            TypeInfo TI = toTypeInfo(P.TypeName, P.IsRef);
+            if (!symTab.insert(P.Name, TI, true))
+            {
+                std::cerr << "Semantic Error: Duplicate parameter name '" << P.Name << "' in function '" << Name << "'.\n";
+                symTab.exitScope();
+                return false;
+            }
+        }
+
+        FunctionReturnTypeStack.push_back(RetInfo);
+        bool BodyOk = Body->typeCheck(symTab);
+        FunctionReturnTypeStack.pop_back();
+        symTab.exitScope();
+
+        ExprType = TypeInfo(BaseType::Void, false);
+        return BodyOk;
     }
 
     void ImportAST::dump(int indent) const

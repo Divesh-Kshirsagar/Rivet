@@ -24,6 +24,13 @@ namespace llvm
 
 namespace Rivet
 {
+    struct FunctionParam
+    {
+        std::string TypeName;
+        std::string Name;
+        bool IsRef;
+    };
+
     /**
      * @class ASTNode
      * @brief The pure virtual base class for all Abstract Syntax Tree nodes.
@@ -265,6 +272,41 @@ namespace Rivet
     public:
         CallAST(const std::string &Callee, std::vector<std::unique_ptr<ASTNode>> Args)
             : Callee(Callee), Args(std::move(Args)) {}
+        llvm::Value *codegen() override;
+        void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
+    };
+
+    /**
+     * @class ReturnAST
+     * @brief Represents a `return` statement inside a function body.
+     */
+    class ReturnAST : public ASTNode
+    {
+        std::unique_ptr<ASTNode> RetVal;
+
+    public:
+        ReturnAST(std::unique_ptr<ASTNode> RetVal)
+            : RetVal(std::move(RetVal)) {}
+        llvm::Value *codegen() override;
+        void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
+    };
+
+    /**
+     * @class FunctionAST
+     * @brief Represents a function declaration/definition.
+     */
+    class FunctionAST : public ASTNode
+    {
+        std::string Name;
+        std::string ReturnType;
+        std::vector<FunctionParam> Params;
+        std::unique_ptr<ASTNode> Body;
+
+    public:
+        FunctionAST(const std::string &Name, const std::string &ReturnType, std::vector<FunctionParam> Params, std::unique_ptr<ASTNode> Body)
+            : Name(Name), ReturnType(ReturnType), Params(std::move(Params)), Body(std::move(Body)) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
         bool typeCheck(SymbolTable& symTab) override;
