@@ -70,3 +70,6 @@ _build/
 
 # Agent
 .codex
+
+# logs
+*.log
