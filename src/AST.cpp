@@ -311,9 +311,11 @@ namespace Rivet
             return true;
         }
 
-        if (LHS->ExprType.IsRef || RHS->ExprType.IsRef)
+        if (LHS->ExprType.Base != BaseType::Int || RHS->ExprType.Base != BaseType::Int ||
+            LHS->ExprType.IsRef || RHS->ExprType.IsRef ||
+            LHS->ExprType.isArray() || RHS->ExprType.isArray())
         {
-            std::cerr << "Semantic Error: Arithmetic operations on pointers are not supported.\n";
+            std::cerr << "Semantic Error: Binary operators require integer operands.\n";
             return false;
         }
 
