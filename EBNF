@@ -30,13 +30,15 @@
 <initializer_list> ::= <expression> { "," <expression> }
 
 // --- Functions ---
-<function_declaration> ::= <type_specifier> <identifier> "(" <params> ")" <compound_statement>
+<function_declaration> ::= "fun" [ <return_type> ] <identifier> "(" <params> ")" <compound_statement>
 
-<params> ::= "void" | <param_list> | <empty>
+<return_type> ::= "int" | "str" | "void"
+
+<params> ::= <param_list> | <empty>
 
 <param_list> ::= <param> { "," <param> }
 
-<param> ::= <type_specifier> <identifier>
+<param> ::= ( "int" | "str" ) [ "ref" ] <identifier>
 
 // --- Statements ---
 <compound_statement> ::= "{" <statement_list> "}"
