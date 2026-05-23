@@ -29,6 +29,7 @@ namespace Rivet
         std::string TypeName;
         std::string Name;
         bool IsRef;
+        bool IsOptRef;
     };
 
     /**
@@ -132,11 +133,12 @@ namespace Rivet
         std::string Type; ///< String identifier of the memory type (e.g. "int", "str").
         std::string Name; ///< Variable name.
         bool IsRef;       ///< True if constructed as a reference type.
+        bool IsOptRef;
         std::unique_ptr<ASTNode> InitVal; ///< The assignment expression (can be null if uninitialized).
         int ArrayCapacity; ///< Set to >0 if defining a fixed-length static array block.
     public:
-        VariableDeclAST(const std::string &Type, const std::string &Name, bool IsRef, std::unique_ptr<ASTNode> InitVal, int ArrayCapacity)
-            : Type(Type), Name(Name), IsRef(IsRef), InitVal(std::move(InitVal)), ArrayCapacity(ArrayCapacity) {}
+        VariableDeclAST(const std::string &Type, const std::string &Name, bool IsRef, bool IsOptRef, std::unique_ptr<ASTNode> InitVal, int ArrayCapacity)
+            : Type(Type), Name(Name), IsRef(IsRef), IsOptRef(IsOptRef), InitVal(std::move(InitVal)), ArrayCapacity(ArrayCapacity) {}
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
         bool typeCheck(SymbolTable& symTab) override;

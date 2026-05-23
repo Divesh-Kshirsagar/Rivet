@@ -31,18 +31,21 @@ namespace Rivet {
         bool IsRef;             ///< Set to true if the type is explicitly requested as a reference.
         int ArrayCapacity;     ///< If > 0, signifies that this type is a fixed-size array block array [N].
 
+        bool IsOptRef;          ///< Set to true if the type is explicitly requested as an optional reference.
+
         /**
          * @brief Default constructor defaults to a generic Unknown primitive.
          */
-        TypeInfo() : Base(BaseType::Unknown), IsRef(false), ArrayCapacity(0) {}
+        TypeInfo() : Base(BaseType::Unknown), IsRef(false), ArrayCapacity(0), IsOptRef(false) {}
         
         /**
          * @brief Explicitly constructs complete type semantics.
          * @param base The desired primitive layer.
          * @param isRef Whether this is a reference (`ref`) to the type.
          * @param arrayCapacity Default `0` means scalar. Any >0 length becomes a static array.
+         * @param isOptRef Whether this is an optional reference (`optref`) to the type.
          */
-        TypeInfo(BaseType base, bool isRef = false, int arrayCapacity = 0) : Base(base), IsRef(isRef), ArrayCapacity(arrayCapacity) {}
+        TypeInfo(BaseType base, bool isRef = false, int arrayCapacity = 0, bool isOptRef = false) : Base(base), IsRef(isRef), ArrayCapacity(arrayCapacity), IsOptRef(isOptRef) {}
 
         /**
          * @brief Checks if two expressions have compatible strict semantic typing.
@@ -50,7 +53,7 @@ namespace Rivet {
          * @return true if primitive types match, array capacities align, and references resolve nicely.
          */
         bool operator==(const TypeInfo& other) const {
-            return Base == other.Base && IsRef == other.IsRef && ArrayCapacity == other.ArrayCapacity;
+            return Base == other.Base && IsRef == other.IsRef && ArrayCapacity == other.ArrayCapacity && IsOptRef == other.IsOptRef;
         }
 
         /**
@@ -80,7 +83,8 @@ namespace Rivet {
                 case BaseType::String: str = "str"; break;
                 default: str = "unknown"; break;
             }
-            if (IsRef) str += " ref";
+            if (IsRef && !IsOptRef) str += " ref";
+            if (IsOptRef) str += " optref";
             return str;
         }
     };

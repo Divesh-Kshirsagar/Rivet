@@ -347,7 +347,6 @@ namespace Rivet
             return ParseNumberExpr();
         if (CurTok == tok_string_literal)
             return ParseStringLiteralExpr();
-        // TODO: Implement optref 
         if (CurTok == tok_address_of)
         {
             getNextToken();
@@ -379,12 +378,15 @@ namespace Rivet
         getNextToken();
 
         bool isRef = false;
-        int arrayCapacity = 0; // default is  meaning it is not an array
+        bool isOptRef = false;
+        int arrayCapacity = 0; // default is 0 meaning it is not an array
         
-        if (CurTok == tok_ref)
+        if (CurTok == tok_ref || CurTok == tok_optref)
         {
             if (isStringType)
                 return LogError("String references are not supported yet.");
+            if (CurTok == tok_optref)
+                isOptRef = true;
             isRef = true;
             getNextToken();
         }
@@ -421,7 +423,7 @@ namespace Rivet
         if (CurTok != ';')
             return LogErrorExpected("';'", "after variable declaration");
         getNextToken();
-        return std::make_unique<VariableDeclAST>(declaredType, varName, isRef, std::move(initVal), arrayCapacity);
+        return std::make_unique<VariableDeclAST>(declaredType, varName, isRef, isOptRef, std::move(initVal), arrayCapacity);
     }
 
     std::unique_ptr<ASTNode> Parser::ParseReturnStatement()
@@ -480,10 +482,13 @@ namespace Rivet
                 getNextToken();
 
                 bool isRef = false;
-                if (CurTok == tok_ref)
+                bool isOptRef = false;
+                if (CurTok == tok_ref || CurTok == tok_optref)
                 {
                     if (paramType == "str")
                         return LogError("String references are not supported yet.");
+                    if (CurTok == tok_optref)
+                        isOptRef = true;
                     isRef = true;
                     getNextToken();
                 }
@@ -493,7 +498,7 @@ namespace Rivet
                 std::string paramName = lexer.IdentifierStr;
                 getNextToken();
 
-                params.push_back(FunctionParam{paramType, paramName, isRef});
+                params.push_back(FunctionParam{paramType, paramName, isRef, isOptRef});
 
                 if (CurTok == ')')
                     break;

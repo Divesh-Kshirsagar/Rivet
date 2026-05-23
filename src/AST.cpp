@@ -152,7 +152,14 @@ namespace Rivet
             return false;
         }
 
-        TypeInfo declaredType(declaredBase, IsRef, ArrayCapacity);
+        TypeInfo declaredType(declaredBase, IsRef, ArrayCapacity, IsOptRef);
+
+        // Strict references must be initialized to guarantee they aren't null
+        if (IsRef && !IsOptRef && !InitVal)
+        {
+            std::cerr << "Semantic Error: Reference variable '" << Name << "' must be initialized.\n";
+            return false;
+        }
 
         if (InitVal)
         {
@@ -161,10 +168,23 @@ namespace Rivet
 
             if (InitVal->ExprType != declaredType)
             {
-                std::cerr << "Semantic Error: Type mismatch in declaration of '" << Name
-                          << "'. Expected " << declaredType.toString()
-                          << ", found " << InitVal->ExprType.toString() << ".\n";
-                return false;
+                bool allowed = false;
+                // Allow initializing optref with ref
+                if (declaredType.Base == InitVal->ExprType.Base &&
+                    declaredType.IsRef && InitVal->ExprType.IsRef &&
+                    declaredType.IsOptRef && !InitVal->ExprType.IsOptRef &&
+                    declaredType.ArrayCapacity == InitVal->ExprType.ArrayCapacity)
+                {
+                    allowed = true;
+                }
+
+                if (!allowed)
+                {
+                    std::cerr << "Semantic Error: Type mismatch in declaration of '" << Name
+                              << "'. Expected " << declaredType.toString()
+                              << ", found " << InitVal->ExprType.toString() << ".\n";
+                    return false;
+                }
             }
         }
 
@@ -304,8 +324,21 @@ namespace Rivet
             }
             if (LHS->ExprType != RHS->ExprType)
             {
-                std::cerr << "Semantic Error: Types of LHS and RHS must be the same.\n";
-                return false;
+                bool allowed = false;
+                // Allow assigning ref to optref
+                if (LHS->ExprType.Base == RHS->ExprType.Base &&
+                    LHS->ExprType.IsRef && RHS->ExprType.IsRef &&
+                    LHS->ExprType.IsOptRef && !RHS->ExprType.IsOptRef &&
+                    LHS->ExprType.ArrayCapacity == RHS->ExprType.ArrayCapacity)
+                {
+                    allowed = true;
+                }
+
+                if (!allowed)
+                {
+                    std::cerr << "Semantic Error: Types of LHS and RHS must be the same.\n";
+                    return false;
+                }
             }
             ExprType = LHS->ExprType;
             return true;
@@ -959,7 +992,7 @@ namespace Rivet
         for (const auto &P : Params)
         {
             printIndent(indent + 2);
-            std::cout << P.TypeName << (P.IsRef ? " ref " : " ") << P.Name << std::endl;
+            std::cout << P.TypeName << (P.IsRef ? (P.IsOptRef ? " optref " : " ref ") : " ") << P.Name << std::endl;
         }
         printIndent(indent + 1);
         std::cout << "Body:" << std::endl;
@@ -1050,12 +1083,12 @@ namespace Rivet
     }
     bool FunctionAST::typeCheck(SymbolTable& symTab)
     {
-        auto toTypeInfo = [&](const std::string &typeName, bool isRef = false) -> TypeInfo
+        auto toTypeInfo = [&](const std::string &typeName, bool isRef = false, bool isOptRef = false) -> TypeInfo
         {
             if (typeName == "int")
-                return TypeInfo(BaseType::Int, isRef);
+                return TypeInfo(BaseType::Int, isRef, 0, isOptRef);
             if (typeName == "str")
-                return TypeInfo(BaseType::String, isRef);
+                return TypeInfo(BaseType::String, isRef, 0, isOptRef);
             if (typeName == "void")
                 return TypeInfo(BaseType::Void, false);
             return TypeInfo(BaseType::Unknown, false);
@@ -1071,7 +1104,7 @@ namespace Rivet
         ArgTypes.reserve(Params.size());
         for (const auto &P : Params)
         {
-            TypeInfo TI = toTypeInfo(P.TypeName, P.IsRef);
+            TypeInfo TI = toTypeInfo(P.TypeName, P.IsRef, P.IsOptRef);
             if (TI.Base == BaseType::Unknown)
             {
                 std::cerr << "Semantic Error: Unknown parameter type '" << P.TypeName << "' in function '" << Name << "'.\n";
@@ -1116,7 +1149,7 @@ namespace Rivet
         symTab.enterScope();
         for (const auto &P : Params)
         {
-            TypeInfo TI = toTypeInfo(P.TypeName, P.IsRef);
+            TypeInfo TI = toTypeInfo(P.TypeName, P.IsRef, P.IsOptRef);
             if (!symTab.insert(P.Name, TI, true))
             {
                 std::cerr << "Semantic Error: Duplicate parameter name '" << P.Name << "' in function '" << Name << "'.\n";
