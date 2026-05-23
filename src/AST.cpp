@@ -780,7 +780,80 @@ namespace Rivet
     }
     bool CallAST::typeCheck(SymbolTable& symTab)
     {
-        (void)symTab;
+        auto toLLVMType = [&](const TypeInfo &T) -> llvm::Type *
+        {
+            if (!CompilerState.TheContext)
+                return nullptr;
+
+            if (T.isArray())
+            {
+                return llvm::ArrayType::get(llvm::Type::getInt32Ty(*CompilerState.TheContext), T.ArrayCapacity);
+            }
+            if (T.Base == BaseType::String)
+            {
+                return CompilerState.StringStructType;
+            }
+            if (T.IsRef)
+            {
+                return llvm::PointerType::getUnqual(*CompilerState.TheContext);
+            }
+            if (T.Base == BaseType::Int)
+            {
+                return llvm::Type::getInt32Ty(*CompilerState.TheContext);
+            }
+            if (T.Base == BaseType::Void)
+            {
+                return llvm::Type::getVoidTy(*CompilerState.TheContext);
+            }
+            return nullptr;
+        };
+
+        if (!CompilerState.TheModule)
+        {
+            std::cerr << "Semantic Error: Compiler module is not initialized for function call checks.\n";
+            return false;
+        }
+
+        llvm::Function *CalleeF = CompilerState.TheModule->getFunction(Callee);
+        if (!CalleeF)
+        {
+            std::cerr << "Semantic Error: Unknown function '" << Callee << "'.\n";
+            return false;
+        }
+
+        if (CalleeF->arg_size() != Args.size())
+        {
+            std::cerr << "Semantic Error: Incorrect number of arguments passed to function '" << Callee << "'.\n";
+            return false;
+        }
+
+        unsigned i = 0;
+        for (const auto &Arg : Args)
+        {
+            if (!Arg->typeCheck(symTab))
+                return false;
+
+            llvm::Type *ExpectedTy = CalleeF->getFunctionType()->getParamType(i);
+            llvm::Type *ActualTy = toLLVMType(Arg->ExprType);
+            if (!ActualTy || ActualTy != ExpectedTy)
+            {
+                std::cerr << "Semantic Error: Type mismatch for argument " << i
+                          << " in call to '" << Callee << "'.\n";
+                return false;
+            }
+            ++i;
+        }
+
+        llvm::Type *RetTy = CalleeF->getReturnType();
+        if (RetTy->isIntegerTy(32))
+            ExprType = TypeInfo(BaseType::Int, false);
+        else if (CompilerState.StringStructType && RetTy == CompilerState.StringStructType)
+            ExprType = TypeInfo(BaseType::String, false);
+        else if (RetTy->isVoidTy())
+            ExprType = TypeInfo(BaseType::Void, false);
+        else
+            ExprType = TypeInfo(BaseType::Unknown, false);
+
         return true;
     }
 

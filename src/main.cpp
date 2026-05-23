@@ -55,6 +55,10 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    // Initialize compiler state before semantic analysis so call checks can
+    // validate against known LLVM function signatures.
+    CompilerState.Initialize();
+
     // --- SEMANTIC ANALYSIS PASS ---
     SymbolTable symTab;
     int semanticErrors = 0;
@@ -91,7 +95,6 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    CompilerState.Initialize();
     std::cout << "Rivet Compiler initialized.\n";
 
     auto* Int32Ty = llvm::Type::getInt32Ty(*CompilerState.TheContext);
