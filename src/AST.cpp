@@ -18,6 +18,22 @@ namespace Rivet
     /// Set to true by ReturnAST::typeCheck when a return is found in the current function body.
     static bool CurrentFunctionHasReturn = false;
 
+    /**
+     * @brief Converts a TypeInfo's base into the matching scalar LLVM type.
+     *
+     * Used by memory operations (DerefAST, IndexAST, ForAST) to avoid hardcoding
+     * getInt32Ty and to correctly handle future non-int element types.
+     */
+    static llvm::Type *toLLVMElementType(const TypeInfo &TI)
+    {
+        if (TI.IsRef || TI.IsOptRef)
+            return llvm::PointerType::getUnqual(*CompilerState.TheContext);
+        if (TI.Base == BaseType::String)
+            return CompilerState.StringStructType;
+        // Default: Int (and Unknown fall through here as a safe fallback)
+        return llvm::Type::getInt32Ty(*CompilerState.TheContext);
+    }
+
     void NumberAST::dump(int indent) const
     {
         printIndent(indent);
@@ -744,8 +760,10 @@ namespace Rivet
                 ArrayAlloca,
                 {Zero, CurIdx},
                 "forarr.elem.ptr");
-            llvm::Value *ElemVal = CompilerState.Builder->CreateLoad(
-                llvm::Type::getInt32Ty(*CompilerState.TheContext), ElemPtr, "forarr.elem");
+            // Derive element type from the array's declared element base type
+            // rather than hardcoding Int32, so future element types work correctly.
+            llvm::Type *ElemTy = toLLVMElementType(TypeInfo(ArrayType->getElementType() == llvm::Type::getInt32Ty(*CompilerState.TheContext) ? BaseType::Int : BaseType::Unknown, false));
+            llvm::Value *ElemVal = CompilerState.Builder->CreateLoad(ElemTy, ElemPtr, "forarr.elem");
             CompilerState.Builder->CreateStore(ElemVal, IterAlloca);
 
             if (!Body->codegen())
@@ -1342,7 +1360,10 @@ namespace Rivet
         llvm::Value *PtrValue = Operand->codegen();
         if (!PtrValue)
             return nullptr;
-        return CompilerState.Builder->CreateLoad(llvm::Type::getInt32Ty(*CompilerState.TheContext), PtrValue, "dereftmp");
+        // Use the type-checker's resolved ExprType (set by DerefAST::typeCheck)
+        // so this load is always correct regardless of what the pointer points to.
+        llvm::Type *LoadTy = toLLVMElementType(ExprType);
+        return CompilerState.Builder->CreateLoad(LoadTy, PtrValue, "dereftmp");
     }
     bool DerefAST::typeCheck(SymbolTable& symTab)
     {
@@ -1392,7 +1413,10 @@ namespace Rivet
         llvm::Value *ElementPtr = codegenAddress();
         if (!ElementPtr)
             return nullptr;
-        return CompilerState.Builder->CreateLoad(llvm::Type::getInt32Ty(*CompilerState.TheContext), ElementPtr, "idxload");
+        // Use the type-checker's resolved ExprType (set by IndexAST::typeCheck)
+        // so element loads are correct for any future array element types.
+        llvm::Type *ElemTy = toLLVMElementType(ExprType);
+        return CompilerState.Builder->CreateLoad(ElemTy, ElementPtr, "idxload");
     }
     bool IndexAST::typeCheck(SymbolTable& symTab)
     {
