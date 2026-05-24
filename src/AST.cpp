@@ -415,6 +415,11 @@ namespace Rivet
     }
     llvm::Value *BlockAST::codegen()
     {
+        // Snapshot outer scope bindings. Any variable declared inside this block
+        // will overwrite entries in NamedValues, but we restore them on exit so
+        // the outer scope is never polluted by inner declarations.
+        auto SavedNamedValues = CompilerState.NamedValues;
+
         llvm::Value *LastVal = nullptr;
         for (const auto &stmt : Statements)
         {
@@ -423,9 +428,13 @@ namespace Rivet
             LastVal = stmt->codegen();
             if (!LastVal)
             {
+                CompilerState.NamedValues = SavedNamedValues;
                 return nullptr;
             }
         }
+
+        CompilerState.NamedValues = SavedNamedValues;
+
         if (LastVal)
             return LastVal;
         return llvm::ConstantInt::get(*CompilerState.TheContext, llvm::APInt(32, 0, true));
