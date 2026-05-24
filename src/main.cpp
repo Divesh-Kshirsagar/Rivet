@@ -60,18 +60,32 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    // Initialize compiler state before semantic analysis so call checks can
-    // validate against known LLVM function signatures.
+    // Initialize compiler state (required for codegen later, not for type-checking).
     CompilerState.Initialize();
 
-    // --- SEMANTIC ANALYSIS PASS ---
+    // --- SEMANTIC PASS 1: Register all function signatures ---
+    // Calling registerSignature() on every FunctionAST node populates
+    // symTab.FunctionRegistry with pure TypeInfo — NO LLVM IR created.
+    // This enables forward declarations: a function can be called anywhere
+    // in the file regardless of source order.
     SymbolTable symTab;
     int semanticErrors = 0;
 
     std::cout << "Running Semantic Analysis...\n";
     for (const auto& node : astNodes) {
-        if (!node->typeCheck(symTab)) {
-            semanticErrors++;
+        if (auto* fn = dynamic_cast<FunctionAST*>(node.get())) {
+            if (!fn->registerSignature(symTab))
+                semanticErrors++;
+        }
+    }
+
+    // --- SEMANTIC PASS 2: Full type-check all nodes ---
+    // FunctionRegistry is fully populated now, so CallAST::typeCheck can
+    // resolve any callee regardless of declaration order.
+    if (semanticErrors == 0) {
+        for (const auto& node : astNodes) {
+            if (!node->typeCheck(symTab))
+                semanticErrors++;
         }
     }
 
@@ -109,6 +123,19 @@ int main(int argc, char** argv) {
 
     llvm::Value* lastVal = llvm::ConstantInt::get(Int32Ty, 0, true);
 
+    // --- CODEGEN PASS 1: Create all function prototypes ---
+    // Ensures that CallAST::codegen() can always find its callee via
+    // TheModule->getFunction(), regardless of source declaration order.
+    for (const auto& node : astNodes) {
+        if (auto* fn = dynamic_cast<FunctionAST*>(node.get())) {
+            if (!fn->createPrototype()) {
+                std::cerr << "Error: Failed to create prototype for a function.\n";
+                return 1;
+            }
+        }
+    }
+
+    // --- CODEGEN PASS 2: Full code generation ---
     for (const auto& node : astNodes) {
         if(llvm::Value* val = node->codegen()) {
             lastVal = val;

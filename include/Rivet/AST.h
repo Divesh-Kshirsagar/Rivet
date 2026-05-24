@@ -329,6 +329,22 @@ namespace Rivet
         llvm::Value *codegen() override;
         void dump(int indent = 0) const override;
         bool typeCheck(SymbolTable& symTab) override;
+
+        /**
+         * @brief Pre-scan step: registers this function's signature (return type + param types)
+         *        into symTab.FunctionRegistry without type-checking the body.
+         *        Called in a first pass so that all function signatures are known before
+         *        any body is type-checked, enabling forward declarations and mutual recursion.
+         * @return true on success, false if signature has unknown types.
+         */
+        bool registerSignature(SymbolTable& symTab);
+
+        /**
+         * @brief Codegen pre-pass: creates the LLVM function declaration (prototype)
+         *        without emitting a body. Called before any function body is codegen'd
+         *        so CallAST::codegen can always find its callee via getFunction().
+         */
+        llvm::Function *createPrototype();
     };
 
     /**

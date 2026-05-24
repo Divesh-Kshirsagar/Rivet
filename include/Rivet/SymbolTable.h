@@ -31,6 +31,18 @@ namespace Rivet {
     };
 
     /**
+     * @struct FunctionSignature
+     * @brief Stores a function's semantic signature independent of LLVM IR.
+     *
+     * Used by the FunctionRegistry to allow CallAST::typeCheck to validate
+     * call sites without touching CompilerState.TheModule at all.
+     */
+    struct FunctionSignature {
+        TypeInfo ReturnType;
+        std::vector<TypeInfo> Params;
+    };
+
+    /**
      * @class SymbolTable
      * @brief A hierarchical structure for managing variable scopes.
      * 
@@ -43,6 +55,13 @@ namespace Rivet {
         std::vector<std::unordered_map<std::string, Symbol>> Scopes; ///< Stack of nested symbol maps.
 
     public:
+        /**
+         * @brief Registry of all known function signatures, populated during the
+         *        semantic pre-scan pass. CallAST::typeCheck reads from here instead
+         *        of from the LLVM module, keeping the two phases fully decoupled.
+         */
+        std::unordered_map<std::string, FunctionSignature> FunctionRegistry;
+
         /**
          * @brief Constructs a new SymbolTable and initializes the global scope.
          */

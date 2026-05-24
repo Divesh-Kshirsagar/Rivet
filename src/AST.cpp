@@ -949,93 +949,49 @@ namespace Rivet
     }
     bool CallAST::typeCheck(SymbolTable& symTab)
     {
-        auto toLLVMType = [&](const TypeInfo &T) -> llvm::Type *
-        {
-            if (!CompilerState.TheContext)
-                return nullptr;
-
-            if (T.isArray())
-            {
-                return llvm::ArrayType::get(llvm::Type::getInt32Ty(*CompilerState.TheContext), T.ArrayCapacity);
-            }
-            if (T.Base == BaseType::String)
-            {
-                return CompilerState.StringStructType;
-            }
-            if (T.IsRef)
-            {
-                return llvm::PointerType::getUnqual(*CompilerState.TheContext);
-            }
-            if (T.Base == BaseType::Int)
-            {
-                return llvm::Type::getInt32Ty(*CompilerState.TheContext);
-            }
-            if (T.Base == BaseType::Void)
-            {
-                return llvm::Type::getVoidTy(*CompilerState.TheContext);
-            }
-            return nullptr;
-        };
-
-        if (!CompilerState.TheModule)
-        {
-            std::cerr << "Semantic Error: Compiler module is not initialized for function call checks.\n";
-            return false;
-        }
-
-        llvm::Function *CalleeF = CompilerState.TheModule->getFunction(Callee);
-        if (!CalleeF)
+        // Look up purely from the semantic FunctionRegistry — no LLVM module access.
+        auto it = symTab.FunctionRegistry.find(Callee);
+        if (it == symTab.FunctionRegistry.end())
         {
             std::cerr << "Semantic Error: Unknown function '" << Callee << "'.\n";
             return false;
         }
 
-        if (CalleeF->arg_size() != Args.size())
+        const FunctionSignature &Sig = it->second;
+
+        if (Sig.Params.size() != Args.size())
         {
-            std::cerr << "Semantic Error: Incorrect number of arguments passed to function '" << Callee << "'.\n";
+            std::cerr << "Semantic Error: Incorrect number of arguments passed to function '"
+                      << Callee << "'. Expected " << Sig.Params.size()
+                      << ", got " << Args.size() << ".\n";
             return false;
         }
 
-        unsigned i = 0;
-        for (const auto &Arg : Args)
+        for (size_t i = 0; i < Args.size(); ++i)
         {
-            if (!Arg->typeCheck(symTab))
+            if (!Args[i]->typeCheck(symTab))
                 return false;
 
-            llvm::Type *ExpectedTy = CalleeF->getFunctionType()->getParamType(i);
-            llvm::Type *ActualTy = toLLVMType(Arg->ExprType);
-            if (!ActualTy || ActualTy != ExpectedTy)
-            {
-                std::string ExpectedTypeStr;
-                if (ExpectedTy->isIntegerTy(32))
-                    ExpectedTypeStr = "int";
-                else if (ExpectedTy->isVoidTy())
-                    ExpectedTypeStr = "void";
-                else if (CompilerState.StringStructType && ExpectedTy == CompilerState.StringStructType)
-                    ExpectedTypeStr = "str";
-                else if (ExpectedTy->isPointerTy())
-                    ExpectedTypeStr = "ref";
-                else
-                    ExpectedTypeStr = "unknown";
+            const TypeInfo &Expected = Sig.Params[i];
+            const TypeInfo &Actual   = Args[i]->ExprType;
 
+            bool compatible = (Expected == Actual);
+            // Allow passing ref where optref is expected
+            if (!compatible && Expected.Base == Actual.Base &&
+                Expected.IsRef && Actual.IsRef &&
+                Expected.IsOptRef && !Actual.IsOptRef)
+                compatible = true;
+
+            if (!compatible)
+            {
                 std::cerr << "Semantic Error: Type mismatch for argument " << i
                           << " in call to '" << Callee << "'. Expected "
-                          << ExpectedTypeStr << ", found " << Arg->ExprType.toString() << ".\n";
+                          << Expected.toString() << ", found " << Actual.toString() << ".\n";
                 return false;
             }
-            ++i;
         }
 
-        llvm::Type *RetTy = CalleeF->getReturnType();
-        if (RetTy->isIntegerTy(32))
-            ExprType = TypeInfo(BaseType::Int, false);
-        else if (CompilerState.StringStructType && RetTy == CompilerState.StringStructType)
-            ExprType = TypeInfo(BaseType::String, false);
-        else if (RetTy->isVoidTy())
-            ExprType = TypeInfo(BaseType::Void, false);
-        else
-            ExprType = TypeInfo(BaseType::Unknown, false);
-
+        ExprType = Sig.ReturnType;
         return true;
     }
 
@@ -1110,6 +1066,39 @@ namespace Rivet
         printIndent(indent + 1);
         std::cout << "Body:" << std::endl;
         Body->dump(indent + 2);
+    }
+    llvm::Function *FunctionAST::createPrototype()
+    {
+        auto toLLVMType = [&](const std::string &typeName, bool isRef) -> llvm::Type *
+        {
+            if (typeName == "int")
+            {
+                if (isRef) return llvm::PointerType::getUnqual(*CompilerState.TheContext);
+                return llvm::Type::getInt32Ty(*CompilerState.TheContext);
+            }
+            if (typeName == "str")
+                return CompilerState.StringStructType;
+            if (typeName == "void")
+                return llvm::Type::getVoidTy(*CompilerState.TheContext);
+            return nullptr;
+        };
+
+        // Skip if already declared
+        if (llvm::Function *Existing = CompilerState.TheModule->getFunction(Name))
+            return Existing;
+
+        std::vector<llvm::Type *> ArgTypes;
+        for (const auto &P : Params)
+        {
+            llvm::Type *T = toLLVMType(P.TypeName, P.IsRef);
+            if (!T) return nullptr;
+            ArgTypes.push_back(T);
+        }
+        llvm::Type *RetTy = toLLVMType(ReturnType, false);
+        if (!RetTy) return nullptr;
+
+        llvm::FunctionType *FnTy = llvm::FunctionType::get(RetTy, ArgTypes, false);
+        return llvm::Function::Create(FnTy, llvm::Function::ExternalLinkage, Name, CompilerState.TheModule.get());
     }
     llvm::Value *FunctionAST::codegen()
     {
@@ -1194,27 +1183,25 @@ namespace Rivet
 
         return Fn;
     }
-    bool FunctionAST::typeCheck(SymbolTable& symTab)
+    bool FunctionAST::registerSignature(SymbolTable& symTab)
     {
         auto toTypeInfo = [&](const std::string &typeName, bool isRef = false, bool isOptRef = false) -> TypeInfo
         {
-            if (typeName == "int")
-                return TypeInfo(BaseType::Int, isRef, 0, isOptRef);
-            if (typeName == "str")
-                return TypeInfo(BaseType::String, isRef, 0, isOptRef);
-            if (typeName == "void")
-                return TypeInfo(BaseType::Void, false);
+            if (typeName == "int")   return TypeInfo(BaseType::Int,    isRef, 0, isOptRef);
+            if (typeName == "str")   return TypeInfo(BaseType::String, isRef, 0, isOptRef);
+            if (typeName == "void")  return TypeInfo(BaseType::Void,   false);
             return TypeInfo(BaseType::Unknown, false);
         };
 
-        if (!CompilerState.TheModule)
+        TypeInfo RetInfo = toTypeInfo(ReturnType, false);
+        if (RetInfo.Base == BaseType::Unknown)
         {
-            std::cerr << "Semantic Error: Compiler module is not initialized for function checks.\n";
+            std::cerr << "Semantic Error: Unknown return type '" << ReturnType << "' in function '" << Name << "'.\n";
             return false;
         }
 
-        std::vector<llvm::Type *> ArgTypes;
-        ArgTypes.reserve(Params.size());
+        std::vector<TypeInfo> ParamTypes;
+        ParamTypes.reserve(Params.size());
         for (const auto &P : Params)
         {
             TypeInfo TI = toTypeInfo(P.TypeName, P.IsRef, P.IsOptRef);
@@ -1228,14 +1215,25 @@ namespace Rivet
                 std::cerr << "Semantic Error: Function parameters cannot be void in function '" << Name << "'.\n";
                 return false;
             }
-
-            if (TI.Base == BaseType::Int && TI.IsRef)
-                ArgTypes.push_back(llvm::PointerType::getUnqual(*CompilerState.TheContext));
-            else if (TI.Base == BaseType::Int)
-                ArgTypes.push_back(llvm::Type::getInt32Ty(*CompilerState.TheContext));
-            else if (TI.Base == BaseType::String)
-                ArgTypes.push_back(CompilerState.StringStructType);
+            ParamTypes.push_back(TI);
         }
+
+        symTab.FunctionRegistry[Name] = FunctionSignature{RetInfo, ParamTypes};
+        return true;
+    }
+
+    bool FunctionAST::typeCheck(SymbolTable& symTab)
+    {
+        auto toTypeInfo = [&](const std::string &typeName, bool isRef = false, bool isOptRef = false) -> TypeInfo
+        {
+            if (typeName == "int")
+                return TypeInfo(BaseType::Int, isRef, 0, isOptRef);
+            if (typeName == "str")
+                return TypeInfo(BaseType::String, isRef, 0, isOptRef);
+            if (typeName == "void")
+                return TypeInfo(BaseType::Void, false);
+            return TypeInfo(BaseType::Unknown, false);
+        };
 
         TypeInfo RetInfo = toTypeInfo(ReturnType, false);
         if (RetInfo.Base == BaseType::Unknown)
@@ -1244,28 +1242,34 @@ namespace Rivet
             return false;
         }
 
-        llvm::Type *RetTy = nullptr;
-        if (RetInfo.Base == BaseType::Int)
-            RetTy = llvm::Type::getInt32Ty(*CompilerState.TheContext);
-        else if (RetInfo.Base == BaseType::String)
-            RetTy = CompilerState.StringStructType;
-        else
-            RetTy = llvm::Type::getVoidTy(*CompilerState.TheContext);
-
-        llvm::Function *Existing = CompilerState.TheModule->getFunction(Name);
-        if (!Existing)
-        {
-            llvm::FunctionType *FnTy = llvm::FunctionType::get(RetTy, ArgTypes, false);
-            llvm::Function::Create(FnTy, llvm::Function::ExternalLinkage, Name, CompilerState.TheModule.get());
-        }
-
-        symTab.enterScope();
+        // Build the parameter TypeInfo list and validate each one.
+        std::vector<TypeInfo> ParamTypes;
+        ParamTypes.reserve(Params.size());
         for (const auto &P : Params)
         {
             TypeInfo TI = toTypeInfo(P.TypeName, P.IsRef, P.IsOptRef);
-            if (!symTab.insert(P.Name, TI, true))
+            if (TI.Base == BaseType::Unknown)
             {
-                std::cerr << "Semantic Error: Duplicate parameter name '" << P.Name << "' in function '" << Name << "'.\n";
+                std::cerr << "Semantic Error: Unknown parameter type '" << P.TypeName << "' in function '" << Name << "'.\n";
+                return false;
+            }
+            if (TI.Base == BaseType::Void)
+            {
+                std::cerr << "Semantic Error: Function parameters cannot be void in function '" << Name << "'.\n";
+                return false;
+            }
+            ParamTypes.push_back(TI);
+        }
+
+        // Register signature into FunctionRegistry — NO LLVM IR created here.
+        symTab.FunctionRegistry[Name] = FunctionSignature{RetInfo, ParamTypes};
+
+        symTab.enterScope();
+        for (size_t i = 0; i < Params.size(); ++i)
+        {
+            if (!symTab.insert(Params[i].Name, ParamTypes[i], true))
+            {
+                std::cerr << "Semantic Error: Duplicate parameter name '" << Params[i].Name << "' in function '" << Name << "'.\n";
                 symTab.exitScope();
                 return false;
             }
