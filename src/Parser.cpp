@@ -399,8 +399,8 @@ namespace Rivet
             if (CurTok != tok_number)
                 return LogErrorExpected("number", "after '[' in array declaration");
             arrayCapacity = lexer.NumVal;
-            if (arrayCapacity < 0)
-                return LogErrorExpected("non-negative number", "after '[' in array declaration");
+            if (arrayCapacity <= 0)
+                return LogError("Array capacity must be a positive integer (> 0).");
             getNextToken();
             if (CurTok != ']')
                 return LogErrorExpected("']'", "after array capacity");
