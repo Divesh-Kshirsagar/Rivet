@@ -258,9 +258,76 @@ namespace Rivet
         }
 
         llvm::Value *L = LHS->codegen();
+        if (!L) return nullptr;
+
+        // Short-circuit AND: if LHS is false (0), skip RHS entirely.
+        if (Op == tok_and)
+        {
+            llvm::Function *Fn = CompilerState.Builder->GetInsertBlock()->getParent();
+            llvm::Value *Zero = llvm::ConstantInt::get(llvm::Type::getInt32Ty(*CompilerState.TheContext), 0);
+            llvm::Value *LBool = CompilerState.Builder->CreateICmpNE(L, Zero, "and.lhs");
+
+            llvm::BasicBlock *RhsBB  = llvm::BasicBlock::Create(*CompilerState.TheContext, "and.rhs",  Fn);
+            llvm::BasicBlock *MergeBB = llvm::BasicBlock::Create(*CompilerState.TheContext, "and.merge", Fn);
+
+            // If LHS == false → jump to merge with 0; else evaluate RHS
+            CompilerState.Builder->CreateCondBr(LBool, RhsBB, MergeBB);
+            llvm::BasicBlock *LhsEndBB = CompilerState.Builder->GetInsertBlock();
+
+            // RHS block
+            CompilerState.Builder->SetInsertPoint(RhsBB);
+            llvm::Value *R = RHS->codegen();
+            if (!R) return nullptr;
+            llvm::Value *RBool = CompilerState.Builder->CreateICmpNE(R, Zero, "and.rhs.bool");
+            llvm::Value *RInt  = CompilerState.Builder->CreateZExt(RBool, llvm::Type::getInt32Ty(*CompilerState.TheContext), "and.rhs.int");
+            CompilerState.Builder->CreateBr(MergeBB);
+            llvm::BasicBlock *RhsEndBB = CompilerState.Builder->GetInsertBlock();
+
+            // Merge block — PHI selects 0 (short-circuit) or RHS result
+            CompilerState.Builder->SetInsertPoint(MergeBB);
+            llvm::PHINode *Phi = CompilerState.Builder->CreatePHI(
+                llvm::Type::getInt32Ty(*CompilerState.TheContext), 2, "and.result");
+            Phi->addIncoming(Zero,  LhsEndBB);   // LHS was false → 0
+            Phi->addIncoming(RInt,  RhsEndBB);   // LHS was true  → RHS value
+            return Phi;
+        }
+
+        // Short-circuit OR: if LHS is true (!= 0), skip RHS entirely.
+        if (Op == tok_or)
+        {
+            llvm::Function *Fn = CompilerState.Builder->GetInsertBlock()->getParent();
+            llvm::Value *Zero = llvm::ConstantInt::get(llvm::Type::getInt32Ty(*CompilerState.TheContext), 0);
+            llvm::Value *One  = llvm::ConstantInt::get(llvm::Type::getInt32Ty(*CompilerState.TheContext), 1);
+            llvm::Value *LBool = CompilerState.Builder->CreateICmpNE(L, Zero, "or.lhs");
+
+            llvm::BasicBlock *RhsBB  = llvm::BasicBlock::Create(*CompilerState.TheContext, "or.rhs",  Fn);
+            llvm::BasicBlock *MergeBB = llvm::BasicBlock::Create(*CompilerState.TheContext, "or.merge", Fn);
+
+            // If LHS == true → jump to merge with 1; else evaluate RHS
+            CompilerState.Builder->CreateCondBr(LBool, MergeBB, RhsBB);
+            llvm::BasicBlock *LhsEndBB = CompilerState.Builder->GetInsertBlock();
+
+            // RHS block
+            CompilerState.Builder->SetInsertPoint(RhsBB);
+            llvm::Value *R = RHS->codegen();
+            if (!R) return nullptr;
+            llvm::Value *RBool = CompilerState.Builder->CreateICmpNE(R, Zero, "or.rhs.bool");
+            llvm::Value *RInt  = CompilerState.Builder->CreateZExt(RBool, llvm::Type::getInt32Ty(*CompilerState.TheContext), "or.rhs.int");
+            CompilerState.Builder->CreateBr(MergeBB);
+            llvm::BasicBlock *RhsEndBB = CompilerState.Builder->GetInsertBlock();
+
+            // Merge block — PHI selects 1 (short-circuit) or RHS result
+            CompilerState.Builder->SetInsertPoint(MergeBB);
+            llvm::PHINode *Phi = CompilerState.Builder->CreatePHI(
+                llvm::Type::getInt32Ty(*CompilerState.TheContext), 2, "or.result");
+            Phi->addIncoming(One,  LhsEndBB);    // LHS was true  → 1
+            Phi->addIncoming(RInt, RhsEndBB);    // LHS was false → RHS value
+            return Phi;
+        }
+
         llvm::Value *R = RHS->codegen();
-        if (!L || !R)
-            return nullptr; // Error in codegen of operands
+        if (!R) return nullptr;
+
         switch (Op)
         {
         // Arithemetic
@@ -273,11 +340,7 @@ namespace Rivet
         case '/':
             return CompilerState.Builder->CreateSDiv(L, R, "divtmp");
 
-        // Bitwise and logical
-        case tok_and:
-            return CompilerState.Builder->CreateAnd(L, R, "andtmp");
-        case tok_or:
-            return CompilerState.Builder->CreateOr(L, R, "ortmp");
+        // Bitwise shifts (these are fine to evaluate both sides always)
         case tok_lsft:
             return CompilerState.Builder->CreateShl(L, R, "shltmp");
         case tok_rsft:
