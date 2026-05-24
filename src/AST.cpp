@@ -15,6 +15,8 @@
 namespace Rivet
 {
     static std::vector<TypeInfo> FunctionReturnTypeStack;
+    /// Set to true by ReturnAST::typeCheck when a return is found in the current function body.
+    static bool CurrentFunctionHasReturn = false;
 
     void NumberAST::dump(int indent) const
     {
@@ -154,7 +156,6 @@ namespace Rivet
 
         TypeInfo declaredType(declaredBase, IsRef, ArrayCapacity, IsOptRef);
 
-        // Strict references must be initialized to guarantee they aren't null
         if (IsRef && !IsOptRef && !InitVal)
         {
             std::cerr << "Semantic Error: Reference variable '" << Name << "' must be initialized.\n";
@@ -433,16 +434,26 @@ namespace Rivet
     {
         symTab.enterScope();
 
+        // Save the caller's has-return state; we'll bubble up ours afterwards.
+        bool savedHasReturn = CurrentFunctionHasReturn;
+        CurrentFunctionHasReturn = false;
+
+        bool hasReturnInBlock = false;
         for (auto& stmt : Statements)
         {
             if (!stmt->typeCheck(symTab))
             {
                 symTab.exitScope();
+                CurrentFunctionHasReturn = savedHasReturn || hasReturnInBlock;
                 return false;
             }
+            if (CurrentFunctionHasReturn)
+                hasReturnInBlock = true;
         }
 
         symTab.exitScope();
+        // Propagate: outer scope sees a return if this block or any inner block had one.
+        CurrentFunctionHasReturn = savedHasReturn || hasReturnInBlock;
         ExprType = TypeInfo(BaseType::Int, false);
         return true;
     }
@@ -980,6 +991,8 @@ namespace Rivet
             return false;
         }
         ExprType = expected;
+        // Signal to FunctionAST that this code path reaches a return.
+        CurrentFunctionHasReturn = true;
         return true;
     }
 
@@ -1159,9 +1172,19 @@ namespace Rivet
         }
 
         FunctionReturnTypeStack.push_back(RetInfo);
+        // Reset the flag before checking the body of this function.
+        CurrentFunctionHasReturn = false;
         bool BodyOk = Body->typeCheck(symTab);
+        bool bodyHasReturn = CurrentFunctionHasReturn;
         FunctionReturnTypeStack.pop_back();
         symTab.exitScope();
+
+        if (BodyOk && RetInfo.Base != BaseType::Void && !bodyHasReturn)
+        {
+            std::cerr << "Semantic Error: Non-void function '" << Name
+                      << "' does not always return a value.\n";
+            return false;
+        }
 
         ExprType = TypeInfo(BaseType::Void, false);
         return BodyOk;
