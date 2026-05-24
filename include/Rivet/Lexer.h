@@ -38,6 +38,7 @@ namespace Rivet
         tok_address_of = -14,   ///< Keyword 'address_of'
         tok_deref = -15,        ///< Keyword 'deref'
         tok_optref = -16,       ///< Keyword 'optref'
+        tok_null = -17,         ///< Keyword 'null' (null optional reference literal)
 
         // Logical & Bitwise
         tok_and = -20,          ///< Keyword 'and'

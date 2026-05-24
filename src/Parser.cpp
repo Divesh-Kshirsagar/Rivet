@@ -364,6 +364,11 @@ namespace Rivet
                 return nullptr;
             return std::make_unique<DerefAST>(std::move(Operand));
         }
+        if (CurTok == tok_null)
+        {
+            getNextToken();
+            return std::make_unique<NullLiteralAST>();
+        }
         
         return LogError("Unknown token when expecting unary expression");
     }

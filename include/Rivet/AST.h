@@ -107,6 +107,23 @@ namespace Rivet
         bool typeCheck(SymbolTable& symTab) override;
         const std::string &getVal() const { return Val; }
     };
+
+    /**
+     * @class NullLiteralAST
+     * @brief Represents the `null` keyword — a typed null pointer literal.
+     * 
+     * Only valid as a value for `optref` typed variables. Emits a null pointer
+     * constant in LLVM IR and carries an optref TypeInfo so the type checker
+     * can validate it is only assigned to optional reference targets.
+     */
+    class NullLiteralAST : public ASTNode
+    {
+    public:
+        NullLiteralAST() {}
+        llvm::Value *codegen() override;
+        void dump(int indent = 0) const override;
+        bool typeCheck(SymbolTable& symTab) override;
+    };
     
     /**
      * @class VariableAST

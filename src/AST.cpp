@@ -178,6 +178,11 @@ namespace Rivet
                 {
                     allowed = true;
                 }
+                // Allow initializing any optref with null literal
+                if (!allowed && declaredType.IsOptRef && InitVal->ExprType.IsOptRef)
+                {
+                    allowed = true;
+                }
 
                 if (!allowed)
                 {
@@ -331,6 +336,11 @@ namespace Rivet
                     LHS->ExprType.IsRef && RHS->ExprType.IsRef &&
                     LHS->ExprType.IsOptRef && !RHS->ExprType.IsOptRef &&
                     LHS->ExprType.ArrayCapacity == RHS->ExprType.ArrayCapacity)
+                {
+                    allowed = true;
+                }
+                // Allow assigning null literal to any optref
+                if (!allowed && LHS->ExprType.IsOptRef && RHS->ExprType.IsOptRef)
                 {
                     allowed = true;
                 }
@@ -1386,6 +1396,27 @@ namespace Rivet
         (void)symTab;
         // mark this node as a string type natively
         ExprType = TypeInfo(BaseType::String, false);
+        return true;
+    }
+
+    void NullLiteralAST::dump(int indent) const
+    {
+        printIndent(indent);
+        std::cout << "NullLiteral\n";
+    }
+    llvm::Value *NullLiteralAST::codegen()
+    {
+        // Emit a null pointer constant. optref variables store ptr-typed allocas,
+        // so a null ptr constant is the correct LLVM representation.
+        return llvm::ConstantPointerNull::get(llvm::PointerType::getUnqual(*CompilerState.TheContext));
+    }
+    bool NullLiteralAST::typeCheck(SymbolTable& symTab)
+    {
+        (void)symTab;
+        // A null literal is typed as an optref (IsRef=true, IsOptRef=true).
+        // The base type is Int here as a convention — the type checker uses IsOptRef
+        // as the discriminant for null-safety, not the base type alone.
+        ExprType = TypeInfo(BaseType::Int, true, 0, true);
         return true;
     }
 }

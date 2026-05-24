@@ -113,6 +113,8 @@ namespace Rivet
                 return tok_deref;
             if (IdentifierStr == "optref")
                 return tok_optref;
+            if (IdentifierStr == "null")
+                return tok_null;
 
             // Control flow
             if (IdentifierStr == "if")
