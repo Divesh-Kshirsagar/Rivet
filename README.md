@@ -1,61 +1,159 @@
 # Rivet
 
-Rivet is a small, LLVM-backed systems language prototype focused on readable syntax and explicit control. This repository contains the compiler frontend, LLVM IR codegen, tests, and documentation site.
+Rivet is an LLVM-backed systems language prototype focused on explicit control, simple syntax, and embedded-oriented workflows.
 
-## What Works Today
+Current Version: `0.0.1`
 
-- Integer, string, reference, and fixed-size array declarations
-- Expression statements and assignments
-- Arithmetic and comparison operators (`+`, `-`, `*`, `/`, `==`, `!=`, `<`, `>`)
-- Keyword operators (`and`, `or`, `lsft`, `rsft`)
-- Control flow: `if/else`, `while`, and `for`
-- Function call expressions
-- Module imports via `import name;`
-- LLVM IR generation into a synthetic entry function `__rivet_entry`
+## Implementation Status (v0.0.1)
 
-## In Progress
+### Implemented
 
-- Function declarations (`fun`/`return`) are tokenized but not fully integrated in parsing and codegen.
-- Unary lowering is still incomplete.
-- Arrays, strings, and references have coverage tests but continue to evolve.
+- **Frontend pipeline:** file-based lexing, recursive-descent parsing, semantic analysis, and LLVM IR generation.
+- **Lexer:**
+  - Tracks line/column for diagnostics.
+  - Supports identifiers, keywords, integers, string literals, operators, punctuation.
+  - Supports both `//` and `/* ... */` comments.
+- **Parser coverage:**
+  - Variable declarations: `int`, `str`, `int ref`, `int optref`, fixed-size `int[N]` arrays.
+  - Expressions: literals, identifiers, calls, indexing, assignment, arithmetic/comparison, keyword ops (`and`, `or`, `lsft`, `rsft`), unary (`-`, `not`), `address_of`, `deref`, `null`.
+  - Statements: expression statements, empty `;`, blocks, `if/else`, `while`, `for`.
+  - Functions: `fun`, typed return (`int`, `str`, `void`), typed parameters, `return`.
+  - Imports: `import module;` with duplicate-import guard.
+  - Intrinsic: `__volatile_store(address, value)`.
+- **Semantic/type analysis:**
+  - Scope-aware symbol table checks.
+  - Function signature registration pass + full type-check pass.
+  - Type matching across declarations, assignments, binary/unary expressions, returns.
+  - Rules for refs/optrefs and `null` compatibility.
+- **LLVM codegen:**
+  - Multi-pass function lowering (prototype creation + body generation).
+  - Synthetic entry function `__rivet_entry` generated and wired to user `main()` when present.
+  - Module IR printed to stdout.
+  - Target/object emission path with LLVM target machine setup.
 
-## Quick Example
+### Known Limitations / Evolving Areas
+
+- Diagnostics are improving but still basic in some parser/codegen failure paths.
+- Some feature edges (strings, arrays, references, unary/operator combinations) need broader regression coverage.
+- Import resolution is currently file-path based (`lib/<name>.rvt`, fallback `../lib/<name>.rvt`).
+- Tooling and docs sections exist, but deeper language/reference coverage is still expanding.
+
+## Prerequisites
+
+- CMake `>= 3.16`
+- C++17-compatible compiler
+- LLVM development package discoverable by CMake (`find_package(LLVM REQUIRED CONFIG)`)
+
+## Build
+
+From repository root:
+
+```bash
+cmake -S . -B build
+cmake --build build -j
+```
+
+This builds the `rivet` executable in `build/`.
+
+## Run
+
+Basic invocation:
+
+```bash
+./build/rivet tests/validation.rvt
+```
+
+Dump AST:
+
+```bash
+./build/rivet tests/validation.rvt --dump-ast
+```
+
+Target and memory layout flags:
+
+```bash
+./build/rivet tests/validation.rvt \
+  --target=arm-none-eabi \
+  --mcpu=cortex-m0 \
+  --flash-origin=0x08000000 \
+  --flash-size=512K \
+  --ram-origin=0x20000000 \
+  --ram-size=128K
+```
+
+## Language Snapshot
+
+```rivet
+fun int main() {
+    int a = 10;
+    int b = 20;
+    int result = 0;
+
+    if (a == 10) {
+        result = a + b;
+    } else {
+        result = a - b;
+    }
+
+    return result;
+}
+```
+
+```rivet
+int base = 42;
+int ref p = address_of base;
+int optref maybe = null;
+int value = deref p;
+```
 
 ```rivet
 import dummy;
-
-int i = 0;
-while (i < 3) {
-  i = i + 1;
-}
-
-i + imported_x;
+__volatile_store(0x40021000, 1);
 ```
 
-## Project Layout
+## Compiler Architecture
 
-- `include/Rivet/` - Public headers for the compiler
-- `src/` - Implementations of the compiler modules
-- `tests/` - `.rvt` files used for parser and semantic coverage
-- `docs/` - MkDocs site sources and Doxygen configuration
-- `lib/` - Importable Rivet modules
+Rivet currently follows this pipeline:
 
-## Documentation (MkDocs + Doxygen)
+1. `Lexer` tokenizes input with source-position tracking.
+2. `Parser` builds AST with precedence-aware expression parsing.
+3. Semantic phase 1 registers function signatures.
+4. Semantic phase 2 validates full program typing/scopes.
+5. Codegen phase 1 creates function prototypes in LLVM module.
+6. Codegen phase 2 emits function and statement IR.
+7. Driver finalizes `__rivet_entry`, prints IR, configures target emission.
 
-The docs site is built with MkDocs, and Doxygen API reference is generated automatically as part of the MkDocs build process.
+## Repository Layout
+
+- `src/` - compiler implementation (`main`, lexer, parser, semantic pass, codegen)
+- `include/Rivet/` - public compiler headers and AST/type interfaces
+- `tests/` - Rivet source programs for validation and feature coverage
+- `examples/` - example outputs/integration artifacts (including Renode-related samples)
+- `docs/` - MkDocs + Doxygen docs source and generated site assets
+- `scripts/` - helper scripts (including docs build flow)
+
+## Testing and Validation
+
+Current validation is source-program driven:
+
+- `tests/validation.rvt`
+- `tests/renode_test.rvt`
+- `tests/uart_test.rvt`
+
+Run a representative test file:
+
+```bash
+./build/rivet tests/validation.rvt --dump-ast
+```
+
+## Documentation
+
+Documentation tooling lives under `docs/`.
 
 Build docs locally:
 
 ```bash
-cd docs
-mkdocs build
+./scripts/docs.sh
 ```
 
-Publish to GitHub Pages:
-
-```bash
-cd docs
-mkdocs gh-deploy
-```
-
-The pre-build hook runs Doxygen and copies the HTML output into `docs/docs/api` before MkDocs renders the site.
+The script runs Doxygen first, copies API output into MkDocs source, then builds the MkDocs site.

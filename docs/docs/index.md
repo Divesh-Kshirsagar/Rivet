@@ -1,57 +1,45 @@
 # Rivet Language Docs
 
-Rivet is a small, LLVM-backed systems language prototype designed for readable syntax and explicit control. This site documents the language as it exists in this repository today, so you can learn what works now and what is still in progress.
+Welcome to the user documentation for **Rivet v0.0.1**.
 
-## What You Can Do Today
+If you want to write programs in Rivet today, this site shows what works, how to run it, and where current limits are.
 
-- Declare integers, strings, references, and fixed-size arrays
-- Write expressions and assignments (`=`, `+`, `-`, `*`, `/`)
-- Use comparisons (`==`, `!=`, `<`, `>`) and keyword operators (`and`, `or`, `lsft`, `rsft`)
-- Create blocks, `if/else`, `while`, and `for` loops
-- Call functions defined in the LLVM module
-- Import other Rivet files with `import name;`
-- Generate LLVM IR through a synthetic entry function `__rivet_entry`
+## Start Here
 
-## What Is Still Evolving
+1. Go to **Getting Started** for build + first run.
+2. Read **Language Basics** for syntax you will use most.
+3. Use **Reference** when you need a quick rule or keyword lookup.
 
-- Function declarations (`fun`/`return`) are tokenized but not fully integrated in parsing and codegen.
-- Unary operators are parsed, but not all forms are lowered yet.
-- Some features (arrays, strings, refs) are implemented but still receiving semantic checks and edge-case coverage.
-- Import resolution searches:
-  - `lib/<module>.rvt`
-  - `../lib/<module>.rvt` (fallback when running from build directories)
+## What You Can Build Today
+
+- Integer and string variables
+- Fixed-size integer arrays
+- References and optional references (`ref`, `optref`, `address_of`, `deref`, `null`)
+- Expressions with arithmetic, comparisons, and keyword operators (`and`, `or`, `lsft`, `rsft`)
+- Control flow with `if/else`, `while`, and `for`
+- Functions with `fun` and `return`
+- Multi-file programs with `import module;`
 
 ## Quick Example
 
 ```rivet
-import dummy;
+fun int main() {
+  int sum = 0;
 
-int i = 0;
-while (i < 3) {
-  i = i + 1;
+  for (i in 0 to 4 step 1) {
+    sum = sum + i;
+  }
+
+  return sum;
 }
-
-i + imported_x;
 ```
 
-Run from `build/`:
+## Current Limits You Should Know
 
-```bash
-./rivet ../tests/import_dummy_test.rvt --dump-ast
-```
+- Error messages are improving, but some are still terse.
+- Imports are path-convention based (`lib/` and `../lib/` fallback).
+- Some edge cases in arrays/refs/strings are still under active validation.
 
-## Typical Compile Flow
+## Version
 
-1. **Lexing**: source is tokenized with line/column tracking.
-2. **Parsing**: recursive descent builds AST nodes.
-3. **AST dump (optional)**: use `--dump-ast` to inspect the tree.
-4. **Codegen**: AST emits LLVM IR into `Rivet Bare Metal Module`.
-5. **IR print**: the module is printed to stdout.
-
-## Reading Guide
-
-- Start with **Language Basics** to learn core syntax.
-- Use **Features** to see strings, arrays, modules, and memory behavior.
-- Use **Reference** for compact grammar and keyword tables.
-- Visit **Internals** to understand the parser and LLVM backend flow.
-
+This documentation targets **Rivet v0.0.1**.

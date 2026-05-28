@@ -1,83 +1,96 @@
 # Examples
 
-This page provides small, focused Rivet programs you can read in a few minutes. Each example is written to be clear for first-time readers.
+Short examples you can run as starting points.
 
-## Hello Expressions
-
-```rivet
-int a = 10;
-int b = 4;
-
-a + b * 2;
-```
-
-## If / Else
+## 1. Function + Return
 
 ```rivet
-int value = 7;
-
-if (value == 7) {
-  value = value + 1;
-} else {
-  value = value - 1;
+fun int main() {
+  int a = 10;
+  int b = 20;
+  return a + b;
 }
 ```
 
-## While Loop
+## 2. If / Else
 
 ```rivet
-int i = 0;
+fun int main() {
+  int value = 7;
 
-while (i < 5) {
-  i = i + 1;
+  if (value == 7) {
+    value = value + 1;
+  } else {
+    value = value - 1;
+  }
+
+  return value;
 }
 ```
 
-## For Loop
+## 3. While Loop
 
 ```rivet
-int sum = 0;
+fun int main() {
+  int i = 0;
+  int sum = 0;
 
-for (i in 0 to 5 step 1) {
-  sum = sum + i;
+  while (i < 5) {
+    sum = sum + i;
+    i = i + 1;
+  }
+
+  return sum;
 }
 ```
 
-## Arrays
+## 4. For Range Loop
 
 ```rivet
-int[4] nums;
-nums[0] = 1;
-nums[1] = 2;
-nums[2] = 3;
-nums[3] = 4;
+fun int main() {
+  int sum = 0;
 
-int total = nums[0] + nums[1] + nums[2] + nums[3];
+  for (i in 0 to 5 step 1) {
+    sum = sum + i;
+  }
+
+  return sum;
+}
 ```
 
-## Strings
+## 5. Arrays
 
 ```rivet
-str message = "Hello Bare Metal";
-str label;
+fun int main() {
+  int[4] nums;
+  nums[0] = 1;
+  nums[1] = 2;
+  nums[2] = 3;
+  nums[3] = 4;
 
-label = "RIVET";
-message = label;
+  return nums[0] + nums[1] + nums[2] + nums[3];
+}
 ```
 
-## References and Dereference
+## 6. References and Optional References
 
 ```rivet
-int base = 42;
-int ref ptr = address_of base;
+fun int main() {
+  int base = 42;
+  int ref ptr = address_of base;
+  int optref maybe = null;
 
-int roundtrip = deref ptr;
+  return deref ptr;
+}
 ```
 
-## Imports
+## 7. Import + Intrinsic
 
 ```rivet
 import dummy;
 
-imported_x + imported_y;
+fun int main() {
+  __volatile_store(0x40021000, 1);
+  return imported_x;
+}
 ```

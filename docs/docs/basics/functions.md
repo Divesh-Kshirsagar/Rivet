@@ -1,34 +1,53 @@
 # Functions
 
-Rivet currently supports function call expressions. Function declarations exist as tokens, but the full declaration pipeline is still in progress.
+Rivet supports user-defined functions using `fun` and `return`.
+
+## Declaration Form
+
+```rivet
+fun int add(int a, int b) {
+  return a + b;
+}
+```
+
+Return type can be `int`, `str`, or `void`.
 
 ## Calling Functions
 
-A function call is parsed when an identifier is followed by `(`:
-
 ```rivet
-do_work();
-add(2, 3);
+fun int add(int a, int b) {
+  return a + b;
+}
+
+fun int main() {
+  int result = add(2, 3);
+  return result;
+}
 ```
 
-Arguments are comma-separated expressions. During codegen, Rivet:
+Arguments are comma-separated expressions.
 
-1. Looks up the callee by name in the LLVM module.
-2. Verifies the argument count.
-3. Emits an LLVM `call` instruction.
+## Parameters
 
-If the callee is missing or the arity does not match, codegen reports an error.
+Supported parameter forms include:
 
-## Function Declarations (Planned)
+- Plain values: `int x`, `str name`
+- References: `int ref p`
+- Optional references: `int optref maybe`
 
-Tokens for `fun` and `return` exist, but parsing and codegen for function declarations are not fully integrated yet. Consider function definitions a planned feature while the current focus is on top-level statements and the synthetic `__rivet_entry` function.
-
-## Example Call Form
+## Return Statements
 
 ```rivet
-import math;
+fun int identity(int x) {
+  return x;
+}
 
-int x = 7;
-int y = 3;
-add(x, y);
+fun void log_value(int x) {
+  return;
+}
 ```
+
+## Current Limits
+
+- Function overloading is not supported.
+- Type conversions are not implicit; argument and return types must match expected forms.

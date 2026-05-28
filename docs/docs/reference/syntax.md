@@ -1,35 +1,46 @@
 # Syntax Reference
 
-This page summarizes the current Rivet syntax in a compact, practical form.
+This is a compact syntax guide for writing Rivet programs in `v0.0.1`.
 
-## Program Shape
+## File Structure
 
-A file can contain top-level items such as:
+A file may contain:
 
-- import statements
+- `import` statements
 - variable declarations
-- control-flow statements
-- expression statements
+- function declarations
+- control-flow and expression statements
 
-## Statements
-
-### Import
+## Imports
 
 ```rivet
 import dummy;
 ```
 
-### Variable declaration
+## Variables
 
 ```rivet
 int x;
 int y = 10;
 str message = "Hello";
-int ref ptr = address_of x;
+int ref p = address_of y;
+int optref maybe = null;
 int[4] nums;
 ```
 
-### If / Else
+## Functions
+
+```rivet
+fun int add(int a, int b) {
+  return a + b;
+}
+
+fun void nop() {
+  return;
+}
+```
+
+## Control Flow
 
 ```rivet
 if (x == 0) {
@@ -37,73 +48,43 @@ if (x == 0) {
 } else {
   x = x + 2;
 }
-```
 
-### While
-
-```rivet
 while (x < 10) {
   x = x + 1;
 }
-```
 
-### For
-
-```rivet
 for (i in 0 to 10 step 1) {
   x = x + i;
 }
-```
 
-```rivet
-for (pin in pins) {
-  set_pin_mode(pin, 1);
+for (item in nums) {
+  x = x + item;
 }
-```
-
-### Expression statement
-
-```rivet
-x + y;
-call_me(x);
-```
-
-### Empty statement
-
-```rivet
-;
 ```
 
 ## Expressions
 
 Primary forms:
 
-- number literal
+- integer literal
 - string literal
 - identifier
 - function call
 - parenthesized expression
-- `address_of` / `deref`
-- array indexing (`nums[i]`)
+- `address_of <identifier>`
+- `deref <expression>`
+- array index `arr[i]`
+- `null`
 
-Supported binary operators:
+Operators:
 
 - assignment: `=`
-- relational: `<`, `>`
-- equality: `==`, `!=`
 - arithmetic: `+`, `-`, `*`, `/`
+- comparison: `<`, `>`, `==`, `!=`
 - keyword operators: `and`, `or`, `lsft`, `rsft`
+- unary: `-`, `not`
 
-## Calls
+## Statement Endings
 
-```rivet
-sum(a, b, 3);
-```
-
-Arguments are comma-separated expressions.
-
-## Notes on Current Parsing Rules
-
-- Conditions for `if`/`while` require parentheses.
-- Bodies are currently handled as block forms only.
-- Every declaration/statement ends with `;` except block/control structures.
+- Declarations and expression statements end with `;`
+- Block/control structures use `{ ... }`
