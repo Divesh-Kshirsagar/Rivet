@@ -1,0 +1,14 @@
+// Validating basic assignments and control flow
+fun int main() {
+    int a = 10;
+    int b = 20;
+    int result = 0;
+
+    if (a == 10) {
+        result = a + b;
+    } else {
+        result = a - b;
+    }
+
+    return result;
+}

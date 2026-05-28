@@ -1,0 +1,6 @@
+fun int main() {
+    int x = 10;
+    int y = 32;
+    // 42 in hex is 0x2A. This is what we will look for in the CPU.
+    return x + y; 
+}

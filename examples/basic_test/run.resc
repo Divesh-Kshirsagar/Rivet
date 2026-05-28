@@ -1,0 +1,21 @@
+# Create a new emulated machine
+mach create "Rivet_Silcon_Test"
+
+# Load the hardware description for an STM32 board
+# (This provides the memory map at 0x08000000 and 0x20000000)
+machine LoadPlatformDescription @platforms/boards/stm32f4_discovery.repl
+
+# Load your compiler's output directly into the emulated Flash memory
+macro reset
+"""
+    sysbus LoadELF $ORIGIN/firmware.elf
+
+    # On real STM32 silicon, the SYSCFG MEMRMP register mirrors Flash (0x08000000)
+    # to address 0x0, so the Cortex-M boot sequence can read the vector table.
+    # Renode does not emulate this memory alias, so we tell the NVIC explicitly
+    # where the vector table lives. This is the hardware-accurate fix — ENTRY()
+    # in the linker script sets the ELF e_entry metadata, but the Cortex-M
+    # hardware ignores it and always reads SP/PC from the vector table address.
+    sysbus.cpu VectorTableOffset 0x08000000
+"""
+runMacro $reset

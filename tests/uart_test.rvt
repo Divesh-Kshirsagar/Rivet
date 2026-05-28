@@ -1,0 +1,42 @@
+fun int main() {
+    // =========================================================================
+    // STM32F4 USART2 Initialization
+    // On real silicon (and in Renode), you must configure the peripheral
+    // before writing data. Three steps: clock enable, baud rate, TX enable.
+    // =========================================================================
+
+    // 1. Enable USART2 clock: RCC_APB1ENR (0x40023840), set bit 17
+    //    0x40023840 = 1073887296 decimal
+    //    Bit 17     = 131072 decimal (0x20000)
+    int rcc_apb1enr = 1073887296;
+    __volatile_store(rcc_apb1enr, 131072);
+
+    // 2. Set baud rate: USART2_BRR (0x40004408)
+    //    0x40004408 = 1073759240 decimal
+    //    Value 417 (0x1A1) ≈ 9600 baud @ 4MHz (Renode doesn't care about exact rate)
+    int usart2_brr = 1073759240;
+    __volatile_store(usart2_brr, 417);
+
+    // 3. Enable USART + Transmitter: USART2_CR1 (0x4000440C)
+    //    0x4000440C = 1073759244 decimal
+    //    Bit 13 = UE (USART Enable)  = 8192
+    //    Bit  3 = TE (Transmit Enable) = 8
+    //    Combined = 8200 decimal (0x2008)
+    int usart2_cr1 = 1073759244;
+    __volatile_store(usart2_cr1, 8200);
+
+    // =========================================================================
+    // Transmit "RIVET\n"
+    // =========================================================================
+    // USART2_DR (0x40004404) = 1073759236 decimal
+    int uart_dr = 1073759236;
+
+    __volatile_store(uart_dr, 82);   // 'R'
+    __volatile_store(uart_dr, 73);   // 'I'
+    __volatile_store(uart_dr, 86);   // 'V'
+    __volatile_store(uart_dr, 69);   // 'E'
+    __volatile_store(uart_dr, 84);   // 'T'
+    __volatile_store(uart_dr, 10);   // newline
+
+    return 0;
+}

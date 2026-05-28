@@ -1,0 +1,17 @@
+# Create a new emulated machine
+mach create "Rivet_Silcon_Test"
+
+# Load the hardware description for an STM32 board
+# (This provides the memory map at 0x08000000 and 0x20000000)
+machine LoadPlatformDescription @platforms/boards/stm32f4_discovery.repl
+
+# Show the UART terminal window
+showAnalyzer sysbus.usart2
+
+# Load your compiler's output directly into the emulated Flash memory
+macro reset
+"""
+    sysbus LoadELF $ORIGIN/firmware.elf
+    sysbus.cpu VectorTableOffset 0x08000000
+"""
+runMacro $reset
