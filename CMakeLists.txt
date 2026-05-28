@@ -18,11 +18,13 @@ include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
 add_definitions(${LLVM_DEFINITIONS})
 
 llvm_map_components_to_libnames(llvm_libs
-    Core       # The IR Builder and Context
-    Support    # Error handling and raw output streams
-    Target     # Generic target machine generation
-    ARM        # The specific ARM Cortex backend
-    MC         # Machine Code emission (object files)
+    Core            # The IR Builder and Context
+    Support         # Error handling and raw output streams
+    Target          # Generic target machine generation
+    ${LLVM_TARGETS_TO_BUILD} # Dynamically links all installed LLVM backends
+    MC              # Machine Code emission (object files)
+    MCParser        # Assembly parsing (required by InitializeAllAsmParsers)
+    TargetParser    # Target identification (required by Host.h in LLVM 20)
 )
 
 # -----------------------------------------------------------------------------
