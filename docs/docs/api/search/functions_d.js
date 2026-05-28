@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['stringliteralast_0',['StringLiteralAST',['../classRivet_1_1StringLiteralAST.html#ac8b297b756da275c6d96a75fdc5ad603',1,'Rivet::StringLiteralAST']]],
-  ['symboltable_1',['SymbolTable',['../classRivet_1_1SymbolTable.html#aaafaf27e01119f2355189ec39c84fde9',1,'Rivet::SymbolTable']]]
+  ['registersignature_0',['registerSignature',['../classRivet_1_1FunctionAST.html#afc52050ff4c72c6207e0b9ab7ebd5832',1,'Rivet::FunctionAST']]],
+  ['returnast_1',['ReturnAST',['../classRivet_1_1ReturnAST.html#a9561fa20f39cab4a40dbdb4999e4937f',1,'Rivet::ReturnAST']]]
 ];

@@ -73,3 +73,10 @@ _build/
 
 # logs
 *.log
+notes
+reports
+
+# Build artifacts
+build/
+dist/
+build-*/

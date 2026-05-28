@@ -14,19 +14,21 @@
 <g id="a_Node000001"><a xlink:title="A hierarchical structure for managing variable scopes.">
 <polygon fill="#999999" stroke="transparent" points="96,-109 0,-109 0,0 96,0 96,-109"/>
 <text text-anchor="start" x="5" y="-96.5" font-family="Helvetica,sans-Serif" font-size="10.00">Rivet::SymbolTable</text>
-<text text-anchor="start" x="46" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<text text-anchor="start" x="7.5" y="-66.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="22" y="-66.5" font-family="Helvetica,sans-Serif" font-size="10.00">enterScope()</text>
-<text text-anchor="start" x="7.5" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="22" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">exitScope()</text>
-<text text-anchor="start" x="7.5" y="-36.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="22" y="-36.5" font-family="Helvetica,sans-Serif" font-size="10.00">insert()</text>
-<text text-anchor="start" x="7.5" y="-21.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="22" y="-21.5" font-family="Helvetica,sans-Serif" font-size="10.00">lookup()</text>
-<text text-anchor="start" x="7.5" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="22" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00">SymbolTable()</text>
+<text text-anchor="start" x="4.5" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="16" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00">FunctionRegistry</text>
+<text text-anchor="start" x="4.5" y="-66.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="16" y="-66.5" font-family="Helvetica,sans-Serif" font-size="10.00">enterScope()</text>
+<text text-anchor="start" x="4.5" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="16" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">exitScope()</text>
+<text text-anchor="start" x="4.5" y="-36.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="16" y="-36.5" font-family="Helvetica,sans-Serif" font-size="10.00">insert()</text>
+<text text-anchor="start" x="4.5" y="-21.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="16" y="-21.5" font-family="Helvetica,sans-Serif" font-size="10.00">lookup()</text>
+<text text-anchor="start" x="4.5" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="16" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00">SymbolTable()</text>
 <polygon fill="#666666" stroke="#666666" points="0,-91.5 0,-91.5 96,-91.5 96,-91.5 0,-91.5"/>
-<polygon fill="#666666" stroke="#666666" points="0,-76.5 0,-76.5 96,-76.5 96,-76.5 0,-76.5"/>
+<polygon fill="#666666" stroke="#666666" points="0,-76.5 0,-76.5 14,-76.5 14,-76.5 0,-76.5"/>
+<polygon fill="#666666" stroke="#666666" points="14,-76.5 14,-76.5 96,-76.5 96,-76.5 14,-76.5"/>
 <polygon fill="none" stroke="#666666" points="0,0 0,-109 96,-109 96,0 0,0"/>
 </a>
 </g>

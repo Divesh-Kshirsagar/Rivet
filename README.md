@@ -4,6 +4,28 @@ Rivet is an LLVM-backed systems language prototype focused on explicit control, 
 
 Current Version: `0.0.1`
 
+## Quick Install (Prebuilt Release)
+
+Install latest release:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/diveshkshirsagar/RIVET/main/install.sh | bash
+```
+
+Install a specific version:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/diveshkshirsagar/RIVET/main/install.sh | RIVET_VERSION=v0.0.1 bash
+```
+
+Install to a custom directory:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/diveshkshirsagar/RIVET/main/install.sh | RIVET_INSTALL_DIR="$HOME/bin" bash
+```
+
+By default, installer targets `/usr/local/bin` so you can run `rivet` directly.
+
 ## Implementation Status (v0.0.1)
 
 ### Implemented
@@ -157,3 +179,16 @@ Build docs locally:
 ```
 
 The script runs Doxygen first, copies API output into MkDocs source, then builds the MkDocs site.
+
+## Release Packaging
+
+Create a local prebuilt release artifact:
+
+```bash
+./scripts/package_release.sh 0.0.1
+```
+
+This generates a platform-specific archive in `dist/` named like:
+
+- `rivet-v0.0.1-linux-x86_64.tar.gz`
+- `rivet-v0.0.1-macos-arm64.tar.gz`

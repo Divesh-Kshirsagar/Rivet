@@ -1,0 +1,5 @@
+<map id="Rivet::ReturnAST::typeCheck" name="Rivet::ReturnAST::typeCheck">
+<area shape="rect" id="Node000001" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="5,5,200,31"/>
+<area shape="rect" id="Node000002" href="$structRivet_1_1TypeInfo.html#ab47cac8af909576b180482f9ccf39778" title="Converts the embedded semantic instructions into a readable debug string format." alt="" coords="248,5,412,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,15,234,15,234,21,201,21"/>
+</map>

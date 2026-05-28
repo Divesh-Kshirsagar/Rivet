@@ -1,33 +1,41 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classRivet_1_1ASTNode.html" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="5,351,124,376"/>
-<area shape="rect" id="Node000001" href="$classRivet_1_1AddressOfAST.html" title="Equivalent to the C &amp; operator to retrieve pointer locations." alt="" coords="177,5,327,31"/>
-<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="64,336,70,276,87,197,100,154,118,113,141,74,170,40,187,28,190,33,174,44,146,77,123,115,105,156,92,198,76,277,70,337"/>
-<area shape="rect" id="Node000002" href="$classRivet_1_1BinaryOpAST.html" title="Node containing binary operators (e.g." alt="" coords="181,55,323,80"/>
-<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="66,337,75,285,93,218,124,149,145,117,170,89,187,78,190,82,174,93,149,121,128,152,98,220,80,286,71,338"/>
-<area shape="rect" id="Node000003" href="$classRivet_1_1BlockAST.html" title="Serves as a container for sequential statements grouping variable scopes { ... }." alt="" coords="192,104,312,129"/>
-<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="69,337,80,294,100,241,129,186,148,161,170,139,191,126,193,131,174,143,152,164,134,189,105,243,85,295,74,338"/>
-<area shape="rect" id="Node000004" href="$classRivet_1_1CallAST.html" title="Encapsulates function or routine invocation mapping to its identifier and parameters." alt="" coords="197,153,307,179"/>
-<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="73,336,87,303,108,263,136,222,170,188,195,174,198,179,174,192,140,226,112,266,92,305,77,338"/>
-<area shape="rect" id="Node000005" href="$classRivet_1_1DerefAST.html" title="Equivalent to the C * operator pointing into referenced memory." alt="" coords="193,203,311,228"/>
-<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="79,337,116,287,142,260,171,237,194,226,196,230,173,242,145,264,120,290,83,340"/>
-<area shape="rect" id="Node000006" href="$classRivet_1_1ForAST.html" title="A for&#45;loop structure defining numeric iterator stepping." alt="" coords="199,252,305,277"/>
-<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="90,340,127,312,171,286,199,275,201,280,173,291,130,317,93,344"/>
-<area shape="rect" id="Node000007" href="$classRivet_1_1IfAST.html" title="Control flow conditional branching (if&#45;else expressions)." alt="" coords="205,301,299,327"/>
-<area shape="poly" id="edge7_Node000000_Node000007" title=" " alt="" coords="126,345,204,324,205,329,127,350"/>
-<area shape="rect" id="Node000008" href="$classRivet_1_1ImportAST.html" title="Pulls external files/modules into the current code compilation tree." alt="" coords="190,351,314,376"/>
-<area shape="poly" id="edge8_Node000000_Node000008" title=" " alt="" coords="138,361,189,361,189,366,138,366"/>
-<area shape="rect" id="Node000009" href="$classRivet_1_1IndexAST.html" title="Node containing array indexing statements (x[i])." alt="" coords="193,400,311,425"/>
-<area shape="poly" id="edge9_Node000000_Node000009" title=" " alt="" coords="127,377,203,397,202,402,126,382"/>
-<area shape="rect" id="Node000010" href="$classRivet_1_1NumberAST.html" title="Syntactic node covering integer literal definitions." alt="" coords="185,449,319,475"/>
-<area shape="poly" id="edge10_Node000000_Node000010" title=" " alt="" coords="94,383,130,409,173,434,204,447,202,452,171,439,128,414,91,387"/>
-<area shape="rect" id="Node000011" href="$classRivet_1_1StringLiteralAST.html" title="Node containing immutable string literals (&quot;sample&quot;)." alt="" coords="174,499,330,524"/>
-<area shape="poly" id="edge11_Node000000_Node000011" title=" " alt="" coords="83,386,121,436,145,461,173,484,198,496,196,501,171,488,142,465,116,439,79,389"/>
-<area shape="rect" id="Node000012" href="$classRivet_1_1UnaryOpAST.html" title="Node describing unary operators applied to a single operand (e.g." alt="" coords="183,548,321,573"/>
-<area shape="poly" id="edge12_Node000000_Node000012" title=" " alt="" coords="78,388,92,421,113,460,140,500,174,533,195,546,193,550,170,537,136,503,108,463,87,423,73,390"/>
-<area shape="rect" id="Node000013" href="$classRivet_1_1VariableAST.html" title="Refers to an already existing defined symbol/variable by its name string." alt="" coords="185,597,319,623"/>
-<area shape="poly" id="edge13_Node000000_Node000013" title=" " alt="" coords="74,389,86,431,105,483,134,537,153,561,174,583,194,595,191,600,170,587,149,565,130,540,101,486,81,433,69,390"/>
-<area shape="rect" id="Node000014" href="$classRivet_1_1VariableDeclAST.html" title="Controls variable allocation syntax like int x = 5; or int[5] array;." alt="" coords="172,647,332,672"/>
-<area shape="poly" id="edge14_Node000000_Node000014" title=" " alt="" coords="71,389,80,440,99,506,129,574,149,605,174,632,193,644,190,649,170,636,145,608,124,576,94,507,75,442,66,390"/>
-<area shape="rect" id="Node000015" href="$classRivet_1_1WhileAST.html" title="A while loop expression iterating execution while Cond evaluates to non&#45;zero." alt="" coords="192,696,312,721"/>
-<area shape="poly" id="edge15_Node000000_Node000015" title=" " alt="" coords="70,390,76,449,92,528,106,569,123,610,146,648,174,681,193,694,190,699,170,685,141,651,119,612,101,571,87,529,71,450,64,390"/>
+<area shape="rect" id="Node000000" href="$classRivet_1_1ASTNode.html" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="5,449,124,475"/>
+<area shape="rect" id="Node000001" href="$classRivet_1_1AddressOfAST.html" title="Equivalent to the C &amp; operator to retrieve pointer locations." alt="" coords="178,5,327,31"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="67,435,79,347,101,229,132,115,150,71,170,40,186,29,189,33,174,44,154,73,137,117,106,230,85,348,72,436"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1BinaryOpAST.html" title="Node containing binary operators (e.g." alt="" coords="182,55,323,80"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="63,435,66,367,80,274,93,225,112,176,138,130,170,89,186,78,189,82,174,93,142,133,117,178,99,226,85,275,71,367,68,436"/>
+<area shape="rect" id="Node000003" href="$classRivet_1_1BlockAST.html" title="Serves as a container for sequential statements grouping variable scopes { ... }." alt="" coords="193,104,313,129"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="64,435,70,375,86,295,100,253,118,212,141,173,170,139,191,125,194,130,174,143,146,176,123,214,105,255,92,297,76,375,70,436"/>
+<area shape="rect" id="Node000004" href="$classRivet_1_1CallAST.html" title="Encapsulates function or routine invocation mapping to its identifier and parameters." alt="" coords="197,153,308,179"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="66,435,75,383,93,317,124,248,145,216,170,188,196,173,198,178,174,192,149,219,128,251,98,319,80,385,71,436"/>
+<area shape="rect" id="Node000005" href="$classRivet_1_1DerefAST.html" title="Equivalent to the C * operator pointing into referenced memory." alt="" coords="193,203,312,228"/>
+<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="69,435,80,392,100,339,129,285,148,259,170,237,192,224,195,229,174,241,152,263,134,287,105,341,85,394,74,437"/>
+<area shape="rect" id="Node000006" href="$classRivet_1_1ForAST.html" title="A for&#45;loop structure defining numeric iterator stepping." alt="" coords="199,252,306,277"/>
+<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="73,435,87,401,108,361,136,321,170,287,198,272,200,277,174,291,140,325,112,364,92,404,77,437"/>
+<area shape="rect" id="Node000007" href="$classRivet_1_1FunctionAST.html" title="Represents a function declaration/definition." alt="" coords="184,301,321,327"/>
+<area shape="poly" id="edge7_Node000000_Node000007" title=" " alt="" coords="79,436,116,385,142,359,171,336,194,324,196,329,173,340,145,363,120,389,83,439"/>
+<area shape="rect" id="Node000008" href="$classRivet_1_1IfAST.html" title="Control flow conditional branching (if&#45;else expressions)." alt="" coords="205,351,300,376"/>
+<area shape="poly" id="edge8_Node000000_Node000008" title=" " alt="" coords="90,439,127,411,171,385,204,372,206,377,173,390,130,416,93,443"/>
+<area shape="rect" id="Node000009" href="$classRivet_1_1ImportAST.html" title="Pulls external files/modules into the current code compilation tree." alt="" coords="191,400,315,425"/>
+<area shape="poly" id="edge9_Node000000_Node000009" title=" " alt="" coords="126,443,202,423,204,428,127,448"/>
+<area shape="rect" id="Node000010" href="$classRivet_1_1IndexAST.html" title="Node containing array indexing statements (x[i])." alt="" coords="193,449,312,475"/>
+<area shape="poly" id="edge10_Node000000_Node000010" title=" " alt="" coords="138,459,193,459,193,465,138,465"/>
+<area shape="rect" id="Node000011" href="$classRivet_1_1NullLiteralAST.html" title="Represents the null keyword — a typed null pointer literal." alt="" coords="180,499,325,524"/>
+<area shape="poly" id="edge11_Node000000_Node000011" title=" " alt="" coords="127,476,204,496,202,501,126,481"/>
+<area shape="rect" id="Node000012" href="$classRivet_1_1NumberAST.html" title="Syntactic node covering integer literal definitions." alt="" coords="186,548,319,573"/>
+<area shape="poly" id="edge12_Node000000_Node000012" title=" " alt="" coords="94,481,130,508,173,533,204,545,202,550,171,538,128,512,91,486"/>
+<area shape="rect" id="Node000013" href="$classRivet_1_1ReturnAST.html" title="Represents a return statement inside a function body." alt="" coords="189,597,316,623"/>
+<area shape="poly" id="edge13_Node000000_Node000013" title=" " alt="" coords="83,485,120,534,145,560,173,582,199,595,196,600,171,587,142,564,116,538,79,488"/>
+<area shape="rect" id="Node000014" href="$classRivet_1_1StringLiteralAST.html" title="Node containing immutable string literals (&quot;sample&quot;)." alt="" coords="175,647,331,672"/>
+<area shape="poly" id="edge14_Node000000_Node000014" title=" " alt="" coords="78,487,92,520,113,559,140,598,174,632,196,644,193,649,170,636,136,602,108,562,87,522,73,489"/>
+<area shape="rect" id="Node000015" href="$classRivet_1_1UnaryOpAST.html" title="Node describing unary operators applied to a single operand (e.g." alt="" coords="183,696,322,721"/>
+<area shape="poly" id="edge15_Node000000_Node000015" title=" " alt="" coords="74,488,86,530,105,582,134,636,153,660,174,681,194,694,191,698,170,685,149,663,130,638,101,584,81,532,69,489"/>
+<area shape="rect" id="Node000016" href="$classRivet_1_1VariableAST.html" title="Refers to an already existing defined symbol/variable by its name string." alt="" coords="186,745,319,771"/>
+<area shape="poly" id="edge16_Node000000_Node000016" title=" " alt="" coords="71,488,80,539,99,604,129,672,149,703,174,731,192,743,189,747,170,735,145,707,124,675,94,606,75,540,66,489"/>
+<area shape="rect" id="Node000017" href="$classRivet_1_1VariableDeclAST.html" title="Controls variable allocation syntax like int x = 5; or int[5] array;." alt="" coords="173,795,333,820"/>
+<area shape="poly" id="edge17_Node000000_Node000017" title=" " alt="" coords="70,488,76,548,92,626,106,668,123,709,146,747,174,780,192,792,189,797,170,784,141,750,118,711,101,670,87,628,71,549,64,489"/>
+<area shape="rect" id="Node000018" href="$classRivet_1_1VolatileStoreAST.html" title="Compiler intrinsic for hardware&#45;mapped I/O writes." alt="" coords="172,844,333,869"/>
+<area shape="poly" id="edge18_Node000000_Node000018" title=" " alt="" coords="68,488,72,556,86,648,99,697,118,745,142,790,174,829,191,842,188,846,170,833,138,793,113,747,94,698,81,649,66,557,63,489"/>
+<area shape="rect" id="Node000019" href="$classRivet_1_1WhileAST.html" title="A while loop expression iterating execution while Cond evaluates to non&#45;zero." alt="" coords="193,893,313,919"/>
+<area shape="poly" id="edge19_Node000000_Node000019" title=" " alt="" coords="72,488,85,576,107,693,137,806,155,849,174,879,194,893,191,897,170,883,150,852,132,807,102,694,80,577,67,489"/>
 </map>

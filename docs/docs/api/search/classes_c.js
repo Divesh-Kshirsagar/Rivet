@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['variableast_0',['VariableAST',['../classRivet_1_1VariableAST.html',1,'Rivet']]],
-  ['variabledeclast_1',['VariableDeclAST',['../classRivet_1_1VariableDeclAST.html',1,'Rivet']]]
+  ['unaryopast_0',['UnaryOpAST',['../classRivet_1_1UnaryOpAST.html',1,'Rivet']]]
 ];

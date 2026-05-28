@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['token_0',['Token',['../namespaceRivet.html#a284293c2fb55fa28a69acee955af0ed1',1,'Rivet']]]
+  ['loopkind_0',['LoopKind',['../classRivet_1_1ForAST.html#ae8e3730b3b1ef7d20d1b5e44d438286d',1,'Rivet::ForAST']]]
 ];

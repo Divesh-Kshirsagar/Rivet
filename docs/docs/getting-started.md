@@ -2,6 +2,22 @@
 
 This guide is for developers who want to write and run Rivet programs right now.
 
+## Quick Install (Prebuilt Binary)
+
+Latest release:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/diveshkshirsagar/RIVET/main/install.sh | bash
+```
+
+Specific version:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/diveshkshirsagar/RIVET/main/install.sh | RIVET_VERSION=v0.0.1 bash
+```
+
+Default install target is `/usr/local/bin`, so `rivet` is available as a normal shell command.
+
 ## Prerequisites
 
 - CMake `>= 3.16`

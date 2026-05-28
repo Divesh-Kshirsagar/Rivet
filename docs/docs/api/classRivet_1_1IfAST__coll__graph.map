@@ -1,7 +1,7 @@
 <map id="Rivet::IfAST" name="Rivet::IfAST">
-<area shape="rect" id="Node000001" title="Control flow conditional branching (if&#45;else expressions)." alt="" coords="12,468,109,593"/>
-<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="5,273,116,419"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,432,63,468,58,468,58,432"/>
-<area shape="rect" id="Node000003" href="$structRivet_1_1TypeInfo.html" title="Encapsulates a data type, its reference semantics, and array capacity if applicable." alt="" coords="6,5,115,211"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="63,211,63,257,58,257,58,211"/>
+<area shape="rect" id="Node000001" title="Control flow conditional branching (if&#45;else expressions)." alt="" coords="12,488,109,613"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="5,293,116,439"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,452,63,488,58,488,58,452"/>
+<area shape="rect" id="Node000003" href="$structRivet_1_1TypeInfo.html" title="Encapsulates a data type, its reference semantics, and array capacity if applicable." alt="" coords="6,5,115,231"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="63,231,63,277,58,277,58,231"/>
 </map>

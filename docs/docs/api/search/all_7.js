@@ -9,5 +9,6 @@ var searchData=
   ['int_6',['Int',['../namespaceRivet.html#a019d2d41cd8798a1c0e4239161512392a1686a6c336b71b36d77354cea19a8b52',1,'Rivet']]],
   ['isarray_7',['isArray',['../structRivet_1_1TypeInfo.html#a2cbd5bf84cdf868487e85e0f4a5e4551',1,'Rivet::TypeInfo']]],
   ['isinitialized_8',['IsInitialized',['../structRivet_1_1Symbol.html#a00417dbcdd4b70a83c534b7d588546e7',1,'Rivet::Symbol']]],
-  ['isref_9',['IsRef',['../structRivet_1_1TypeInfo.html#abbedb0febfb12111584ee65cecd834bb',1,'Rivet::TypeInfo']]]
+  ['isoptref_9',['isoptref',['../structRivet_1_1FunctionParam.html#a391c882c2ae5f3798e3f6dac281ae502',1,'Rivet::FunctionParam::IsOptRef'],['../structRivet_1_1TypeInfo.html#a6e735832a7f5680fcb880f813821280c',1,'Rivet::TypeInfo::IsOptRef']]],
+  ['isref_10',['isref',['../structRivet_1_1FunctionParam.html#a01ce7dcb648bc8f1c4f710965702d83c',1,'Rivet::FunctionParam::IsRef'],['../structRivet_1_1TypeInfo.html#abbedb0febfb12111584ee65cecd834bb',1,'Rivet::TypeInfo::IsRef']]]
 ];

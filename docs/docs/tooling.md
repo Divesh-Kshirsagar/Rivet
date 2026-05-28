@@ -2,6 +2,21 @@
 
 Rivet is currently used through the `rivet` command-line compiler.
 
+## Installer Script
+
+Rivet provides `install.sh` for release-based installation:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/diveshkshirsagar/RIVET/main/install.sh | bash
+```
+
+Supported installer environment variables:
+
+- `RIVET_VERSION` (default: `latest`, example: `v0.0.1`)
+- `RIVET_INSTALL_DIR` (default: `/usr/local/bin`)
+- `RIVET_REPO` (default: `diveshkshirsagar/RIVET`)
+- `RIVET_DRY_RUN` (set to `1` to preview install path without changing files)
+
 ## Command Shape
 
 ```bash

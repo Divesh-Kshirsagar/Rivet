@@ -1,5 +1,5 @@
 <map id="Rivet::ForAST" name="Rivet::ForAST">
-<area shape="rect" id="Node000001" title="A for&#45;loop structure defining numeric iterator stepping." alt="" coords="11,199,110,324"/>
+<area shape="rect" id="Node000001" title="A for&#45;loop structure defining numeric iterator stepping." alt="" coords="11,199,110,344"/>
 <area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="5,5,116,151"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,164,63,198,58,198,58,164"/>
 </map>

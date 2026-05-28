@@ -1,0 +1,30 @@
+<map id="Sema.cpp" name="Sema.cpp">
+<area shape="rect" id="Node000001" title="Semantic Analysis (Type Checking) for the Rivet compiler." alt="" coords="343,5,425,31"/>
+<area shape="rect" id="Node000002" href="$AST_8h.html" title="Defines the Abstract Syntax Tree classes for the Rivet compiler." alt="" coords="381,79,473,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="393,30,415,66,411,68,389,32"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="608,152,680,177"/>
+<area shape="poly" id="edge17_Node000001_Node000006" title=" " alt="" coords="406,29,613,143,610,148,404,33"/>
+<area shape="rect" id="Node000008" href="$SymbolTable_8h.html" title="Defines the scoped symbol table for semantic analysis." alt="" coords="230,152,338,177"/>
+<area shape="poly" id="edge13_Node000001_Node000008" title=" " alt="" coords="378,33,302,142,297,139,374,30"/>
+<area shape="rect" id="Node000010" href="$Lexer_8h.html" title="Defines the Lexer and Token types for the Rivet compiler." alt="" coords="60,79,159,104"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="344,32,167,78,166,73,342,27"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="464,152,533,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="440,102,479,140,475,144,437,106"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="419,225,477,251"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="431,104,447,211,442,212,426,105"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="302,299,357,324"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="474,101,514,119,533,133,548,151,552,164,548,178,538,203,527,221,491,253,462,271,430,285,371,304,370,299,428,280,459,266,488,249,523,218,533,201,543,176,546,164,543,153,529,137,512,123,472,106"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="462,101,597,145,595,150,461,107"/>
+<area shape="rect" id="Node000007" href="$Type_8h.html" title="Defines the basic types supported by the Rivet type system." alt="" coords="333,225,395,251"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="424,106,377,214,372,211,419,103"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="405,106,321,148,318,143,403,102"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="361,252,343,287,339,285,356,250"/>
+<area shape="poly" id="edge12_Node000008_Node000004" title=" " alt="" coords="311,175,410,217,408,222,309,180"/>
+<area shape="poly" id="edge10_Node000008_Node000005" title=" " alt="" coords="290,177,324,285,319,286,285,179"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="299,175,343,214,339,218,295,179"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="147,225,258,251"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="273,179,228,218,224,214,269,175"/>
+<area shape="poly" id="edge15_Node000010_Node000005" title=" " alt="" coords="110,105,107,133,108,172,117,213,125,232,137,249,170,276,210,293,251,303,289,307,288,312,250,308,208,298,167,280,133,252,120,235,112,215,103,173,102,133,105,104"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="5,152,72,177"/>
+<area shape="poly" id="edge16_Node000010_Node000011" title=" " alt="" coords="100,106,62,144,58,140,96,102"/>
+</map>

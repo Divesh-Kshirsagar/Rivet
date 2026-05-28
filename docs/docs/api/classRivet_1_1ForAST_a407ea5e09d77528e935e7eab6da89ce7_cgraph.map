@@ -1,9 +1,13 @@
 <map id="Rivet::ForAST::typeCheck" name="Rivet::ForAST::typeCheck">
-<area shape="rect" id="Node000001" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="5,77,180,102"/>
-<area shape="rect" id="Node000002" href="$classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e" title="Creates a new inner scope and pushes it onto the stack." alt="" coords="228,5,364,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,74,218,47,220,52,135,79"/>
-<area shape="rect" id="Node000003" href="$classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22" title="Destroys the deepest active scope, popping it from the stack." alt="" coords="228,69,364,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,87,214,87,214,92,180,92"/>
-<area shape="rect" id="Node000004" href="$classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a" title="Declares a new variable in the latest/current block scope." alt="" coords="228,133,364,173"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="135,100,220,127,218,132,133,105"/>
+<area shape="rect" id="Node000001" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="5,141,180,166"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e" title="Creates a new inner scope and pushes it onto the stack." alt="" coords="240,5,376,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,138,159,99,227,55,239,49,242,53,229,60,162,103,111,143"/>
+<area shape="rect" id="Node000003" href="$classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22" title="Destroys the deepest active scope, popping it from the stack." alt="" coords="240,69,376,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="136,138,226,111,228,116,137,143"/>
+<area shape="rect" id="Node000004" href="$classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a" title="Declares a new variable in the latest/current block scope." alt="" coords="240,133,376,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="180,151,226,151,226,156,180,156"/>
+<area shape="rect" id="Node000005" href="$structRivet_1_1TypeInfo.html#a2cbd5bf84cdf868487e85e0f4a5e4551" title="Utility returning whether this structure resolves as a flat array." alt="" coords="228,198,388,223"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="142,163,247,192,246,197,141,169"/>
+<area shape="rect" id="Node000006" href="$classRivet_1_1SymbolTable.html#aff47a5345d3544d3f2bedcf4c2274c2e" title="Searches for a variable traversing upward from the current scope to the global scope." alt="" coords="240,248,376,288"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="114,164,166,196,229,232,245,240,243,245,227,237,163,201,112,168"/>
 </map>
