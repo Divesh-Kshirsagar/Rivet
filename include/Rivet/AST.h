@@ -417,6 +417,31 @@ namespace Rivet
         std::string getArrayName() const { return ArrayName; }
         ASTNode *getIndexExpr() const { return IndexExpr.get(); }
     };
+
+    /**
+     * @class VolatileStoreAST
+     * @brief Compiler intrinsic for hardware-mapped I/O writes.
+     *
+     * Maps `__volatile_store(address, value)` to LLVM's `inttoptr` + volatile `store`.
+     * This prevents the optimizer from eliminating writes to memory-mapped
+     * peripheral registers — essential for embedded I/O (UART, GPIO, etc.).
+     *
+     * @todo Addresses above 0x7FFFFFFF will overflow signed int — add `uint` type
+     *       to support full 32-bit address space (e.g. NVIC at 0xE000E000).
+     */
+    class VolatileStoreAST : public ASTNode
+    {
+        std::unique_ptr<ASTNode> Address;
+        std::unique_ptr<ASTNode> Value;
+
+    public:
+        VolatileStoreAST(std::unique_ptr<ASTNode> address, std::unique_ptr<ASTNode> value)
+            : Address(std::move(address)), Value(std::move(value)) {}
+
+        llvm::Value *codegen() override;
+        bool typeCheck(SymbolTable &symTab) override;
+        void dump(int indent = 0) const override;
+    };
 }
 
 #endif

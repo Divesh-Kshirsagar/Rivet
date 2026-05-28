@@ -54,6 +54,32 @@ namespace Rivet
 
         getNextToken();
 
+        // Compiler intrinsic: __volatile_store(address, value)
+        if (idName == "__volatile_store")
+        {
+            if (CurTok != '(')
+                return LogErrorExpected("'('", "after '__volatile_store'");
+            getNextToken();
+
+            auto addressExpr = ParseExpression();
+            if (!addressExpr)
+                return nullptr;
+
+            if (CurTok != ',')
+                return LogErrorExpected("','", "between __volatile_store arguments");
+            getNextToken();
+
+            auto valueExpr = ParseExpression();
+            if (!valueExpr)
+                return nullptr;
+
+            if (CurTok != ')')
+                return LogErrorExpected("')'", "after __volatile_store arguments");
+            getNextToken();
+
+            return std::make_unique<VolatileStoreAST>(std::move(addressExpr), std::move(valueExpr));
+        }
+
         // function call f(a,b)
         if (CurTok == '(')
         {

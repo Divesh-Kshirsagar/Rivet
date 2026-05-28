@@ -967,4 +967,61 @@ namespace Rivet
         // so a null ptr constant is the correct LLVM representation.
         return llvm::ConstantPointerNull::get(llvm::PointerType::getUnqual(*CompilerState.TheContext));
     }
+
+    // ---- VolatileStoreAST ----
+
+    void VolatileStoreAST::dump(int indent) const
+    {
+        printIndent(indent);
+        std::cout << "VolatileStore" << std::endl;
+        printIndent(indent + 1);
+        std::cout << "Address:" << std::endl;
+        Address->dump(indent + 2);
+        printIndent(indent + 1);
+        std::cout << "Value:" << std::endl;
+        Value->dump(indent + 2);
+    }
+
+    bool VolatileStoreAST::typeCheck(SymbolTable &symTab)
+    {
+        if (!Address->typeCheck(symTab) || !Value->typeCheck(symTab))
+            return false;
+
+        if (Address->ExprType.Base != BaseType::Int)
+        {
+            std::cerr << "Error: __volatile_store address must be an integer.\n";
+            return false;
+        }
+        if (Value->ExprType.Base != BaseType::Int)
+        {
+            std::cerr << "Error: __volatile_store value must be an integer.\n";
+            return false;
+        }
+
+        ExprType = TypeInfo(BaseType::Int, false);
+        return true;
+    }
+
+    llvm::Value *VolatileStoreAST::codegen()
+    {
+        llvm::Value *AddrVal = Address->codegen();
+        llvm::Value *DataVal = Value->codegen();
+
+        if (!AddrVal || !DataVal)
+            return nullptr;
+
+        // 1. Cast the integer address to a hardware pointer
+        auto *PtrTy = llvm::PointerType::getUnqual(*CompilerState.TheContext);
+        llvm::Value *PtrVal = CompilerState.Builder->CreateIntToPtr(AddrVal, PtrTy, "hw_ptr");
+
+        // 2. Create the store instruction and mark as volatile —
+        //    prevents LLVM from optimizing away the hardware write
+        llvm::StoreInst *Store = CompilerState.Builder->CreateStore(DataVal, PtrVal);
+        Store->setVolatile(true);
+
+        // TODO: USART2 may need a status register check (TXE bit) before each write
+        //       to avoid dropped characters on real silicon. For Renode this is fine.
+
+        return Store;
+    }
 }
