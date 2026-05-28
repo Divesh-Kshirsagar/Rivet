@@ -44,13 +44,34 @@ using namespace Rivet;
 // include line/column info in the error messages? --- IGNORE ---
 int main ( int argc, char **argv )
 {
+    auto printUsage = [] ()
+    {
+        std::cout << "Usage: rivet <source_file.rvt> [options]\n";
+        std::cout << "Options:\n";
+        std::cout << "  -h, --help                 Show this help message and exit\n";
+        std::cout << "  --dump-ast                 Print the parsed AST\n";
+        std::cout << "  --target=<triple>          LLVM target triple (default: host triple)\n";
+        std::cout << "  --mcpu=<cpu>               Target CPU name (default: generic)\n";
+        std::cout << "  --flash-origin=<addr>      Flash origin address (default: 0x08000000)\n";
+        std::cout << "  --flash-size=<size>        Flash size (default: 512K)\n";
+        std::cout << "  --ram-origin=<addr>        RAM origin address (default: 0x20000000)\n";
+        std::cout << "  --ram-size=<size>          RAM size (default: 128K)\n";
+    };
+
+    if ( argc >= 2 )
+    {
+        std::string firstArg = argv[1];
+        if ( firstArg == "-h" || firstArg == "--help" )
+        {
+            printUsage ();
+            return 0;
+        }
+    }
 
     if ( argc < 2 )
     {
         std::cerr << "Fatal Error: No input file provided.\n";
-        std::cerr << "Usage: rivet <source_file.rvt> [--dump-ast] [--target=<triple>] [--mcpu=<cpu>]\n";
-        std::cerr << "             [--flash-origin=<addr>] [--flash-size=<size>]\n";
-        std::cerr << "             [--ram-origin=<addr>]   [--ram-size=<size>]\n";
+        printUsage ();
         return 1;
     }
 
