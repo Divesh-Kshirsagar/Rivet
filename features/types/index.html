@@ -67,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#types" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -525,6 +530,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -542,6 +567,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        int
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        str
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references-ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References (ref)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arrays
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1231,6 +1330,71 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        int
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        str
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references-ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References (ref)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arrays
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1247,9 +1411,47 @@
 
 
 
-  <h1>Types</h1>
+<h1 id="types">Types<a class="headerlink" href="#types" title="Permanent link">&para;</a></h1>
+<p>Rivet is a small language prototype, but it already includes a few core types that appear throughout the compiler and tests.</p>
+<h2 id="int"><code>int</code><a class="headerlink" href="#int" title="Permanent link">&para;</a></h2>
+<p>The primary numeric type is <code>int</code>:</p>
+<div class="codehilite"><pre><span></span><code>int count = 10;
+int total = count + 5;
+</code></pre></div>
 
+<p><code>int</code> values are currently represented as 32-bit integers in LLVM IR.</p>
+<h2 id="str"><code>str</code><a class="headerlink" href="#str" title="Permanent link">&para;</a></h2>
+<p>Strings are supported through the <code>str</code> keyword:</p>
+<div class="codehilite"><pre><span></span><code>str message = &quot;Hello Bare Metal&quot;;
+str label;
 
+label = &quot;RIVET&quot;;
+message = label;
+</code></pre></div>
+
+<p>The backend lowers strings to a small struct containing a pointer and length.</p>
+<h2 id="references-ref">References (<code>ref</code>)<a class="headerlink" href="#references-ref" title="Permanent link">&para;</a></h2>
+<p>References use the <code>ref</code> keyword combined with <code>address_of</code> and <code>deref</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">int</span><span class="w"> </span><span class="kd">base</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="nx">int</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="nx">ptr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">address_of</span><span class="w"> </span><span class="kd">base</span><span class="p">;</span>
+
+<span class="nx">int</span><span class="w"> </span><span class="nx">roundtrip</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">deref</span><span class="w"> </span><span class="nx">ptr</span><span class="p">;</span>
+</code></pre></div>
+
+<p>References are useful for modeling memory access and pointer-like behavior in tests.</p>
+<h2 id="arrays">Arrays<a class="headerlink" href="#arrays" title="Permanent link">&para;</a></h2>
+<p>Rivet supports fixed-size arrays of integers:</p>
+<div class="codehilite"><pre><span></span><code>int[4] nums;
+nums[0] = 1;
+nums[1] = 2;
+</code></pre></div>
+
+<p>Array indexing works on both the left and right side of assignments.</p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>void</code> exists as a token, but full function signatures are still under construction.</li>
+<li>The type checker continues to expand; some edge cases are still being refined.</li>
+</ul>
 
 
 

@@ -1,0 +1,5 @@
+<map id="Rivet::NullLiteralAST" name="Rivet::NullLiteralAST">
+<area shape="rect" id="Node000001" title="Represents the null keyword — a typed null pointer literal." alt="" coords="5,199,143,324"/>
+<area shape="rect" id="Node000002" href="$classRivet_1_1ASTNode.html" title="The pure virtual base class for all Abstract Syntax Tree nodes." alt="" coords="19,5,129,151"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,164,77,198,71,198,71,164"/>
+</map>

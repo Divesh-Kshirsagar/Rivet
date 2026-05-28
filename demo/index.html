@@ -67,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#cortex-m0-simulation" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1019,6 +1024,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cortex-M0 Simulation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1036,6 +1061,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-included" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Included
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typical-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Typical Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Note
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1231,6 +1308,49 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-included" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Included
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typical-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Typical Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Note
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1247,9 +1367,24 @@
 
 
 
-  <h1>Cortex-M0 Simulation</h1>
-
-
+<h1 id="cortex-m0-simulation">Cortex-M0 Simulation<a class="headerlink" href="#cortex-m0-simulation" title="Permanent link">&para;</a></h1>
+<p>This page describes the current demo assets for embedded-style experimentation.</p>
+<h2 id="what-is-included">What Is Included<a class="headerlink" href="#what-is-included" title="Permanent link">&para;</a></h2>
+<p>Under <code>examples/basic_test/</code> and <code>examples/uart_test/</code>, the repo includes:</p>
+<ul>
+<li>linker scripts</li>
+<li>startup assembly</li>
+<li>generated objects/ELF artifacts</li>
+<li>Renode run scripts (<code>run.resc</code>)</li>
+</ul>
+<h2 id="typical-flow">Typical Flow<a class="headerlink" href="#typical-flow" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Compile your Rivet program with <code>./build/rivet &lt;file&gt;.rvt</code>.</li>
+<li>Use your target toolchain/linker flow with the provided linker/startup assets.</li>
+<li>Run simulation through the Renode script in the example folder.</li>
+</ol>
+<h2 id="note">Note<a class="headerlink" href="#note" title="Permanent link">&para;</a></h2>
+<p>The exact simulation command may depend on your local Renode setup. Use the included <code>run.resc</code> files as the baseline entry point.</p>
 
 
 

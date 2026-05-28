@@ -1,56 +1,78 @@
 <map id="main.cpp" name="main.cpp">
-<area shape="rect" id="Node000001" title="Entry point for the Rivet compiler." alt="" coords="747,5,821,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="147,225,219,251"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="747,25,595,42,499,59,403,81,309,105,272,122,230,154,207,183,193,214,188,211,203,180,226,150,269,118,307,100,402,76,498,53,594,37,746,19"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="297,372,351,397"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="765,33,738,53,713,80,692,119,688,163,688,239,685,268,676,290,661,308,637,326,616,337,587,347,513,363,365,382,365,377,512,358,585,342,614,332,635,322,657,304,672,287,680,267,683,239,683,163,687,118,708,77,734,49,762,29"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="870,79,1015,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="811,28,905,71,903,75,808,33"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="1040,79,1179,104"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="823,25,1044,73,1043,78,821,30"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="1203,79,1333,104"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="822,22,1190,76,1189,81,821,27"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="1357,79,1464,104"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="822,20,1039,40,1344,76,1343,81,1039,45,821,25"/>
-<area shape="rect" id="Node000008" href="$Lexer_8h.html" title="Defines the Lexer and Token types for the Rivet compiler." alt="" coords="240,152,339,177"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="747,26,622,44,546,60,470,81,389,114,322,148,320,143,387,109,468,76,545,55,621,39,746,21"/>
-<area shape="rect" id="Node000010" href="$Parser_8h.html" title="Defines the Parser class for analyzing the token stream." alt="" coords="481,79,586,104"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="747,32,587,78,586,72,746,27"/>
-<area shape="rect" id="Node000018" href="$CodeGen_8h.html" title="Defines the globals and context structures required for LLVM IR code generation." alt="" coords="723,79,845,104"/>
-<area shape="poly" id="edge27_Node000001_Node000018" title=" " alt="" coords="787,31,787,65,781,65,781,31"/>
-<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="240,175,198,185,159,200,145,210,136,222,133,234,137,250,167,290,205,323,247,348,285,366,283,371,244,353,202,327,163,294,132,252,128,235,131,219,142,206,157,196,196,180,239,170"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="5,225,72,251"/>
-<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="250,180,86,226,84,221,248,175"/>
-<area shape="poly" id="edge11_Node000010_Node000008" title=" " alt="" coords="495,107,343,151,341,146,493,101"/>
-<area shape="rect" id="Node000011" href="$AST_8h.html" title="Defines the Abstract Syntax Tree classes for the Rivet compiler." alt="" coords="370,152,427,177"/>
-<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="513,106,434,148,432,143,510,102"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="528,225,597,251"/>
-<area shape="poly" id="edge24_Node000010_Node000012" title=" " alt="" coords="538,104,560,211,555,212,533,105"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="565,299,624,324"/>
-<area shape="poly" id="edge25_Node000010_Node000013" title=" " alt="" coords="545,103,580,153,598,188,612,225,614,257,607,286,602,285,608,256,607,226,593,190,575,156,541,106"/>
-<area shape="rect" id="Node000017" title=" " alt="" coords="485,152,525,177"/>
-<area shape="poly" id="edge26_Node000010_Node000017" title=" " alt="" coords="531,105,517,140,512,138,526,103"/>
-<area shape="poly" id="edge16_Node000011_Node000002" title=" " alt="" coords="371,178,232,223,230,218,369,173"/>
-<area shape="poly" id="edge15_Node000011_Node000003" title=" " alt="" coords="380,180,350,200,321,227,297,260,284,299,282,311,284,323,293,343,306,360,301,363,289,345,279,325,276,311,279,298,292,258,317,224,347,196,377,175"/>
-<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="426,175,525,217,522,222,424,180"/>
-<area shape="poly" id="edge14_Node000011_Node000013" title=" " alt="" coords="416,175,569,288,566,292,413,180"/>
-<area shape="rect" id="Node000014" href="$Type_8h.html" title="Defines the basic types supported by the Rivet type system." alt="" coords="293,299,355,324"/>
-<area shape="poly" id="edge17_Node000011_Node000014" title=" " alt="" coords="381,180,357,200,336,227,327,256,325,285,320,284,322,255,331,224,353,196,378,175"/>
-<area shape="rect" id="Node000015" href="$SymbolTable_8h.html" title="Defines the scoped symbol table for semantic analysis." alt="" coords="345,225,453,251"/>
-<area shape="poly" id="edge19_Node000011_Node000015" title=" " alt="" coords="401,178,401,212,396,212,396,178"/>
-<area shape="poly" id="edge18_Node000014_Node000003" title=" " alt="" coords="327,324,327,358,321,358,321,324"/>
-<area shape="poly" id="edge21_Node000015_Node000003" title=" " alt="" coords="398,252,387,285,369,325,344,363,340,360,364,323,382,283,393,250"/>
-<area shape="poly" id="edge23_Node000015_Node000013" title=" " alt="" coords="431,248,553,292,552,297,429,253"/>
-<area shape="poly" id="edge20_Node000015_Node000014" title=" " alt="" coords="389,253,348,291,344,287,385,249"/>
-<area shape="rect" id="Node000016" title=" " alt="" coords="430,299,541,324"/>
-<area shape="poly" id="edge22_Node000015_Node000016" title=" " alt="" coords="414,249,462,288,459,292,411,253"/>
-<area shape="poly" id="edge31_Node000018_Node000012" title=" " alt="" coords="768,106,593,220,590,215,765,102"/>
-<area shape="rect" id="Node000019" title=" " alt="" coords="1146,152,1305,177"/>
-<area shape="poly" id="edge28_Node000018_Node000019" title=" " alt="" coords="846,100,1141,147,1140,152,845,105"/>
-<area shape="rect" id="Node000020" title=" " alt="" coords="774,152,906,177"/>
-<area shape="poly" id="edge29_Node000018_Node000020" title=" " alt="" coords="795,103,825,140,820,143,791,106"/>
-<area shape="rect" id="Node000021" title=" " alt="" coords="930,152,1051,177"/>
-<area shape="poly" id="edge30_Node000018_Node000021" title=" " alt="" coords="818,101,945,145,943,150,816,107"/>
-<area shape="rect" id="Node000022" title=" " alt="" coords="1075,152,1122,177"/>
-<area shape="poly" id="edge32_Node000018_Node000022" title=" " alt="" coords="846,101,944,121,1063,149,1062,154,943,126,845,106"/>
+<area shape="rect" id="Node000001" title="Entry point for the Rivet compiler." alt="" coords="1257,5,1332,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,67,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1257,21,1076,21,788,27,441,45,262,60,86,81,81,82,80,77,85,76,261,55,441,40,787,22,1076,16,1257,16"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="1144,225,1216,251"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1257,22,1004,27,635,37,295,55,182,67,147,74,131,81,121,94,117,106,118,116,124,127,151,147,194,164,253,179,324,192,492,212,677,224,858,231,1130,234,1130,240,858,236,676,229,491,217,323,197,252,185,193,169,148,151,120,130,113,118,112,105,117,91,128,77,146,69,181,62,295,50,635,32,1004,22,1257,17"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="142,79,287,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1257,23,874,40,594,58,301,81,301,76,593,52,873,35,1257,18"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="312,79,451,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1257,24,936,42,705,59,465,81,464,76,705,54,935,37,1257,18"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="475,79,605,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1257,25,995,45,619,81,618,76,994,39,1257,19"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="629,79,736,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1257,25,1046,46,750,81,749,76,1045,40,1257,20"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="760,79,827,104"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1257,25,1081,45,963,61,841,81,840,76,963,56,1081,39,1257,20"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="851,79,920,104"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1257,27,1119,48,934,81,933,76,1118,43,1257,22"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="2531,372,2586,397"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1332,16,1645,17,2126,22,2372,29,2592,40,2762,55,2822,65,2861,76,2895,91,2923,107,2941,129,2948,163,2948,239,2945,261,2938,277,2926,289,2911,298,2832,327,2771,349,2707,365,2600,382,2599,377,2706,360,2769,344,2830,321,2909,293,2923,285,2933,274,2940,259,2943,239,2943,164,2936,132,2919,111,2893,96,2859,81,2821,70,2762,61,2592,45,2372,35,2126,28,1645,22,1332,22"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1091,79,1291,104"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1279,33,1221,73,1218,68,1276,28"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="1315,79,1485,104"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1313,28,1373,69,1370,73,1310,33"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="1509,79,1675,104"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1333,26,1531,73,1530,78,1332,31"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="1699,79,1875,104"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="1332,22,1695,74,1694,79,1332,27"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="1899,79,2082,104"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="1332,20,1885,76,1885,81,1332,26"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="2107,79,2293,104"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="1332,19,1641,40,2093,76,2093,81,1641,45,1332,24"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="2318,79,2501,104"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="1332,18,1722,37,2007,54,2304,76,2304,81,2006,59,1722,42,1332,24"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="2525,79,2691,104"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="1332,18,1800,33,2148,51,2511,76,2511,81,2148,56,1799,39,1332,23"/>
+<area shape="rect" id="Node000019" href="$CodeGen_8h.html" title="Defines the globals and context structures required for LLVM IR code generation." alt="" coords="944,79,1067,104"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="1257,31,1066,78,1064,73,1256,26"/>
+<area shape="rect" id="Node000025" href="$Lexer_8h.html" title="Defines the Lexer and Token types for the Rivet compiler." alt="" coords="2809,152,2908,177"/>
+<area shape="poly" id="edge24_Node000001_Node000025" title=" " alt="" coords="1332,17,1655,20,2146,29,2392,37,2605,47,2761,60,2810,68,2835,76,2847,90,2855,106,2861,138,2856,139,2850,107,2842,93,2832,81,2808,73,2760,65,2605,52,2392,42,2146,35,1655,25,1332,22"/>
+<area shape="rect" id="Node000027" href="$Parser_8h.html" title="Defines the Parser class for analyzing the token stream." alt="" coords="2715,79,2821,104"/>
+<area shape="poly" id="edge27_Node000001_Node000027" title=" " alt="" coords="1332,16,1537,17,1872,24,2278,42,2492,56,2702,76,2701,81,2491,62,2278,47,1871,29,1537,22,1332,22"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="989,152,1147,177"/>
+<area shape="poly" id="edge19_Node000019_Node000020" title=" " alt="" coords="1018,103,1051,140,1047,143,1014,106"/>
+<area shape="rect" id="Node000021" title=" " alt="" coords="1171,152,1303,177"/>
+<area shape="poly" id="edge20_Node000019_Node000021" title=" " alt="" coords="1043,101,1188,145,1186,151,1042,107"/>
+<area shape="rect" id="Node000022" title=" " alt="" coords="773,152,894,177"/>
+<area shape="poly" id="edge21_Node000019_Node000022" title=" " alt="" coords="979,106,875,149,873,144,977,102"/>
+<area shape="rect" id="Node000023" title=" " alt="" coords="2316,225,2385,251"/>
+<area shape="poly" id="edge22_Node000019_Node000023" title=" " alt="" coords="1067,100,1079,101,1447,145,1805,183,2302,230,2302,235,1805,188,1446,151,1078,107,1067,105"/>
+<area shape="rect" id="Node000024" title=" " alt="" coords="918,152,965,177"/>
+<area shape="poly" id="edge23_Node000019_Node000024" title=" " alt="" coords="997,106,963,144,959,140,993,103"/>
+<area shape="poly" id="edge25_Node000025_Node000010" title=" " alt="" coords="2861,178,2858,208,2849,248,2833,290,2820,309,2804,326,2781,343,2755,357,2700,375,2646,384,2600,387,2599,381,2645,379,2699,370,2753,352,2778,338,2801,322,2816,306,2828,288,2844,247,2853,207,2856,177"/>
+<area shape="rect" id="Node000026" title=" " alt="" coords="2755,225,2821,251"/>
+<area shape="poly" id="edge26_Node000025_Node000026" title=" " alt="" coords="2849,180,2811,218,2807,214,2845,176"/>
+<area shape="poly" id="edge41_Node000027_Node000023" title=" " alt="" coords="2715,105,2434,154,2397,183,2368,216,2364,212,2393,179,2432,150,2715,99"/>
+<area shape="poly" id="edge28_Node000027_Node000025" title=" " alt="" coords="2784,102,2835,141,2831,145,2781,106"/>
+<area shape="rect" id="Node000028" href="$AST_8h.html" title="Defines the Abstract Syntax Tree classes for the Rivet compiler." alt="" coords="2445,152,2502,177"/>
+<area shape="poly" id="edge29_Node000027_Node000028" title=" " alt="" coords="2721,107,2516,156,2515,151,2720,101"/>
+<area shape="rect" id="Node000029" title=" " alt="" coords="2732,299,2791,324"/>
+<area shape="poly" id="edge42_Node000027_Node000029" title=" " alt="" coords="2761,106,2747,127,2736,153,2732,188,2735,224,2753,285,2748,287,2730,225,2726,188,2731,151,2742,124,2757,103"/>
+<area shape="rect" id="Node000033" title=" " alt="" coords="2745,152,2785,177"/>
+<area shape="poly" id="edge43_Node000027_Node000033" title=" " alt="" coords="2770,104,2769,139,2764,138,2765,104"/>
+<area shape="poly" id="edge33_Node000028_Node000003" title=" " alt="" coords="2445,170,1231,237,1230,231,2444,165"/>
+<area shape="poly" id="edge32_Node000028_Node000010" title=" " alt="" coords="2469,179,2456,206,2443,244,2439,285,2442,304,2450,323,2464,339,2481,353,2519,371,2517,376,2478,357,2460,343,2446,325,2437,306,2434,285,2438,243,2451,204,2464,177"/>
+<area shape="poly" id="edge30_Node000028_Node000023" title=" " alt="" coords="2455,180,2384,221,2381,216,2452,175"/>
+<area shape="poly" id="edge31_Node000028_Node000029" title=" " alt="" coords="2503,172,2564,193,2633,223,2690,256,2737,288,2734,293,2687,260,2631,228,2562,198,2501,177"/>
+<area shape="rect" id="Node000030" href="$Type_8h.html" title="Defines the basic types supported by the Rivet type system." alt="" coords="2460,299,2521,324"/>
+<area shape="poly" id="edge34_Node000028_Node000030" title=" " alt="" coords="2477,177,2490,285,2485,285,2472,178"/>
+<area shape="rect" id="Node000031" href="$SymbolTable_8h.html" title="Defines the scoped symbol table for semantic analysis." alt="" coords="2511,225,2619,251"/>
+<area shape="poly" id="edge36_Node000028_Node000031" title=" " alt="" coords="2490,175,2541,215,2538,219,2486,179"/>
+<area shape="poly" id="edge35_Node000030_Node000010" title=" " alt="" coords="2504,322,2540,360,2536,364,2500,326"/>
+<area shape="poly" id="edge38_Node000031_Node000010" title=" " alt="" coords="2567,251,2562,358,2557,358,2562,251"/>
+<area shape="poly" id="edge40_Node000031_Node000029" title=" " alt="" coords="2598,248,2720,292,2718,297,2596,253"/>
+<area shape="poly" id="edge37_Node000031_Node000030" title=" " alt="" coords="2555,253,2515,291,2511,287,2552,249"/>
+<area shape="rect" id="Node000032" title=" " alt="" coords="2597,299,2707,324"/>
+<area shape="poly" id="edge39_Node000031_Node000032" title=" " alt="" coords="2581,249,2629,288,2626,292,2578,253"/>
 </map>

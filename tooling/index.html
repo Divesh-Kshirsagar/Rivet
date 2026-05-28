@@ -67,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#cli-usage" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -937,6 +942,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Usage
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -954,6 +979,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installer-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installer Script
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command Shape
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1231,6 +1330,71 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installer-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installer Script
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command Shape
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1247,9 +1411,59 @@
 
 
 
-  <h1>CLI Usage</h1>
+<h1 id="cli-usage">CLI Usage<a class="headerlink" href="#cli-usage" title="Permanent link">&para;</a></h1>
+<p>Rivet is currently used through the <code>rivet</code> command-line compiler.</p>
+<h2 id="installer-script">Installer Script<a class="headerlink" href="#installer-script" title="Permanent link">&para;</a></h2>
+<p>Rivet provides <code>install.sh</code> for release-based installation:</p>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/diveshkshirsagar/RIVET/main/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</code></pre></div>
 
+<p>Supported installer environment variables:</p>
+<ul>
+<li><code>RIVET_VERSION</code> (default: <code>latest</code>, example: <code>v0.0.1</code>)</li>
+<li><code>RIVET_INSTALL_DIR</code> (default: <code>/usr/local/bin</code>)</li>
+<li><code>RIVET_REPO</code> (default: <code>diveshkshirsagar/RIVET</code>)</li>
+<li><code>RIVET_DRY_RUN</code> (set to <code>1</code> to preview install path without changing files)</li>
+</ul>
+<h2 id="command-shape">Command Shape<a class="headerlink" href="#command-shape" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>./build/rivet<span class="w"> </span>&lt;source_file.rvt&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+</code></pre></div>
 
+<h2 id="core-options">Core Options<a class="headerlink" href="#core-options" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>--dump-ast</code></li>
+<li>Prints parsed AST for debugging.</li>
+<li><code>--target=&lt;triple&gt;</code></li>
+<li>Overrides LLVM target triple.</li>
+<li><code>--mcpu=&lt;cpu&gt;</code></li>
+<li>Sets CPU model for backend code generation.</li>
+<li><code>--flash-origin=&lt;addr&gt;</code></li>
+<li><code>--flash-size=&lt;size&gt;</code></li>
+<li><code>--ram-origin=&lt;addr&gt;</code></li>
+<li><code>--ram-size=&lt;size&gt;</code></li>
+<li>Memory-layout parameters for embedded-oriented builds.</li>
+</ul>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<p>Basic compile:</p>
+<div class="codehilite"><pre><span></span><code>./build/rivet<span class="w"> </span>tests/validation.rvt
+</code></pre></div>
+
+<p>Compile and print AST:</p>
+<div class="codehilite"><pre><span></span><code>./build/rivet<span class="w"> </span>tests/validation.rvt<span class="w"> </span>--dump-ast
+</code></pre></div>
+
+<p>Cross-target compile options:</p>
+<div class="codehilite"><pre><span></span><code>./build/rivet<span class="w"> </span>tests/validation.rvt<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--target<span class="o">=</span>arm-none-eabi<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--mcpu<span class="o">=</span>cortex-m4
+</code></pre></div>
+
+<h2 id="practical-notes">Practical Notes<a class="headerlink" href="#practical-notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The compiler prints LLVM IR to stdout as part of normal execution.</li>
+<li>If <code>main()</code> exists in your source, Rivet wires it into <code>__rivet_entry</code>.</li>
+<li>If no input file is provided, Rivet exits with usage guidance.</li>
+</ul>
 
 
 

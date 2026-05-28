@@ -1,0 +1,5 @@
+<map id="Rivet::FunctionSignature" name="Rivet::FunctionSignature">
+<area shape="rect" id="Node000001" title="Stores a function&#39;s semantic signature independent of LLVM IR." alt="" coords="5,293,164,359"/>
+<area shape="rect" id="Node000002" href="$structRivet_1_1TypeInfo.html" title="Encapsulates a data type, its reference semantics, and array capacity if applicable." alt="" coords="30,5,139,231"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,231,87,277,82,277,82,231"/>
+</map>

@@ -258,10 +258,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-rivet-currently-supports" class="md-nav__link">
+  <a href="#start-here" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Rivet Currently Supports
+        Start Here
       
     </span>
   </a>
@@ -269,21 +269,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-partially-implemented-or-planned" class="md-nav__link">
+  <a href="#what-you-can-build-today" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Is Partially Implemented or Planned
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#typical-compile-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Typical Compile Flow
+        What You Can Build Today
       
     </span>
   </a>
@@ -302,10 +291,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-guide" class="md-nav__link">
+  <a href="#current-limits-you-should-know" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading Guide
+        Current Limits You Should Know
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version
       
     </span>
   </a>
@@ -1336,10 +1336,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-rivet-currently-supports" class="md-nav__link">
+  <a href="#start-here" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Rivet Currently Supports
+        Start Here
       
     </span>
   </a>
@@ -1347,21 +1347,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-partially-implemented-or-planned" class="md-nav__link">
+  <a href="#what-you-can-build-today" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Is Partially Implemented or Planned
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#typical-compile-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Typical Compile Flow
+        What You Can Build Today
       
     </span>
   </a>
@@ -1380,10 +1369,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-guide" class="md-nav__link">
+  <a href="#current-limits-you-should-know" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading Guide
+        Current Limits You Should Know
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version
       
     </span>
   </a>
@@ -1408,63 +1408,44 @@
 
 
 <h1 id="rivet-language-docs">Rivet Language Docs<a class="headerlink" href="#rivet-language-docs" title="Permanent link">&para;</a></h1>
-<p>Rivet is a small, LLVM-backed systems language prototype focused on readable syntax and explicit control.
-These docs describe the current implementation in this repository so you can quickly understand what works today.</p>
-<h2 id="what-rivet-currently-supports">What Rivet Currently Supports<a class="headerlink" href="#what-rivet-currently-supports" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Integer literals and integer variables (<code>int</code>)</li>
-<li>Variable declarations with optional initialization</li>
-<li>Expression statements (for example, <code>a + b;</code>)</li>
-<li>Arithmetic operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></li>
-<li>Comparisons: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code></li>
-<li>Bitwise/logical keyword operators: <code>and</code>, <code>or</code>, <code>lsft</code>, <code>rsft</code></li>
-<li>Assignment with <code>=</code> to declared variables</li>
-<li><code>if</code> / <code>else</code> blocks</li>
-<li><code>while</code> loops</li>
-<li>Function-call expressions (<code>name(arg1, arg2)</code>)</li>
-<li>Module imports with <code>import module_name;</code></li>
-<li>LLVM IR generation to a synthetic entry function <code>__rivet_entry</code></li>
-</ul>
-<h2 id="what-is-partially-implemented-or-planned">What Is Partially Implemented or Planned<a class="headerlink" href="#what-is-partially-implemented-or-planned" title="Permanent link">&para;</a></h2>
-<ul>
-<li><code>fun</code> and <code>return</code> tokens exist in the lexer, but function declaration parsing is not part of the current parser flow.</li>
-<li>Unary expression codegen is not implemented.</li>
-<li>Arrays are not implemented yet.</li>
-<li>Import resolution currently tries:<ul>
-<li><code>lib/&lt;module&gt;.rvt</code></li>
-<li><code>../lib/&lt;module&gt;.rvt</code> (fallback for build-directory execution)</li>
-</ul>
-</li>
-</ul>
-<h2 id="typical-compile-flow">Typical Compile Flow<a class="headerlink" href="#typical-compile-flow" title="Permanent link">&para;</a></h2>
+<p>Welcome to the user documentation for <strong>Rivet v0.0.1</strong>.</p>
+<p>If you want to write programs in Rivet today, this site shows what works, how to run it, and where current limits are.</p>
+<h2 id="start-here">Start Here<a class="headerlink" href="#start-here" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>Lexing</strong>: source file is tokenized with line/column tracking.</li>
-<li><strong>Parsing</strong>: recursive-descent parser builds AST nodes.</li>
-<li><strong>AST dump (optional)</strong>: run with <code>--dump-ast</code> to inspect parse output.</li>
-<li><strong>Codegen</strong>: AST emits LLVM IR into module <code>Rivet Bare Metal Module</code>.</li>
-<li><strong>IR print</strong>: module is printed to stdout.</li>
+<li>Go to <strong>Getting Started</strong> for build + first run.</li>
+<li>Read <strong>Language Basics</strong> for syntax you will use most.</li>
+<li>Use <strong>Reference</strong> when you need a quick rule or keyword lookup.</li>
 </ol>
-<h2 id="quick-example">Quick Example<a class="headerlink" href="#quick-example" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">dummy</span><span class="p">;</span>
-
-<span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">i</span> <span class="o">+</span> <span class="n">imported_x</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Run from <code>build/</code>:</p>
-<div class="codehilite"><pre><span></span><code>./rivet<span class="w"> </span>../tests/import_dummy_test.rvt<span class="w"> </span>--dump-ast
-</code></pre></div>
-
-<h2 id="reading-guide">Reading Guide<a class="headerlink" href="#reading-guide" title="Permanent link">&para;</a></h2>
+<h2 id="what-you-can-build-today">What You Can Build Today<a class="headerlink" href="#what-you-can-build-today" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Start with <strong>Language Basics</strong> for day-to-day syntax.</li>
-<li>Use <strong>Reference</strong> for compact grammar and keyword tables.</li>
-<li>Use <strong>Internals</strong> to understand parser and LLVM backend behavior.</li>
+<li>Integer and string variables</li>
+<li>Fixed-size integer arrays</li>
+<li>References and optional references (<code>ref</code>, <code>optref</code>, <code>address_of</code>, <code>deref</code>, <code>null</code>)</li>
+<li>Expressions with arithmetic, comparisons, and keyword operators (<code>and</code>, <code>or</code>, <code>lsft</code>, <code>rsft</code>)</li>
+<li>Control flow with <code>if/else</code>, <code>while</code>, and <code>for</code></li>
+<li>Functions with <code>fun</code> and <code>return</code></li>
+<li>Multi-file programs with <code>import module;</code></li>
 </ul>
+<h2 id="quick-example">Quick Example<a class="headerlink" href="#quick-example" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="nv">fun</span><span class="w"> </span><span class="nv">int</span><span class="w"> </span><span class="nv">main</span><span class="ss">()</span><span class="w"> </span>{
+<span class="w">  </span><span class="nv">int</span><span class="w"> </span><span class="nv">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="c1">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="ss">(</span><span class="nv">i</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="nv">step</span><span class="w"> </span><span class="mi">1</span><span class="ss">)</span><span class="w"> </span>{
+<span class="w">    </span><span class="nv">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">i</span><span class="c1">;</span>
+<span class="w">  </span>}
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">sum</span><span class="c1">;</span>
+}
+</code></pre></div>
+
+<h2 id="current-limits-you-should-know">Current Limits You Should Know<a class="headerlink" href="#current-limits-you-should-know" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Error messages are improving, but some are still terse.</li>
+<li>Imports are path-convention based (<code>lib/</code> and <code>../lib/</code> fallback).</li>
+<li>Some edge cases in arrays/refs/strings are still under active validation.</li>
+</ul>
+<h2 id="version">Version<a class="headerlink" href="#version" title="Permanent link">&para;</a></h2>
+<p>This documentation targets <strong>Rivet v0.0.1</strong>.</p>
 
 
 

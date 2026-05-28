@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['string_0',['String',['../namespaceRivet.html#a019d2d41cd8798a1c0e4239161512392a27118326006d3829667a400ad23d5d98',1,'Rivet']]]
+  ['int_0',['Int',['../namespaceRivet.html#a019d2d41cd8798a1c0e4239161512392a1686a6c336b71b36d77354cea19a8b52',1,'Rivet']]]
 ];

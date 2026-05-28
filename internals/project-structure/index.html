@@ -1188,10 +1188,32 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#internal-api-structure" class="md-nav__link">
+  <a href="#key-directories" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Internal API &amp; Structure
+        Key Directories
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Reference
       
     </span>
   </a>
@@ -1296,10 +1318,32 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#internal-api-structure" class="md-nav__link">
+  <a href="#key-directories" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Internal API &amp; Structure
+        Key Directories
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Reference
       
     </span>
   </a>
@@ -1324,14 +1368,28 @@
 
 
 <h1 id="project-structure">Project Structure<a class="headerlink" href="#project-structure" title="Permanent link">&para;</a></h1>
-<p>This page outlines the internal architecture and structure of the Rivet compiler.</p>
-<h2 id="internal-api-structure">Internal API &amp; Structure<a class="headerlink" href="#internal-api-structure" title="Permanent link">&para;</a></h2>
-<p>For a full interactive class breakdown and dependency graphs, please see our dedicated <a href="../../api/">C++ API Reference</a>.</p>
-<p>The API Reference is generated using Doxygen to provide:
-- Class Hierarchies
-- Include dependency graphs
-- Caller/Callee graphs
-- Full symbol indexes</p>
+<p>This page explains how the Rivet repository is organized and where to find the core compiler components.</p>
+<h2 id="key-directories">Key Directories<a class="headerlink" href="#key-directories" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>include/Rivet/</code> - Public headers for the compiler (AST, Lexer, Parser, SymbolTable, Type, CodeGen).</li>
+<li><code>src/</code> - Implementations of the core compiler modules.</li>
+<li><code>tests/</code> - Sample <code>.rvt</code> files used for parser and semantic coverage.</li>
+<li><code>docs/</code> - MkDocs site sources and Doxygen configuration.</li>
+<li><code>lib/</code> - Importable Rivet modules (used by <code>import</code>).</li>
+<li><code>examples/</code> - Example programs or experiments.</li>
+</ul>
+<h2 id="core-files">Core Files<a class="headerlink" href="#core-files" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>include/Rivet/AST.h</code> / <code>src/AST.cpp</code> - AST node definitions and codegen.</li>
+<li><code>include/Rivet/Lexer.h</code> / <code>src/Lexer.cpp</code> - Tokenization and lexing logic.</li>
+<li><code>include/Rivet/Parser.h</code> / <code>src/Parser.cpp</code> - Recursive descent parsing logic.</li>
+<li><code>include/Rivet/CodeGen.h</code> / <code>src/CodeGen.cpp</code> - LLVM context setup.</li>
+<li><code>include/Rivet/SymbolTable.h</code> - Scope and symbol tracking.</li>
+<li><code>include/Rivet/Type.h</code> - Type system definitions.</li>
+<li><code>src/main.cpp</code> - Compiler driver and entry point.</li>
+</ul>
+<h2 id="api-reference">API Reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h2>
+<p>For a complete class breakdown and dependency graphs, see the <a href="../../api/">C++ API Reference</a>. It is generated with Doxygen and includes class hierarchies, include graphs, and symbol indexes.</p>
 
 
 

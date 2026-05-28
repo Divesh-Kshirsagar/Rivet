@@ -446,38 +446,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#declaration-forms" class="md-nav__link">
+  <a href="#integer-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Declaration Forms
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Declaration Forms">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Notes
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#assignment" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Assignment
+        Integer Variables
       
     </span>
   </a>
@@ -485,10 +457,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-variables" class="md-nav__link">
+  <a href="#string-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading Variables
+        String Variables
       
     </span>
   </a>
@@ -496,10 +468,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#scope-model-current" class="md-nav__link">
+  <a href="#fixed-size-arrays" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scope Model (Current)
+        Fixed-Size Arrays
       
     </span>
   </a>
@@ -507,10 +479,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#supported-expression-operators-with-variables" class="md-nav__link">
+  <a href="#references-address-and-dereference" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Supported Expression Operators with Variables
+        References (Address and Dereference)
       
     </span>
   </a>
@@ -518,10 +490,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#assignment-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example
+        Assignment Rules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope-notes-current-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope Notes (Current Implementation)
       
     </span>
   </a>
@@ -1368,38 +1351,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#declaration-forms" class="md-nav__link">
+  <a href="#integer-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Declaration Forms
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Declaration Forms">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Notes
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#assignment" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Assignment
+        Integer Variables
       
     </span>
   </a>
@@ -1407,10 +1362,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-variables" class="md-nav__link">
+  <a href="#string-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading Variables
+        String Variables
       
     </span>
   </a>
@@ -1418,10 +1373,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#scope-model-current" class="md-nav__link">
+  <a href="#fixed-size-arrays" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scope Model (Current)
+        Fixed-Size Arrays
       
     </span>
   </a>
@@ -1429,10 +1384,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#supported-expression-operators-with-variables" class="md-nav__link">
+  <a href="#references-address-and-dereference" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Supported Expression Operators with Variables
+        References (Address and Dereference)
       
     </span>
   </a>
@@ -1440,10 +1395,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#assignment-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example
+        Assignment Rules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope-notes-current-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope Notes (Current Implementation)
       
     </span>
   </a>
@@ -1468,56 +1434,53 @@
 
 
 <h1 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h1>
-<p>This page describes variable behavior in the current Rivet implementation.</p>
-<h2 id="declaration-forms">Declaration Forms<a class="headerlink" href="#declaration-forms" title="Permanent link">&para;</a></h2>
-<p>Rivet currently supports <code>int</code> variables with two forms:</p>
+<p>This page introduces variables as implemented in Rivet today. You will see how to declare values, assign them, and work with arrays and references.</p>
+<h2 id="integer-variables">Integer Variables<a class="headerlink" href="#integer-variables" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><code>int x;
 int y = 42;
 </code></pre></div>
 
-<h3 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>int x;</code> is valid and defaults to <code>0</code> during codegen.</li>
+<li><code>int x;</code> is valid and defaults to <code>0</code> in codegen.</li>
 <li><code>int y = &lt;expression&gt;;</code> evaluates the expression and stores the result.</li>
-<li>Declarations must end with <code>;</code>.</li>
+<li>Declarations end with <code>;</code>.</li>
 </ul>
-<h2 id="assignment">Assignment<a class="headerlink" href="#assignment" title="Permanent link">&para;</a></h2>
-<p>Assignment works as a binary expression with <code>=</code>:</p>
+<h2 id="string-variables">String Variables<a class="headerlink" href="#string-variables" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>str message = &quot;Hello Bare Metal&quot;;
+str label;
+
+label = &quot;RIVET&quot;;
+message = label;
+</code></pre></div>
+
+<p>Strings are first-class values in the current prototype. Assignments between <code>str</code> values are allowed.</p>
+<h2 id="fixed-size-arrays">Fixed-Size Arrays<a class="headerlink" href="#fixed-size-arrays" title="Permanent link">&para;</a></h2>
+<p>Rivet supports fixed-size arrays of integers using bracket syntax:</p>
+<div class="codehilite"><pre><span></span><code>int[5] nums;
+nums[0] = 10;
+nums[1] = nums[0] + 5;
+</code></pre></div>
+
+<p>Array indexing works in expressions and assignments. Index expressions must resolve to integers.</p>
+<h2 id="references-address-and-dereference">References (Address and Dereference)<a class="headerlink" href="#references-address-and-dereference" title="Permanent link">&para;</a></h2>
+<p>Rivet models references using <code>address_of</code> and <code>deref</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">int</span><span class="w"> </span><span class="kd">base</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="nx">int</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="nx">ptr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">address_of</span><span class="w"> </span><span class="kd">base</span><span class="p">;</span>
+
+<span class="nx">int</span><span class="w"> </span><span class="nx">roundtrip</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">deref</span><span class="w"> </span><span class="nx">ptr</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Use <code>int ref</code> to declare a reference. The <code>deref</code> operator reads the value at the referenced location.</p>
+<h2 id="assignment-rules">Assignment Rules<a class="headerlink" href="#assignment-rules" title="Permanent link">&para;</a></h2>
+<p>Assignments are binary expressions with <code>=</code>:</p>
 <div class="codehilite"><pre><span></span><code>int i = 0;
 i = i + 1;
 </code></pre></div>
 
-<p>Current rule: the left-hand side must be a declared variable.
-If the left side is not a variable node, codegen reports an error.</p>
-<h2 id="reading-variables">Reading Variables<a class="headerlink" href="#reading-variables" title="Permanent link">&para;</a></h2>
-<p>Using a variable in an expression generates a load from its stack slot:</p>
-<div class="codehilite"><pre><span></span><code>int a = 7;
-int b = 3;
-a + b;
-</code></pre></div>
-
-<h2 id="scope-model-current">Scope Model (Current)<a class="headerlink" href="#scope-model-current" title="Permanent link">&para;</a></h2>
-<p>Variables are stored in a shared name map for codegen.
-Practical implication in the current prototype:</p>
-<ul>
-<li>Redeclaration and shadowing rules are not fully formalized yet.</li>
-<li>Keep names unique in small programs to avoid confusion.</li>
-</ul>
-<h2 id="supported-expression-operators-with-variables">Supported Expression Operators with Variables<a class="headerlink" href="#supported-expression-operators-with-variables" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Arithmetic: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></li>
-<li>Equality: <code>==</code>, <code>!=</code></li>
-<li>Relational: <code>&lt;</code>, <code>&gt;</code></li>
-<li>Keyword logical/bitwise: <code>and</code>, <code>or</code>, <code>lsft</code>, <code>rsft</code></li>
-</ul>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>int x = 10;
-int y = 2;
-
-x = x + y;
-x = x lsft 1;
-x;
-</code></pre></div>
+<p>Current rule: the left-hand side must be a declared variable or an array element.</p>
+<h2 id="scope-notes-current-implementation">Scope Notes (Current Implementation)<a class="headerlink" href="#scope-notes-current-implementation" title="Permanent link">&para;</a></h2>
+<p>Variables are tracked in a shared name map for codegen and semantic checks.
+For now, keep names unique within the same block to avoid accidental shadowing.</p>
 
 
 

@@ -76,6 +76,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classRivet_1_1SymbolTable-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Rivet::SymbolTable Class Reference</div></div>
 </div><!--header-->
@@ -108,11 +109,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aaafaf27e01119f2355189ec39c84fde9" id="r_aaafaf27e01119f2355189ec39c84fde9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1SymbolTable.html#aaafaf27e01119f2355189ec39c84fde9">SymbolTable</a> ()</td></tr>
 <tr class="memdesc:aaafaf27e01119f2355189ec39c84fde9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classRivet_1_1SymbolTable.html" title="A hierarchical structure for managing variable scopes.">SymbolTable</a> and initializes the global scope.  <br /></td></tr>
 <tr class="separator:aaafaf27e01119f2355189ec39c84fde9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a09011105d0cf8ab3be028b8f213c9bc7" id="r_a09011105d0cf8ab3be028b8f213c9bc7"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, <a class="el" href="structRivet_1_1FunctionSignature.html">FunctionSignature</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRivet_1_1SymbolTable.html#a09011105d0cf8ab3be028b8f213c9bc7">FunctionRegistry</a></td></tr>
+<tr class="memdesc:a09011105d0cf8ab3be028b8f213c9bc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registry of all known function signatures, populated during the semantic pre-scan pass.  <br /></td></tr>
+<tr class="separator:a09011105d0cf8ab3be028b8f213c9bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Supports nested scopes (functions, code blocks). When variables are declared, they are pushed into the current topmost scope. Lookups start at the current scope and search outwards until the global scope is reached. </p>
 
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00037">37</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00053">53</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aaafaf27e01119f2355189ec39c84fde9" name="aaafaf27e01119f2355189ec39c84fde9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaafaf27e01119f2355189ec39c84fde9">&#9670;&#160;</a></span>SymbolTable()</h2>
@@ -137,9 +144,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00045">45</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00068">68</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 
-<p class="reference">References <a class="el" href="SymbolTable_8h_source.html#l00052">enterScope()</a>.</p>
+<p class="reference">References <a class="el" href="SymbolTable_8h_source.html#l00075">enterScope()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -172,13 +179,13 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00052">52</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00075">75</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SymbolTable_8h_source.html#l00045">SymbolTable()</a>, <a class="el" href="AST_8cpp_source.html#l00384">Rivet::BlockAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00635">Rivet::ForAST::typeCheck()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SymbolTable_8h_source.html#l00068">SymbolTable()</a>, <a class="el" href="Sema_8cpp_source.html#l00231">Rivet::BlockAST::typeCheck()</a>, <a class="el" href="Sema_8cpp_source.html#l00278">Rivet::ForAST::typeCheck()</a>, and <a class="el" href="Sema_8cpp_source.html#l00457">Rivet::FunctionAST::typeCheck()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classRivet_1_1SymbolTable_acb51f1288693460fea1e197e6d27d20e_icgraph.svg" width="384" height="151"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classRivet_1_1SymbolTable_acb51f1288693460fea1e197e6d27d20e_icgraph.svg" width="384" height="215"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -206,13 +213,13 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00059">59</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00082">82</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00384">Rivet::BlockAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00635">Rivet::ForAST::typeCheck()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Sema_8cpp_source.html#l00231">Rivet::BlockAST::typeCheck()</a>, <a class="el" href="Sema_8cpp_source.html#l00278">Rivet::ForAST::typeCheck()</a>, and <a class="el" href="Sema_8cpp_source.html#l00457">Rivet::FunctionAST::typeCheck()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classRivet_1_1SymbolTable_a976f81141cddc387bce3fe95145ebb22_icgraph.svg" width="384" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classRivet_1_1SymbolTable_a976f81141cddc387bce3fe95145ebb22_icgraph.svg" width="384" height="151"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -268,13 +275,13 @@ Here is the caller graph for this function:</div>
 <dd>
 false if the variable already exists within the <em>current</em> restricted scope. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00074">74</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00097">97</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00138">Rivet::VariableDeclAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00635">Rivet::ForAST::typeCheck()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Sema_8cpp_source.html#l00080">Rivet::VariableDeclAST::typeCheck()</a>, <a class="el" href="Sema_8cpp_source.html#l00278">Rivet::ForAST::typeCheck()</a>, and <a class="el" href="Sema_8cpp_source.html#l00457">Rivet::FunctionAST::typeCheck()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classRivet_1_1SymbolTable_a0936db332f9cef233ed7be73cdaed58a_icgraph.svg" width="370" height="102"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classRivet_1_1SymbolTable_a0936db332f9cef233ed7be73cdaed58a_icgraph.svg" width="370" height="166"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -310,14 +317,34 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Symbol* Pointer to the resolved variable struct, or nullptr if completely undefined. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00089">89</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00112">112</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AST_8cpp_source.html#l00047">Rivet::VariableAST::typeCheck()</a>, <a class="el" href="AST_8cpp_source.html#l00733">Rivet::AddressOfAST::typeCheck()</a>, and <a class="el" href="AST_8cpp_source.html#l00807">Rivet::IndexAST::typeCheck()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Sema_8cpp_source.html#l00064">Rivet::VariableAST::typeCheck()</a>, <a class="el" href="Sema_8cpp_source.html#l00278">Rivet::ForAST::typeCheck()</a>, <a class="el" href="Sema_8cpp_source.html#l00548">Rivet::AddressOfAST::typeCheck()</a>, and <a class="el" href="Sema_8cpp_source.html#l00580">Rivet::IndexAST::typeCheck()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classRivet_1_1SymbolTable_aff47a5345d3544d3f2bedcf4c2274c2e_icgraph.svg" width="383" height="166"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classRivet_1_1SymbolTable_aff47a5345d3544d3f2bedcf4c2274c2e_icgraph.svg" width="383" height="216"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a09011105d0cf8ab3be028b8f213c9bc7" name="a09011105d0cf8ab3be028b8f213c9bc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09011105d0cf8ab3be028b8f213c9bc7">&#9670;&#160;</a></span>FunctionRegistry</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;std::string, <a class="el" href="structRivet_1_1FunctionSignature.html">FunctionSignature</a>&gt; Rivet::SymbolTable::FunctionRegistry</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="classRivet_1_1CallAST.html#ade436fa8295c42f55149e259ba416cc6" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing.">CallAST::typeCheck</a> reads from here instead of from the LLVM module, keeping the two phases fully decoupled. </p>
+
+<p class="definition">Definition at line <a class="el" href="SymbolTable_8h_source.html#l00063">63</a> of file <a class="el" href="SymbolTable_8h_source.html">SymbolTable.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Sema_8cpp_source.html#l00418">Rivet::FunctionAST::registerSignature()</a>, <a class="el" href="Sema_8cpp_source.html#l00322">Rivet::CallAST::typeCheck()</a>, and <a class="el" href="Sema_8cpp_source.html#l00457">Rivet::FunctionAST::typeCheck()</a>.</p>
 
 </div>
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unaryopast_0',['UnaryOpAST',['../classRivet_1_1UnaryOpAST.html',1,'Rivet']]]
+  ['typeinfo_0',['TypeInfo',['../structRivet_1_1TypeInfo.html',1,'Rivet']]]
 ];

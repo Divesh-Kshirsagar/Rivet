@@ -67,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#standard-library" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -724,6 +729,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standard Library
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -741,6 +766,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-exists-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Exists Today
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Practice
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1229,6 +1295,38 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-exists-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Exists Today
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Practice
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1245,9 +1343,22 @@
 
 
 
-  <h1>Standard Library</h1>
-
-
+<h1 id="standard-library">Standard Library<a class="headerlink" href="#standard-library" title="Permanent link">&para;</a></h1>
+<p>Rivet <code>v0.0.1</code> does not ship with a stable standard library yet.</p>
+<h2 id="what-exists-today">What Exists Today<a class="headerlink" href="#what-exists-today" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Module-style source reuse through <code>import &lt;module&gt;;</code></li>
+<li>Project-local library files typically placed in <code>lib/</code></li>
+<li>Compiler intrinsic call support for low-level operations such as:</li>
+<li><code>__volatile_store(address, value)</code></li>
+</ul>
+<h2 id="recommended-practice">Recommended Practice<a class="headerlink" href="#recommended-practice" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Keep reusable helpers in small <code>lib/*.rvt</code> modules.</li>
+<li>Import only what you need per program.</li>
+<li>Treat module APIs as evolving while the language stabilizes.</li>
+</ul>
+<p>This page will be expanded once standard library modules are formalized.</p>
 
 
 

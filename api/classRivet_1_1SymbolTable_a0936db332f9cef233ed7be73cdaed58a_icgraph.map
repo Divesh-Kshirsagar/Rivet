@@ -1,7 +1,9 @@
 <map id="Rivet::SymbolTable::insert" name="Rivet::SymbolTable::insert">
-<area shape="rect" id="Node000001" title="Declares a new variable in the latest/current block scope." alt="" coords="228,35,364,75"/>
+<area shape="rect" id="Node000001" title="Declares a new variable in the latest/current block scope." alt="" coords="228,63,364,103"/>
 <area shape="rect" id="Node000002" href="$classRivet_1_1VariableDeclAST.html#a460732a4f926f201708d5379ac11c673" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="13,5,173,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,46,172,39,173,34,215,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,62,164,48,165,43,215,57"/>
 <area shape="rect" id="Node000003" href="$classRivet_1_1ForAST.html#a407ea5e09d77528e935e7eab6da89ce7" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="5,70,180,95"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,69,181,73,180,68,214,63"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="214,85,180,85,180,80,214,80"/>
+<area shape="rect" id="Node000004" href="$classRivet_1_1FunctionAST.html#a63b7edef975e0730cfdde742e3c3f73b" title="Analyzes AST structure semantics like variable lifetimes, references, bounds, and typing." alt="" coords="24,120,161,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="215,108,162,123,161,118,214,103"/>
 </map>

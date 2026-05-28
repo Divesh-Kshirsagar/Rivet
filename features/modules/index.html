@@ -67,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#modules-and-imports" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -581,6 +586,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -598,6 +623,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#import-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import Syntax
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#import-resolution-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import Resolution Paths
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1231,6 +1308,49 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#import-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import Syntax
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#import-resolution-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import Resolution Paths
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1247,9 +1367,24 @@
 
 
 
-  <h1>Modules</h1>
+<h1 id="modules-and-imports">Modules and Imports<a class="headerlink" href="#modules-and-imports" title="Permanent link">&para;</a></h1>
+<p>Rivet uses a simple import system that loads other <code>.rvt</code> files and injects their AST nodes into the current module.</p>
+<h2 id="import-syntax">Import Syntax<a class="headerlink" href="#import-syntax" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">dummy</span><span class="p">;</span>
+</code></pre></div>
 
-
+<p>The parser reads the target module, parses its contents, and places them into an <code>ImportAST</code> node. During codegen, imported nodes are emitted before the current file continues.</p>
+<h2 id="import-resolution-paths">Import Resolution Paths<a class="headerlink" href="#import-resolution-paths" title="Permanent link">&para;</a></h2>
+<p>The current implementation searches for module files in:</p>
+<ol>
+<li><code>lib/&lt;module&gt;.rvt</code></li>
+<li><code>../lib/&lt;module&gt;.rvt</code> (fallback when running from build directories)</li>
+</ol>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Imports are cached to avoid duplicate loads.</li>
+<li>Cyclic imports are prevented by tracking module names.</li>
+</ul>
 
 
 

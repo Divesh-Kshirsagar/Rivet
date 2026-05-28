@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#keywords-and-tokens" class="md-skip">
+        <a href="#keywords" class="md-skip">
           Skip to content
         </a>
       
@@ -887,10 +887,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#dynamic-tokens" class="md-nav__link">
+  <a href="#types-and-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dynamic Tokens
+        Types and Values
       
     </span>
   </a>
@@ -898,10 +898,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#types-and-memory-keywords" class="md-nav__link">
+  <a href="#functions-and-modules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Types and Memory Keywords
+        Functions and Modules
       
     </span>
   </a>
@@ -909,10 +909,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#logical-and-bitwise-keywords" class="md-nav__link">
+  <a href="#control-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Logical and Bitwise Keywords
+        Control Flow
       
     </span>
   </a>
@@ -920,10 +920,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#controlmodule-keywords" class="md-nav__link">
+  <a href="#operators-keyword-form" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Control/Module Keywords
+        Operators (Keyword Form)
       
     </span>
   </a>
@@ -931,10 +931,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ascii-operator-tokens" class="md-nav__link">
+  <a href="#memory-helpers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ASCII Operator Tokens
+        Memory Helpers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
       
     </span>
   </a>
@@ -1340,10 +1351,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#dynamic-tokens" class="md-nav__link">
+  <a href="#types-and-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dynamic Tokens
+        Types and Values
       
     </span>
   </a>
@@ -1351,10 +1362,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#types-and-memory-keywords" class="md-nav__link">
+  <a href="#functions-and-modules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Types and Memory Keywords
+        Functions and Modules
       
     </span>
   </a>
@@ -1362,10 +1373,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#logical-and-bitwise-keywords" class="md-nav__link">
+  <a href="#control-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Logical and Bitwise Keywords
+        Control Flow
       
     </span>
   </a>
@@ -1373,10 +1384,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#controlmodule-keywords" class="md-nav__link">
+  <a href="#operators-keyword-form" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Control/Module Keywords
+        Operators (Keyword Form)
       
     </span>
   </a>
@@ -1384,10 +1395,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ascii-operator-tokens" class="md-nav__link">
+  <a href="#memory-helpers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ASCII Operator Tokens
+        Memory Helpers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
       
     </span>
   </a>
@@ -1411,170 +1433,52 @@
 
 
 
-<h1 id="keywords-and-tokens">Keywords and Tokens<a class="headerlink" href="#keywords-and-tokens" title="Permanent link">&para;</a></h1>
-<p>Rivet uses negative integer token values for language keywords and dynamic token categories.
-Single-character punctuation/operators are returned as ASCII integer values.</p>
-<h2 id="dynamic-tokens">Dynamic Tokens<a class="headerlink" href="#dynamic-tokens" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Category</th>
-<th style="text-align: right;">Token Value</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>identifier</code></td>
-<td style="text-align: right;"><code>-2</code></td>
-<td>Variable/function/module names</td>
-</tr>
-<tr>
-<td><code>number</code></td>
-<td style="text-align: right;"><code>-3</code></td>
-<td>Integer literal</td>
-</tr>
-</tbody>
-</table>
-<h2 id="types-and-memory-keywords">Types and Memory Keywords<a class="headerlink" href="#types-and-memory-keywords" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Keyword</th>
-<th style="text-align: right;">Token Value</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>int</code></td>
-<td style="text-align: right;"><code>-10</code></td>
-<td>Implemented</td>
-</tr>
-<tr>
-<td><code>void</code></td>
-<td style="text-align: right;"><code>-11</code></td>
-<td>Tokenized; parser integration limited</td>
-</tr>
-<tr>
-<td><code>ref</code></td>
-<td style="text-align: right;"><code>-12</code></td>
-<td>Tokenized; parser integration limited</td>
-</tr>
-<tr>
-<td><code>address_of</code></td>
-<td style="text-align: right;"><code>-13</code></td>
-<td>Tokenized; parser integration limited</td>
-</tr>
-<tr>
-<td><code>deref</code></td>
-<td style="text-align: right;"><code>-14</code></td>
-<td>Tokenized; parser integration limited</td>
-</tr>
-</tbody>
-</table>
-<h2 id="logical-and-bitwise-keywords">Logical and Bitwise Keywords<a class="headerlink" href="#logical-and-bitwise-keywords" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Keyword</th>
-<th style="text-align: right;">Token Value</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>and</code></td>
-<td style="text-align: right;"><code>-20</code></td>
-<td>Parsed as binary operator</td>
-</tr>
-<tr>
-<td><code>or</code></td>
-<td style="text-align: right;"><code>-21</code></td>
-<td>Parsed as binary operator</td>
-</tr>
-<tr>
-<td><code>not</code></td>
-<td style="text-align: right;"><code>-22</code></td>
-<td>Token exists; unary path not fully wired in codegen</td>
-</tr>
-<tr>
-<td><code>lsft</code></td>
-<td style="text-align: right;"><code>-23</code></td>
-<td>Parsed as shift-left-like operator</td>
-</tr>
-<tr>
-<td><code>rsft</code></td>
-<td style="text-align: right;"><code>-24</code></td>
-<td>Parsed as arithmetic shift-right-like operator</td>
-</tr>
-<tr>
-<td><code>==</code></td>
-<td style="text-align: right;"><code>-25</code></td>
-<td>Equality compare</td>
-</tr>
-<tr>
-<td><code>!=</code></td>
-<td style="text-align: right;"><code>-26</code></td>
-<td>Not-equal compare</td>
-</tr>
-</tbody>
-</table>
-<h2 id="controlmodule-keywords">Control/Module Keywords<a class="headerlink" href="#controlmodule-keywords" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Keyword</th>
-<th style="text-align: right;">Token Value</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>if</code></td>
-<td style="text-align: right;"><code>-30</code></td>
-<td>Implemented</td>
-</tr>
-<tr>
-<td><code>else</code></td>
-<td style="text-align: right;"><code>-31</code></td>
-<td>Implemented</td>
-</tr>
-<tr>
-<td><code>while</code></td>
-<td style="text-align: right;"><code>-32</code></td>
-<td>Implemented</td>
-</tr>
-<tr>
-<td><code>fun</code></td>
-<td style="text-align: right;"><code>-33</code></td>
-<td>Tokenized; full function-declaration flow is in progress</td>
-</tr>
-<tr>
-<td><code>return</code></td>
-<td style="text-align: right;"><code>-34</code></td>
-<td>Tokenized; return statement flow is in progress</td>
-</tr>
-<tr>
-<td><code>import</code></td>
-<td style="text-align: right;"><code>-35</code></td>
-<td>Implemented</td>
-</tr>
-</tbody>
-</table>
-<h2 id="ascii-operator-tokens">ASCII Operator Tokens<a class="headerlink" href="#ascii-operator-tokens" title="Permanent link">&para;</a></h2>
-<p>These are returned directly as character code values by the lexer:</p>
+<h1 id="keywords">Keywords<a class="headerlink" href="#keywords" title="Permanent link">&para;</a></h1>
+<p>This page lists Rivet language keywords you can use in source files in <code>v0.0.1</code>.</p>
+<h2 id="types-and-values">Types and Values<a class="headerlink" href="#types-and-values" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>=</code> (<code>61</code>)</li>
-<li><code>&lt;</code> (<code>60</code>)</li>
-<li><code>&gt;</code> (<code>62</code>)</li>
-<li><code>+</code> (<code>43</code>)</li>
-<li><code>-</code> (<code>45</code>)</li>
-<li><code>*</code> (<code>42</code>)</li>
-<li><code>/</code> (<code>47</code>)</li>
-<li><code>(</code>, <code>)</code>, <code>{</code>, <code>}</code>, <code>,</code>, <code>;</code></li>
+<li><code>int</code></li>
+<li><code>str</code></li>
+<li><code>void</code></li>
+<li><code>ref</code></li>
+<li><code>optref</code></li>
+<li><code>null</code></li>
 </ul>
-<p>This is why AST debug output may show numbers like <code>43</code> for <code>+</code> and <code>61</code> for <code>=</code>.</p>
+<h2 id="functions-and-modules">Functions and Modules<a class="headerlink" href="#functions-and-modules" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>fun</code></li>
+<li><code>return</code></li>
+<li><code>import</code></li>
+</ul>
+<h2 id="control-flow">Control Flow<a class="headerlink" href="#control-flow" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>if</code></li>
+<li><code>else</code></li>
+<li><code>while</code></li>
+<li><code>for</code></li>
+<li><code>in</code></li>
+<li><code>to</code></li>
+<li><code>step</code></li>
+</ul>
+<h2 id="operators-keyword-form">Operators (Keyword Form)<a class="headerlink" href="#operators-keyword-form" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>and</code></li>
+<li><code>or</code></li>
+<li><code>not</code></li>
+<li><code>lsft</code></li>
+<li><code>rsft</code></li>
+</ul>
+<h2 id="memory-helpers">Memory Helpers<a class="headerlink" href="#memory-helpers" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>address_of</code></li>
+<li><code>deref</code></li>
+</ul>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>and</code>, <code>or</code>, <code>lsft</code>, and <code>rsft</code> are binary operators.</li>
+<li><code>not</code> and <code>-</code> are unary operators.</li>
+<li><code>__volatile_store(address, value)</code> is available as a compiler intrinsic call form.</li>
+</ul>
 
 
 

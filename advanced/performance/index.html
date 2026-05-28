@@ -67,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#performance" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -663,6 +668,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -680,6 +705,69 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-fast-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Fast Today
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-overhead-can-appear" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where Overhead Can Appear
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Tips
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roadmap Ideas
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1231,6 +1319,60 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-fast-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Fast Today
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-overhead-can-appear" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where Overhead Can Appear
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Tips
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roadmap Ideas
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1247,9 +1389,28 @@
 
 
 
-  <h1>Performance</h1>
-
-
+<h1 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h1>
+<p>Rivet is an early-stage compiler, but it already emits direct LLVM IR for core operations. This page explains how to think about performance today.</p>
+<h2 id="what-is-fast-today">What Is Fast Today<a class="headerlink" href="#what-is-fast-today" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Integer arithmetic and comparisons map directly to LLVM instructions.</li>
+<li>Local variables are stack-allocated and accessed with <code>load</code>/<code>store</code>.</li>
+<li>Loops compile to simple control-flow blocks.</li>
+</ul>
+<h2 id="where-overhead-can-appear">Where Overhead Can Appear<a class="headerlink" href="#where-overhead-can-appear" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Imports inline all parsed nodes, which can increase compile time for large trees.</li>
+<li>Some semantic checks are conservative and may reject edge cases.</li>
+<li>String handling is still evolving and may change structure in future revisions.</li>
+</ul>
+<h2 id="practical-tips">Practical Tips<a class="headerlink" href="#practical-tips" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Keep loops simple when testing performance paths.</li>
+<li>Prefer integer math in hot paths.</li>
+<li>Use <code>--dump-ast</code> only when debugging; it adds runtime overhead during compilation.</li>
+</ul>
+<h2 id="roadmap-ideas">Roadmap Ideas<a class="headerlink" href="#roadmap-ideas" title="Permanent link">&para;</a></h2>
+<p>Future improvements may include richer optimizations, more aggressive constant folding, and expanded IR analysis. For now, the primary focus is correctness and clarity.</p>
 
 
 

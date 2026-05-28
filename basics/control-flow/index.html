@@ -482,34 +482,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="if / else">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#current-parser-behavior" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Current parser behavior
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#truthiness-in-codegen" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Truthiness in codegen
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -521,33 +493,16 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="while">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#current-parser-behavior_1" class="md-nav__link">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Current parser behavior
+        for
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#llvm-structure-generated" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        LLVM structure generated
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1393,34 +1348,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="if / else">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#current-parser-behavior" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Current parser behavior
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#truthiness-in-codegen" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Truthiness in codegen
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1432,33 +1359,16 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="while">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#current-parser-behavior_1" class="md-nav__link">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Current parser behavior
+        for
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#llvm-structure-generated" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        LLVM structure generated
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1502,67 +1412,67 @@
 
 
 <h1 id="control-flow">Control Flow<a class="headerlink" href="#control-flow" title="Permanent link">&para;</a></h1>
-<p>Rivet currently supports block-based <code>if</code>/<code>else</code> and <code>while</code>.</p>
+<p>Rivet supports block-based <code>if/else</code>, <code>while</code>, and <code>for</code> loops. All control-flow bodies are parsed as blocks (<code>{ ... }</code>).</p>
 <h2 id="if-else"><code>if</code> / <code>else</code><a class="headerlink" href="#if-else" title="Permanent link">&para;</a></h2>
-<p>Syntax:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="ss">(</span><span class="o">&lt;</span><span class="nv">expression</span><span class="o">&gt;</span><span class="ss">)</span><span class="w"> </span>{
-<span class="w">    </span><span class="o">&lt;</span><span class="nv">statements</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="ss">(</span><span class="nv">condition</span><span class="ss">)</span><span class="w"> </span>{
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="nv">statements</span>
 }<span class="w"> </span><span class="k">else</span><span class="w"> </span>{
-<span class="w">    </span><span class="o">&lt;</span><span class="nv">statements</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="nv">statements</span>
 }
 </code></pre></div>
 
-<h3 id="current-parser-behavior">Current parser behavior<a class="headerlink" href="#current-parser-behavior" title="Permanent link">&para;</a></h3>
+<p>Notes:</p>
 <ul>
-<li><code>if</code> condition must be wrapped in parentheses.</li>
-<li><code>then</code> and <code>else</code> are parsed as blocks (<code>{ ... }</code>) in the current implementation.</li>
+<li>Conditions must be wrapped in parentheses.</li>
 <li><code>else</code> is optional.</li>
-</ul>
-<h3 id="truthiness-in-codegen">Truthiness in codegen<a class="headerlink" href="#truthiness-in-codegen" title="Permanent link">&para;</a></h3>
-<p>Conditions are lowered to integer comparison against zero:</p>
-<ul>
-<li>non-zero -&gt; true</li>
-<li>zero -&gt; false</li>
+<li>In codegen, conditions are treated as integers: zero is false, non-zero is true.</li>
 </ul>
 <h2 id="while"><code>while</code><a class="headerlink" href="#while" title="Permanent link">&para;</a></h2>
-<p>Syntax:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="ss">(</span><span class="o">&lt;</span><span class="nv">expression</span><span class="o">&gt;</span><span class="ss">)</span><span class="w"> </span>{
-<span class="w">    </span><span class="o">&lt;</span><span class="nv">statements</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="ss">(</span><span class="nv">condition</span><span class="ss">)</span><span class="w"> </span>{
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="nv">statements</span>
 }
 </code></pre></div>
 
-<h3 id="current-parser-behavior_1">Current parser behavior<a class="headerlink" href="#current-parser-behavior_1" title="Permanent link">&para;</a></h3>
+<p>The loop re-evaluates the condition before each iteration.</p>
+<h2 id="for"><code>for</code><a class="headerlink" href="#for" title="Permanent link">&para;</a></h2>
+<p>Rivet supports two <code>for</code> loop forms.</p>
+<p>Range-style loop:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="ss">(</span><span class="nv">i</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="nv">step</span><span class="w"> </span><span class="mi">1</span><span class="ss">)</span><span class="w"> </span>{
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="nv">statements</span>
+}
+</code></pre></div>
+
+<p>Array-iteration loop:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="ss">(</span><span class="nv">pin</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">pins</span><span class="ss">)</span><span class="w"> </span>{
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="nv">statements</span>
+}
+</code></pre></div>
+
+<p>Notes:</p>
 <ul>
-<li>Condition must be in <code>(...)</code>.</li>
-<li>Body is parsed as a block.</li>
+<li><code>step</code> is optional; if omitted, a step of <code>1</code> is assumed.</li>
+<li>The identifier before <code>in</code> is always the loop iterator name.</li>
+<li><code>to</code> is inclusive of the upper bound in current tests.</li>
+<li>In array iteration, the iterator receives each element value in order.</li>
 </ul>
-<h3 id="llvm-structure-generated">LLVM structure generated<a class="headerlink" href="#llvm-structure-generated" title="Permanent link">&para;</a></h3>
-<p>Codegen creates three blocks:</p>
-<ol>
-<li>condition block</li>
-<li>loop body block</li>
-<li>after-loop block</li>
-</ol>
-<p>The body branches back to the condition block.</p>
 <h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><code><span class="nv">int</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="c1">;</span>
+<span class="nv">int</span><span class="w"> </span><span class="nv">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="c1">;</span>
 
-<span class="k">while</span><span class="w"> </span><span class="ss">(</span><span class="nv">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="ss">)</span><span class="w"> </span>{
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ss">(</span><span class="nv">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span><span class="ss">)</span><span class="w"> </span>{
-<span class="w">        </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="c1">;</span>
-<span class="w">    </span>}<span class="w"> </span><span class="k">else</span><span class="w"> </span>{
-<span class="w">        </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="c1">;</span>
-<span class="w">    </span>}
+<span class="k">while</span><span class="w"> </span><span class="ss">(</span><span class="nv">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="ss">)</span><span class="w"> </span>{
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="ss">(</span><span class="nv">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="ss">)</span><span class="w"> </span>{
+<span class="w">    </span><span class="nv">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="c1">;</span>
+<span class="w">  </span>}<span class="w"> </span><span class="k">else</span><span class="w"> </span>{
+<span class="w">    </span><span class="nv">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">i</span><span class="c1">;</span>
+<span class="w">  </span>}
+<span class="w">  </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="c1">;</span>
 }
-
-<span class="nv">i</span><span class="c1">;</span>
 </code></pre></div>
 
 <h2 id="current-limitations">Current Limitations<a class="headerlink" href="#current-limitations" title="Permanent link">&para;</a></h2>
 <ul>
-<li>No <code>break</code> / <code>continue</code> yet.</li>
-<li>No single-line non-block <code>if</code> body form in parser path right now.</li>
-<li>No <code>for</code> loop support yet.</li>
+<li><code>break</code> and <code>continue</code> are not implemented yet.</li>
+<li>Single-line bodies without <code>{}</code> are not supported in the parser.</li>
 </ul>
 
 

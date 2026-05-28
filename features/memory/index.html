@@ -67,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#memory-model" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -553,6 +558,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memory Model
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -570,6 +595,69 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stack-allocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stack Allocation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arrays-in-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arrays in Memory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current Limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1231,6 +1319,60 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stack-allocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stack Allocation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arrays-in-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arrays in Memory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current Limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1247,9 +1389,35 @@
 
 
 
-  <h1>Memory Model</h1>
+<h1 id="memory-model">Memory Model<a class="headerlink" href="#memory-model" title="Permanent link">&para;</a></h1>
+<p>Rivet models memory explicitly so newcomers can understand how values are stored and accessed. The current implementation focuses on stack allocation and simple references.</p>
+<h2 id="stack-allocation">Stack Allocation<a class="headerlink" href="#stack-allocation" title="Permanent link">&para;</a></h2>
+<p>When you declare a variable, Rivet allocates a stack slot in LLVM IR:</p>
+<div class="codehilite"><pre><span></span><code>int x = 7;
+</code></pre></div>
 
+<p>This becomes an <code>alloca</code> and a <code>store</code> in LLVM, and reads become <code>load</code> instructions.</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<p>References are created with <code>address_of</code> and read with <code>deref</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">int</span><span class="w"> </span><span class="kd">base</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="nx">int</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="nx">ptr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">address_of</span><span class="w"> </span><span class="kd">base</span><span class="p">;</span>
+<span class="nx">int</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">deref</span><span class="w"> </span><span class="nx">ptr</span><span class="p">;</span>
+</code></pre></div>
 
+<p>Use references when you want explicit address manipulation in your program logic.</p>
+<h2 id="arrays-in-memory">Arrays in Memory<a class="headerlink" href="#arrays-in-memory" title="Permanent link">&para;</a></h2>
+<p>Fixed-size arrays are allocated as a block of contiguous integers. Indexing compiles into pointer arithmetic on that block.</p>
+<div class="codehilite"><pre><span></span><code>int[3] flags;
+flags[0] = 1;
+flags[1] = 0;
+</code></pre></div>
+
+<h2 id="current-limitations">Current Limitations<a class="headerlink" href="#current-limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Only stack allocation is modeled for now.</li>
+<li>There is no heap allocation or dynamic array support yet.</li>
+<li>Null reference handling is still being refined.</li>
+</ul>
 
 
 

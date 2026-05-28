@@ -98,69 +98,86 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structRivet_1_1Symbol.html#ae453af2665ccf95e33ad1068077c92ac">   24</a></span>        std::string <a class="code hl_variable" href="structRivet_1_1Symbol.html#ae453af2665ccf95e33ad1068077c92ac">Name</a>;       </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structRivet_1_1Symbol.html#ac41e773774ee8de5a89f9ba2304a9f76">   25</a></span>        <a class="code hl_struct" href="structRivet_1_1TypeInfo.html">TypeInfo</a> <a class="code hl_variable" href="structRivet_1_1Symbol.html#ac41e773774ee8de5a89f9ba2304a9f76">Type</a>;          </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structRivet_1_1Symbol.html#a00417dbcdd4b70a83c534b7d588546e7">   26</a></span>        <span class="keywordtype">bool</span> <a class="code hl_variable" href="structRivet_1_1Symbol.html#a00417dbcdd4b70a83c534b7d588546e7">IsInitialized</a>;     </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    };</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="comment">// TODO: Add `bool isMutable` to support const/immutable variables.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="comment">// TODO: Add `llvm::Value* MemoryLocation` to unify semantic analysis and code generation,</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="comment">//       which would eventually replace `CompilerState.NamedValues`.</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    };</div>
 </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html">   37</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRivet_1_1SymbolTable.html">SymbolTable</a> {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        std::vector&lt;std::unordered_map&lt;std::string, Symbol&gt;&gt; Scopes; </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html#aaafaf27e01119f2355189ec39c84fde9">   45</a></span>        <a class="code hl_function" href="classRivet_1_1SymbolTable.html#aaafaf27e01119f2355189ec39c84fde9">SymbolTable</a>() {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <a class="code hl_function" href="classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e">enterScope</a>();</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        }</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="};">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structRivet_1_1FunctionSignature.html">   40</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structRivet_1_1FunctionSignature.html">FunctionSignature</a> {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structRivet_1_1FunctionSignature.html#a53338d56425f40f7daa204217167c6c4">   41</a></span>        <a class="code hl_struct" href="structRivet_1_1TypeInfo.html">TypeInfo</a> <a class="code hl_variable" href="structRivet_1_1FunctionSignature.html#a53338d56425f40f7daa204217167c6c4">ReturnType</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structRivet_1_1FunctionSignature.html#a267f2b4d8e7db8e7230f2880ffb0bc8d">   42</a></span>        std::vector&lt;TypeInfo&gt; <a class="code hl_variable" href="structRivet_1_1FunctionSignature.html#a267f2b4d8e7db8e7230f2880ffb0bc8d">Params</a>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    };</div>
 </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e">   52</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e">enterScope</a>() {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            Scopes.push_back(std::unordered_map&lt;std::string, Symbol&gt;());</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        }</div>
-</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22">   59</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22">exitScope</a>() {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keywordflow">if</span> (Scopes.size() &gt; 1) {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                Scopes.pop_back();</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        }</div>
-</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="};">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html">   53</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRivet_1_1SymbolTable.html">SymbolTable</a> {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        std::vector&lt;std::unordered_map&lt;std::string, Symbol&gt;&gt; Scopes; </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html#a09011105d0cf8ab3be028b8f213c9bc7">   63</a></span>        std::unordered_map&lt;std::string, FunctionSignature&gt; <a class="code hl_variable" href="classRivet_1_1SymbolTable.html#a09011105d0cf8ab3be028b8f213c9bc7">FunctionRegistry</a>;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a">   74</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a">insert</a>(<span class="keyword">const</span> std::string&amp; name, <a class="code hl_struct" href="structRivet_1_1TypeInfo.html">TypeInfo</a> type, <span class="keywordtype">bool</span> isInitialized = <span class="keyword">false</span>) {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="keyword">auto</span>&amp; currentScope = Scopes.back();</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keywordflow">if</span> (currentScope.find(name) != currentScope.end()) {</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Variable already declared in this exact scope</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            }</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            currentScope[name] = <a class="code hl_struct" href="structRivet_1_1Symbol.html">Symbol</a>{name, type, isInitialized};</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        }</div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html#aaafaf27e01119f2355189ec39c84fde9">   68</a></span>        <a class="code hl_function" href="classRivet_1_1SymbolTable.html#aaafaf27e01119f2355189ec39c84fde9">SymbolTable</a>() {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <a class="code hl_function" href="classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e">enterScope</a>();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        }</div>
 </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html#aff47a5345d3544d3f2bedcf4c2274c2e">   89</a></span>        <a class="code hl_struct" href="structRivet_1_1Symbol.html">Symbol</a>* <a class="code hl_function" href="classRivet_1_1SymbolTable.html#aff47a5345d3544d3f2bedcf4c2274c2e">lookup</a>(<span class="keyword">const</span> std::string&amp; name) {</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = Scopes.rbegin(); it != Scopes.rend(); ++it) {</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                <span class="keywordflow">if</span> (it-&gt;find(name) != it-&gt;end()) {</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                    <span class="keywordflow">return</span> &amp;((*it)[name]);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            }</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>; </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e">   75</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e">enterScope</a>() {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            Scopes.push_back(std::unordered_map&lt;std::string, Symbol&gt;());</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        }</div>
 </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    };</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22">   82</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22">exitScope</a>() {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">if</span> (Scopes.size() &gt; 1) {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                Scopes.pop_back();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        }</div>
 </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a">   97</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a">insert</a>(<span class="keyword">const</span> std::string&amp; name, <a class="code hl_struct" href="structRivet_1_1TypeInfo.html">TypeInfo</a> type, <span class="keywordtype">bool</span> isInitialized = <span class="keyword">false</span>) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keyword">auto</span>&amp; currentScope = Scopes.back();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <span class="keywordflow">if</span> (currentScope.find(name) != currentScope.end()) {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Variable already declared in this exact scope</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            currentScope[name] = <a class="code hl_struct" href="structRivet_1_1Symbol.html">Symbol</a>{name, type, isInitialized};</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        }</div>
+</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classRivet_1_1SymbolTable.html#aff47a5345d3544d3f2bedcf4c2274c2e">  112</a></span>        <a class="code hl_struct" href="structRivet_1_1Symbol.html">Symbol</a>* <a class="code hl_function" href="classRivet_1_1SymbolTable.html#aff47a5345d3544d3f2bedcf4c2274c2e">lookup</a>(<span class="keyword">const</span> std::string&amp; name) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = Scopes.rbegin(); it != Scopes.rend(); ++it) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                <span class="keywordflow">if</span> (it-&gt;find(name) != it-&gt;end()) {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                    <span class="keywordflow">return</span> &amp;((*it)[name]);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>; </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        }</div>
+</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    };</div>
+</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>}</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aType_8h_html"><div class="ttname"><a href="Type_8h.html">Type.h</a></div><div class="ttdoc">Defines the basic types supported by the Rivet type system.</div></div>
-<div class="ttc" id="aclassRivet_1_1SymbolTable_html"><div class="ttname"><a href="classRivet_1_1SymbolTable.html">Rivet::SymbolTable</a></div><div class="ttdoc">A hierarchical structure for managing variable scopes.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00037">SymbolTable.h:37</a></div></div>
-<div class="ttc" id="aclassRivet_1_1SymbolTable_html_a0936db332f9cef233ed7be73cdaed58a"><div class="ttname"><a href="classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a">Rivet::SymbolTable::insert</a></div><div class="ttdeci">bool insert(const std::string &amp;name, TypeInfo type, bool isInitialized=false)</div><div class="ttdoc">Declares a new variable in the latest/current block scope.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00074">SymbolTable.h:74</a></div></div>
-<div class="ttc" id="aclassRivet_1_1SymbolTable_html_a976f81141cddc387bce3fe95145ebb22"><div class="ttname"><a href="classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22">Rivet::SymbolTable::exitScope</a></div><div class="ttdeci">void exitScope()</div><div class="ttdoc">Destroys the deepest active scope, popping it from the stack.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00059">SymbolTable.h:59</a></div></div>
-<div class="ttc" id="aclassRivet_1_1SymbolTable_html_aaafaf27e01119f2355189ec39c84fde9"><div class="ttname"><a href="classRivet_1_1SymbolTable.html#aaafaf27e01119f2355189ec39c84fde9">Rivet::SymbolTable::SymbolTable</a></div><div class="ttdeci">SymbolTable()</div><div class="ttdoc">Constructs a new SymbolTable and initializes the global scope.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00045">SymbolTable.h:45</a></div></div>
-<div class="ttc" id="aclassRivet_1_1SymbolTable_html_acb51f1288693460fea1e197e6d27d20e"><div class="ttname"><a href="classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e">Rivet::SymbolTable::enterScope</a></div><div class="ttdeci">void enterScope()</div><div class="ttdoc">Creates a new inner scope and pushes it onto the stack.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00052">SymbolTable.h:52</a></div></div>
-<div class="ttc" id="aclassRivet_1_1SymbolTable_html_aff47a5345d3544d3f2bedcf4c2274c2e"><div class="ttname"><a href="classRivet_1_1SymbolTable.html#aff47a5345d3544d3f2bedcf4c2274c2e">Rivet::SymbolTable::lookup</a></div><div class="ttdeci">Symbol * lookup(const std::string &amp;name)</div><div class="ttdoc">Searches for a variable traversing upward from the current scope to the global scope.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00089">SymbolTable.h:89</a></div></div>
+<div class="ttc" id="aclassRivet_1_1SymbolTable_html"><div class="ttname"><a href="classRivet_1_1SymbolTable.html">Rivet::SymbolTable</a></div><div class="ttdoc">A hierarchical structure for managing variable scopes.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00053">SymbolTable.h:53</a></div></div>
+<div class="ttc" id="aclassRivet_1_1SymbolTable_html_a09011105d0cf8ab3be028b8f213c9bc7"><div class="ttname"><a href="classRivet_1_1SymbolTable.html#a09011105d0cf8ab3be028b8f213c9bc7">Rivet::SymbolTable::FunctionRegistry</a></div><div class="ttdeci">std::unordered_map&lt; std::string, FunctionSignature &gt; FunctionRegistry</div><div class="ttdoc">Registry of all known function signatures, populated during the semantic pre-scan pass.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00063">SymbolTable.h:63</a></div></div>
+<div class="ttc" id="aclassRivet_1_1SymbolTable_html_a0936db332f9cef233ed7be73cdaed58a"><div class="ttname"><a href="classRivet_1_1SymbolTable.html#a0936db332f9cef233ed7be73cdaed58a">Rivet::SymbolTable::insert</a></div><div class="ttdeci">bool insert(const std::string &amp;name, TypeInfo type, bool isInitialized=false)</div><div class="ttdoc">Declares a new variable in the latest/current block scope.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00097">SymbolTable.h:97</a></div></div>
+<div class="ttc" id="aclassRivet_1_1SymbolTable_html_a976f81141cddc387bce3fe95145ebb22"><div class="ttname"><a href="classRivet_1_1SymbolTable.html#a976f81141cddc387bce3fe95145ebb22">Rivet::SymbolTable::exitScope</a></div><div class="ttdeci">void exitScope()</div><div class="ttdoc">Destroys the deepest active scope, popping it from the stack.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00082">SymbolTable.h:82</a></div></div>
+<div class="ttc" id="aclassRivet_1_1SymbolTable_html_aaafaf27e01119f2355189ec39c84fde9"><div class="ttname"><a href="classRivet_1_1SymbolTable.html#aaafaf27e01119f2355189ec39c84fde9">Rivet::SymbolTable::SymbolTable</a></div><div class="ttdeci">SymbolTable()</div><div class="ttdoc">Constructs a new SymbolTable and initializes the global scope.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00068">SymbolTable.h:68</a></div></div>
+<div class="ttc" id="aclassRivet_1_1SymbolTable_html_acb51f1288693460fea1e197e6d27d20e"><div class="ttname"><a href="classRivet_1_1SymbolTable.html#acb51f1288693460fea1e197e6d27d20e">Rivet::SymbolTable::enterScope</a></div><div class="ttdeci">void enterScope()</div><div class="ttdoc">Creates a new inner scope and pushes it onto the stack.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00075">SymbolTable.h:75</a></div></div>
+<div class="ttc" id="aclassRivet_1_1SymbolTable_html_aff47a5345d3544d3f2bedcf4c2274c2e"><div class="ttname"><a href="classRivet_1_1SymbolTable.html#aff47a5345d3544d3f2bedcf4c2274c2e">Rivet::SymbolTable::lookup</a></div><div class="ttdeci">Symbol * lookup(const std::string &amp;name)</div><div class="ttdoc">Searches for a variable traversing upward from the current scope to the global scope.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00112">SymbolTable.h:112</a></div></div>
 <div class="ttc" id="anamespaceRivet_html"><div class="ttname"><a href="namespaceRivet.html">Rivet</a></div><div class="ttdef"><b>Definition</b> <a href="AST_8h_source.html#l00025">AST.h:26</a></div></div>
+<div class="ttc" id="astructRivet_1_1FunctionSignature_html"><div class="ttname"><a href="structRivet_1_1FunctionSignature.html">Rivet::FunctionSignature</a></div><div class="ttdoc">Stores a function's semantic signature independent of LLVM IR.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00040">SymbolTable.h:40</a></div></div>
+<div class="ttc" id="astructRivet_1_1FunctionSignature_html_a267f2b4d8e7db8e7230f2880ffb0bc8d"><div class="ttname"><a href="structRivet_1_1FunctionSignature.html#a267f2b4d8e7db8e7230f2880ffb0bc8d">Rivet::FunctionSignature::Params</a></div><div class="ttdeci">std::vector&lt; TypeInfo &gt; Params</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00042">SymbolTable.h:42</a></div></div>
+<div class="ttc" id="astructRivet_1_1FunctionSignature_html_a53338d56425f40f7daa204217167c6c4"><div class="ttname"><a href="structRivet_1_1FunctionSignature.html#a53338d56425f40f7daa204217167c6c4">Rivet::FunctionSignature::ReturnType</a></div><div class="ttdeci">TypeInfo ReturnType</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00041">SymbolTable.h:41</a></div></div>
 <div class="ttc" id="astructRivet_1_1Symbol_html"><div class="ttname"><a href="structRivet_1_1Symbol.html">Rivet::Symbol</a></div><div class="ttdoc">Contains data associated with a specific variable inside the symbol table.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00023">SymbolTable.h:23</a></div></div>
 <div class="ttc" id="astructRivet_1_1Symbol_html_a00417dbcdd4b70a83c534b7d588546e7"><div class="ttname"><a href="structRivet_1_1Symbol.html#a00417dbcdd4b70a83c534b7d588546e7">Rivet::Symbol::IsInitialized</a></div><div class="ttdeci">bool IsInitialized</div><div class="ttdoc">Tracks whether the variable has been initialized.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00026">SymbolTable.h:26</a></div></div>
 <div class="ttc" id="astructRivet_1_1Symbol_html_ac41e773774ee8de5a89f9ba2304a9f76"><div class="ttname"><a href="structRivet_1_1Symbol.html#ac41e773774ee8de5a89f9ba2304a9f76">Rivet::Symbol::Type</a></div><div class="ttdeci">TypeInfo Type</div><div class="ttdoc">Type information for the variable.</div><div class="ttdef"><b>Definition</b> <a href="SymbolTable_8h_source.html#l00025">SymbolTable.h:25</a></div></div>

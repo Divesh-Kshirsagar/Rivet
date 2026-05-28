@@ -1490,9 +1490,9 @@
 
 
 <h1 id="internals-overview">Internals Overview<a class="headerlink" href="#internals-overview" title="Permanent link">&para;</a></h1>
-<p>This page documents the actual compiler pipeline as implemented in this repository.</p>
+<p>This page describes the current compiler pipeline as implemented in this repository. It is intended for readers who want to connect the language features to the codebase.</p>
 <h2 id="high-level-architecture">High-Level Architecture<a class="headerlink" href="#high-level-architecture" title="Permanent link">&para;</a></h2>
-<p>Rivet currently uses a classic front-end + LLVM IR backend design:</p>
+<p>Rivet uses a classic frontend + LLVM backend structure:</p>
 <ol>
 <li><strong>Lexer</strong> (<code>src/Lexer.cpp</code>)</li>
 <li><strong>Parser</strong> (<code>src/Parser.cpp</code>)</li>
@@ -1501,67 +1501,61 @@
 <li><strong>Driver</strong> (<code>src/main.cpp</code>)</li>
 </ol>
 <h2 id="lexer">Lexer<a class="headerlink" href="#lexer" title="Permanent link">&para;</a></h2>
-<p>The lexer reads a file stream and returns integer tokens.</p>
+<p>The lexer reads a file stream and emits integer tokens:</p>
 <ul>
 <li>Keywords are negative enum values (for example <code>tok_if</code>, <code>tok_import</code>).</li>
-<li>Punctuation/operators such as <code>+</code>, <code>=</code>, <code>&lt;</code>, <code>(</code> are returned as ASCII values.</li>
-<li>Supports line comments <code>// ...</code>.</li>
-<li>Tracks <code>CurrentLine</code> and <code>CurrentColumn</code> for diagnostics.</li>
+<li>Single-character operators and punctuation are returned as ASCII values.</li>
+<li>Line and column are tracked for diagnostics.</li>
+<li>Line comments (<code>//</code>) are supported.</li>
 </ul>
 <h2 id="parser">Parser<a class="headerlink" href="#parser" title="Permanent link">&para;</a></h2>
-<p>Parser is recursive descent with operator-precedence parsing for binary expressions.</p>
+<p>The parser is recursive descent with a precedence-aware binary expression parser.</p>
 <h3 id="statement-entry-points">Statement entry points<a class="headerlink" href="#statement-entry-points" title="Permanent link">&para;</a></h3>
-<p>Current statement parsing includes:</p>
+<p>Current statements include:</p>
 <ul>
 <li><code>import &lt;id&gt;;</code></li>
-<li>variable declarations (<code>int ...</code>)</li>
+<li>variable declarations (<code>int</code>, <code>str</code>, <code>int ref</code>, arrays)</li>
 <li><code>if (...) { ... } [else { ... }]</code></li>
 <li><code>while (...) { ... }</code></li>
+<li><code>for (i in start to end [step step])</code></li>
+<li><code>for (item in arrayName)</code></li>
 <li>blocks <code>{ ... }</code></li>
 <li>expression statements</li>
 <li>empty statement <code>;</code></li>
 </ul>
 <h3 id="expression-parsing">Expression parsing<a class="headerlink" href="#expression-parsing" title="Permanent link">&para;</a></h3>
+<p>Primary expressions include:</p>
 <ul>
-<li>primary: number, identifier/call, parenthesized expression</li>
-<li>binary RHS parser (<code>ParseBinOpRHS</code>) with precedence table</li>
+<li>number literals</li>
+<li>string literals</li>
+<li>identifiers and calls</li>
+<li>parenthesized expressions</li>
 </ul>
+<p>The <code>ParseBinOpRHS</code> function applies operator precedence for binary expressions.</p>
 <h3 id="import-flow">Import flow<a class="headerlink" href="#import-flow" title="Permanent link">&para;</a></h3>
-<p><code>ParseImport</code> parses module name, avoids duplicate imports, and recursively parses imported source file into an <code>ImportAST</code> node.</p>
-<p>Path strategy currently:</p>
-<ol>
-<li><code>lib/&lt;module&gt;.rvt</code></li>
-<li>fallback <code>../lib/&lt;module&gt;.rvt</code></li>
-</ol>
+<p><code>ParseImport</code> resolves the module name, avoids duplicate imports, and parses the imported file into an <code>ImportAST</code> node. Import search paths currently include <code>lib/&lt;module&gt;.rvt</code> and <code>../lib/&lt;module&gt;.rvt</code>.</p>
 <h2 id="ast-layer">AST Layer<a class="headerlink" href="#ast-layer" title="Permanent link">&para;</a></h2>
-<p>Main nodes currently present:</p>
+<p>Key AST nodes include:</p>
 <ul>
-<li><code>NumberAST</code></li>
-<li><code>VariableAST</code></li>
-<li><code>VariableDeclAST</code></li>
-<li><code>BinaryOpAST</code></li>
-<li><code>BlockAST</code></li>
-<li><code>IfAST</code></li>
-<li><code>WhileAST</code></li>
-<li><code>CallAST</code></li>
-<li><code>ImportAST</code></li>
+<li>literals and variables (<code>NumberAST</code>, <code>StringLiteralAST</code>, <code>VariableAST</code>)</li>
+<li>declarations (<code>VariableDeclAST</code>)</li>
+<li>operators (<code>BinaryOpAST</code>, <code>UnaryOpAST</code>)</li>
+<li>control flow (<code>IfAST</code>, <code>WhileAST</code>, <code>ForAST</code>, <code>BlockAST</code>)</li>
+<li>calls and imports (<code>CallAST</code>, <code>ImportAST</code>)</li>
+<li>memory nodes (<code>AddressOfAST</code>, <code>DerefAST</code>, <code>IndexAST</code>)</li>
 </ul>
-<p>Each node provides:</p>
-<ul>
-<li><code>dump()</code> for debug tree output</li>
-<li><code>codegen()</code> for LLVM generation</li>
-</ul>
+<p>Each node provides <code>dump()</code> for debug output and <code>codegen()</code> for LLVM emission.</p>
 <h2 id="driver-main">Driver (<code>main</code>)<a class="headerlink" href="#driver-main" title="Permanent link">&para;</a></h2>
 <p>The driver:</p>
 <ol>
-<li>Loads source file.</li>
-<li>Parses to top-level AST node list.</li>
-<li>Optionally dumps AST.</li>
-<li>Creates LLVM module context.</li>
-<li>Builds synthetic entry function <code>__rivet_entry</code>.</li>
+<li>Loads the source file.</li>
+<li>Parses to a top-level AST node list.</li>
+<li>Optionally dumps the AST.</li>
+<li>Initializes the LLVM module context.</li>
+<li>Builds a synthetic entry function <code>__rivet_entry</code>.</li>
 <li>Codegens each top-level node.</li>
-<li>Emits <code>ret</code> if current block has no terminator.</li>
-<li>Prints full LLVM IR.</li>
+<li>Emits a return if the block lacks a terminator.</li>
+<li>Prints the full LLVM IR.</li>
 </ol>
 
 

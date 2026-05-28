@@ -1227,10 +1227,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#variable-lowering" class="md-nav__link">
+  <a href="#variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Variable Lowering
+        Variables
       
     </span>
   </a>
@@ -1261,10 +1261,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ifelse" class="md-nav__link">
+  <a href="#if-else" class="md-nav__link">
     <span class="md-ellipsis">
       
-        If/Else
+        If / Else
       
     </span>
   </a>
@@ -1282,8 +1282,30 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strings
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1390,10 +1412,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#variable-lowering" class="md-nav__link">
+  <a href="#variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Variable Lowering
+        Variables
       
     </span>
   </a>
@@ -1424,10 +1446,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ifelse" class="md-nav__link">
+  <a href="#if-else" class="md-nav__link">
     <span class="md-ellipsis">
       
-        If/Else
+        If / Else
       
     </span>
   </a>
@@ -1445,8 +1467,30 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strings
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1490,7 +1534,7 @@
 
 
 <h1 id="llvm-backend-details">LLVM Backend Details<a class="headerlink" href="#llvm-backend-details" title="Permanent link">&para;</a></h1>
-<p>This page explains how Rivet lowers language constructs into LLVM IR today.</p>
+<p>This page explains how Rivet lowers language constructs into LLVM IR in the current implementation.</p>
 <h2 id="module-and-entry-function">Module and Entry Function<a class="headerlink" href="#module-and-entry-function" title="Permanent link">&para;</a></h2>
 <p>Codegen initializes:</p>
 <ul>
@@ -1501,12 +1545,11 @@
 <p>Top-level code is emitted into:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">define</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="vg">@__rivet_entry</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="nl">entry:</span>
-<span class="w">    </span><span class="p">...</span>
+<span class="w">  </span><span class="p">...</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<h2 id="variable-lowering">Variable Lowering<a class="headerlink" href="#variable-lowering" title="Permanent link">&para;</a></h2>
-<p>Declaration:</p>
+<h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><code>int x = 7;
 </code></pre></div>
 
@@ -1515,7 +1558,7 @@
 <span class="k">store</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="kt">ptr</span><span class="w"> </span><span class="nv">%x</span>
 </code></pre></div>
 
-<p>Variable read uses <code>load</code>.</p>
+<p>Variable reads use <code>load</code>.</p>
 <h2 id="binary-operators">Binary Operators<a class="headerlink" href="#binary-operators" title="Permanent link">&para;</a></h2>
 <p>Current mapping:</p>
 <ul>
@@ -1534,14 +1577,14 @@
 <li><code>=</code> -&gt; <code>store</code> into variable slot and return RHS value</li>
 </ul>
 <h2 id="control-flow-lowering">Control Flow Lowering<a class="headerlink" href="#control-flow-lowering" title="Permanent link">&para;</a></h2>
-<h3 id="ifelse">If/Else<a class="headerlink" href="#ifelse" title="Permanent link">&para;</a></h3>
+<h3 id="if-else">If / Else<a class="headerlink" href="#if-else" title="Permanent link">&para;</a></h3>
 <p>If creates blocks:</p>
 <ul>
 <li><code>then</code></li>
 <li><code>else</code></li>
 <li><code>ifcont</code></li>
 </ul>
-<p>Condition is tested against zero for branch selection.</p>
+<p>The condition is tested against zero for branch selection.</p>
 <h3 id="while">While<a class="headerlink" href="#while" title="Permanent link">&para;</a></h3>
 <p>While creates blocks:</p>
 <ul>
@@ -1556,14 +1599,17 @@
 <li>branch to <code>loop</code> or <code>afterloop</code></li>
 <li>loop body branches back to <code>cond</code></li>
 </ol>
+<h3 id="for">For<a class="headerlink" href="#for" title="Permanent link">&para;</a></h3>
+<p><code>for</code> lowers to a loop with a dedicated induction variable and a step value. It uses the same structure as <code>while</code>, but emits initialization and increment logic around the loop body.</p>
+<h2 id="strings">Strings<a class="headerlink" href="#strings" title="Permanent link">&para;</a></h2>
+<p>Strings are represented as a simple struct containing a pointer and length. The backend builds a <code>String</code> struct type in the LLVM context and reuses it for string values.</p>
 <h2 id="imports-and-ir">Imports and IR<a class="headerlink" href="#imports-and-ir" title="Permanent link">&para;</a></h2>
-<p><code>ImportAST::codegen()</code> codegens all imported AST nodes in sequence before continuing with the importing file.
-This effectively injects imported declarations/statements into the same module.</p>
+<p><code>ImportAST::codegen()</code> emits all imported nodes before continuing with the importing file. This effectively injects imported declarations and statements into the same module.</p>
 <h2 id="current-backend-limitations">Current Backend Limitations<a class="headerlink" href="#current-backend-limitations" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Unary operations are not lowered yet.</li>
-<li>More advanced type system and arrays are not implemented.</li>
-<li>Function declaration pipeline is incomplete in parser/codegen integration.</li>
+<li>Unary lowering is not fully implemented yet.</li>
+<li>Function declarations are not yet integrated into parser and codegen.</li>
+<li>Some edge cases in array and reference semantics are still being refined.</li>
 </ul>
 
 
