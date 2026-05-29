@@ -74,8 +74,14 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
+<dt>Member <a class="el" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>  (int argc, char **argv)</dt>
+<dd><a class="anchor" id="_todo000005"></a>Improve diagnostics quality for parse/codegen errors and surface line/column context consistently across all failure paths.  </dd>
+<dt>Member <a class="el" href="structRivet_1_1CodeGenContext.html#af1125911bc1c36d6c934dd5559865381">Rivet::CodeGenContext::NamedValues</a>  </dt>
+<dd><a class="anchor" id="_todo000002"></a>Add <code>std::unique_ptr&lt;llvm::DIBuilder&gt; DBuilder;</code> to emit DWARF debug metadata (gdb/lldb support).  </dd>
 <dt>Class <a class="el" href="classRivet_1_1VolatileStoreAST.html">Rivet::VolatileStoreAST</a>  </dt>
-<dd><a class="anchor" id="_todo000001"></a>Addresses above 0x7FFFFFFF will overflow signed int — add <code>uint</code> type to support full 32-bit address space (e.g. NVIC at 0xE000E000). </dd>
+<dd><a class="anchor" id="_todo000001"></a>Addresses above 0x7FFFFFFF will overflow signed int — add <code>uint</code> type to support full 32-bit address space (e.g. NVIC at 0xE000E000).  </dd>
+<dt>Member <a class="el" href="classRivet_1_1VolatileStoreAST.html#a902328f10d889ed0077d4d50b57e470e">Rivet::VolatileStoreAST::codegen</a>  () override</dt>
+<dd><a class="anchor" id="_todo000004"></a>For real hardware UART writes, gate each transmit on the TXE status bit (or equivalent) to avoid dropped characters. </dd>
 </dl>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

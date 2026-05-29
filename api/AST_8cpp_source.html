@@ -1172,8 +1172,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01019" name="l01019"></a><span class="lineno"> 1019</span>        llvm::StoreInst *Store = <a class="code hl_variable" href="namespaceRivet.html#ac23ba1a8e5fe790dd49687e69b0a4ccd">CompilerState</a>.<a class="code hl_variable" href="structRivet_1_1CodeGenContext.html#acd83b2152c8cbbe4970f5a3cc4643784">Builder</a>-&gt;CreateStore(DataVal, PtrVal);</div>
 <div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span>        Store-&gt;setVolatile(<span class="keyword">true</span>);</div>
 <div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span> </div>
-<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span>        <span class="comment">// TODO: USART2 may need a status register check (TXE bit) before each write</span></div>
-<div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span>        <span class="comment">//       to avoid dropped characters on real silicon. For Renode this is fine.</span></div>
 <div class="line"><a id="l01024" name="l01024"></a><span class="lineno"> 1024</span> </div>
 <div class="line"><a id="l01025" name="l01025"></a><span class="lineno"> 1025</span>        <span class="keywordflow">return</span> Store;</div>
 <div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span>    }</div>

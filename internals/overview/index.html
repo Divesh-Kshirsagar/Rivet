@@ -1506,7 +1506,7 @@
 <li>Keywords are negative enum values (for example <code>tok_if</code>, <code>tok_import</code>).</li>
 <li>Single-character operators and punctuation are returned as ASCII values.</li>
 <li>Line and column are tracked for diagnostics.</li>
-<li>Line comments (<code>//</code>) are supported.</li>
+<li>Line comments (<code>//</code>) and block comments (<code>/* ... */</code>) are supported.</li>
 </ul>
 <h2 id="parser">Parser<a class="headerlink" href="#parser" title="Permanent link">&para;</a></h2>
 <p>The parser is recursive descent with a precedence-aware binary expression parser.</p>
@@ -1515,9 +1515,10 @@
 <ul>
 <li><code>import &lt;id&gt;;</code></li>
 <li>variable declarations (<code>int</code>, <code>str</code>, <code>int ref</code>, arrays)</li>
+<li>optional refs (<code>int optref</code>) and <code>null</code></li>
 <li><code>if (...) { ... } [else { ... }]</code></li>
 <li><code>while (...) { ... }</code></li>
-<li><code>for (i in start to end [step step])</code></li>
+<li><code>for (i in start to end [step &lt;expr&gt;])</code></li>
 <li><code>for (item in arrayName)</code></li>
 <li>blocks <code>{ ... }</code></li>
 <li>expression statements</li>
