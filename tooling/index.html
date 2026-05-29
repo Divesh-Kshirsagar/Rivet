@@ -1458,6 +1458,14 @@
 <span class="w">  </span>--mcpu<span class="o">=</span>cortex-m4
 </code></pre></div>
 
+<p>Manual AST/IR suite (no pass/fail gating, captures logs for inspection):</p>
+<div class="codehilite"><pre><span></span><code>./scripts/run_ast_ir_suite.sh
+</code></pre></div>
+
+<p>Suite artifacts:
+- Test cases: <code>tests/ast_ir/</code>
+- Import fixtures: <code>tests/fixtures/lib/</code>
+- Captured outputs: <code>tests/out/</code></p>
 <h2 id="practical-notes">Practical Notes<a class="headerlink" href="#practical-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The compiler prints LLVM IR to stdout as part of normal execution.</li>
