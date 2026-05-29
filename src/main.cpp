@@ -40,8 +40,8 @@ using namespace Rivet;
  * [--ram-size=<size>]`
  * @return int Returns 0 on successful compilation, 1 on failure (e.g., syntax/semantic errors or missing input).
  */
-// TODO: Try to use better error messages cause the current ones are pretty bad, especially for syntax errors. Maybe
-// include line/column info in the error messages? --- IGNORE ---
+/// @todo Improve diagnostics quality for parse/codegen errors and surface
+/// line/column context consistently across all failure paths.
 int main ( int argc, char **argv )
 {
     auto printUsage = [] ()

@@ -19,7 +19,7 @@ The lexer reads a file stream and emits integer tokens:
 - Keywords are negative enum values (for example `tok_if`, `tok_import`).
 - Single-character operators and punctuation are returned as ASCII values.
 - Line and column are tracked for diagnostics.
-- Line comments (`//`) are supported.
+- Line comments (`//`) and block comments (`/* ... */`) are supported.
 
 ## Parser
 
@@ -31,9 +31,10 @@ Current statements include:
 
 - `import <id>;`
 - variable declarations (`int`, `str`, `int ref`, arrays)
+- optional refs (`int optref`) and `null`
 - `if (...) { ... } [else { ... }]`
 - `while (...) { ... }`
-- `for (i in start to end [step step])`
+- `for (i in start to end [step <expr>])`
 - `for (item in arrayName)`
 - blocks `{ ... }`
 - expression statements

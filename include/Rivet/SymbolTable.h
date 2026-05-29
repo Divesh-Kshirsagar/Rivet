@@ -25,9 +25,9 @@ namespace Rivet {
         TypeInfo Type;          ///< Type information for the variable.
         bool IsInitialized;     ///< Tracks whether the variable has been initialized.
         
-        // TODO: Add `bool isMutable` to support const/immutable variables.
-        // TODO: Add `llvm::Value* MemoryLocation` to unify semantic analysis and code generation,
-        //       which would eventually replace `CompilerState.NamedValues`.
+        /// @todo Add `bool IsMutable` to support const/immutable variables.
+        /// @todo Add `llvm::Value* MemoryLocation` to unify semantic analysis
+        /// and code generation, eventually replacing `CompilerState.NamedValues`.
     };
 
     /**

@@ -19,12 +19,10 @@
 <import_statement> ::= "import" <identifier> ";"
 
 // --- Types & Variables ---
-<type_specifier> ::= "int" | "int" "ref" | "str" | "void"
-                   | "int" "[" <number> "]"
-                   | "str" "[" <number> "]"
+<type_specifier> ::= "int" [ ("ref" | "optref") ] [ "[" <number> "]" ]
+                   | "str"
 
 <variable_declaration> ::= <type_specifier> <identifier> "=" <expression> ";"
-                         | <type_specifier> <identifier> "=" "{" <initializer_list> "}" ";"
                          | <type_specifier> <identifier> ";"
 
 <initializer_list> ::= <expression> { "," <expression> }
@@ -38,7 +36,7 @@
 
 <param_list> ::= <param> { "," <param> }
 
-<param> ::= ( "int" | "str" ) [ "ref" ] <identifier>
+<param> ::= ( "int" | "str" ) [ "ref" | "optref" ] <identifier>
 
 // --- Statements ---
 <compound_statement> ::= "{" <statement_list> "}"
@@ -54,10 +52,12 @@
 
 <expression_statement> ::= [ <expression> ] ";"
 
-<selection_statement> ::= "if" "(" <expression> ")" <statement> [ "else" <statement> ]
+<selection_statement> ::= "if" "(" <expression> ")" <compound_statement>
+                          [ "else" <compound_statement> ]
 
-<iteration_statement> ::= "while" "(" <expression> ")" <statement>
+<iteration_statement> ::= "while" "(" <expression> ")" <compound_statement>
                       | "for" "(" <identifier> "in" <expression> "to" <expression> [ "step" <expression> ] ")" <compound_statement>
+                      | "for" "(" <identifier> "in" <identifier> ")" <compound_statement>
 
 <return_statement> ::= "return" [ <expression> ] ";"
 
@@ -66,8 +66,8 @@
 <expression> ::= <assignment_target> "=" <expression> 
                | <logical_or_expression>
 
-<assignment_target> ::= <identifier> 
-                      | "deref" <identifier>
+<assignment_target> ::= <identifier>
+                      | "deref" <expression>
                       | <identifier> "[" <expression> "]"
 
 <logical_or_expression> ::= <logical_and_expression> { "or" <logical_and_expression> }
@@ -80,7 +80,7 @@
 
 <relational_expression> ::= <shift_expression> { <relational_operator> <shift_expression> }
 
-<relational_operator> ::= "<" | "<=" | ">" | ">="
+<relational_operator> ::= "<" | ">"
 
 <shift_expression> ::= <additive_expression> { <shift_operator> <additive_expression> }
 
@@ -92,12 +92,12 @@
 
 <term> ::= <unary_expression> { <multiplicative_operator> <unary_expression> }
 
-<multiplicative_operator> ::= "*" | "/" | "%"
+<multiplicative_operator> ::= "*" | "/"
 
 <unary_expression> ::= "not" <unary_expression>
                      | "-" <unary_expression>
                      | "address_of" <identifier>
-                     | "deref" <identifier>
+                     | "deref" <unary_expression>
                      | <factor>
 
 <factor> ::= "(" <expression> ")" 
@@ -105,6 +105,7 @@
            | <identifier> "[" <expression> "]"
            | <number> 
            | <string>
+           | "null"
            | <function_call>
 
 <string> ::= "\"" { <any_character_except_quote> } "\""

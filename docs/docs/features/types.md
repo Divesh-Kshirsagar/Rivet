@@ -54,5 +54,5 @@ Array indexing works on both the left and right side of assignments.
 
 ## Notes
 
-- `void` exists as a token, but full function signatures are still under construction.
+- `void` is valid as a function return type (for example `fun void log_value(int x) { ... }`), not as a variable type.
 - The type checker continues to expand; some edge cases are still being refined.

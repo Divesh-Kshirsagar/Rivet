@@ -37,8 +37,8 @@ By default, installer targets `/usr/local/bin` so you can run `rivet` directly.
   - Supports both `//` and `/* ... */` comments.
 - **Parser coverage:**
   - Variable declarations: `int`, `str`, `int ref`, `int optref`, fixed-size `int[N]` arrays.
-  - Expressions: literals, identifiers, calls, indexing, assignment, arithmetic/comparison, keyword ops (`and`, `or`, `lsft`, `rsft`), unary (`-`, `not`), `address_of`, `deref`, `null`.
-  - Statements: expression statements, empty `;`, blocks, `if/else`, `while`, `for`.
+  - Expressions: literals, identifiers, calls, indexing, assignment, arithmetic (`+`, `-`, `*`, `/`), comparisons (`<`, `>`, `==`, `!=`), keyword ops (`and`, `or`, `lsft`, `rsft`), unary (`-`, `not`), `address_of`, `deref`, `null`.
+  - Statements: expression statements, empty `;`, blocks, `if/else` (block bodies), `while` (block body), `for`.
   - Functions: `fun`, typed return (`int`, `str`, `void`), typed parameters, `return`.
   - Imports: `import module;` with duplicate-import guard.
   - Intrinsic: `__volatile_store(address, value)`.

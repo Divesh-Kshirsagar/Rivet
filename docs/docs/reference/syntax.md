@@ -28,6 +28,10 @@ int optref maybe = null;
 int[4] nums;
 ```
 
+Notes:
+- `void` is not a variable type.
+- `str ref` and `str optref` are not currently supported.
+
 ## Functions
 
 ```rivet
@@ -61,6 +65,9 @@ for (item in nums) {
   x = x + item;
 }
 ```
+
+Notes:
+- `if`, `else`, and `while` bodies must be blocks (`{ ... }`).
 
 ## Expressions
 

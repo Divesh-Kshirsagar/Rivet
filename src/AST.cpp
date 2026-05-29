@@ -1019,8 +1019,8 @@ namespace Rivet
         llvm::StoreInst *Store = CompilerState.Builder->CreateStore(DataVal, PtrVal);
         Store->setVolatile(true);
 
-        // TODO: USART2 may need a status register check (TXE bit) before each write
-        //       to avoid dropped characters on real silicon. For Renode this is fine.
+        /// @todo For real hardware UART writes, gate each transmit on the TXE
+        /// status bit (or equivalent) to avoid dropped characters.
 
         return Store;
     }

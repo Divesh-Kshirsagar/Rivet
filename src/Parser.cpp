@@ -183,8 +183,8 @@ namespace Rivet
         return std::make_unique<WhileAST>(std::move(Cond), std::move(Body));
     }
 
-    // Dummy implementations for now, to be filled in later
-    // TODO: Replace temroary placeholder with actual parsing logic
+    // Parses a braced block and recovers from statement-level failures by
+    // advancing one token to continue parsing the rest of the block.
     std::unique_ptr<ASTNode> Parser::ParseBlock()
     {
         if (CurTok != '{')

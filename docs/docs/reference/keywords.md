@@ -44,4 +44,5 @@ This page lists Rivet language keywords you can use in source files in `v0.0.1`.
 
 - `and`, `or`, `lsft`, and `rsft` are binary operators.
 - `not` and `-` are unary operators.
+- `void` is used as a function return type, not as a variable type.
 - `__volatile_store(address, value)` is available as a compiler intrinsic call form.
