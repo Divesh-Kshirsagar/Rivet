@@ -1,0 +1,5 @@
+import mathx;
+
+fun int main() {
+    return triple(5);
+}

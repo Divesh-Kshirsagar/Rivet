@@ -1,0 +1,7 @@
+fun int main() {
+    return twice(11);
+}
+
+fun int twice(int n) {
+    return n + n;
+}

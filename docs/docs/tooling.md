@@ -59,6 +59,17 @@ Cross-target compile options:
   --mcpu=cortex-m4
 ```
 
+Manual AST/IR suite (no pass/fail gating, captures logs for inspection):
+
+```bash
+./scripts/run_ast_ir_suite.sh
+```
+
+Suite artifacts:
+- Test cases: `tests/ast_ir/`
+- Import fixtures: `tests/fixtures/lib/`
+- Captured outputs: `tests/out/`
+
 ## Practical Notes
 
 - The compiler prints LLVM IR to stdout as part of normal execution.

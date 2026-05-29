@@ -1,0 +1,9 @@
+fun int main() {
+    int x = 10;
+    {
+        int x = 20;
+        x = x + 1;
+    }
+    x = x + 2;
+    return x;
+}

@@ -1,0 +1,4 @@
+fun int main() {
+    str msg = "hello;
+    return 0;
+}

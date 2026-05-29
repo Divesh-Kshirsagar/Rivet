@@ -1,0 +1,5 @@
+fun int main() {
+    str ref a;
+    str[4] names;
+    return 0;
+}

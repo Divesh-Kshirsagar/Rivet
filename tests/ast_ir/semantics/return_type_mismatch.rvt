@@ -1,0 +1,7 @@
+fun int bad() {
+    return "oops";
+}
+
+fun int main() {
+    return bad();
+}

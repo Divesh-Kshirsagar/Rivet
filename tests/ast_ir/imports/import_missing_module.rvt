@@ -1,0 +1,5 @@
+import does_not_exist;
+
+fun int main() {
+    return 0;
+}

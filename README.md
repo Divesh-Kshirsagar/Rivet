@@ -156,17 +156,24 @@ Rivet currently follows this pipeline:
 
 ## Testing and Validation
 
-Current validation is source-program driven:
+Frontend validation is source-program driven and AST/IR-inspection oriented:
 
 - `tests/validation.rvt`
-- `tests/renode_test.rvt`
-- `tests/uart_test.rvt`
+- `tests/ast_ir/` (comprehensive manual-inspection suite)
 
 Run a representative test file:
 
 ```bash
 ./build/rivet tests/validation.rvt --dump-ast
 ```
+
+Run the full manual AST/IR suite and capture logs:
+
+```bash
+./scripts/run_ast_ir_suite.sh
+```
+
+Review logs under `tests/out/` and use `tests/ast_ir/GAPS.md` to track semantic/type-check gaps discovered during review.
 
 ## Documentation
 

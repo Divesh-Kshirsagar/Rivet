@@ -1,0 +1,12 @@
+fun int main() {
+    int base = 42;
+    int ref p = address_of base;
+    int optref maybe = null;
+
+    base = deref p + 1;
+    if (maybe == null) {
+        maybe = p;
+    }
+
+    return base;
+}

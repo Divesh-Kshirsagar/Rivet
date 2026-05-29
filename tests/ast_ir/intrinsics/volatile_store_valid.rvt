@@ -1,0 +1,5 @@
+fun int main() {
+    int addr = 1073759236;
+    __volatile_store(addr, 65);
+    return 0;
+}

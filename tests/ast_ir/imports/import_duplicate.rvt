@@ -1,0 +1,6 @@
+import mathx;
+import mathx;
+
+fun int main() {
+    return triple(2);
+}

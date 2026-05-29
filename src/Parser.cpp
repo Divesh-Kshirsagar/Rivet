@@ -416,6 +416,10 @@ namespace Rivet
         {
             if (isStringType)
                 return LogError("String references are not supported yet.");
+            // TODO: Investigate/resolve parsing edge where valid declarations
+            // like `int ref p = ...;` and `int optref q = ...;` can still
+            // surface "Expected 'identifier' after type in variable declaration"
+            // in some frontend cases.
             if (CurTok == tok_optref)
                 isOptRef = true;
             isRef = true;

@@ -1,0 +1,6 @@
+fun int main() {
+    int[4] nums;
+    nums[0] = 3;
+    nums[1] = nums[0] + 2;
+    return nums[1];
+}

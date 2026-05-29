@@ -326,6 +326,9 @@ namespace Rivet
                 Result = CompilerState.Builder->CreateNeg(OperandVal, "neg");
                 break;
             default:
+                // FIXME: `not` currently reaches codegen as tok_not and falls
+                // through here ("Unknown unary operator: -22"). Add explicit
+                // lowering for logical-not (and any remaining unary tokens).
                 std::cerr << "Unknown unary operator: " << Op << std::endl;
                 return nullptr;
         }
