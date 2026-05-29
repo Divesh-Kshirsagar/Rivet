@@ -1,0 +1,81 @@
+fun void uart_init() {
+    // RCC_APB1ENR: enable USART2 clock (bit 17)
+    int rcc_apb1enr = 1073887296;
+    __volatile_store(rcc_apb1enr, 131072);
+
+    // USART2_BRR: baud divisor (nominal)
+    int usart2_brr = 1073759240;
+    __volatile_store(usart2_brr, 417);
+
+    // USART2_CR1: UE (bit 13) + TE (bit 3)
+    int usart2_cr1 = 1073759244;
+    __volatile_store(usart2_cr1, 8200);
+}
+
+fun void uart_putc(int ch) {
+    // USART2_DR
+    int uart_dr = 1073759236;
+    __volatile_store(uart_dr, ch);
+}
+
+fun void uart_puts_banner() {
+    // "[RIVET] heartbeat\n"
+    uart_putc(91);   // [
+    uart_putc(82);   // R
+    uart_putc(73);   // I
+    uart_putc(86);   // V
+    uart_putc(69);   // E
+    uart_putc(84);   // T
+    uart_putc(93);   // ]
+    uart_putc(32);   // space
+    uart_putc(104);  // h
+    uart_putc(101);  // e
+    uart_putc(97);   // a
+    uart_putc(114);  // r
+    uart_putc(116);  // t
+    uart_putc(98);   // b
+    uart_putc(101);  // e
+    uart_putc(97);   // a
+    uart_putc(116);  // t
+    uart_putc(10);   // \n
+}
+
+fun void uart_put_u32_2digit(int n) {
+    // Print two decimal digits (00..99) without division,
+    // so bare-metal linking does not require __divsi3.
+    int tens = 0;
+    int ones = n;
+    while (ones > 9) {
+        ones = ones - 10;
+        tens = tens + 1;
+    }
+    uart_putc(48 + tens);
+    uart_putc(48 + ones);
+}
+
+fun int main() {
+    uart_init();
+
+    int counter = 0;
+    while (counter < 20) {
+        // "tick NN\n"
+        uart_putc(116); // t
+        uart_putc(105); // i
+        uart_putc(99);  // c
+        uart_putc(107); // k
+        uart_putc(32);  // space
+        uart_put_u32_2digit(counter);
+        uart_putc(10);  // \n
+
+        // Busy delay to make output cadence visible in emulation
+        int delay = 0;
+        while (delay < 20000) {
+            delay = delay + 1;
+        }
+
+        counter = counter + 1;
+    }
+
+    uart_puts_banner();
+    return 0;
+}

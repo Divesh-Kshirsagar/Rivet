@@ -1,0 +1,13 @@
+# Practical UART validation example for Renode
+mach create "Rivet_Practical_UART"
+machine LoadPlatformDescription @platforms/boards/stm32f4_discovery.repl
+
+# Open UART2 analyzer so printed output is visible
+showAnalyzer sysbus.usart2
+
+macro reset
+"""
+    sysbus LoadELF $ORIGIN/firmware.elf
+    sysbus.cpu VectorTableOffset 0x08000000
+"""
+runMacro $reset
