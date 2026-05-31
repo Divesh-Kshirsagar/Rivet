@@ -1,0 +1,27 @@
+{
+  "name": "Rivet Compiler Environment",
+  "image": "mcr.microsoft.com/devcontainers/cpp:ubuntu-24.04",
+
+  "postCreateCommand": "sudo bash scripts/setup-dev.sh && cmake -S . -B build -DCMAKE_C_COMPILER=clang-18 -DCMAKE_CXX_COMPILER=clang++-18 && cmake --build build -j$(nproc)",
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "cmake.buildDirectory": "${workspaceFolder}/build",
+        "cmake.configureArgs": [
+          "-DCMAKE_C_COMPILER=clang-18",
+          "-DCMAKE_CXX_COMPILER=clang++-18"
+        ]
+      },
+      "extensions": [
+        "llvm-vs-code-extensions.vscode-clangd",
+        "ms-vscode.cmake-tools",
+        "twxs.cmake"
+      ]
+    }
+  },
+
+  "forwardPorts": [1234, 4444],
+
+  "remoteUser": "vscode"
+}

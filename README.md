@@ -77,6 +77,39 @@ cmake --build build -j
 
 This builds the `rivet` executable in `build/`.
 
+## Quick Start with GitHub Codespaces (Zero Install)
+
+To avoid installing LLVM, Renode, and the ARM toolchain on your local machine, you can run
+the Rivet compiler entirely in the browser:
+
+1. Go to the [GitHub repository](https://github.com/Divesh-Kshirsagar/Verbex).
+2. Click **Code → Codespaces → Create codespace on main**.
+3. Wait for the environment to build (~5 minutes on first launch).
+4. The compiler is pre-built — run it immediately:
+
+```bash
+./build/rivet tests/validation.rvt --dump-ast
+```
+
+The Codespace comes with LLVM 18, Renode, ARM GCC, and VS Code extensions pre-configured.
+
+## Quick Start with Docker
+
+If you prefer a local containerized environment:
+
+```bash
+# Build the image (includes compiler build + smoke test)
+docker build -t rivet .
+
+# Launch an interactive shell
+docker run -it rivet
+
+# Or run a one-off compilation
+docker run --rm rivet ./build/rivet tests/validation.rvt --dump-ast
+```
+
+The Docker image includes the full toolchain: LLVM 18, Renode, and `arm-none-eabi-gcc`.
+
 ## Run
 
 Basic invocation:

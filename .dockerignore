@@ -1,0 +1,31 @@
+# Build artifacts
+build/
+build-release/
+build-*/
+dist/
+
+# Version control
+.git/
+
+# Python environments
+.venv/
+.venv-docs/
+
+# IDE / editor
+.idea/
+.vscode/
+.cache/
+.clangd/
+
+# Agent files
+.agents/
+.codex/
+
+# Generated docs
+site/
+docs/doxygen/_build/
+
+# Object files and logs
+*.o
+*.elf
+*.log

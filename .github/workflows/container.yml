@@ -1,0 +1,54 @@
+name: Container Build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Dockerfile'
+      - '.devcontainer/**'
+      - 'scripts/setup-dev.sh'
+      - 'CMakeLists.txt'
+      - 'src/**'
+      - 'include/**'
+  pull_request:
+    paths:
+      - 'Dockerfile'
+      - '.devcontainer/**'
+      - 'scripts/setup-dev.sh'
+      - 'CMakeLists.txt'
+      - 'src/**'
+      - 'include/**'
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t rivet-test .
+
+      - name: Smoke test — compiler help
+        run: docker run --rm rivet-test ./build/rivet --help
+
+      - name: Smoke test — compile validation.rvt
+        run: docker run --rm rivet-test ./build/rivet tests/validation.rvt
+
+      - name: Smoke test — dump AST
+        run: docker run --rm rivet-test ./build/rivet tests/validation.rvt --dump-ast
+
+      - name: Verify toolchain availability
+        run: |
+          docker run --rm rivet-test bash -c "
+            echo '--- LLVM ---'
+            llvm-config-18 --version
+            echo '--- ARM GCC ---'
+            arm-none-eabi-gcc --version | head -1
+            echo '--- Renode ---'
+            renode --version | head -1
+            echo '--- CMake ---'
+            cmake --version | head -1
+          "
